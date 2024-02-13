@@ -1,0 +1,5 @@
+find_path(VPX_INCLUDE_DIRS vp8.h HINTS "/usr/include" PATH_SUFFIXES "vpx")
+find_library(VPX_LIBRARY_DIRS NAMES vpx HINTS "/usr/lib")
+
+include(FindPackageHandleStandardArgs)
+FIND_PACKAGE_HANDLE_STANDARD_ARGS(VPX REQUIRED_VARS VPX_INCLUDE_DIRS VPX_LIBRARY_DIRS)

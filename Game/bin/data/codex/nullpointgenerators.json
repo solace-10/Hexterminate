@@ -1,0 +1,5 @@
+{
+  "category": "SHIELDS",
+  "name": "Null point generators",
+  "content": "Null Point Generators have a smaller capacity but an increased recharged rate compared with most other variants. Shield manufacturers achieved this by replacing the relatively large capacitor arrays with a more compact variant, which allows for a larger overall number of capacitors to fit within the same physical space. However, having such a large number of capacitors all drawing current from the ship's power supply presents a considerably high energy cost as a drawback to the shield's rapid recharge rate. \n\nNote that installing multiple shield modules on a single ship has diminishing returns."
+}

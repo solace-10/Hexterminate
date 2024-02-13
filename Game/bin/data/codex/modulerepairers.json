@@ -1,0 +1,5 @@
+{
+  "category": "ADDONS",
+  "name": "Module repairers",
+  "content": "Module repairers, also known as MicroDrone Repair Modules, are made up of a storage bay and a command chip. The command chip orchestrates the MicroDrones contained to use the ship's energy in order to repair any damaged modules. \n\nThe MicroDrones repair the ship's modules by using on-board fabricators to inductively convert the ship's energy into the materials required. Not every material can be synthetised, or match the same tolerances of the larger scale shipyard fabricators, but they are almost always enough to allow for a ship to keep operating until proper repairs can be conducted. \n\nEach manufacturer produces their own proprietary MicroDrones, which each have their own repair rates and energy efficiency ratings. Despite these differences, all variants are specialised in repairing armour modules, often allowing a ship to remain engaged despite being under sustained fire."
+}

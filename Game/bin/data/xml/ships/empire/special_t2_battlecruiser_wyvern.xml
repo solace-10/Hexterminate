@@ -1,0 +1,9 @@
+<ShipInfo>
+	<DisplayName>Wyvern</DisplayName>
+	<LongDisplayName>Wyvern class battlecruiser</LongDisplayName>
+	<Tier>2</Tier>
+	<Cost>6000</Cost>
+	<DisplayImage>data/ui/ships/wyvern.png</DisplayImage>
+	<Weapons>Missiles (342 DPS)</Weapons>
+	<Defense>Covariant shields, medium reactive armour</Defense>
+</ShipInfo>

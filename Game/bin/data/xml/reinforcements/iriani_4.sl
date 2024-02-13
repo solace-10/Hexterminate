@@ -1,0 +1,4 @@
+battlecruiser1
+capital1
+capital1
+battlecruiser1

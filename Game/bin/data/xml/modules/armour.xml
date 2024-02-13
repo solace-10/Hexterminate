@@ -1,0 +1,573 @@
+<Modules>
+
+  <!-- Trash armour modules -->
+  
+  <Module>
+    <Name>TrashArmour1</Name>
+    <FullName>Archaic 100mm armour</FullName>
+    <Model>data/models/armour/light/t1/module.tmf</Model>
+    <Type>Armour</Type>
+    <Rarity>Trash</Rarity>
+    <MassMultiplier>0.9</MassMultiplier>
+    <ExtraHealth>300</ExtraHealth>
+    <KineticResistance>0.0</KineticResistance>
+    <EnergyResistance>0.0</EnergyResistance>
+    <ContextualTip>#tip_light_armour</ContextualTip>
+  </Module>
+
+  <Module>
+    <Name>TrashArmour2</Name>
+    <FullName>Archaic 200mm armour</FullName>
+    <Model>data/models/armour/medium/t1/module.tmf</Model>
+    <Type>Armour</Type>
+    <Rarity>Trash</Rarity>
+    <MassMultiplier>1.0</MassMultiplier>
+    <ExtraHealth>300</ExtraHealth>
+    <KineticResistance>0.1</KineticResistance>
+    <EnergyResistance>0.0</EnergyResistance>
+    <ContextualTip>#tip_medium_armour</ContextualTip>
+  </Module>
+
+  <Module>
+    <Name>TrashArmour3</Name>
+    <FullName>Archaic 400mm armour</FullName>
+    <Model>data/models/armour/heavy/model.tmf</Model>
+    <Type>Armour</Type>
+    <Rarity>Trash</Rarity>
+    <MassMultiplier>1.25</MassMultiplier>
+    <ExtraHealth>300</ExtraHealth>
+    <KineticResistance>0.2</KineticResistance>
+    <EnergyResistance>0.0</EnergyResistance>
+    <ContextualTip>#tip_heavy_armour</ContextualTip>
+  </Module>
+  
+  <!-- Common armour modules -->
+
+  <Module>
+    <Name>CommonArmour1</Name>
+    <FullName>Kyros-Hyperion 100mm armour</FullName>
+    <Model>data/models/armour/light/t1/module.tmf</Model>
+    <Type>Armour</Type>
+    <Rarity>Common</Rarity>
+    <MassMultiplier>0.8</MassMultiplier>
+    <ExtraHealth>750</ExtraHealth>
+    <KineticResistance>0.1</KineticResistance>
+    <EnergyResistance>0.0</EnergyResistance>
+    <ContextualTip>#tip_light_armour</ContextualTip>
+    <Description>The lightest armour available. Kinetic resistance reduces the damage dealt by projectiles and missiles.</Description>
+  </Module>
+
+  <Module>
+    <Name>CommonArmour2</Name>
+    <FullName>Strauman Corp 200mm armour</FullName>
+    <Model>data/models/armour/medium/t1/module.tmf</Model>
+    <Type>Armour</Type>
+    <Rarity>Common</Rarity>
+    <MassMultiplier>1.0</MassMultiplier>
+    <ExtraHealth>750</ExtraHealth>
+    <KineticResistance>0.3</KineticResistance>
+    <EnergyResistance>0.0</EnergyResistance>
+    <ContextualTip>#tip_medium_armour</ContextualTip>
+    <Description>A compromise between weight and defense. Kinetic resistance reduces the damage dealt by projectiles and missiles.</Description>
+  </Module>
+
+  <Module>
+    <Name>CommonArmour3</Name>
+    <FullName>Valrun Corp 400mm armour</FullName>
+    <Model>data/models/armour/heavy/model.tmf</Model>
+    <Type>Armour</Type>
+    <Rarity>Common</Rarity>
+    <MassMultiplier>1.25</MassMultiplier>
+    <ExtraHealth>750</ExtraHealth>
+    <KineticResistance>0.45</KineticResistance>
+    <EnergyResistance>0.0</EnergyResistance>
+    <ContextualTip>#tip_heavy_armour</ContextualTip>
+    <Description>The heaviest armour available, it noticeably decreases your ship's speed. Kinetic resistance reduces the damage dealt by projectiles and missiles.</Description>
+  </Module>
+
+  <!-- Uncommon armour modules -->
+
+  <Module>
+    <Name>UncommonArmour1</Name>
+    <FullName>Kyros-Hyperion 100mm reactive armour</FullName>
+    <Model>data/models/armour/light/t1/module.tmf</Model>
+    <Type>Armour</Type>
+    <Rarity>Uncommon</Rarity>
+    <MassMultiplier>0.8</MassMultiplier>
+    <ExtraHealth>1250</ExtraHealth>
+    <KineticResistance>0.35</KineticResistance>
+    <EnergyResistance>0.05</EnergyResistance>
+    <OverlayColour r="0.6" g="0.0" b="0.0" a="0.2" />
+    <ContextualTip>#tip_reactive_armour</ContextualTip>
+    <Description>The lightest armour available. Reactive armour has a higher kinetic resistance than other armour types.</Description>
+  </Module>
+
+  <Module>
+    <Name>UncommonArmour4</Name>
+    <FullName>Kyros-Hyperion 100mm regenerative armour</FullName>
+    <Model>data/models/armour/light/t1/module.tmf</Model>
+    <Type>Armour</Type>
+    <Rarity>Uncommon</Rarity>
+    <MassMultiplier>0.8</MassMultiplier>
+    <ExtraHealth>1250</ExtraHealth>
+    <KineticResistance>0.15</KineticResistance>
+    <EnergyResistance>0.05</EnergyResistance>
+    <Regenerative>true</Regenerative>
+    <OverlayColour r="0.2" g="0.9" b="0.2" a="0.2" />
+    <ContextualTip>#tip_regenerative_armour</ContextualTip>
+    <Description>The lightest armour available. This module regenerates 5% of its health per second.</Description>
+  </Module>
+
+  <Module>
+    <Name>UncommonArmour2</Name>
+    <FullName>Strauman Corp 200mm reactive armour</FullName>
+    <Model>data/models/armour/medium/t1/module.tmf</Model>
+    <Type>Armour</Type>
+    <Rarity>Uncommon</Rarity>
+    <MassMultiplier>1.0</MassMultiplier>
+    <ExtraHealth>1250</ExtraHealth>
+    <KineticResistance>0.55</KineticResistance>
+    <EnergyResistance>0.05</EnergyResistance>
+    <OverlayColour r="0.6" g="0.0" b="0.0" a="0.2" />
+    <ContextualTip>#tip_reactive_armour</ContextualTip>
+    <Description>A compromise between weight and defense. Reactive armour has a higher kinetic resistance than other armour types.</Description>
+  </Module>
+
+  <Module>
+    <Name>UncommonArmour5</Name>
+    <FullName>Strauman Corp 200mm regenerative armour</FullName>
+    <Model>data/models/armour/medium/t1/module.tmf</Model>
+    <Type>Armour</Type>
+    <Rarity>Uncommon</Rarity>
+    <MassMultiplier>1.0</MassMultiplier>
+    <ExtraHealth>1250</ExtraHealth>
+    <KineticResistance>0.35</KineticResistance>
+    <EnergyResistance>0.05</EnergyResistance>
+    <Regenerative>true</Regenerative>
+    <OverlayColour r="0.2" g="0.9" b="0.2" a="0.2" />
+    <ContextualTip>#tip_regenerative_armour</ContextualTip>
+    <Description>A compromise between weight and defense. This module regenerates 5% of its health per second.</Description>
+  </Module>
+
+  <Module>
+    <Name>UncommonArmour3</Name>
+    <FullName>Valrun Corp 400mm reactive armour</FullName>
+    <Model>data/models/armour/heavy/model.tmf</Model>
+    <Type>Armour</Type>
+    <Rarity>Uncommon</Rarity>
+    <MassMultiplier>1.25</MassMultiplier>
+    <ExtraHealth>1250</ExtraHealth>
+    <KineticResistance>0.7</KineticResistance>
+    <EnergyResistance>0.05</EnergyResistance>
+    <OverlayColour r="0.6" g="0.0" b="0.0" a="0.2" />
+    <ContextualTip>#tip_reactive_armour</ContextualTip>
+    <Description>The heaviest armour available, it noticeably decreases your ship's speed. Reactive armour has a higher kinetic resistance than other armour types.</Description>
+  </Module>
+
+  <Module>
+    <Name>UncommonArmour6</Name>
+    <FullName>Valrun Corp 400mm regenerative armour</FullName>
+    <Model>data/models/armour/heavy/model.tmf</Model>
+    <Type>Armour</Type>
+    <Rarity>Uncommon</Rarity>
+    <MassMultiplier>1.25</MassMultiplier>
+    <ExtraHealth>1250</ExtraHealth>
+    <KineticResistance>0.5</KineticResistance>
+    <EnergyResistance>0.05</EnergyResistance>
+    <Regenerative>true</Regenerative>
+    <OverlayColour r="0.2" g="0.9" b="0.2" a="0.2" />
+    <ContextualTip>#tip_regenerative_armour</ContextualTip>
+    <Description>The heaviest armour available, it noticeably decreases your ship's speed. This module regenerates 5% of its health per second.</Description>
+  </Module>
+
+  <Module>
+    <Name>UncommonArmour7</Name>
+    <FullName>Valrun Corp 400mm ramming prow</FullName>
+    <Model>data/models/armour/heavy/ramming/module.tmf</Model>
+    <Type>Armour</Type>
+    <Rarity>Uncommon</Rarity>
+    <MassMultiplier>1.25</MassMultiplier>
+    <ExtraHealth>1250</ExtraHealth>
+    <KineticResistance>0.5</KineticResistance>
+    <EnergyResistance>0.05</EnergyResistance>
+    <Ramming>true</Ramming>
+    <ContextualTip>#tip_ramming_prow</ContextualTip>
+    <Description>The heaviest armour available, it noticeably decreases your ship's speed. Greatly benefits ramming maneuvers.</Description>
+  </Module>
+
+  <!-- Rare armour modules -->
+
+  <Module>
+    <Name>RareArmour1</Name>
+    <FullName>Kyros-Hyperion 100mm reactive armour</FullName>
+    <Model>data/models/armour/light/t1/module.tmf</Model>
+    <Type>Armour</Type>
+    <Rarity>Rare</Rarity>
+    <MassMultiplier>0.8</MassMultiplier>
+    <ExtraHealth>2000</ExtraHealth>
+    <KineticResistance>0.4</KineticResistance>
+    <EnergyResistance>0.1</EnergyResistance>
+    <OverlayColour r="0.6" g="0.0" b="0.0" a="0.4" />
+    <ContextualTip>#tip_reactive_armour</ContextualTip>
+    <Description>The lightest armour available. Reactive armour has a higher kinetic resistance than other armour types.</Description>
+  </Module>
+
+  <Module>
+    <Name>RareArmour2</Name>
+    <FullName>Kyros-Hyperion 100mm regenerative armour</FullName>
+    <Model>data/models/armour/light/t1/module.tmf</Model>
+    <Type>Armour</Type>
+    <Rarity>Rare</Rarity>
+    <MassMultiplier>0.8</MassMultiplier>
+    <ExtraHealth>2000</ExtraHealth>
+    <KineticResistance>0.2</KineticResistance>
+    <EnergyResistance>0.1</EnergyResistance>
+    <Regenerative>true</Regenerative>
+    <OverlayColour r="0.2" g="0.9" b="0.2" a="0.4" />
+    <ContextualTip>#tip_regenerative_armour</ContextualTip>
+    <Description>The lightest armour available. This module regenerates 5% of its health per second.</Description>
+  </Module>
+  
+  <Module>
+    <Name>RareArmour7</Name>
+    <FullName>Kyros-Hyperion 100mm powered armour</FullName>
+    <Model>data/models/armour/light/t1/module.tmf</Model>
+    <Type>Armour</Type>
+    <Rarity>Rare</Rarity>
+    <MassMultiplier>0.8</MassMultiplier>
+    <ExtraHealth>2000</ExtraHealth>
+    <KineticResistance>0.2</KineticResistance>
+    <EnergyResistance>0.4</EnergyResistance>
+    <OverlayColour r="0.0" g="1.0" b="1.0" a="0.4" />
+    <ContextualTip>#tip_powered_armour</ContextualTip>
+    <Description>The lightest armour available. Powered armour has a higher energy resistance than other armour types.</Description>
+  </Module>
+
+  <Module>
+    <Name>RareArmour3</Name>
+    <FullName>Strauman Corp 200mm reactive armour</FullName>
+    <Model>data/models/armour/medium/t1/module.tmf</Model>
+    <Type>Armour</Type>
+    <Rarity>Rare</Rarity>
+    <MassMultiplier>1.0</MassMultiplier>
+    <ExtraHealth>2000</ExtraHealth>
+    <KineticResistance>0.6</KineticResistance>
+    <EnergyResistance>0.1</EnergyResistance>
+    <OverlayColour r="0.6" g="0.0" b="0.0" a="0.4" />
+    <ContextualTip>#tip_reactive_armour</ContextualTip>
+    <Description>A compromise between weight and defense. Reactive armour has a higher kinetic resistance than other armour types.</Description>
+  </Module>
+
+  <Module>
+    <Name>RareArmour4</Name>
+    <FullName>Strauman Corp 200mm regenerative armour</FullName>
+    <Model>data/models/armour/medium/t1/module.tmf</Model>
+    <Type>Armour</Type>
+    <Rarity>Rare</Rarity>
+    <MassMultiplier>1.0</MassMultiplier>
+    <ExtraHealth>2000</ExtraHealth>
+    <KineticResistance>0.4</KineticResistance>
+    <EnergyResistance>0.1</EnergyResistance>
+    <Regenerative>true</Regenerative>
+    <OverlayColour r="0.2" g="0.9" b="0.2" a="0.4" />
+    <ContextualTip>#tip_regenerative_armour</ContextualTip>
+    <Description>A compromise between weight and defense. This module regenerates 5% of its health per second.</Description>
+  </Module>
+  
+  <Module>
+    <Name>RareArmour8</Name>
+    <FullName>Strauman Corp 200mm powered armour</FullName>
+    <Model>data/models/armour/medium/t1/module.tmf</Model>
+    <Type>Armour</Type>
+    <Rarity>Rare</Rarity>
+    <MassMultiplier>1.0</MassMultiplier>
+    <ExtraHealth>2000</ExtraHealth>
+    <KineticResistance>0.4</KineticResistance>
+    <EnergyResistance>0.4</EnergyResistance>
+    <OverlayColour r="0.0" g="1.0" b="1.0" a="0.4" />
+    <ContextualTip>#tip_powered_armour</ContextualTip>
+    <Description>A compromise between weight and defense. Powered armour has a higher energy resistance than other armour types.</Description>
+  </Module>
+
+  <Module>
+    <Name>RareArmour5</Name>
+    <FullName>Valrun Corp 400mm reactive armour</FullName>
+    <Model>data/models/armour/heavy/model.tmf</Model>
+    <Type>Armour</Type>
+    <Rarity>Rare</Rarity>
+    <MassMultiplier>1.25</MassMultiplier>
+    <ExtraHealth>2000</ExtraHealth>
+    <KineticResistance>0.75</KineticResistance>
+    <EnergyResistance>0.1</EnergyResistance>
+    <OverlayColour r="0.6" g="0.0" b="0.0" a="0.4" />
+    <ContextualTip>#tip_reactive_armour</ContextualTip>
+    <Description>The heaviest armour available, it noticeably decreases your ship's speed. Reactive armour has a higher kinetic resistance than other armour types.</Description>
+  </Module>
+
+  <Module>
+    <Name>RareArmour6</Name>
+    <FullName>Valrun Corp 400mm regenerative armour</FullName>
+    <Model>data/models/armour/heavy/model.tmf</Model>
+    <Type>Armour</Type>
+    <Rarity>Rare</Rarity>
+    <MassMultiplier>1.25</MassMultiplier>
+    <ExtraHealth>2000</ExtraHealth>
+    <KineticResistance>0.55</KineticResistance>
+    <EnergyResistance>0.1</EnergyResistance>
+    <Regenerative>true</Regenerative>
+    <OverlayColour r="0.2" g="0.9" b="0.2" a="0.4" />
+    <ContextualTip>#tip_regenerative_armour</ContextualTip>
+    <Description>The heaviest armour available, it noticeably decreases your ship's speed. This module regenerates 5% of its health per second.</Description>
+  </Module>
+  
+  <Module>
+    <Name>RareArmour9</Name>
+    <FullName>Valrun Corp 400mm powered armour</FullName>
+    <Model>data/models/armour/heavy/model.tmf</Model>
+    <Type>Armour</Type>
+    <Rarity>Rare</Rarity>
+    <MassMultiplier>1.25</MassMultiplier>
+    <ExtraHealth>2000</ExtraHealth>
+    <KineticResistance>0.55</KineticResistance>
+    <EnergyResistance>0.4</EnergyResistance>
+    <OverlayColour r="0.0" g="1.0" b="1.0" a="0.4" />
+    <ContextualTip>#tip_powered_armour</ContextualTip>
+    <Description>The heaviest armour available, it noticeably decreases your ship's speed. Powered armour has a higher energy resistance than other armour types.</Description>
+  </Module>
+  
+  <Module>
+    <Name>RareArmour10</Name>
+    <FullName>Valrun Corp 400mm ramming prow</FullName>
+    <Model>data/models/armour/heavy/ramming/module.tmf</Model>
+    <Type>Armour</Type>
+    <Rarity>Rare</Rarity>
+    <MassMultiplier>1.25</MassMultiplier>
+    <ExtraHealth>2000</ExtraHealth>
+    <KineticResistance>0.55</KineticResistance>
+    <EnergyResistance>0.1</EnergyResistance>
+    <Ramming>true</Ramming>
+    <ContextualTip>#tip_ramming_prow</ContextualTip>
+    <Description>The heaviest armour available, it noticeably decreases your ship's speed. Greatly benefits ramming maneuvers.</Description>
+  </Module>
+
+  <!-- Artifact armour modules -->
+
+  <Module>
+    <Name>ArtifactArmour1</Name>
+    <FullName>Frontier 'Reflex' 100mm reactive armour</FullName>
+    <Model>data/models/armour/light/t1/module.tmf</Model>
+    <Type>Armour</Type>
+    <Rarity>Artifact</Rarity>
+    <MassMultiplier>0.8</MassMultiplier>
+    <ExtraHealth>2620</ExtraHealth>
+    <KineticResistance>0.45</KineticResistance>
+    <EnergyResistance>0.15</EnergyResistance>
+    <OverlayColour r="0.6" g="0.0" b="0.0" a="0.5" />
+    <ContextualTip>#tip_reactive_armour</ContextualTip>
+    <Description>The lightest armour available. Reactive armour has a higher kinetic resistance than other armour types.</Description>
+  </Module>
+
+  <Module>
+    <Name>ArtifactArmour2</Name>
+    <FullName>Frontier 'Borderworlds' 100mm regenerative armour</FullName>
+    <Model>data/models/armour/light/t1/module.tmf</Model>
+    <Type>Armour</Type>
+    <Rarity>Artifact</Rarity>
+    <MassMultiplier>0.8</MassMultiplier>
+    <ExtraHealth>2620</ExtraHealth>
+    <KineticResistance>0.25</KineticResistance>
+    <EnergyResistance>0.15</EnergyResistance>
+    <Regenerative>true</Regenerative>
+    <OverlayColour r="0.2" g="0.9" b="0.2" a="0.5" />
+    <ContextualTip>#tip_regenerative_armour</ContextualTip>
+    <Description>The lightest armour available. This module regenerates 5% of its health per second.</Description>
+  </Module>
+
+  <Module>
+    <Name>ArtifactArmour3</Name>
+    <FullName>Frontier 'Mirror' 100mm powered armour</FullName>
+    <Model>data/models/armour/light/t1/module.tmf</Model>
+    <Type>Armour</Type>
+    <Rarity>Artifact</Rarity>
+    <MassMultiplier>0.8</MassMultiplier>
+    <ExtraHealth>2620</ExtraHealth>
+    <KineticResistance>0.25</KineticResistance>
+    <EnergyResistance>0.45</EnergyResistance>
+    <OverlayColour r="0.0" g="1.0" b="1.0" a="0.5" />
+    <ContextualTip>#tip_powered_armour</ContextualTip>
+    <Description>The lightest armour available. Powered armour has a higher energy resistance than other armour types.</Description>
+  </Module>
+
+  <Module>
+    <Name>ArtifactArmour4</Name>
+    <FullName>Sinclair 'Frontline' 200mm reactive armour</FullName>
+    <Model>data/models/armour/medium/t1/module.tmf</Model>
+    <Type>Armour</Type>
+    <Rarity>Artifact</Rarity>
+    <MassMultiplier>1.0</MassMultiplier>
+    <ExtraHealth>3125</ExtraHealth>
+    <KineticResistance>0.65</KineticResistance>
+    <EnergyResistance>0.15</EnergyResistance>
+    <OverlayColour r="0.6" g="0.0" b="0.0" a="0.5" />
+    <ContextualTip>#tip_reactive_armour</ContextualTip>
+    <Description>A compromise between weight and defense. Reactive armour has a higher kinetic resistance than other armour types.</Description>
+  </Module>
+
+  <Module>
+    <Name>ArtifactArmour5</Name>
+    <FullName>Sinclair 'Endless' 200mm regenerative armour</FullName>
+    <Model>data/models/armour/medium/t1/module.tmf</Model>
+    <Type>Armour</Type>
+    <Rarity>Artifact</Rarity>
+    <MassMultiplier>1.0</MassMultiplier>
+    <ExtraHealth>3125</ExtraHealth>
+    <KineticResistance>0.45</KineticResistance>
+    <EnergyResistance>0.15</EnergyResistance>
+    <Regenerative>true</Regenerative>
+    <OverlayColour r="0.2" g="0.9" b="0.2" a="0.5" />
+    <ContextualTip>#tip_regenerative_armour</ContextualTip>
+    <Description>A compromise between weight and defense. This module regenerates 5% of its health per second.</Description>
+  </Module>
+
+  <Module>
+    <Name>ArtifactArmour6</Name>
+    <FullName>Sinclair 'Edge' 200mm powered armour</FullName>
+    <Model>data/models/armour/medium/t1/module.tmf</Model>
+    <Type>Armour</Type>
+    <Rarity>Artifact</Rarity>
+    <MassMultiplier>1.0</MassMultiplier>
+    <ExtraHealth>3125</ExtraHealth>
+    <KineticResistance>0.45</KineticResistance>
+    <EnergyResistance>0.45</EnergyResistance>
+    <OverlayColour r="0.0" g="1.0" b="1.0" a="0.5" />
+    <ContextualTip>#tip_powered_armour</ContextualTip>
+    <Description>A compromise between weight and defense. Powered armour has a higher energy resistance than other armour types.</Description>
+  </Module>
+
+  <Module>
+    <Name>ArtifactArmour7</Name>
+    <FullName>Daedalus 'Minotaur' 400mm reactive armour</FullName>
+    <Model>data/models/armour/heavy/model.tmf</Model>
+    <Type>Armour</Type>
+    <Rarity>Artifact</Rarity>
+    <MassMultiplier>1.25</MassMultiplier>
+    <ExtraHealth>3970</ExtraHealth>
+    <KineticResistance>0.8</KineticResistance>
+    <EnergyResistance>0.15</EnergyResistance>
+    <OverlayColour r="0.6" g="0.0" b="0.0" a="0.5" />
+    <ContextualTip>#tip_reactive_armour</ContextualTip>
+    <Description>The heaviest armour available, it noticeably decreases your ship's speed. Reactive armour has a higher kinetic resistance than other armour types.</Description>
+  </Module>
+
+  <Module>
+    <Name>ArtifactArmour8</Name>
+    <FullName>Daedalus 'Perdix' 400mm regenerative armour</FullName>
+    <Model>data/models/armour/heavy/model.tmf</Model>
+    <Type>Armour</Type>
+    <Rarity>Artifact</Rarity>
+    <MassMultiplier>1.25</MassMultiplier>
+    <ExtraHealth>3970</ExtraHealth>
+    <KineticResistance>0.6</KineticResistance>
+    <EnergyResistance>0.15</EnergyResistance>
+    <Regenerative>true</Regenerative>
+    <OverlayColour r="0.2" g="0.9" b="0.2" a="0.5" />
+    <ContextualTip>#tip_regenerative_armour</ContextualTip>
+    <Description>The heaviest armour available, it noticeably decreases your ship's speed. This module regenerates 5% of its health per second.</Description>
+  </Module>
+
+  <Module>
+    <Name>ArtifactArmour9</Name>
+    <FullName>Daedalus 'Icarus' 400mm powered armour</FullName>
+    <Model>data/models/armour/heavy/model.tmf</Model>
+    <Type>Armour</Type>
+    <Rarity>Artifact</Rarity>
+    <MassMultiplier>1.25</MassMultiplier>
+    <ExtraHealth>3970</ExtraHealth>
+    <KineticResistance>0.6</KineticResistance>
+    <EnergyResistance>0.45</EnergyResistance>
+    <OverlayColour r="0.0" g="1.0" b="1.0" a="0.5" />
+    <ContextualTip>#tip_powered_armour</ContextualTip>
+    <Description>The heaviest armour available, it noticeably decreases your ship's speed. Powered armour has a higher energy resistance than other armour types.</Description>
+  </Module>
+
+  <Module>
+    <Name>ArtifactArmour10</Name>
+    <FullName>Daedalus 'Taurus' 400mm ramming prow</FullName>
+    <Model>data/models/armour/heavy/ramming/module.tmf</Model>
+    <Type>Armour</Type>
+    <Rarity>Artifact</Rarity>
+    <MassMultiplier>1.25</MassMultiplier>
+    <ExtraHealth>3970</ExtraHealth>
+    <KineticResistance>0.6</KineticResistance>
+    <EnergyResistance>0.15</EnergyResistance>
+    <Ramming>true</Ramming>
+    <ContextualTip>#tip_ramming_prow</ContextualTip>
+    <Description>The heaviest armour available, it noticeably decreases your ship's speed. Greatly benefits ramming maneuvers.</Description>
+  </Module>
+
+  <!-- Legendary armour modules -->
+
+  <Module>
+    <Name>LegendaryLightArmour</Name>
+    <FullName>'BASTION' 100mm matrix armour</FullName>
+    <Model>data/models/armour/light/t1/module.tmf</Model>
+    <Type>Armour</Type>
+    <Rarity>Legendary</Rarity>
+    <MassMultiplier>0.50</MassMultiplier>
+    <ExtraHealth>4050</ExtraHealth>
+    <KineticResistance>0.5</KineticResistance>
+    <EnergyResistance>0.5</EnergyResistance>
+    <Regenerative>true</Regenerative>
+    <OverlayColour r="0.8" g="0.55" b="0.0" a="0.6" />
+    <ContextualTip>#tip_omni_armour</ContextualTip>
+    <Description>The lightest armour available. Matrix armour has high resistances across the board and regenerates 5% of its health per second.</Description>
+  </Module>
+
+  <Module>
+    <Name>LegendaryMediumArmour</Name>
+    <FullName>'PRIME' 200mm matrix armour</FullName>
+    <Model>data/models/armour/medium/t1/module.tmf</Model>
+    <Type>Armour</Type>
+    <Rarity>Legendary</Rarity>
+    <MassMultiplier>0.75</MassMultiplier>
+    <ExtraHealth>4710</ExtraHealth>
+    <KineticResistance>0.7</KineticResistance>
+    <EnergyResistance>0.5</EnergyResistance>
+    <Regenerative>true</Regenerative>
+    <OverlayColour r="0.8" g="0.55" b="0.0" a="0.6" />
+    <ContextualTip>#tip_omni_armour</ContextualTip>
+    <Description>A compromise between weight and defense. Matrix armour has high resistances across the board and regenerates 5% of its health per second.</Description>
+  </Module>
+
+  <Module>
+    <Name>LegendaryHeavyArmour</Name>
+    <FullName>'BULWARK' 400mm matrix armour</FullName>
+    <Model>data/models/armour/heavy/model.tmf</Model>
+    <Type>Armour</Type>
+    <Rarity>Legendary</Rarity>
+    <MassMultiplier>1.00</MassMultiplier>
+    <ExtraHealth>6080</ExtraHealth>
+    <KineticResistance>0.85</KineticResistance>
+    <EnergyResistance>0.5</EnergyResistance>
+    <Regenerative>true</Regenerative>
+    <OverlayColour r="0.8" g="0.55" b="0.0" a="0.6" />
+    <ContextualTip>#tip_omni_armour</ContextualTip>
+    <Description>The heaviest armour available, it noticeably decreases your ship's speed. Matrix armour has high resistances across the board and regenerates 5% of its health per second.</Description>
+  </Module>
+
+  <Module>
+    <Name>LegendaryHeavyArmour2</Name>
+    <FullName>'IMPERATOR' 400mm ramming prow</FullName>
+    <Model>data/models/armour/heavy/ramming/module.tmf</Model>
+    <Type>Armour</Type>
+    <Rarity>Legendary</Rarity>
+    <MassMultiplier>1.25</MassMultiplier>
+    <ExtraHealth>6080</ExtraHealth>
+    <KineticResistance>0.8</KineticResistance>
+    <EnergyResistance>0.5</EnergyResistance>
+    <Ramming>true</Ramming>
+    <ContextualTip>#tip_ramming_prow</ContextualTip>
+    <Description>The heaviest armour available, it noticeably decreases your ship's speed. Greatly benefits ramming maneuvers.</Description>
+  </Module>
+
+</Modules>

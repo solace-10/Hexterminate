@@ -1,0 +1,9 @@
+<ShipInfo>
+	<DisplayName>Glory</DisplayName>
+	<LongDisplayName>Glory class battlecruiser</LongDisplayName>
+	<Tier>2</Tier>
+	<Cost>6000</Cost>
+	<DisplayImage>data/ui/ships/glory.png</DisplayImage>
+	<Weapons>Autocannons, torpedoes (861 DPS)</Weapons>
+	<Defense>Reactive heavy armour</Defense>
+</ShipInfo>

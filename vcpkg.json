@@ -1,0 +1,22 @@
+{
+  "name": "hexterminate",
+  "version-string": "1.20.0",
+  "license": "GPL-3.0-or-later",
+  "dependencies": [
+    { "name": "assimp" },
+    { "name": "bullet3" },
+    { "name": "freetype" },
+    { "name": "glew" },
+    { "name": "nlohmann-json" },
+    {
+      "name": "rpclib",
+      "version>=": "2.3.0"
+    },
+    { "name": "sdl2" },
+    {
+      "name": "sdl2-image",
+      "features": [ "libjpeg-turbo" ]
+    }
+  ],
+  "builtin-baseline": "934a99dc13cabb330824ae1a5ab4a53a9acc5a49"
+}

@@ -1,0 +1,9 @@
+<ShipInfo>
+	<DisplayName>Arbellatris</DisplayName>
+	<LongDisplayName>Arbellatris class battleship</LongDisplayName>
+	<Tier>3</Tier>
+	<Cost>22500</Cost>
+	<DisplayImage>data/ui/ships/arbellatris.png</DisplayImage>
+	<Weapons>Artillery and torpedoes (1700 DPS)</Weapons>
+	<Defense>Shields and powered heavy armour</Defense>
+</ShipInfo>

@@ -1,0 +1,8 @@
+02 - Default
+  SHADER shipyard.fx
+  FLOAT4 k_a 0.100000 0.100000 0.100000 1.000000
+  TEXTUREMAP diffuse.png
+  TEXTUREMAP specular.png
+  TEXTUREMAP maps.png
+  FLOAT4 k_primaryPaint 0.000000 0.200000 0.600000 1.000000
+  FLOAT4 k_secondaryPaint 1.000000 1.000000 1.000000 1.000000

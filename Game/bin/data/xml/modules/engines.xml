@@ -1,0 +1,228 @@
+<Modules>
+
+  <!-- Out takes-->
+
+  <Module>
+    <Name>RareEngine4</Name>
+    <FullName>Hypnos stabilised ion drive</FullName>
+    <Model>data/models/engines/module.tmf</Model>
+    <Type>Engine</Type>
+    <Rarity>Trash</Rarity>
+    <Thrust>2030</Thrust>
+    <Torque>13310</Torque>
+    <ExtraHealth>1500</ExtraHealth>
+    <Bonus>Stabilised</Bonus>
+    <Description>Immune to wavefront disruption</Description>
+  </Module>
+  
+  <Module>
+    <Name>ArtifactEngine4</Name>
+    <FullName>Hypnos 'Flame' stabilised diametric drive</FullName>
+    <Model>data/models/engines/module.tmf</Model>
+    <Type>Engine</Type>
+    <Rarity>Trash</Rarity>
+    <Thrust>2635</Thrust>
+    <Torque>14640</Torque>
+    <ExtraHealth>2250</ExtraHealth>
+    <Bonus>Stabilised</Bonus>
+    <Description>Immune to wavefront disruption</Description>
+  </Module>
+  
+  <!-- Trash engines -->
+
+  <Module>
+    <Name>TrashEngine1</Name>
+    <FullName>Archaic plasma engine</FullName>
+    <Model>data/models/engines/module.tmf</Model>
+    <Type>Engine</Type>
+    <Rarity>Trash</Rarity>
+    <Thrust>900</Thrust>
+    <Torque>8250</Torque>
+    <ContextualTip>#tip_engines</ContextualTip>
+  </Module>
+
+  <!-- Common engines -->
+  
+	<Module>
+		<Name>PlasmaEngine</Name>
+    <FullName>Kyros-Hyperion plasma engine</FullName>
+    <Model>data/models/engines/module.tmf</Model>
+		<Type>Engine</Type>
+    <Rarity>Common</Rarity>
+		<Thrust>1200</Thrust>
+		<Torque>11000</Torque>
+    <ContextualTip>#tip_engines</ContextualTip>
+    <Description>A modest, common plasma engine. Still considerably better than what passes for an engine in the Unaligned Sectors.</Description>
+	</Module>
+  
+  <!-- Uncommon engines -->
+
+  <Module>
+    <Name>UncommonEngine1</Name>
+    <FullName>Valrun reinforced fusion engine</FullName>
+    <Model>data/models/engines/module.tmf</Model>
+    <Type>Engine</Type>
+    <Rarity>Uncommon</Rarity>
+    <Thrust>1560</Thrust>
+    <Torque>12100</Torque>
+    <ExtraHealth>1500</ExtraHealth>
+    <Description>Increased armour</Description>
+    <ContextualTip>#tip_engines</ContextualTip>
+    <Description>A heavily armoured engine, it can take substantially more damage than other engines of the same rarity.</Description>
+  </Module>
+
+  <Module>
+    <Name>UncommonEngine2</Name>
+    <FullName>Kyros-Hyperion EMPR fusion engine</FullName>
+    <Model>data/models/engines/module.tmf</Model>
+    <Type>Engine</Type>
+    <Rarity>Uncommon</Rarity>
+    <Thrust>1560</Thrust>
+    <Torque>12100</Torque>
+    <ExtraHealth>750</ExtraHealth>
+    <Bonus>EMPR</Bonus>
+    <Description>Additional shielding prevents this engine from going offline if hit by an EMP blast.</Description>
+    <ContextualTip>#tip_engines</ContextualTip>
+  </Module>
+
+  <Module>
+    <Name>UncommonEngine3</Name>
+    <FullName>Strata overtuned fusion engine</FullName>
+    <Model>data/models/engines/module.tmf</Model>
+    <Type>Engine</Type>
+    <Rarity>Uncommon</Rarity>
+    <Thrust>1560</Thrust>
+    <Torque>16500</Torque>
+    <ExtraHealth>750</ExtraHealth>
+    <Description>Advanced thrust vectoring control considerably increases how quickly this engine will allow your ship to turn.</Description>
+    <ContextualTip>#tip_engines</ContextualTip>
+  </Module>
+  
+  <!-- Rare engines -->
+
+  <Module>
+    <Name>RareEngine1</Name>
+    <FullName>Valrun reinforced ion drive</FullName>
+    <Model>data/models/engines/module.tmf</Model>
+    <Type>Engine</Type>
+    <Rarity>Rare</Rarity>
+    <Thrust>2030</Thrust>
+    <Torque>13310</Torque>
+    <ExtraHealth>3000</ExtraHealth>
+    <Description>A heavily armoured engine, it can take substantially more damage than other engines of the same rarity.</Description>
+    <ContextualTip>#tip_engines</ContextualTip>
+  </Module>
+
+  <Module>
+    <Name>RareEngine2</Name>
+    <FullName>Strata EMPR ion drive</FullName>
+    <Model>data/models/engines/module.tmf</Model>
+    <Type>Engine</Type>
+    <Rarity>Rare</Rarity>
+    <Thrust>2030</Thrust>
+    <Torque>13310</Torque>
+    <ExtraHealth>1500</ExtraHealth>
+    <Bonus>EMPR</Bonus>
+    <Description>Additional shielding prevents this engine from going offline if hit by an EMP blast.</Description>
+    <ContextualTip>#tip_engines</ContextualTip>
+  </Module>
+
+  <Module>
+    <Name>RareEngine3</Name>
+    <FullName>Limit overtuned ion drive</FullName>
+    <Model>data/models/engines/module.tmf</Model>
+    <Type>Engine</Type>
+    <Rarity>Rare</Rarity>
+    <Thrust>2030</Thrust>
+    <Torque>18150</Torque>
+    <ExtraHealth>1500</ExtraHealth>
+    <Description>Advanced thrust vectoring control considerably increases how quickly this engine will allow your ship to turn.</Description>
+    <ContextualTip>#tip_engines</ContextualTip>
+  </Module>
+  
+  <!-- Artifact engines -->
+
+  <Module>
+    <Name>ArtifactEngine1</Name>
+    <FullName>Valrun 'Glacier' reinforced diametric drive</FullName>
+    <Model>data/models/engines/module.tmf</Model>
+    <Type>Engine</Type>
+    <Rarity>Artifact</Rarity>
+    <Thrust>2635</Thrust>
+    <Torque>14640</Torque>
+    <ExtraHealth>4500</ExtraHealth>
+    <Description>A heavily armoured engine, it can take substantially more damage than other engines of the same rarity.</Description>
+    <ContextualTip>#tip_engines</ContextualTip>
+  </Module>
+
+  <Module>
+    <Name>ArtifactEngine2</Name>
+    <FullName>Strata 'Nimbus' EMPR diametric drive</FullName>
+    <Model>data/models/engines/module.tmf</Model>
+    <Type>Engine</Type>
+    <Rarity>Artifact</Rarity>
+    <Thrust>2635</Thrust>
+    <Torque>14640</Torque>
+    <ExtraHealth>2250</ExtraHealth>
+    <Bonus>EMPR</Bonus>
+    <Description>Additional shielding prevents this engine from going offline if hit by an EMP blast.</Description>
+    <ContextualTip>#tip_engines</ContextualTip>
+  </Module>
+
+  <Module>
+    <Name>ArtifactEngine3</Name>
+    <FullName>Limit 'Pioneer' overtuned diametric drive</FullName>
+    <Model>data/models/engines/module.tmf</Model>
+    <Type>Engine</Type>
+    <Rarity>Artifact</Rarity>
+    <Thrust>2635</Thrust>
+    <Torque>19965</Torque>
+    <ExtraHealth>2250</ExtraHealth>
+    <Description>Advanced thrust vectoring control considerably increases how quickly this engine will allow your ship to turn.</Description>
+    <ContextualTip>#tip_engines</ContextualTip>
+  </Module>
+
+  <Module>
+    <Name>ArtifactEngine5</Name>
+    <FullName>Achranos 'Farjump' remapped diametric drive</FullName>
+    <Model>data/models/engines/module.tmf</Model>
+    <Type>Engine</Type>
+    <Rarity>Artifact</Rarity>
+    <Thrust>2635</Thrust>
+    <Torque>14640</Torque>
+    <ExtraHealth>2250</ExtraHealth>
+    <Bonus>Hyperspace</Bonus>
+    <Description>Remaps power to hyperspace core (-50% core recharge time).</Description>
+    <ContextualTip>#tip_engines</ContextualTip>
+  </Module>
+  
+  <!-- Legendary engines -->
+
+  <Module>
+    <Name>LegendaryEngine1</Name>
+    <FullName>'DIARMID' reactionless engine</FullName>
+    <Model>data/models/engines/module.tmf</Model>
+    <Type>Engine</Type>
+    <Rarity>Legendary</Rarity>
+    <Thrust>3430</Thrust>
+    <Torque>22000</Torque>
+    <ExtraHealth>6000</ExtraHealth>
+    <Bonus>Hyperspace</Bonus>
+    <Description>Reinforced, remaps power to hyperspace core (-50% core recharge time).</Description>
+  </Module>
+
+  <Module>
+    <Name>LegendaryEngine2</Name>
+    <FullName>'LAZARUS' reactionless engine</FullName>
+    <Model>data/models/engines/module.tmf</Model>
+    <Type>Engine</Type>
+    <Rarity>Legendary</Rarity>
+    <Thrust>3430</Thrust>
+    <Torque>22000</Torque>
+    <ExtraHealth>3000</ExtraHealth>
+    <Bonus>EMPR</Bonus>
+    <Bonus>Hyperspace</Bonus>
+    <Description>Resistant to EMP, remaps power to hyperspace core (-50% core recharge time).</Description>
+  </Module>
+  
+</Modules>

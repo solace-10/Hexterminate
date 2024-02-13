@@ -1,0 +1,195 @@
+<Modules>
+
+    <!-- Common reactors -->
+
+    <Module>
+        <Name>CommonReactor1</Name>
+        <FullName>Kyros-Hyperion plasma reactor</FullName>
+        <Type>Reactor</Type>
+        <Rarity>Common</Rarity>
+        <Model>data/models/reactors/module.tmf</Model>
+        <CapacitorStorage>400</CapacitorStorage>
+        <CapacitorRechargeRate>40</CapacitorRechargeRate>
+        <PowerGrid>15</PowerGrid>
+        <ContextualTip>#tip_reactor</ContextualTip>
+        <Variant>Standard</Variant>
+    </Module>
+
+    <Module>
+        <Name>CommonReactor2</Name>
+        <FullName>Delacroix anti-matter reactor</FullName>
+        <Type>Reactor</Type>
+        <Rarity>Common</Rarity>
+        <Model>data/models/reactors/module.tmf</Model>
+        <CapacitorStorage>400</CapacitorStorage>
+        <CapacitorRechargeRate>60</CapacitorRechargeRate>
+        <PowerGrid>15</PowerGrid>
+        <ContextualTip>#tip_reactor</ContextualTip>
+        <Variant>Unstable</Variant>
+    </Module>
+
+    <Module>
+        <Name>CommonReactor3</Name>
+        <FullName>Octer solid-state reactor</FullName>
+        <Type>Reactor</Type>
+        <Rarity>Common</Rarity>
+        <Model>data/models/reactors/module.tmf</Model>
+        <CapacitorStorage>800</CapacitorStorage>
+        <CapacitorRechargeRate>20</CapacitorRechargeRate>
+        <PowerGrid>15</PowerGrid>
+        <ContextualTip>#tip_reactor</ContextualTip>
+        <Variant>HighCapacity</Variant>
+    </Module>
+
+    <!-- Uncommon reactors -->
+
+    <Module>
+        <Name>UncommonReactor1</Name>
+        <FullName>Kyros-Hyperion plasma reactor</FullName>
+        <Type>Reactor</Type>
+        <Rarity>Uncommon</Rarity>
+        <Model>data/models/reactors/module.tmf</Model>
+        <CapacitorStorage>800</CapacitorStorage>
+        <CapacitorRechargeRate>80</CapacitorRechargeRate>
+        <PowerGrid>30</PowerGrid>
+        <ContextualTip>#tip_reactor</ContextualTip>
+        <Variant>Standard</Variant>
+    </Module>
+
+    <Module>
+        <Name>UncommonReactor2</Name>
+        <FullName>Delacroix anti-matter reactor</FullName>
+        <Type>Reactor</Type>
+        <Rarity>Uncommon</Rarity>
+        <Model>data/models/reactors/module.tmf</Model>
+        <CapacitorStorage>800</CapacitorStorage>
+        <CapacitorRechargeRate>120</CapacitorRechargeRate>
+        <PowerGrid>30</PowerGrid>
+        <ContextualTip>#tip_reactor</ContextualTip>
+        <Variant>Unstable</Variant>
+    </Module>
+
+    <Module>
+        <Name>UncommonReactor3</Name>
+        <FullName>Octer solid-state reactor</FullName>
+        <Type>Reactor</Type>
+        <Rarity>Uncommon</Rarity>
+        <Model>data/models/reactors/module.tmf</Model>
+        <CapacitorStorage>1600</CapacitorStorage>
+        <CapacitorRechargeRate>40</CapacitorRechargeRate>
+        <PowerGrid>30</PowerGrid>
+        <ContextualTip>#tip_reactor</ContextualTip>
+        <Variant>HighCapacity</Variant>
+    </Module>
+
+    <!-- Rare reactors -->
+
+    <Module>
+        <Name>RareReactor1</Name>
+        <FullName>Kyros-Hyperion plasma reactor</FullName>
+        <Type>Reactor</Type>
+        <Rarity>Rare</Rarity>
+        <Model>data/models/reactors/module.tmf</Model>
+        <CapacitorStorage>1600</CapacitorStorage>
+        <CapacitorRechargeRate>160</CapacitorRechargeRate>
+        <PowerGrid>60</PowerGrid>
+        <ContextualTip>#tip_reactor</ContextualTip>
+        <Variant>Standard></Variant>
+    </Module>
+
+    <Module>
+        <Name>RareReactor2</Name>
+        <FullName>Delacroix anti-matter reactor</FullName>
+        <Type>Reactor</Type>
+        <Rarity>Rare</Rarity>
+        <Model>data/models/reactors/module.tmf</Model>
+        <CapacitorStorage>1600</CapacitorStorage>
+        <CapacitorRechargeRate>240</CapacitorRechargeRate>
+        <PowerGrid>60</PowerGrid>
+        <ContextualTip>#tip_reactor</ContextualTip>
+        <Variant>Unstable</Variant>
+    </Module>
+
+    <Module>
+        <Name>RareReactor3</Name>
+        <FullName>Octer solid-state reactor</FullName>
+        <Type>Reactor</Type>
+        <Rarity>Rare</Rarity>
+        <Model>data/models/reactors/module.tmf</Model>
+        <CapacitorStorage>3200</CapacitorStorage>
+        <CapacitorRechargeRate>80</CapacitorRechargeRate>
+        <PowerGrid>60</PowerGrid>
+        <ContextualTip>#tip_reactor</ContextualTip>
+        <Variant>HighCapacity</Variant>
+    </Module>
+
+    <!-- Artifact reactors -->
+
+    <Module>
+        <Name>ArtifactReactor1</Name>
+        <FullName>Frontier 'Ascendant' plasma reactor</FullName>
+        <Type>Reactor</Type>
+        <Rarity>Artifact</Rarity>
+        <Model>data/models/reactors/module.tmf</Model>
+        <CapacitorStorage>3200</CapacitorStorage>
+        <CapacitorRechargeRate>320</CapacitorRechargeRate>
+        <PowerGrid>120</PowerGrid>
+        <ContextualTip>#tip_reactor</ContextualTip>
+        <Variant>Standard</Variant>
+    </Module>
+
+    <Module>
+        <Name>ArtifactReactor2</Name>
+        <FullName>Sinclair 'Rapture' anti-matter reactor</FullName>
+        <Type>Reactor</Type>
+        <Rarity>Artifact</Rarity>
+        <Model>data/models/reactors/module.tmf</Model>
+        <CapacitorStorage>3200</CapacitorStorage>
+        <CapacitorRechargeRate>480</CapacitorRechargeRate>
+        <PowerGrid>120</PowerGrid>
+        <ContextualTip>#tip_reactor</ContextualTip>
+        <Variant>Unstable</Variant>
+    </Module>
+
+    <Module>
+        <Name>ArtifactReactor3</Name>
+        <FullName>Daedalus 'Rise' solid-state reactor</FullName>
+        <Type>Reactor</Type>
+        <Rarity>Artifact</Rarity>
+        <Model>data/models/reactors/module.tmf</Model>
+        <CapacitorStorage>6400</CapacitorStorage>
+        <CapacitorRechargeRate>160</CapacitorRechargeRate>
+        <PowerGrid>120</PowerGrid>
+        <ContextualTip>#tip_reactor</ContextualTip>
+        <Variant>HighCapacity</Variant>
+    </Module>
+
+    <!-- Legendary reactors -->
+
+    <Module>
+        <Name>LegendaryReactor1</Name>
+        <FullName>'UNBOUND' grid reactor</FullName>
+        <Type>Reactor</Type>
+        <Rarity>Legendary</Rarity>
+        <Model>data/models/reactors/module.tmf</Model>
+        <CapacitorStorage>6400</CapacitorStorage>
+        <CapacitorRechargeRate>640</CapacitorRechargeRate>
+        <PowerGrid>240</PowerGrid>
+        <ContextualTip>#tip_reactor</ContextualTip>
+        <Variant>Standard</Variant>
+    </Module>
+
+    <Module>
+        <Name>LegendaryReactor2</Name>
+        <FullName>'INFINITY' grid reactor</FullName>
+        <Type>Reactor</Type>
+        <Rarity>Legendary</Rarity>
+        <Model>data/models/reactors/module.tmf</Model>
+        <CapacitorStorage>12800</CapacitorStorage>
+        <CapacitorRechargeRate>320</CapacitorRechargeRate>
+        <ContextualTip>#tip_reactor</ContextualTip>
+        <PowerGrid>240</PowerGrid>
+        <Variant>Standard</Variant>
+    </Module>
+
+</Modules>

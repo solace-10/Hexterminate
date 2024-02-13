@@ -1,0 +1,214 @@
+<Modules>
+
+  <!-- Outtakes -->
+  
+  <Module>
+    <Name>ArtifactBridge5</Name>
+    <FullName>Bridge - Hyperspace sensors</FullName>
+    <Type>Tower</Type>
+    <Rarity>Trash</Rarity>
+    <Model>data/models/bridge/model.tmf</Model>
+    <ExtraHealth>3500</ExtraHealth>
+    <Bonus>Sensors</Bonus>
+  </Module>
+
+  <Module>
+    <Name>ArtifactBridge6</Name>
+    <FullName>Bridge - Waveform stabilisation</FullName>
+    <Type>Tower</Type>
+    <Rarity>Trash</Rarity>
+    <Model>data/models/bridge/model.tmf</Model>
+    <ExtraHealth>3500</ExtraHealth>
+    <Bonus>HyperspaceImmunity</Bonus>
+    <ContextualTip>#tip_bridge</ContextualTip>
+  </Module>
+	
+  <!-- Common bridges -->
+  
+  <Module>
+    <Name>CommonBridge1</Name>
+    <FullName>Bridge - Standard</FullName>
+    <ShortDescription>Standard bridge module</ShortDescription>
+    <Description>A standard bridge module, allowing command of your ship and communications with the rest of the fleet. If this module is destroyed, so is your ship.</Description>
+    <Type>Tower</Type>
+	  <Model>data/models/bridge/model.tmf</Model>
+    <ExtraHealth>500</ExtraHealth>
+    <ContextualTip>#tip_bridge</ContextualTip>
+  </Module>
+  
+  <!-- Uncommon bridges -->
+
+  <Module>
+    <Name>UncommonBridge1</Name>
+    <FullName>Bridge - Reinforced</FullName>
+    <ShortDescription>Fleet ships take -30% ramming damage</ShortDescription>
+    <Description>Heavily reinforced internal compartments reduce the ramming damage taken by fleet ships by 30%. If this module is destroyed, so is your ship.</Description>
+    <Type>Tower</Type>
+    <Rarity>Uncommon</Rarity>
+    <Model>data/models/bridge/model.tmf</Model>
+    <ExtraHealth>1125</ExtraHealth>
+    <Bonus>Ramming</Bonus>
+    <BonusMagnitude>0.7</BonusMagnitude>
+    <ContextualTip>#tip_bridge</ContextualTip>
+  </Module>
+
+  <Module>
+    <Name>UncommonBridge2</Name>
+    <FullName>Bridge - Fire Control</FullName>
+    <ShortDescription>Fleet ships deal +15% damage</ShortDescription>
+    <Description>An expanded fire control bay allows all fleet ships to deal an additional 15% damage. If this module is destroyed, so is your ship.</Description>
+    <Type>Tower</Type>
+    <Rarity>Uncommon</Rarity>
+    <Model>data/models/bridge/model.tmf</Model>
+    <ExtraHealth>1125</ExtraHealth>
+    <Bonus>Damage</Bonus>
+    <BonusMagnitude>1.15</BonusMagnitude>
+    <ContextualTip>#tip_bridge</ContextualTip>
+  </Module>
+
+  <Module>
+    <Name>UncommonBridge3</Name>
+    <FullName>Bridge - Subspace CC</FullName>
+    <ShortDescription>Fleet ships move 15% faster</ShortDescription>
+    <Description>An expanded navigation bay allows all fleet ships to move 15% faster using their sub-light engines. If this module is destroyed, so is your ship.</Description>
+    <Type>Tower</Type>
+    <Rarity>Uncommon</Rarity>
+    <Model>data/models/bridge/model.tmf</Model>
+    <ExtraHealth>1125</ExtraHealth>
+    <Bonus>Movement</Bonus>
+    <BonusMagnitude>1.15</BonusMagnitude>
+    <ContextualTip>#tip_bridge</ContextualTip>
+  </Module>
+	
+  <!-- Rare bridges -->
+
+  <Module>
+    <Name>RareBridge1</Name>
+    <FullName>Bridge - Reinforced</FullName>
+    <ShortDescription>Fleet ships take -45% ramming damage</ShortDescription>
+    <Description>Heavily reinforced internal compartments reduce the ramming damage taken by fleet ships by 45%. If this module is destroyed, so is your ship.</Description>
+    <Type>Tower</Type>
+    <Rarity>Rare</Rarity>
+    <Model>data/models/bridge/model.tmf</Model>
+    <ExtraHealth>2000</ExtraHealth>
+    <Bonus>Ramming</Bonus>
+    <BonusMagnitude>0.55</BonusMagnitude>
+    <ContextualTip>#tip_bridge</ContextualTip>
+  </Module>
+
+  <Module>
+    <Name>RareBridge2</Name>
+    <FullName>Bridge - Fire Control</FullName>
+    <ShortDescription>Fleet ships deal +20% damage</ShortDescription>
+    <Description>An expanded fire control bay allows all fleet ships to deal an additional 20% damage. If this module is destroyed, so is your ship.</Description>
+    <Type>Tower</Type>
+    <Rarity>Rare</Rarity>
+    <Model>data/models/bridge/model.tmf</Model>
+    <ExtraHealth>2000</ExtraHealth>
+    <Bonus>Damage</Bonus>
+    <BonusMagnitude>1.20</BonusMagnitude>
+    <ContextualTip>#tip_bridge</ContextualTip>
+  </Module>
+
+  <Module>
+    <Name>RareBridge3</Name>
+    <FullName>Bridge - Subspace CC</FullName>
+    <ShortDescription>Fleet ships move 25% faster</ShortDescription>
+    <Description>An expanded navigation bay allows all fleet ships to move 25% faster using their sub-light engines. If this module is destroyed, so is your ship.</Description>
+    <Type>Tower</Type>
+    <Rarity>Rare</Rarity>
+    <Model>data/models/bridge/model.tmf</Model>
+    <ExtraHealth>2000</ExtraHealth>
+    <Bonus>Movement</Bonus>
+    <BonusMagnitude>1.25</BonusMagnitude>
+    <ContextualTip>#tip_bridge</ContextualTip>
+  </Module>
+
+  <Module>
+    <Name>RareBridge4</Name>
+    <FullName>Bridge - Shield harmonisation</FullName>
+    <ShortDescription>Fleet ships have 20% stronger shields</ShortDescription>
+    <Description>Dedicated analysis mainframes improve both the effective shield capacity and regeneration of all fleet ships by 20%. If this module is destroyed, so is your ship.</Description>
+    <Type>Tower</Type>
+    <Rarity>Rare</Rarity>
+    <Model>data/models/bridge/model.tmf</Model>
+    <ExtraHealth>2000</ExtraHealth>
+    <Bonus>Shields</Bonus>
+    <BonusMagnitude>1.20</BonusMagnitude>
+    <ContextualTip>#tip_bridge</ContextualTip>
+  </Module>
+
+  <Module>
+    <Name>RareBridge5</Name>
+    <FullName>Bridge - Hyperspace sensors</FullName>
+    <ShortDescription>Able to detect fleets in hyperspace</ShortDescription>
+    <Description>An advanced hyperspace sensor array provides early warning of any hostile fleets which might be on course to attack your current sector. If this module is destroyed, so is your ship.</Description>
+    <Type>Tower</Type>
+    <Rarity>Rare</Rarity>
+    <Model>data/models/bridge/model.tmf</Model>
+    <ExtraHealth>2000</ExtraHealth>
+    <Bonus>Sensors</Bonus>
+    <ContextualTip>#tip_bridge</ContextualTip>
+  </Module>
+
+  <!-- Artifact bridges -->
+
+  <Module>
+    <Name>ArtifactBridge1</Name>
+    <FullName>Bridge - Reinforced</FullName>
+    <ShortDescription>Fleet ships take -60% ramming damage</ShortDescription>
+    <Description>Heavily reinforced internal compartments reduce the ramming damage taken by fleet ships by 60%. If this module is destroyed, so is your ship.</Description>
+    <Type>Tower</Type>
+    <Rarity>Artifact</Rarity>
+    <Model>data/models/bridge/model.tmf</Model>
+    <ExtraHealth>3500</ExtraHealth>
+    <Bonus>Ramming</Bonus>
+    <BonusMagnitude>1.60</BonusMagnitude>
+    <ContextualTip>#tip_bridge</ContextualTip>
+  </Module>
+
+  <Module>
+    <Name>ArtifactBridge2</Name>
+    <FullName>Bridge - Fire Control</FullName>
+    <ShortDescription>Fleet ships deal +25% damage</ShortDescription>
+    <Description>An expanded fire control bay allows all fleet ships to deal an additional 25% damage. If this module is destroyed, so is your ship.</Description>
+    <Type>Tower</Type>
+    <Rarity>Artifact</Rarity>
+    <Model>data/models/bridge/model.tmf</Model>
+    <ExtraHealth>3500</ExtraHealth>
+    <Bonus>Damage</Bonus>
+    <BonusMagnitude>1.25</BonusMagnitude>
+    <ContextualTip>#tip_bridge</ContextualTip>
+  </Module>
+
+  <Module>
+    <Name>ArtifactBridge3</Name>
+    <FullName>Bridge - Subspace CC</FullName>
+    <ShortDescription>Fleet ships move 35% faster</ShortDescription>
+    <Description>An expanded navigation bay allows all fleet ships to move 35% faster using their sub-light engines. If this module is destroyed, so is your ship.</Description>
+    <Type>Tower</Type>
+    <Rarity>Artifact</Rarity>
+    <Model>data/models/bridge/model.tmf</Model>
+    <ExtraHealth>3500</ExtraHealth>
+    <Bonus>Movement</Bonus>
+    <BonusMagnitude>1.35</BonusMagnitude>
+    <ContextualTip>#tip_bridge</ContextualTip>
+  </Module>
+  
+  <Module>
+    <Name>ArtifactBridge4</Name>
+    <FullName>Bridge - Shield harmonisation</FullName>
+    <ShortDescription>Fleet ships have 25% stronger shields</ShortDescription>
+    <Description>Dedicated analysis mainframes improve both the effective shield capacity and regeneration of all fleet ships by 25%. If this module is destroyed, so is your ship.</Description>
+    <Type>Tower</Type>
+    <Rarity>Artifact</Rarity>
+    <Model>data/models/bridge/model.tmf</Model>
+    <ExtraHealth>3500</ExtraHealth>
+    <Bonus>Shields</Bonus>
+    <BonusMagnitude>1.25</BonusMagnitude>
+    <ContextualTip>#tip_bridge</ContextualTip>
+  </Module>
+  
+  <!-- Legendary bridges -->
+  
+</Modules>

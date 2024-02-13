@@ -1,0 +1,183 @@
+<Modules>
+
+  <!-- Common shields -->
+  
+  <Module>
+    <Name>CommonShield1</Name>
+    <FullName>Imperial void shield battery</FullName>
+    <Model>data/models/shieldgenerator/module.tmf</Model>
+    <Type>Shield</Type>
+    <Rarity>Common</Rarity>
+    <Capacity>2000</Capacity>
+    <PeakRechargeRate>0</PeakRechargeRate>
+    <PowerGrid>-5</PowerGrid>
+    <ContextualTip>#tip_shield_battery</ContextualTip>
+    <Description>A shield battery provides a small buffer and requires little of the power grid, but it is incapable of regenerating on its own. Having multiple shield modules will cause them to operate at reduced efficiency.</Description>
+  </Module>
+  
+  <!-- Uncommon shields -->
+
+  <Module>
+    <Name>UncommonShield1</Name>
+    <FullName>Kyros-Hyperion deflector shield</FullName>
+    <Model>data/models/shieldgenerator/module.tmf</Model>
+    <Type>Shield</Type>
+    <Rarity>Uncommon</Rarity>
+    <Capacity>6000</Capacity>
+    <PeakRechargeRate>40</PeakRechargeRate>
+    <PowerGrid>-40</PowerGrid>
+    <ContextualTip>#tip_deflector_shield</ContextualTip>
+    <Description>Deflector shields provide large buffers, but low recharge rates. Having multiple shield modules will cause them to operate at reduced efficiency.</Description>
+  </Module>
+
+  <Module>
+    <Name>UncommonShield2</Name>
+    <FullName>Delacroix null point generator</FullName>
+    <Model>data/models/shieldgenerator/module.tmf</Model>
+    <Type>Shield</Type>
+    <Rarity>Uncommon</Rarity>
+    <Capacity>2000</Capacity>
+    <PeakRechargeRate>115</PeakRechargeRate>
+    <PowerGrid>-60</PowerGrid>
+    <ContextualTip>#tip_null_point_generator</ContextualTip>
+    <Description>Null point generators provide fast recharge rates, but small buffers and at a considerable power grid cost. Having multiple shield modules will cause them to operate at reduced efficiency.</Description>
+  </Module>
+
+  <Module>
+    <Name>UncommonShield3</Name>
+    <FullName>Imperial covariant shield array</FullName>
+    <Model>data/models/shieldgenerator/module.tmf</Model>
+    <Type>Shield</Type>
+    <Rarity>Uncommon</Rarity>
+    <Capacity>2000</Capacity>
+    <PeakRechargeRate>175</PeakRechargeRate>
+    <PowerGrid>-60</PowerGrid>
+    <Overtuned>true</Overtuned>
+    <Description>The safety controls of this module have been overriden, providing substantially higher regeneration rate than normal. However, the module is destroyed if the shield collapses. Having multiple shield modules will cause them to operate at reduced efficiency.</Description>
+    <ContextualTip>#tip_covariant_shield_array</ContextualTip>
+  </Module>
+
+  <Module>
+    <Name>UncommonShield4</Name>
+    <FullName>Octer void shield battery</FullName>
+    <Model>data/models/shieldgenerator/module.tmf</Model>
+    <Type>Shield</Type>
+    <Rarity>Uncommon</Rarity>
+    <Capacity>6000</Capacity>
+    <PeakRechargeRate>0</PeakRechargeRate>
+    <PowerGrid>-10</PowerGrid>
+    <ContextualTip>#tip_shield_battery</ContextualTip>
+    <Description>A shield battery provides a small buffer and requires little of the power grid, but it is incapable of regenerating on its own. Having multiple shield modules will cause them to operate at reduced efficiency.</Description>
+  </Module>
+  
+  <!-- Rare shields -->
+
+  <Module>
+    <Name>RareShield1</Name>
+    <FullName>Strauman deflector shield</FullName>
+    <Model>data/models/shieldgenerator/module.tmf</Model>
+    <Type>Shield</Type>
+    <Rarity>Rare</Rarity>
+    <Capacity>9000</Capacity>
+    <PeakRechargeRate>55</PeakRechargeRate>
+    <PowerGrid>-80</PowerGrid>
+    <ContextualTip>#tip_deflector_shield</ContextualTip>
+    <Description>Deflector shields provide large buffers, but low recharge rates. Having multiple shield modules will cause them to operate at reduced efficiency.</Description>
+  </Module>
+
+  <Module>
+    <Name>RareShield2</Name>
+    <FullName>Sinclair null point generator</FullName>
+    <Model>data/models/shieldgenerator/module.tmf</Model>
+    <Type>Shield</Type>
+    <Rarity>Rare</Rarity>
+    <Capacity>3000</Capacity>
+    <PeakRechargeRate>175</PeakRechargeRate>
+    <PowerGrid>-120</PowerGrid>
+    <ContextualTip>#tip_null_point_generator</ContextualTip>
+    <Description>Null point generators provide fast recharge rates, but small buffers and at a considerable power grid cost. Having multiple shield modules will cause them to operate at reduced efficiency.</Description>
+  </Module>
+
+  <Module>
+    <Name>RareShield3</Name>
+    <FullName>Ascent covariant shield array</FullName>
+    <Model>data/models/shieldgenerator/module.tmf</Model>
+    <Type>Shield</Type>
+    <Rarity>Rare</Rarity>
+    <Capacity>3000</Capacity>
+    <PeakRechargeRate>275</PeakRechargeRate>
+    <PowerGrid>-120</PowerGrid>
+    <Overtuned>true</Overtuned>
+    <ContextualTip>#tip_covariant_shield_array</ContextualTip>
+    <Description>The safety controls of this module have been overriden, providing substantially higher regeneration rate than normal. However, the module is destroyed if the shield collapses. Having multiple shield modules will cause them to operate at reduced efficiency.</Description>
+  </Module>
+
+  <Module>
+    <Name>RareShield4</Name>
+    <FullName>Octer advanced void shield battery</FullName>
+    <Model>data/models/shieldgenerator/module.tmf</Model>
+    <Type>Shield</Type>
+    <Rarity>Rare</Rarity>
+    <Capacity>9000</Capacity>
+    <PeakRechargeRate>0</PeakRechargeRate>
+    <PowerGrid>-20</PowerGrid>
+    <ContextualTip>#tip_shield_battery</ContextualTip>
+    <Description>A shield battery provides a small buffer and requires little of the power grid, but it is incapable of regenerating on its own. Having multiple shield modules will cause them to operate at reduced efficiency.</Description>
+  </Module>
+  
+  <!-- Artifact shields -->
+
+  <Module>
+    <Name>ArtifactShield1</Name>
+    <FullName>Frontier 'Eve' deflector shield</FullName>
+    <Model>data/models/shieldgenerator/module.tmf</Model>
+    <Type>Shield</Type>
+    <Rarity>Artifact</Rarity>
+    <Capacity>15000</Capacity>
+    <PeakRechargeRate>90</PeakRechargeRate>
+    <PowerGrid>-160</PowerGrid>
+    <ContextualTip>#tip_deflector_shield</ContextualTip>
+    <Description>The 'Eve' deflector shield provides a massive buffers, but a modest recharge rate. Having multiple shield modules will cause them to operate at reduced efficiency.</Description>
+  </Module>
+
+  <Module>
+    <Name>ArtifactShield2</Name>
+    <FullName>Sinclair 'Guardian' null point generator</FullName>
+    <Model>data/models/shieldgenerator/module.tmf</Model>
+    <Type>Shield</Type>
+    <Rarity>Artifact</Rarity>
+    <Capacity>5000</Capacity>
+    <PeakRechargeRate>275</PeakRechargeRate>
+    <PowerGrid>-240</PowerGrid>
+    <ContextualTip>#tip_null_point_generator</ContextualTip>
+    <Description>The 'Guardian' null point generator provides fast recharge rates, but a modest buffer and at a considerable power grid cost. Having multiple shield modules will cause them to operate at reduced efficiency.</Description>
+  </Module>
+
+  <Module>
+    <Name>ArtifactShield3</Name>
+    <FullName>Daedalus 'Sybil' shield battery</FullName>
+    <Model>data/models/shieldgenerator/module.tmf</Model>
+    <Type>Shield</Type>
+    <Rarity>Artifact</Rarity>
+    <Capacity>15000</Capacity>
+    <PeakRechargeRate>0</PeakRechargeRate>
+    <PowerGrid>-40</PowerGrid>
+    <ContextualTip>#tip_shield_battery</ContextualTip>
+    <Description>The 'Sybil' shield battery provides a massive buffer and requires little of the power grid, but it is incapable of regenerating on its own. Having multiple shield modules will cause them to operate at reduced efficiency.</Description>
+  </Module>
+  
+  <!-- Legendary shields -->
+
+  <Module>
+    <Name>LegendaryShield1</Name>
+    <FullName>'OMEGA' multiphasic shield array</FullName>
+    <Model>data/models/shieldgenerator/module.tmf</Model>
+    <Type>Shield</Type>
+    <Rarity>Legendary</Rarity>
+    <Capacity>9000</Capacity>
+    <PeakRechargeRate>500</PeakRechargeRate>
+    <PowerGrid>-480</PowerGrid>
+    <Description>"This is where your conquest ends. This is where your empire falls."</Description>
+  </Module>
+  
+</Modules>

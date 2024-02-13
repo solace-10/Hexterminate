@@ -1,0 +1,5 @@
+{
+  "category": "ARMOUR",
+  "name": "Armour modules",
+  "content": "Although it had long been a dream of technologists and ship engineers alike that armour would become unnecessary as shielding technology advanced, reality has brought little more than disappointments. Armour remains essential for protecting critical modules, with the vast majority of ships relying on one or more armour module variants. \n\nThese are broadly split in three categories: light, medium and heavy armour modules, progressively providing greater protection at the cost of significantly greater mass, which negatively affects a ship's agility and speed. \n\nProjectiles hitting an armour module have a chance to be deflected outright (given by the armour's kinetic resistance), while beams and missiles deal reduced damage based on the armour's energy resistance. \n\nAdditionally, Module Repairers are significantly more effective on armour modules, allowing a well protected ship to remain engaged for considerable lengths of time."
+}

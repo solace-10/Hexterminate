@@ -1,0 +1,9 @@
+<ShipInfo>
+	<DisplayName>Lancer</DisplayName>
+	<LongDisplayName>Lancer class gunship</LongDisplayName>
+	<Tier>1</Tier>
+	<Cost>750</Cost>
+	<DisplayImage>data/ui/ships/lancer.png</DisplayImage>
+	<Weapons>Artillery (187 DPS)</Weapons>
+	<Defense>Light armour</Defense>
+</ShipInfo>

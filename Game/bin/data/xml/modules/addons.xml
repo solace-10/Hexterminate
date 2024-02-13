@@ -1,0 +1,344 @@
+<Module>
+
+  <!-- Quantum alternators -->
+
+  <Module>
+    <Name>LegendaryQuantumAlternator</Name>
+    <FullName>'RADIANT' quantum state alternator</FullName>
+    <Description>Passive: increases shield resistance by 25%. Active: flips the quantum state of your shield, blocking anti-proton projectiles in the same state.</Description>
+    <Model>data/models/alternator/module.tmf</Model>
+    <Type>Addon</Type>
+    <Rarity>Legendary</Rarity>
+    <Icon>data/ui/icons/quantum_alternator.png</Icon>
+    <Category>QuantumStateAlternator</Category>
+    <ActivationType>Trigger</ActivationType>
+    <Cooldown>0.5</Cooldown>
+    <ActivationCost>100.0</ActivationCost>
+    <Parameter>0.75</Parameter>
+    <ContextualTip>#tip_quantum_alternator</ContextualTip>
+  </Module>
+  
+  <Module>
+    <Name>ArtifactQuantumAlternator</Name>
+    <FullName>Hegemon quantum state alternator</FullName>
+    <Description>Passive: increases shield resistance by 15%. Active: flips the quantum state of your shield, blocking anti-proton projectiles in the same state.</Description>
+    <Model>data/models/alternator/module.tmf</Model>
+    <Type>Addon</Type>
+    <Rarity>Artifact</Rarity>
+    <Icon>data/ui/icons/quantum_alternator.png</Icon>
+    <Category>QuantumStateAlternator</Category>
+    <ActivationType>Trigger</ActivationType>
+    <Cooldown>0.5</Cooldown>
+    <ActivationCost>100.0</ActivationCost>
+    <Parameter>0.85</Parameter>
+    <ContextualTip>#tip_quantum_alternator</ContextualTip>
+  </Module>
+
+  <!-- Particle accelerators -->
+    
+  <Module>
+    <Name>LegendaryParticleAccelerator</Name>
+    <FullName>'MJOLNIR' plasma linear accelerator</FullName>
+    <Description>The massive 'MJOLNIR' plasma linear accelerator destroys all modules it hits. If it hits a shield, it deals 60% of the shield's maximum health instead. The 20s cooldown is long, but dwarfed by this weapon's destructive potential.</Description>
+    <Model>data/models/particleaccelerator/module.tmf</Model>
+    <Type>Addon</Type>
+    <Rarity>Legendary</Rarity>
+    <Icon>data/ui/icons/particle_accelerator.png</Icon>
+    <Category>ParticleAccelerator</Category>
+    <ActivationType>Trigger</ActivationType>
+    <Cooldown>20.0</Cooldown>
+    <ActivationCost>600.0</ActivationCost>
+    <ContextualTip>#tip_particle_accelerator</ContextualTip>
+  </Module>
+  
+  <!-- Module repairers -->
+    
+  <Module>
+    <Name>PhasedAssemblerArray</Name>
+    <FullName>Kyros-Hyperion phased assembler array</FullName>
+    <Description>Each module is repaired by 250hp. 15s cooldown, 60 energy cost. Armour modules repair twice as much.</Description>
+    <Model>data/models/armourrepairer/module.tmf</Model>
+    <Type>Addon</Type>
+    <Rarity>Common</Rarity>
+    <Icon>data/ui/icons/armour.png</Icon>
+    <Category>ModuleRepairer</Category>
+    <ActivationType>Trigger</ActivationType>
+    <Cooldown>15.0</Cooldown>
+    <ActivationCost>60.0</ActivationCost>
+    <Parameter>250.0</Parameter>
+    <ContextualTip>#tip_armour_repairer</ContextualTip>
+  </Module>
+
+  <Module>
+    <Name>UncommonPhasedAssemblerArray</Name>
+    <FullName>Delacroix phased assembler array</FullName>
+    <Description>Each module is repaired by 375hp. 14s cooldown, 110 energy cost. Armour modules repair twice as much.</Description>
+    <Model>data/models/armourrepairer/module.tmf</Model>
+    <Type>Addon</Type>
+    <Rarity>Uncommon</Rarity>
+    <Icon>data/ui/icons/armour.png</Icon>
+    <Category>ModuleRepairer</Category>
+    <ActivationType>Trigger</ActivationType>
+    <Cooldown>14.0</Cooldown>
+    <ActivationCost>110.0</ActivationCost>
+    <Parameter>375.0</Parameter>
+    <ContextualTip>#tip_armour_repairer</ContextualTip>
+  </Module>
+  
+  <Module>
+    <Name>RarePhasedAssemblerArray</Name>
+    <FullName>Valrun phased assembler array</FullName>
+    <Description>Each module is repaired by 560hp. 13s cooldown, 205 energy cost. Armour modules repair twice as much.</Description>
+    <Model>data/models/armourrepairer/module.tmf</Model>
+    <Type>Addon</Type>
+    <Rarity>Rare</Rarity>
+    <Icon>data/ui/icons/armour.png</Icon>
+    <Category>ModuleRepairer</Category>
+    <ActivationType>Trigger</ActivationType>
+    <Cooldown>13.0</Cooldown>
+    <ActivationCost>205.0</ActivationCost>
+    <Parameter>560.0</Parameter>
+    <ContextualTip>#tip_armour_repairer</ContextualTip>
+  </Module>
+
+  <Module>
+    <Name>ArtifactPhasedAssemblerArray</Name>
+    <FullName>Daedalus 'Unbroken' phased assembler array</FullName>
+    <Description>Each module is repaired by 850hp. 12s cooldown, 385 energy cost. Armour modules repair twice as much.</Description>
+    <Model>data/models/armourrepairer/module.tmf</Model>
+    <Type>Addon</Type>
+    <Rarity>Artifact</Rarity>
+    <Icon>data/ui/icons/armour.png</Icon>
+    <Category>ModuleRepairer</Category>
+    <ActivationType>Trigger</ActivationType>
+    <Cooldown>12.0</Cooldown>
+    <ActivationCost>385.0</ActivationCost>
+    <Parameter>850.0</Parameter>
+    <ContextualTip>#tip_armour_repairer</ContextualTip>
+  </Module>
+  
+  <Module>
+    <Name>LegendaryPhasedAssemblerArray</Name>
+    <FullName>'HIGHLANDER' phased assembler array</FullName>
+    <Description>Each module is repaired by 1250hp. 10s cooldown, 600 energy cost. Armour modules repair twice as much.</Description>
+    <Model>data/models/armourrepairer/module.tmf</Model>
+    <Type>Addon</Type>
+    <Rarity>Legendary</Rarity>
+    <Icon>data/ui/icons/armour.png</Icon>
+    <Category>ModuleRepairer</Category>
+    <ActivationType>Trigger</ActivationType>
+    <Cooldown>10.0</Cooldown>
+    <ActivationCost>600.0</ActivationCost>
+    <Parameter>1250.0</Parameter>
+    <ContextualTip>#tip_armour_repairer</ContextualTip>
+  </Module>
+  
+  <!-- Missile interceptor -->
+
+  <Module>
+    <Name>CommonMissileInterceptor1</Name>
+    <FullName>Rafel-Skal missile interceptor</FullName>
+    <Description>While active, this missile interceptor is capable of shooting down one missile every 0.35s. It consumes 25 energy per second.</Description>
+    <Model>data/models/missileinterceptor/model.tmf</Model>
+    <Type>Addon</Type>
+    <Icon>data/ui/icons/addon.png</Icon>
+    <Category>MissileInterceptor</Category>
+    <ActivationType>Toggle</ActivationType>
+    <Cooldown>10.0</Cooldown>
+    <ActivationCost>25.0</ActivationCost>
+    <Parameter>0.35</Parameter>
+    <ContextualTip>#tip_missile_interceptor</ContextualTip>
+  </Module>
+
+  <Module>
+    <Name>UnommonMissileInterceptor1</Name>
+    <FullName>Sinclair missile interceptor</FullName>
+    <Description>While active, this missile interceptor is capable of shooting down one missile every 0.3s. It consumes 50 energy per second.</Description>
+    <Model>data/models/missileinterceptor/model.tmf</Model>
+    <Rarity>Uncommon</Rarity>
+    <Type>Addon</Type>
+    <Icon>data/ui/icons/addon.png</Icon>
+    <Category>MissileInterceptor</Category>
+    <ActivationType>Toggle</ActivationType>
+    <Cooldown>10.0</Cooldown>
+    <ActivationCost>50.0</ActivationCost>
+    <Parameter>0.30</Parameter>
+    <ContextualTip>#tip_missile_interceptor</ContextualTip>
+  </Module>
+
+  <Module>
+    <Name>RareMissileInterceptor1</Name>
+    <FullName>Stillwater missile interceptor</FullName>
+    <Description>While active, this missile interceptor is capable of shooting down one missile every 0.25s. It consumes 100 energy per second.</Description>
+    <Model>data/models/missileinterceptor/model.tmf</Model>
+    <Rarity>Rare</Rarity>
+    <Type>Addon</Type>
+    <Icon>data/ui/icons/addon.png</Icon>
+    <Category>MissileInterceptor</Category>
+    <ActivationType>Toggle</ActivationType>
+    <Cooldown>10.0</Cooldown>
+    <ActivationCost>100.0</ActivationCost>
+    <Parameter>0.25</Parameter>
+    <ContextualTip>#tip_missile_interceptor</ContextualTip>
+  </Module>
+
+  <Module>
+    <Name>ArtifactMissileInterceptor1</Name>
+    <FullName>Valrun 'Guardian' missile interceptor</FullName>
+    <Description>While active, this missile interceptor is capable of shooting down one missile every 0.2s. It consumes 200 energy per second.</Description>
+    <Model>data/models/missileinterceptor/model.tmf</Model>
+    <Rarity>Artifact</Rarity>
+    <Type>Addon</Type>
+    <Icon>data/ui/icons/addon.png</Icon>
+    <Category>MissileInterceptor</Category>
+    <ActivationType>Toggle</ActivationType>
+    <Cooldown>10.0</Cooldown>
+    <ActivationCost>200.0</ActivationCost>
+    <Parameter>0.20</Parameter>
+    <ContextualTip>#tip_missile_interceptor</ContextualTip>
+  </Module>
+
+  <Module>
+    <Name>LegendaryMissileInterceptor1</Name>
+    <FullName>'AEGIS' missile interceptor</FullName>
+    <Description>While active, this missile interceptor is capable of shooting down one missile every 0.15s. It consumes 400 energy per second.</Description>
+    <Model>data/models/missileinterceptor/model.tmf</Model>
+    <Rarity>Legendary</Rarity>
+    <Type>Addon</Type>
+    <Icon>data/ui/icons/addon.png</Icon>
+    <Category>MissileInterceptor</Category>
+    <ActivationType>Toggle</ActivationType>
+    <Cooldown>10.0</Cooldown>
+    <ActivationCost>400.0</ActivationCost>
+    <Parameter>0.15</Parameter>
+    <ContextualTip>#tip_missile_interceptor</ContextualTip>
+  </Module>
+
+  <!-- Phase barrier -->
+
+  <Module>
+    <Name>RarePhaseBarrier1</Name>
+    <FullName>Experimental Imperial phase barrier</FullName>
+    <Description>Projected shield which blocks any incoming fire (90m coverage). Consumes the Phase bar while active.</Description>
+    <Model>data/models/phasebarrier/module.tmf</Model>
+    <Rarity>Rare</Rarity>
+    <Type>Addon</Type>
+    <Icon>data/ui/icons/shield.png</Icon>
+    <Category>PhaseBarrier</Category>
+    <ActivationType>Toggle</ActivationType>
+    <Cooldown>10.0</Cooldown>
+    <ActivationCost>5.0</ActivationCost>
+    <Parameter>90.0</Parameter>
+  </Module>
+
+  <Module>
+    <Name>ArtifactPhaseBarrier1</Name>
+    <FullName>Imperial 'Aurora' phase barrier</FullName>
+    <Description>Projected shield which blocks any incoming fire (120m coverage). Consumes the Phase bar while active.</Description>
+    <Model>data/models/phasebarrier/module.tmf</Model>
+    <Rarity>Artifact</Rarity>
+    <Type>Addon</Type>
+    <Icon>data/ui/icons/shield.png</Icon>
+    <Category>PhaseBarrier</Category>
+    <ActivationType>Toggle</ActivationType>
+    <Cooldown>10.0</Cooldown>
+    <ActivationCost>30.0</ActivationCost>
+    <Parameter>120.0</Parameter>
+  </Module>
+
+  <Module>
+    <Name>LegendaryPhaseBarrier1</Name>
+    <FullName>'RECLAMATION' phase barrier</FullName>
+    <Description>Projected shield which blocks any incoming fire (160m coverage). Consumes the Phase bar while active.</Description>
+    <Model>data/models/phasebarrier/module.tmf</Model>
+    <Rarity>Legendary</Rarity>
+    <Type>Addon</Type>
+    <Icon>data/ui/icons/shield.png</Icon>
+    <Category>PhaseBarrier</Category>
+    <ActivationType>Toggle</ActivationType>
+    <Cooldown>10.0</Cooldown>
+    <ActivationCost>60.0</ActivationCost>
+    <Parameter>160.0</Parameter>
+  </Module>
+
+  <!-- Engine disruptor -->
+
+  <Module>
+    <Name>CommonEngineDisruptor1</Name>
+    <FullName>Valrun engine disruptor</FullName>
+    <Description>Triggers three 150m wide shockwaves which slow down any ships caught in the blast, including those attempting a ramming maneuver. It has a 30s cooldown and requires 25 energy to activate.</Description>
+    <Model>data/models/enginedisruptor/module.tmf</Model>
+    <Type>Addon</Type>
+    <Icon>data/ui/icons/addon.png</Icon>
+    <Category>EngineDisruptor</Category>
+    <ActivationType>Trigger</ActivationType>
+    <Cooldown>30.0</Cooldown>
+    <ActivationCost>25.0</ActivationCost>
+    <Parameter>150</Parameter>
+    <ContextualTip>#tip_engine_disruptor</ContextualTip>
+  </Module>
+
+  <Module>
+    <Name>UncommonEngineDisruptor1</Name>
+    <FullName>Sinclair engine disruptor</FullName>
+    <Description>Triggers three 180m wide shockwaves which slow down any ships caught in the blast, including those attempting a ramming maneuver. It has a 28s cooldown and requires 50 energy to activate.</Description>
+    <Model>data/models/enginedisruptor/module.tmf</Model>
+    <Rarity>Uncommon</Rarity>
+    <Type>Addon</Type>
+    <Icon>data/ui/icons/addon.png</Icon>
+    <Category>EngineDisruptor</Category>
+    <ActivationType>Trigger</ActivationType>
+    <Cooldown>28.0</Cooldown>
+    <ActivationCost>50.0</ActivationCost>
+    <Parameter>180</Parameter>
+    <ContextualTip>#tip_engine_disruptor</ContextualTip>
+  </Module>
+
+  <Module>
+    <Name>RareEngineDisruptor1</Name>
+    <FullName>Stillwater engine disruptor</FullName>
+    <Description>Triggers three 180m wide shockwaves which slow down any ships caught in the blast, including those attempting a ramming maneuver. It has a 25s cooldown and requires 100 energy to activate.</Description>
+    <Model>data/models/enginedisruptor/module.tmf</Model>
+    <Rarity>Rare</Rarity>
+    <Type>Addon</Type>
+    <Icon>data/ui/icons/addon.png</Icon>
+    <Category>EngineDisruptor</Category>
+    <ActivationType>Trigger</ActivationType>
+    <Cooldown>25.0</Cooldown>
+    <ActivationCost>100.0</ActivationCost>
+    <Parameter>210</Parameter>
+    <ContextualTip>#tip_engine_disruptor</ContextualTip>
+  </Module>
+
+  <Module>
+    <Name>ArtifactEngineDisruptor1</Name>
+    <FullName>Gamescroller 'Intercept' engine disruptor</FullName>
+    <Description>Triggers three 250m wide shockwaves which slow down any ships caught in the blast, including those attempting a ramming maneuver. It has a 20s cooldown and requires 200 energy to activate.</Description>
+    <Model>data/models/enginedisruptor/module.tmf</Model>
+    <Rarity>Artifact</Rarity>
+    <Type>Addon</Type>
+    <Icon>data/ui/icons/addon.png</Icon>
+    <Category>EngineDisruptor</Category>
+    <ActivationType>Trigger</ActivationType>
+    <Cooldown>20.0</Cooldown>
+    <ActivationCost>200.0</ActivationCost>
+    <Parameter>250</Parameter>
+    <ContextualTip>#tip_engine_disruptor</ContextualTip>
+  </Module>
+
+  <Module>
+    <Name>LegendaryEngineDisruptor1</Name>
+    <FullName>'POINT' engine disruptor</FullName>
+    <Description>Triggers three 300m wide shockwaves which slow down any ships caught in the blast, including those attempting a ramming maneuver. It has a 15s cooldown and requires 400 energy to activate.</Description>
+    <Model>data/models/enginedisruptor/module.tmf</Model>
+    <Rarity>Legendary</Rarity>
+    <Type>Addon</Type>
+    <Icon>data/ui/icons/addon.png</Icon>
+    <Category>EngineDisruptor</Category>
+    <ActivationType>Trigger</ActivationType>
+    <Cooldown>15.0</Cooldown>
+    <ActivationCost>400.0</ActivationCost>
+    <Parameter>300</Parameter>
+    <ContextualTip>#tip_engine_disruptor</ContextualTip>
+  </Module>
+</Module>

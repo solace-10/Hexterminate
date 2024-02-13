@@ -1,0 +1,5 @@
+{
+  "category": "ARMOUR",
+  "name": "Regenerative armour",
+  "content": "Regenerative armour modules use a self-contained MicroDrone repair bay to regenerate any damage sustained to it's armour plates. \n\nThis type of armour module uses a multi-layered system. The top layer is comprised of standard armor plates of varying thickness, which range from lightweight 100mm to thick 400mm plates. The lower layer contains an enclosed MRDU, and works in the exact same manner as those used on the larger ship Repair Modules. \n\nThe major difference between a MRDU (MicroDrone Repair Unit) and a MRDM (MicroDrone Repair Module) is that the unit variant is a much smaller and thus can be contained within the armour module itself. Although not usually as powerful as its dedicated cousin and only capable of repairing itself, its constant effect and minimal energy requirements are a boon when the armour plates are taking sustained fire."
+}

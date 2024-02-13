@@ -1,0 +1,2 @@
+set(STEAMWORKS_INCLUDE_DIRS "${CMAKE_SOURCE_DIR}/Genesis/libs/steamworks-1.57/sdk/public" CACHE STRING "Steam - include directory")
+set(STEAMWORKS_LIBRARY_DIRS "${CMAKE_SOURCE_DIR}/Genesis/libs/steamworks-1.57/sdk/redistributable_bin/win64" CACHE STRING "Steam - library directory")

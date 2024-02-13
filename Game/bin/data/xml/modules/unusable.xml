@@ -1,0 +1,29 @@
+<Modules>
+
+  <!-- Modules which aren't supposed to be acquired by the player -->
+  <!-- All of these modules are listed as rarity "Trash" so they do not drop during gameplay -->
+
+  <Module>
+    <Name>CargoContainer</Name>
+    <FullName>Heavy cargo container</FullName>
+    <Type>Armour</Type>
+    <Rarity>Trash</Rarity>
+    <MassMultiplier>2.0</MassMultiplier>
+    <ExtraHealth>5000</ExtraHealth>
+    <KineticResistance>0.0</KineticResistance>
+    <EnergyResistance>0.0</EnergyResistance>
+  </Module>
+
+  <Module>
+    <Name>BroadcastRelay</Name>
+    <FullName>Broadcast relay</FullName>
+    <Model>data/models/relay/module.tmf</Model>
+    <Type>Armour</Type>
+    <Rarity>Trash</Rarity>
+    <MassMultiplier>2.0</MassMultiplier>
+    <ExtraHealth>5000</ExtraHealth>
+    <KineticResistance>0.0</KineticResistance>
+    <EnergyResistance>0.0</EnergyResistance>
+  </Module>
+
+</Modules>

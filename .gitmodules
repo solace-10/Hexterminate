@@ -1,0 +1,6 @@
+[submodule "vcpkg"]
+	path = vcpkg
+	url = https://github.com/microsoft/vcpkg
+[submodule "Genesis/ext/crashpad-cmake"]
+	path = Genesis/ext/crashpad-cmake
+	url = https://github.com/TheAssemblyArmada/crashpad-cmake

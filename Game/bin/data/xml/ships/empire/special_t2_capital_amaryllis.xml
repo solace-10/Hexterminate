@@ -1,0 +1,9 @@
+<ShipInfo>
+	<DisplayName>Amaryllis</DisplayName>
+	<LongDisplayName>Amaryllis class battleship</LongDisplayName>
+	<Tier>2</Tier>
+	<Cost>9000</Cost>
+	<DisplayImage>data/ui/ships/amaryllis.png</DisplayImage>
+	<Weapons>Artillery (1062 DPS)</Weapons>
+	<Defense>Shields and reactive heavy armour</Defense>
+</ShipInfo>

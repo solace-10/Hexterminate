@@ -1,0 +1,930 @@
+<Modules>
+
+  <!--
+  Behaviour: can be 'Fixed' (weapon always point ahead) or 'Turret' (weapon turns to track targets)
+  -->
+  
+  <!-- Antiproton Cannon -->
+
+  <Module>
+    <Name>LegendaryAntiProtonCannon</Name>
+    <FullName>'DARK BLOSSOM' antiproton cannon</FullName>
+    <Type>Weapon</Type>
+    <Rarity>Legendary</Rarity>
+    <Model>data/models/weapons/AntiProtonCannon/module.tmf</Model>
+    <WeaponModel>data/models/weapons/AntiProtonCannon/turret.tmf</WeaponModel>
+    <Behaviour>Turret</Behaviour>
+    <System>Antiproton</System>
+    <Rof>0.75</Rof>
+    <Damage>15000.0</Damage>
+    <ActivationCost>240.0</ActivationCost>
+    <Burst>1</Burst>
+    <RayLength>10.0</RayLength>
+    <Speed>120.0</Speed>
+    <Range>800.0</Range>
+    <OnFireSFX>data/sfx/antiproton.wav</OnFireSFX>
+    <ContextualTip>#tip_antiproton</ContextualTip>
+    <Description>Annihilates matter on contact, working in conjunction with a quantum alternator.</Description>
+    <MuzzleflashScale>2.0</MuzzleflashScale>
+    <MuzzleflashColourR>0.0</MuzzleflashColourR>
+    <MuzzleflashColourG>1.0</MuzzleflashColourG>
+    <MuzzleflashColourB>1.0</MuzzleflashColourB>
+  </Module>
+
+  <Module>
+    <Name>ArtifactAntiProtonCannon</Name>
+    <FullName>Hegemon 'Daybreak' antiproton cannon</FullName>
+    <Type>Weapon</Type>
+    <Rarity>Artifact</Rarity>
+    <Model>data/models/weapons/AntiProtonCannon/module.tmf</Model>
+    <WeaponModel>data/models/weapons/AntiProtonCannon/turret.tmf</WeaponModel>
+    <Behaviour>Turret</Behaviour>
+    <System>Antiproton</System>
+    <Rof>0.33</Rof>
+    <Damage>10000.0</Damage>
+    <ActivationCost>200.0</ActivationCost>
+    <Burst>1</Burst>
+    <RayLength>10.0</RayLength>
+    <Speed>120.0</Speed>
+    <Range>600.0</Range>
+    <OnFireSFX>data/sfx/antiproton.wav</OnFireSFX>
+    <ContextualTip>#tip_antiproton</ContextualTip>
+    <Description>Annihilates matter on contact, working in conjunction with a quantum alternator.</Description>
+  </Module>
+
+  <!-- Artilleries -->
+
+  <Module>
+    <Name>TrashArtillery1</Name>
+    <FullName>Archaic 650mm artillery</FullName>
+    <Type>Weapon</Type>
+    <Rarity>Trash</Rarity>
+    <Model>data/models/weapons/Artillery/module.tmf</Model>
+    <WeaponModel>data/models/weapons/Artillery/turret.tmf</WeaponModel>
+    <Behaviour>Turret</Behaviour>
+    <System>Projectile</System>
+    <Rof>1.25</Rof>
+    <Damage>18</Damage>
+    <ActivationCost>16</ActivationCost>
+    <Burst>1</Burst>
+    <RayLength>60.0</RayLength>
+    <Speed>250.0</Speed>
+    <Range>515.0</Range>
+    <OnFireSFX>data/sfx/artillery.wav</OnFireSFX>
+    <MuzzleflashScale>2.0</MuzzleflashScale>
+    <MuzzleflashColourR>1.0</MuzzleflashColourR>
+    <MuzzleflashColourG>1.0</MuzzleflashColourG>
+    <MuzzleflashColourB>0.0</MuzzleflashColourB>
+  </Module>
+  
+  <Module>
+    <Name>800mmArtillery</Name>
+    <FullName>Kyros-Hyperion 800mm artillery</FullName>
+    <Type>Weapon</Type>
+    <Model>data/models/weapons/Artillery/module.tmf</Model>
+    <WeaponModel>data/models/weapons/Artillery/turret.tmf</WeaponModel>
+    <Behaviour>Turret</Behaviour>
+    <System>Projectile</System>
+    <Rof>1.25</Rof>
+    <Damage>36.0</Damage>
+    <ActivationCost>16</ActivationCost>
+    <Burst>1</Burst>
+    <RayLength>60.0</RayLength>
+    <Speed>300.0</Speed>
+    <Range>560.0</Range>
+    <OnFireSFX>data/sfx/artillery.wav</OnFireSFX>
+    <ContextualTip>#tip_artillery</ContextualTip>
+    <MuzzleflashScale>2.0</MuzzleflashScale>
+    <MuzzleflashColourR>1.0</MuzzleflashColourR>
+    <MuzzleflashColourG>1.0</MuzzleflashColourG>
+    <MuzzleflashColourB>0.0</MuzzleflashColourB>
+    <Description>An artillery cannon provides substantial damage at long range, although at considerable energy cost.</Description>
+  </Module>
+
+  <Module>
+    <Name>UncommonArtillery1</Name>
+    <FullName>Valrun 800mm repeating howitzer</FullName>
+    <Type>Weapon</Type>
+    <Rarity>Uncommon</Rarity>
+    <Model>data/models/weapons/Artillery/module.tmf</Model>
+    <WeaponModel>data/models/weapons/Artillery/turret.tmf</WeaponModel>
+    <Behaviour>Turret</Behaviour>
+    <System>Projectile</System>
+    <Rof>1.2</Rof>
+    <Damage>56.0</Damage>
+    <ActivationCost>33</ActivationCost>
+    <Burst>1</Burst>
+    <RayLength>60.0</RayLength>
+    <Speed>310.0</Speed>
+    <Range>605.0</Range>
+    <OnFireSFX>data/sfx/artillery.wav</OnFireSFX>
+    <ContextualTip>#tip_artillery</ContextualTip>
+    <MuzzleflashScale>2.5</MuzzleflashScale>
+    <MuzzleflashColourR>1.0</MuzzleflashColourR>
+    <MuzzleflashColourG>0.8</MuzzleflashColourG>
+    <MuzzleflashColourB>0.0</MuzzleflashColourB>
+    <Description>An artillery cannon provides substantial damage at long range, although at considerable energy cost.</Description>
+  </Module>
+
+  <Module>
+    <Name>RareArtillery1</Name>
+    <FullName>Sinclair 900mm siege artillery</FullName>
+    <Type>Weapon</Type>
+    <Rarity>Rare</Rarity>
+    <Model>data/models/weapons/Artillery/module.tmf</Model>
+    <WeaponModel>data/models/weapons/Artillery/turret.tmf</WeaponModel>
+    <Behaviour>Turret</Behaviour>
+    <System>Projectile</System>
+    <Rof>1.1</Rof>
+    <Damage>91.0</Damage>
+    <ActivationCost>72.0</ActivationCost>
+    <Burst>1</Burst>
+    <RayLength>60.0</RayLength>
+    <Speed>320.0</Speed>
+    <Range>650.0</Range>
+    <OnFireSFX>data/sfx/artillery.wav</OnFireSFX>
+    <ContextualTip>#tip_artillery</ContextualTip>
+    <MuzzleflashScale>3.0</MuzzleflashScale>
+    <MuzzleflashColourR>1.0</MuzzleflashColourR>
+    <MuzzleflashColourG>0.7</MuzzleflashColourG>
+    <MuzzleflashColourB>0.0</MuzzleflashColourB>
+    <Description>An artillery cannon provides substantial damage at long range, although at considerable energy cost.</Description>
+  </Module>
+
+  <Module>
+    <Name>ArtifactArtillery1</Name>
+    <FullName>Daedalus 'Supremacy' 1000mm artillery</FullName>
+    <Type>Weapon</Type>
+    <Rarity>Artifact</Rarity>
+    <Model>data/models/weapons/Artillery/module.tmf</Model>
+    <WeaponModel>data/models/weapons/Artillery/turret.tmf</WeaponModel>
+    <Behaviour>Turret</Behaviour>
+    <System>Projectile</System>
+    <Rof>1</Rof>
+    <Damage>150.0</Damage>
+    <ActivationCost>160.0</ActivationCost>
+    <Burst>1</Burst>
+    <RayLength>60.0</RayLength>
+    <Speed>330.0</Speed>
+    <Range>695.0</Range>
+    <OnFireSFX>data/sfx/artillery.wav</OnFireSFX>
+    <ContextualTip>#tip_artillery</ContextualTip>
+    <MuzzleflashScale>3.5</MuzzleflashScale>
+    <MuzzleflashColourR>1.0</MuzzleflashColourR>
+    <MuzzleflashColourG>0.5</MuzzleflashColourG>
+    <MuzzleflashColourB>0.0</MuzzleflashColourB>
+    <Description>The 'Supremacy' artillery cannon delivers massive shells to a remarkable range, although at an eye-watering energy cost.</Description>
+  </Module>
+
+  <Module>
+    <Name>LegendaryArtillery1</Name>
+    <FullName>'CITADEL' 1200mm artillery</FullName>
+    <Type>Weapon</Type>
+    <Rarity>Legendary</Rarity>
+    <Model>data/models/weapons/Artillery/module.tmf</Model>
+    <WeaponModel>data/models/weapons/Artillery/turret.tmf</WeaponModel>
+    <Behaviour>Turret</Behaviour>
+    <System>Projectile</System>
+    <Rof>0.5</Rof>
+    <Damage>450.0</Damage>
+    <ActivationCost>640.0</ActivationCost>
+    <Burst>1</Burst>
+    <RayLength>60.0</RayLength>
+    <Speed>340.0</Speed>
+    <Range>740.0</Range>
+    <OnFireSFX>data/sfx/artillery.wav</OnFireSFX>
+    <ContextualTip>#tip_artillery</ContextualTip>
+    <MuzzleflashScale>4.0</MuzzleflashScale>
+    <MuzzleflashColourR>1.0</MuzzleflashColourR>
+    <MuzzleflashColourG>0.3</MuzzleflashColourG>
+    <MuzzleflashColourB>0.0</MuzzleflashColourB>
+    <Description>Certainly meant to be installed on a starfort rather than a spaceship, a single shell enough to destroy lesser vessels.</Description>
+  </Module>
+  
+  <!-- Autocannons -->
+
+  <Module>
+    <Name>TrashAutocannon1</Name>
+    <FullName>Archaic 200mm autocannon</FullName>
+    <Type>Weapon</Type>
+    <Rarity>Trash</Rarity>
+    <Model>data/models/weapons/Autocannon/module.tmf</Model>
+    <WeaponModel>data/models/weapons/Autocannon/turret.tmf</WeaponModel>
+    <Behaviour>Turret</Behaviour>
+    <System>Projectile</System>
+    <Rof>2.0</Rof>
+    <Damage>22.5</Damage>
+    <ActivationCost>10.0</ActivationCost>
+    <Burst>4</Burst>
+    <RayLength>20.0</RayLength>
+    <Speed>190.0</Speed>
+    <Range>250.0</Range>
+    <OnFireSFX>data/sfx/autocannon.wav</OnFireSFX>
+  </Module>
+
+  <Module>
+    <Name>200mmRotaryAutocannon</Name>
+    <FullName>Kyros-Hyperion 200mm autocannon</FullName>
+    <Type>Weapon</Type>
+    <Model>data/models/weapons/Autocannon/module.tmf</Model>
+    <WeaponModel>data/models/weapons/Autocannon/turret.tmf</WeaponModel>
+    <Behaviour>Turret</Behaviour>
+    <System>Projectile</System>
+    <Rof>2.0</Rof>
+    <Damage>45.0</Damage>
+    <ActivationCost>10.0</ActivationCost>
+    <Burst>4</Burst>
+    <RayLength>20.0</RayLength>
+    <Speed>230.0</Speed>
+    <Range>280.0</Range>
+    <OnFireSFX>data/sfx/autocannon.wav</OnFireSFX>
+    <ContextualTip>#tip_autocannon</ContextualTip>
+    <MuzzleflashScale>1.0</MuzzleflashScale>
+    <Description>This mass produced autocannon outputs unrelenting streams of shells, although its range is quite limited.</Description>
+  </Module>
+
+  <Module>
+    <Name>UncommonAutoCannon1</Name>
+    <FullName>Valrun 220mm autocannon</FullName>
+    <Type>Weapon</Type>
+    <Rarity>Uncommon</Rarity>
+    <Model>data/models/weapons/Autocannon/module.tmf</Model>
+    <WeaponModel>data/models/weapons/Autocannon/turret.tmf</WeaponModel>
+    <Behaviour>Turret</Behaviour>
+    <System>Projectile</System>
+    <Rof>2.2</Rof>
+    <Damage>65.0</Damage>
+    <ActivationCost>18.0</ActivationCost>
+    <Burst>4</Burst>
+    <RayLength>20.0</RayLength>
+    <Speed>240.0</Speed>
+    <Range>310.0</Range>
+    <OnFireSFX>data/sfx/autocannon.wav</OnFireSFX>
+    <ContextualTip>#tip_autocannon</ContextualTip>
+    <MuzzleflashScale>1.25</MuzzleflashScale>
+    <MuzzleflashColourR>1.0</MuzzleflashColourR>
+    <MuzzleflashColourG>0.8</MuzzleflashColourG>
+    <MuzzleflashColourB>0.0</MuzzleflashColourB>
+    <Description>This autocannon outputs unrelenting streams of shells, although its range is quite limited.</Description>
+  </Module>
+
+  <Module>
+    <Name>RareAutoCannon1</Name>
+    <FullName>Sinclair repeating autocannon</FullName>
+    <Type>Weapon</Type>
+    <Rarity>Rare</Rarity>
+    <Model>data/models/weapons/Autocannon/module.tmf</Model>
+    <WeaponModel>data/models/weapons/Autocannon/turret.tmf</WeaponModel>
+    <Behaviour>Turret</Behaviour>
+    <System>Projectile</System>
+    <Rof>4</Rof>
+    <Damage>55.0</Damage>
+    <ActivationCost>20.0</ActivationCost>
+    <Burst>1</Burst>
+    <RayLength>20.0</RayLength>
+    <Speed>250.0</Speed>
+    <Range>340.0</Range>
+    <OnFireSFX>data/sfx/autocannon.wav</OnFireSFX>
+    <ContextualTip>#tip_autocannon</ContextualTip>
+    <MuzzleflashScale>1.5</MuzzleflashScale>
+    <MuzzleflashColourR>1.0</MuzzleflashColourR>
+    <MuzzleflashColourG>0.7</MuzzleflashColourG>
+    <MuzzleflashColourB>0.0</MuzzleflashColourB>
+    <Description>This autocannon fires shells of a smaller caliber than most, but more than makes for it in sheer volume of fire.</Description>
+  </Module>
+
+  <Module>
+    <Name>ArtifactAutoCannon1</Name>
+    <FullName>Daedalus 'Slayer' 240mm autocannon</FullName>
+    <Type>Weapon</Type>
+    <Rarity>Artifact</Rarity>
+    <Model>data/models/weapons/Autocannon/module.tmf</Model>
+    <WeaponModel>data/models/weapons/Autocannon/turret.tmf</WeaponModel>
+    <Behaviour>Turret</Behaviour>
+    <System>Projectile</System>
+    <Rof>3</Rof>
+    <Damage>107.0</Damage>
+    <ActivationCost>53.0</ActivationCost>
+    <Burst>2</Burst>
+    <RayLength>20.0</RayLength>
+    <Speed>260.0</Speed>
+    <Range>370.0</Range>
+    <OnFireSFX>data/sfx/autocannon.wav</OnFireSFX>
+    <ContextualTip>#tip_autocannon</ContextualTip>
+    <MuzzleflashScale>1.75</MuzzleflashScale>
+    <MuzzleflashColourR>1.0</MuzzleflashColourR>
+    <MuzzleflashColourG>0.5</MuzzleflashColourG>
+    <MuzzleflashColourB>0.0</MuzzleflashColourB>
+    <Description>Autocannons are not usually made in such large calibers, but this is an exceptional piece of engineering.</Description>
+  </Module>
+
+  <Module>
+    <Name>LegendaryAutoCannon1</Name>
+    <FullName>'REAPER' linked chaingun</FullName>
+    <Type>Weapon</Type>
+    <Rarity>Legendary</Rarity>
+    <Model>data/models/weapons/Autocannon/module.tmf</Model>
+    <WeaponModel>data/models/weapons/Autocannon/turret.tmf</WeaponModel>
+    <Behaviour>Turret</Behaviour>
+    <System>Projectile</System>
+    <Rof>3</Rof>
+    <Damage>195</Damage>
+    <ActivationCost>106.0</ActivationCost>
+    <Burst>5</Burst>
+    <RayLength>20.0</RayLength>
+    <Speed>350.0</Speed>
+    <Range>440.0</Range>
+    <OnFireSFX>data/sfx/autocannon.wav</OnFireSFX>
+    <ContextualTip>#tip_autocannon</ContextualTip>
+    <MuzzleflashScale>2.0</MuzzleflashScale>
+    <MuzzleflashColourR>1.0</MuzzleflashColourR>
+    <MuzzleflashColourG>0.3</MuzzleflashColourG>
+    <MuzzleflashColourB>0.0</MuzzleflashColourB>
+    <Description>The 'REAPER' unleashes a relentless stream of bullets to a range which challenges certain artillery cannons.</Description>
+  </Module>
+  
+  <!-- Rocket launchers -->
+
+  <Module>
+    <Name>TrashRocketLauncher1</Name>
+    <FullName>Archaic rocket launcher pod</FullName>
+    <Type>Weapon</Type>
+    <Rarity>Trash</Rarity>
+    <Model>data/models/weapons/RocketLauncher/module.tmf</Model>
+    <WeaponModel>data/models/weapons/RocketLauncher/turret.tmf</WeaponModel>
+    <Behaviour>Turret</Behaviour>
+    <System>Rocket</System>
+    <Rof>1.0</Rof>
+    <Damage>50.0</Damage>
+    <ActivationCost>5.0</ActivationCost>
+    <Burst>2</Burst>
+    <RayLength>10.0</RayLength>
+    <Speed>250.0</Speed>
+    <Range>250.0</Range>
+    <Tracking>8.0</Tracking>
+    <OnFireSFX>data/sfx/rocket.wav</OnFireSFX>
+    <OnHitSFX>data/sfx/small_explosion.wav</OnHitSFX>
+    <OnHitSFXDistance>300.0</OnHitSFXDistance>
+    <ContextualTip>#tip_rockets</ContextualTip>
+  </Module>
+
+  <Module>
+    <Name>CommonRocketLauncher1</Name>
+    <FullName>Jade rocket launcher pod</FullName>
+    <Type>Weapon</Type>
+    <Model>data/models/weapons/RocketLauncher/module.tmf</Model>
+    <WeaponModel>data/models/weapons/RocketLauncher/turret.tmf</WeaponModel>
+    <Behaviour>Turret</Behaviour>
+    <System>Rocket</System>
+    <Rof>1.0</Rof>
+    <Damage>100.0</Damage>
+    <ActivationCost>5.0</ActivationCost>
+    <Burst>2</Burst>
+    <RayLength>10.0</RayLength>
+    <Speed>310.0</Speed>
+    <Range>310.0</Range>
+    <Tracking>8.0</Tracking>
+    <OnFireSFX>data/sfx/rocket.wav</OnFireSFX>
+    <OnHitSFX>data/sfx/small_explosion.wav</OnHitSFX>
+    <OnHitSFXDistance>300.0</OnHitSFXDistance>
+    <ContextualTip>#tip_rockets</ContextualTip>
+    <Description>These short range rockets are guided and will penetrate shields. Their rate of fire makes it difficult for missile interceptors to keep up.</Description>
+  </Module>
+
+  <Module>
+    <Name>UncommonRocketLauncher1</Name>
+    <FullName>Rafel-Skal rocket launcher pod</FullName>
+    <Type>Weapon</Type>
+    <Rarity>Uncommon</Rarity>
+    <Model>data/models/weapons/RocketLauncher/module.tmf</Model>
+    <WeaponModel>data/models/weapons/RocketLauncher/turret.tmf</WeaponModel>
+    <Behaviour>Turret</Behaviour>
+    <System>Rocket</System>
+    <Rof>1.0</Rof>
+    <Damage>143.0</Damage>
+    <ActivationCost>10.0</ActivationCost>
+    <Burst>3</Burst>
+    <RayLength>10.0</RayLength>
+    <Speed>340.0</Speed>
+    <Range>340.0</Range>
+    <Tracking>8.0</Tracking>
+    <OnFireSFX>data/sfx/rocket.wav</OnFireSFX>
+    <OnHitSFX>data/sfx/small_explosion.wav</OnHitSFX>
+    <OnHitSFXDistance>300.0</OnHitSFXDistance>
+    <ContextualTip>#tip_rockets</ContextualTip>
+    <Description>These short range rockets are guided and will penetrate shields. Their rate of fire makes it difficult for missile interceptors to keep up.</Description>
+  </Module>
+
+  <Module>
+    <Name>RareRocketLauncher1</Name>
+    <FullName>Vellus rocket launcher pod</FullName>
+    <Type>Weapon</Type>
+    <Rarity>Rare</Rarity>
+    <Model>data/models/weapons/RocketLauncher/module.tmf</Model>
+    <WeaponModel>data/models/weapons/RocketLauncher/turret.tmf</WeaponModel>
+    <Behaviour>Turret</Behaviour>
+    <System>Rocket</System>
+    <Rof>1.0</Rof>
+    <Damage>215.0</Damage>
+    <ActivationCost>20.0</ActivationCost>
+    <Burst>2</Burst>
+    <RayLength>10.0</RayLength>
+    <Speed>360.0</Speed>
+    <Range>360.0</Range>
+    <Tracking>8.0</Tracking>
+    <OnFireSFX>data/sfx/rocket.wav</OnFireSFX>
+    <OnHitSFX>data/sfx/small_explosion.wav</OnHitSFX>
+    <OnHitSFXDistance>300.0</OnHitSFXDistance>
+    <ContextualTip>#tip_rockets</ContextualTip>
+    <Description>These short range rockets are guided and will penetrate shields. Their rate of fire makes it difficult for missile interceptors to keep up.</Description>
+  </Module>  
+  
+  <Module>
+    <Name>ArtifactRocketLauncher1</Name>
+    <FullName>Epsilon 'Rage' rocket launcher pod</FullName>
+    <Type>Weapon</Type>
+    <Rarity>Artifact</Rarity>
+    <Model>data/models/weapons/RocketLauncher/module.tmf</Model>
+    <WeaponModel>data/models/weapons/RocketLauncher/turret.tmf</WeaponModel>
+    <Behaviour>Turret</Behaviour>
+    <System>Rocket</System>
+    <Rof>1.0</Rof>
+    <Damage>325.0</Damage>
+    <ActivationCost>40.0</ActivationCost>
+    <Burst>3</Burst>
+    <RayLength>10.0</RayLength>
+    <Speed>380.0</Speed>
+    <Range>380.0</Range>
+    <Tracking>8.0</Tracking>
+    <OnFireSFX>data/sfx/rocket.wav</OnFireSFX>
+    <OnHitSFX>data/sfx/small_explosion.wav</OnHitSFX>
+    <OnHitSFXDistance>300.0</OnHitSFXDistance>
+    <ContextualTip>#tip_rockets</ContextualTip>
+    <Description>These short range rockets are guided and will penetrate shields. Their rate of fire makes it difficult for missile interceptors to keep up.</Description>
+  </Module>
+  
+  <Module>
+    <Name>LegendaryRocketLauncher1</Name>
+    <FullName>'MAELSTORM' rocket launcher pod</FullName>
+    <Type>Weapon</Type>
+    <Rarity>Legendary</Rarity>
+    <Model>data/models/weapons/RocketLauncher/module.tmf</Model>
+    <WeaponModel>data/models/weapons/RocketLauncher/turret.tmf</WeaponModel>
+    <Behaviour>Turret</Behaviour>
+    <System>Rocket</System>
+    <Rof>1.0</Rof>
+    <Damage>565.0</Damage>
+    <ActivationCost>80.0</ActivationCost>
+    <Burst>3</Burst>
+    <RayLength>10.0</RayLength>
+    <Speed>470.0</Speed>
+    <Range>470.0</Range>
+    <Tracking>8.0</Tracking>
+    <OnFireSFX>data/sfx/rocket.wav</OnFireSFX>
+    <OnHitSFX>data/sfx/small_explosion.wav</OnHitSFX>
+    <OnHitSFXDistance>300.0</OnHitSFXDistance>
+    <ContextualTip>#tip_rockets</ContextualTip>
+    <Description>The 'MAELSTORM' fires powerful anti-matter rockets, eating through most armours with ease.</Description>
+  </Module>
+  
+  <!-- Missile launchers -->
+
+  <Module>
+    <Name>TrashMissileLauncher1</Name>
+    <FullName>Archaic seeker missile battery</FullName>
+    <Type>Weapon</Type>
+    <Rarity>Trash</Rarity>
+    <Model>data/models/weapons/MissileLauncher/t1/module.tmf</Model>
+    <WeaponModel>data/models/weapons/MissileLauncher/t1/module_turret.tmf</WeaponModel>
+    <Behaviour>Turret</Behaviour>
+    <System>Missile</System>
+    <Rof>1.0</Rof>
+    <Damage>20.0</Damage>
+    <ActivationCost>5.0</ActivationCost>
+    <Burst>2</Burst>
+    <RayLength>10.0</RayLength>
+    <Speed>120.0</Speed>
+    <Range>500.0</Range>
+    <Tracking>1.5</Tracking>
+    <OnFireSFX>data/sfx/missile.wav</OnFireSFX>
+    <OnHitSFX>data/sfx/small_explosion.wav</OnHitSFX>
+    <OnHitSFXDistance>300.0</OnHitSFXDistance>
+    <Description>These long range missiles are guided and will penetrate shields, but are vulnerable to being intercepted en route.</Description>
+  </Module>
+
+  <Module>
+    <Name>HunterMissileLauncher</Name>
+    <FullName>Kyros-Hyperion seeker missile battery</FullName>
+    <Type>Weapon</Type>
+    <Model>data/models/weapons/MissileLauncher/t1/module.tmf</Model>
+    <WeaponModel>data/models/weapons/MissileLauncher/t1/module_turret.tmf</WeaponModel>
+    <Behaviour>Turret</Behaviour>
+    <System>Missile</System>
+    <Rof>1.0</Rof>
+    <Damage>40.0</Damage>
+    <ActivationCost>5.0</ActivationCost>
+    <Burst>2</Burst>
+    <RayLength>10.0</RayLength>
+    <Speed>140.0</Speed>
+    <Range>600.0</Range>
+    <Tracking>1.5</Tracking>
+    <OnFireSFX>data/sfx/missile.wav</OnFireSFX>
+    <OnHitSFX>data/sfx/small_explosion.wav</OnHitSFX>
+    <OnHitSFXDistance>300.0</OnHitSFXDistance>
+    <ContextualTip>#tip_missiles</ContextualTip>
+    <Description>These long range missiles are guided and will penetrate shields, but are vulnerable to being intercepted en route.</Description>
+  </Module>
+
+  <Module>
+    <Name>UncommonMissileLauncher1</Name>
+    <FullName>Valrun seeker missile battery</FullName>
+    <Type>Weapon</Type>
+    <Rarity>Uncommon</Rarity>
+    <Model>data/models/weapons/MissileLauncher/t1/module.tmf</Model>
+    <WeaponModel>data/models/weapons/MissileLauncher/t1/module_turret.tmf</WeaponModel>
+    <Behaviour>Turret</Behaviour>
+    <System>Missile</System>
+    <Rof>1.0</Rof>
+    <Damage>57.0</Damage>
+    <ActivationCost>10.0</ActivationCost>
+    <Burst>2</Burst>
+    <RayLength>10.0</RayLength>
+    <Speed>150.0</Speed>
+    <Range>650.0</Range>
+    <Tracking>1.5</Tracking>
+    <OnFireSFX>data/sfx/missile.wav</OnFireSFX>
+    <OnHitSFX>data/sfx/small_explosion.wav</OnHitSFX>
+    <OnHitSFXDistance>300.0</OnHitSFXDistance>
+    <ContextualTip>#tip_missiles</ContextualTip>
+  </Module>
+
+  <Module>
+    <Name>RareMissileLauncher1</Name>
+    <FullName>Sinclair seeker missile battery</FullName>
+    <Type>Weapon</Type>
+    <Rarity>Rare</Rarity>
+    <Model>data/models/weapons/MissileLauncher/t1/module.tmf</Model>
+    <WeaponModel>data/models/weapons/MissileLauncher/t1/module_turret.tmf</WeaponModel>
+    <Behaviour>Turret</Behaviour>
+    <System>Missile</System>
+    <Rof>0.75</Rof>
+    <Damage>115.0</Damage>
+    <ActivationCost>20.0</ActivationCost>
+    <Burst>4</Burst>
+    <RayLength>10.0</RayLength>
+    <Speed>170.0</Speed>
+    <Range>900.0</Range>
+    <Tracking>4</Tracking>
+    <Swarm>true</Swarm>
+    <OnFireSFX>data/sfx/missile.wav</OnFireSFX>
+    <OnHitSFX>data/sfx/small_explosion.wav</OnHitSFX>
+    <OnHitSFXDistance>300.0</OnHitSFXDistance>
+    <ContextualTip>#tip_missiles</ContextualTip>
+    <Description>These long range missiles are guided and will penetrate shields. They are launched in a swarm, challenging missile interceptors.</Description>
+  </Module>
+
+  <Module>
+    <Name>ArtifactMissileLauncher1</Name>
+    <FullName>Strauman 'Farsight' seeker missile battery</FullName>
+    <Type>Weapon</Type>
+    <Rarity>Artifact</Rarity>
+    <Model>data/models/weapons/MissileLauncher/t1/module.tmf</Model>
+    <WeaponModel>data/models/weapons/MissileLauncher/t1/module_turret.tmf</WeaponModel>
+    <Behaviour>Turret</Behaviour>
+    <System>Missile</System>
+    <Rof>1.5</Rof>
+    <Damage>90.0</Damage>
+    <ActivationCost>40.0</ActivationCost>
+    <Burst>4</Burst>
+    <RayLength>10.0</RayLength>
+    <Speed>200.0</Speed>
+    <Range>900.0</Range>
+    <Tracking>4</Tracking>
+    <Swarm>true</Swarm>
+    <OnFireSFX>data/sfx/missile.wav</OnFireSFX>
+    <OnHitSFX>data/sfx/small_explosion.wav</OnHitSFX>
+    <OnHitSFXDistance>300.0</OnHitSFXDistance>
+    <ContextualTip>#tip_missiles</ContextualTip>
+    <Description>These long range missiles are guided and will penetrate shields. They are launched in a swarm, challenging missile interceptors.</Description>
+  </Module>
+
+  <Module>
+    <Name>LegendaryMissileLauncher1</Name>
+    <FullName>'REVELATION' missile battery</FullName>
+    <Type>Weapon</Type>
+    <Rarity>Legendary</Rarity>
+    <Model>data/models/weapons/MissileLauncher/t1/module.tmf</Model>
+    <WeaponModel>data/models/weapons/MissileLauncher/t1/module_turret.tmf</WeaponModel>
+    <Behaviour>Turret</Behaviour>
+    <System>Missile</System>
+    <Rof>2</Rof>
+    <Damage>235.0</Damage>
+    <ActivationCost>80.0</ActivationCost>
+    <Burst>6</Burst>
+    <RayLength>10.0</RayLength>
+    <Speed>250.0</Speed>
+    <Range>1000.0</Range>
+    <Tracking>4</Tracking>
+    <Swarm>true</Swarm>
+    <OnFireSFX>data/sfx/missile.wav</OnFireSFX>
+    <OnHitSFX>data/sfx/small_explosion.wav</OnHitSFX>
+    <OnHitSFXDistance>300.0</OnHitSFXDistance>
+    <ContextualTip>#tip_missiles</ContextualTip>
+    <Description>These long range missiles are guided and will penetrate shields. They are launched in a swarm, challenging missile interceptors.</Description>
+  </Module>
+
+  <!-- Torpedoes -->
+
+  <Module>
+    <Name>TrashTorpedoLauncher1</Name>
+    <FullName>Archaic torpedo launcher</FullName>
+    <Type>Weapon</Type>
+    <Rarity>Trash</Rarity>
+    <Model>data/models/weapons/TorpedoLauncher/module.tmf</Model>
+    <Behaviour>Fixed</Behaviour>
+    <System>Torpedo</System>
+    <Rof>0.5</Rof>
+    <Damage>100.0</Damage>
+    <ActivationCost>5.0</ActivationCost>
+    <Burst>1</Burst>
+    <RayLength>10.0</RayLength>
+    <Speed>120.0</Speed>
+    <Range>480.0</Range>
+    <Tracking>0.0</Tracking>
+    <OnFireSFX>data/sfx/torpedo.wav</OnFireSFX>
+    <OnHitSFX>data/sfx/large_explosion_3.wav</OnHitSFX>
+    <OnHitSFXDistance>400.0</OnHitSFXDistance>
+  </Module>
+
+  <Module>
+    <Name>BreacherTorpedoLauncher</Name>
+    <FullName>Kyros-Hyperion torpedo launcher</FullName>
+    <Type>Weapon</Type>
+    <Model>data/models/weapons/TorpedoLauncher/module.tmf</Model>
+    <Behaviour>Fixed</Behaviour>
+    <System>Torpedo</System>
+    <Rof>0.5</Rof>
+    <Damage>300.0</Damage>
+    <ActivationCost>5.0</ActivationCost>
+    <Burst>1</Burst>
+    <RayLength>10.0</RayLength>
+    <Speed>120.0</Speed>
+    <Range>600.0</Range>
+    <Tracking>0.0</Tracking>
+    <OnFireSFX>data/sfx/torpedo.wav</OnFireSFX>
+    <OnHitSFX>data/sfx/large_explosion_3.wav</OnHitSFX>
+    <OnHitSFXDistance>400.0</OnHitSFXDistance>
+    <ContextualTip>#tip_torpedoes</ContextualTip>
+    <Description>The torpedo launcher always fires forward (use Right click to launch them). They are entirely unguided and go through shields, dealing a devastating amount of damage if they reach the target.</Description>
+  </Module>
+
+  <Module>
+    <Name>UncommonTorpedoLauncher1</Name>
+    <FullName>Delacroix torpedo launcher</FullName>
+    <Type>Weapon</Type>
+    <Rarity>Uncommon</Rarity>
+    <Model>data/models/weapons/TorpedoLauncher/module.tmf</Model>
+    <Behaviour>Fixed</Behaviour>
+    <System>Torpedo</System>
+    <Rof>0.6</Rof>
+    <Damage>360.0</Damage>
+    <ActivationCost>10.0</ActivationCost>
+    <Burst>1</Burst>
+    <RayLength>10.0</RayLength>
+    <Speed>130.0</Speed>
+    <Range>650.0</Range>
+    <Tracking>0.0</Tracking>
+    <OnFireSFX>data/sfx/torpedo.wav</OnFireSFX>
+    <OnHitSFX>data/sfx/large_explosion_3.wav</OnHitSFX>
+    <OnHitSFXDistance>400.0</OnHitSFXDistance>
+    <ContextualTip>#tip_torpedoes</ContextualTip>
+    <Description>The torpedo launcher always fires forward (use Right click to launch them). They are entirely unguided and go through shields, dealing a devastating amount of damage if they reach the target.</Description>
+  </Module>
+
+  <Module>
+    <Name>RareTorpedoLauncher1</Name>
+    <FullName>Valrun torpedo launcher</FullName>
+    <Type>Weapon</Type>
+    <Rarity>Rare</Rarity>
+    <Model>data/models/weapons/TorpedoLauncher/module.tmf</Model>
+    <Behaviour>Fixed</Behaviour>
+    <System>Torpedo</System>
+    <Rof>0.7</Rof>
+    <Damage>460.0</Damage>
+    <ActivationCost>20.0</ActivationCost>
+    <Burst>1</Burst>
+    <RayLength>10.0</RayLength>
+    <Speed>140.0</Speed>
+    <Range>700.0</Range>
+    <Tracking>0.0</Tracking>
+    <OnFireSFX>data/sfx/torpedo.wav</OnFireSFX>
+    <OnHitSFX>data/sfx/large_explosion_3.wav</OnHitSFX>
+    <OnHitSFXDistance>400.0</OnHitSFXDistance>
+    <ContextualTip>#tip_torpedoes</ContextualTip>
+    <Description>The torpedo launcher always fires forward (use Right click to launch them). They are entirely unguided and go through shields, dealing a devastating amount of damage if they reach the target.</Description>
+  </Module>
+
+  <Module>
+    <Name>ArtifactTorpedoLauncher1</Name>
+    <FullName>Dominion 'Apocalypse' torpedo launcher</FullName>
+    <Type>Weapon</Type>
+    <Rarity>Artifact</Rarity>
+    <Model>data/models/weapons/TorpedoLauncher/module.tmf</Model>
+    <Behaviour>Fixed</Behaviour>
+    <System>Torpedo</System>
+    <Rof>0.8</Rof>
+    <Damage>610.0</Damage>
+    <ActivationCost>40.0</ActivationCost>
+    <Burst>1</Burst>
+    <RayLength>10.0</RayLength>
+    <Speed>150.0</Speed>
+    <Range>750.0</Range>
+    <Tracking>0.0</Tracking>
+    <OnFireSFX>data/sfx/torpedo.wav</OnFireSFX>
+    <OnHitSFX>data/sfx/large_explosion_3.wav</OnHitSFX>
+    <OnHitSFXDistance>400.0</OnHitSFXDistance>
+    <ContextualTip>#tip_torpedoes</ContextualTip>
+    <Description>The torpedo launcher always fires forward (use Right click to launch them). They are entirely unguided and go through shields, dealing a devastating amount of damage if they reach the target.</Description>
+  </Module>
+
+  <Module>
+    <Name>LegendaryTorpedoLauncher1</Name>
+    <FullName>'SUNSLAYER' torpedo launcher</FullName>
+    <Type>Weapon</Type>
+    <Rarity>Legendary</Rarity>
+    <Model>data/models/weapons/TorpedoLauncher/module.tmf</Model>
+    <Behaviour>Fixed</Behaviour>
+    <System>Torpedo</System>
+    <Rof>1.0</Rof>
+    <Damage>900.0</Damage>
+    <ActivationCost>80.0</ActivationCost>
+    <Burst>1</Burst>
+    <RayLength>10.0</RayLength>
+    <Speed>160.0</Speed>
+    <Range>900.0</Range>
+    <Tracking>0.0</Tracking>
+    <OnFireSFX>data/sfx/torpedo.wav</OnFireSFX>
+    <OnHitSFX>data/sfx/large_explosion_3.wav</OnHitSFX>
+    <OnHitSFXDistance>400.0</OnHitSFXDistance>
+    <ContextualTip>#tip_torpedoes</ContextualTip>
+    <Description>The torpedo launcher always fires forward (use Right click to launch them). They are entirely unguided and go through shields, dealing a devastating amount of damage if they reach the target.</Description>
+  </Module>
+
+  <!-- Lances -->
+
+  <Module>
+    <Name>RareLance1</Name>
+    <FullName>Dominion prototype lance</FullName>
+    <Type>Weapon</Type>
+    <Rarity>Rare</Rarity>
+    <Model>data/models/weapons/Lance/module.tmf</Model>
+    <WeaponModel>data/models/weapons/Lance/turret.tmf</WeaponModel>
+    <Behaviour>Turret</Behaviour>
+    <System>Lance</System>
+    <Rof>0.5</Rof>
+    <Damage>200.0</Damage>
+    <ActivationCost>320.0</ActivationCost>
+    <Burst>3</Burst>
+    <RayLength>495.0</RayLength>
+    <Speed>0</Speed>
+    <Range>495.0</Range>
+    <BeamLifetime>1.75</BeamLifetime>
+    <BeamWidth>6.0</BeamWidth>
+    <BeamColourR>1.0</BeamColourR>
+    <BeamColourG>0.0</BeamColourG>
+    <BeamColourB>0.0</BeamColourB>
+    <OnFireSFX>data/sfx/lance.wav</OnFireSFX>
+    <ContextualTip>#tip_lance</ContextualTip>
+    <Description>Old Empire technology, this lance deals substantial energy damage. The energy cost can be prohibitive without excellent reactors.</Description>
+  </Module>
+
+  <Module>
+    <Name>ArtifactLance1</Name>
+    <FullName>Iriani 'Harbinger' lance</FullName>
+    <Type>Weapon</Type>
+    <Rarity>Artifact</Rarity>
+    <Model>data/models/weapons/Lance/module.tmf</Model>
+    <WeaponModel>data/models/weapons/Lance/turret.tmf</WeaponModel>
+    <Behaviour>Turret</Behaviour>
+    <System>Lance</System>
+    <Rof>0.5</Rof>
+    <Damage>300.0</Damage>
+    <ActivationCost>640.0</ActivationCost>
+    <Burst>3</Burst>
+    <RayLength>530.0</RayLength>
+    <Speed>0</Speed>
+    <Range>530.0</Range>
+    <BeamLifetime>0.75</BeamLifetime>
+    <BeamWidth>5.0</BeamWidth>
+    <BeamColourR>0.0</BeamColourR>
+    <BeamColourG>0.5</BeamColourG>
+    <BeamColourB>1.0</BeamColourB>
+    <OnFireSFX>data/sfx/lance.wav</OnFireSFX>
+    <ContextualTip>#tip_lance</ContextualTip>
+    <Description>The 'Harbinger' lance is a clear step up from even the most advanced Imperial technology, dealing massive energy damage. The drain on the reactors, however, is equally large.</Description>
+  </Module>
+  
+  <Module>
+    <Name>LegendaryLance1</Name>
+    <FullName>'ENUMA ELISH' lance</FullName>
+    <Type>Weapon</Type>
+    <Rarity>Legendary</Rarity>
+    <Model>data/models/weapons/Lance/module.tmf</Model>
+    <WeaponModel>data/models/weapons/Lance/turret.tmf</WeaponModel>
+    <Behaviour>Turret</Behaviour>
+    <System>Lance</System>
+    <Rof>0.5</Rof>
+    <Damage>450.0</Damage>
+    <ActivationCost>1280.0</ActivationCost>
+    <Burst>3</Burst>
+    <RayLength>590.0</RayLength>
+    <Speed>0</Speed>
+    <Range>590.0</Range>
+    <BeamLifetime>1.75</BeamLifetime>
+    <BeamWidth>5.0</BeamWidth>
+    <BeamColourR>1.0</BeamColourR>
+    <BeamColourG>0.0</BeamColourG>
+    <BeamColourB>1.0</BeamColourB>
+    <OnFireSFX>data/sfx/lance.wav</OnFireSFX>
+    <ContextualTip>#tip_lance</ContextualTip>
+    <Description>The physics behind the 'ENUMA ELISH' are well beyond the Empire's brightest minds. The way it cuts through ships, however, can be appreciated by anyone.</Description>
+  </Module>
+  
+  <!-- Ion cannons -->
+
+  <Module>
+    <Name>RareIonCannon1</Name>
+    <FullName>Stillwater prototype ion cannon</FullName>
+    <Type>Weapon</Type>
+    <Rarity>Rare</Rarity>
+    <Model>data/models/weapons/IonCannon/module.tmf</Model>
+    <Behaviour>Fixed</Behaviour>
+    <System>Ion</System>
+    <Rof>0.83</Rof> <!-- ion cannons are active 5 out every 6 seconds -->
+    <Damage>100.0</Damage>
+    <ActivationCost>82.0</ActivationCost>
+    <Burst>1</Burst>
+    <RayLength>480.0</RayLength>
+    <Speed>0</Speed>
+    <Range>480.0</Range>
+    <BeamLifetime>1.00</BeamLifetime>
+    <BeamWidth>18.0</BeamWidth>
+    <BeamColourR>0.5</BeamColourR>
+    <BeamColourG>0.2</BeamColourG>
+    <BeamColourB>0.0</BeamColourB>
+    <OnFireSFX>data/sfx/ion_cannon.wav</OnFireSFX>
+    <ContextualTip>#tip_ion_cannon</ContextualTip>
+    <Description>Set in a forward facing fixed mount, this prototype ion cannon unleashes a stream of energy. Hold the right mouse button to keep firing it.</Description>
+  </Module>
+
+  <Module>
+    <Name>ArtifactIonCannon1</Name>
+    <FullName>Iriani 'Sunburst' ion cannon</FullName>
+    <Type>Weapon</Type>
+    <Rarity>Artifact</Rarity>
+    <Model>data/models/weapons/IonCannon/module.tmf</Model>
+    <Behaviour>Fixed</Behaviour>
+    <System>Ion</System>
+    <Rof>0.83</Rof> <!-- ion cannons are active 5 out every 6 seconds -->
+    <Damage>140.0</Damage>
+    <ActivationCost>153.0</ActivationCost>
+    <Burst>1</Burst>
+    <RayLength>480.0</RayLength>
+    <Speed>0</Speed>
+    <Range>480.0</Range>
+    <BeamLifetime>1.00</BeamLifetime>
+    <BeamWidth>18.0</BeamWidth>
+    <BeamColourR>0.0</BeamColourR>
+    <BeamColourG>0.5</BeamColourG>
+    <BeamColourB>1.0</BeamColourB>
+    <OnFireSFX>data/sfx/ion_cannon.wav</OnFireSFX>
+    <ContextualTip>#tip_ion_cannon</ContextualTip>
+    <Description>Set in a forward facing fixed mount, this ion cannon unleashes a stream of energy. Hold the right mouse button to keep firing it.</Description>
+  </Module>
+
+  <Module>
+    <Name>LegendaryIonCannon1</Name>
+    <FullName>'ACHRANOS' ion cannon</FullName>
+    <Type>Weapon</Type>
+    <Rarity>Legendary</Rarity>
+    <Model>data/models/weapons/IonCannon/module.tmf</Model>
+    <Behaviour>Fixed</Behaviour>
+    <System>Ion</System>
+    <Rof>0.83</Rof> <!-- ion cannons are active 5 out every 6 seconds -->
+    <Damage>255.0</Damage>
+    <ActivationCost>290.0</ActivationCost>
+    <Burst>1</Burst>
+    <RayLength>480.0</RayLength>
+    <Speed>0</Speed>
+    <Range>480.0</Range>
+    <BeamLifetime>1.00</BeamLifetime>
+    <BeamWidth>18.0</BeamWidth>
+    <BeamColourR>1.0</BeamColourR>
+    <BeamColourG>0.0</BeamColourG>
+    <BeamColourB>1.0</BeamColourB>
+    <OnFireSFX>data/sfx/ion_cannon.wav</OnFireSFX>
+    <ContextualTip>#tip_ion_cannon</ContextualTip>
+    <Description>Set in a forward facing fixed mount, this ion cannon unleashes a stream of energy. Hold the right mouse button to keep firing it.</Description>
+  </Module>
+
+</Modules>

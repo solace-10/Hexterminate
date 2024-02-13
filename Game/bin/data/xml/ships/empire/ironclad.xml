@@ -1,0 +1,9 @@
+<ShipInfo>
+	<DisplayName>Ironclad</DisplayName>
+	<LongDisplayName>Ironclad class gunship</LongDisplayName>
+	<Tier>1</Tier>
+	<Cost>750</Cost>
+	<DisplayImage>data/ui/ships/ironclad.png</DisplayImage>
+	<Weapons>Rockets and torpedoes (350 DPS)</Weapons>
+	<Defense>Heavy armour and repairer</Defense>
+</ShipInfo>

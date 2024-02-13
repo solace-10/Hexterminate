@@ -1,0 +1,9 @@
+<ShipInfo>
+	<DisplayName>Dies Irae</DisplayName>
+	<LongDisplayName>Dies Irae class battlecruiser</LongDisplayName>
+	<Tier>3</Tier>
+	<Cost>9000</Cost>
+	<DisplayImage>data/ui/ships/dies_irae.png</DisplayImage>
+	<Weapons>Ion cannons (345 DPS)</Weapons>
+	<Defense>Reactive and regenerative heavy armour</Defense>
+</ShipInfo>

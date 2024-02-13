@@ -1,0 +1,5 @@
+{
+  "category": "SHIELDS",
+  "name": "Covariant shield array",
+  "content": "The Covariant Shield Array is an older shield model which was known for being particularly easy to overclock, making it a common modification on Pirate vessels which relied on hit-and-run tactics. With it's power-delivery parameters unlocked and failsafe sensors removed, it is capable of providing substantially higher regeneration rate compared to the standard shield array. \n\nThese modifications come with a significant downside, however: if the shield sustains enough damage to collapse, the resulting power spike will cause the shield emitters to melt and trigger a catastrophic failure that will result in the module's destruction. \n\nStill, for more fragile ships where the shield's collapse would almost certainly be followed by the ship's destruction, this is not necessarily a poor trade-off. \n\nNote that installing multiple shield modules on a single ship has diminishing returns."
+}

@@ -1,0 +1,20 @@
+Ship Module
+  SHADER shipmodule.fx
+  FLOAT4 k_a 0.100000 0.100000 0.100000 1.000000
+  FLOAT k_health 1.000000
+  TEXTUREMAP ../shared/generic_module_diffuse.png
+  TEXTUREMAP ../shared/generic_module_specular.png
+  TEXTUREMAP ../shared/generic_module_maps.png
+  TEXTUREMAP ../shared/damage.tga
+  FLOAT4 k_primaryPaint 0.000000 0.200000 0.600000 1.000000
+  FLOAT4 k_secondaryPaint 1.000000 1.000000 1.000000 1.000000
+Ship Module 2
+  SHADER shipmodule.fx
+  FLOAT4 k_a 0.100000 0.100000 0.100000 1.000000
+  FLOAT k_health 1.000000
+  TEXTUREMAP ../shared/diffuse3drt.png
+  TEXTUREMAP ../shared/specular3drt.png
+  TEXTUREMAP ../shared/maps3drt.png
+  TEXTUREMAP ../shared/damage.tga
+  FLOAT4 k_primaryPaint 0.000000 0.200000 0.600000 1.000000
+  FLOAT4 k_secondaryPaint 1.000000 1.000000 1.000000 1.000000

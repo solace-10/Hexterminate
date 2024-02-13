@@ -1,0 +1,5 @@
+{
+  "category": "SHIELDS",
+  "name": "Shield batteries",
+  "content": "Shield batteries are the most basic version of a shield module, being capable of sustaining a protective bubble but not being able to restore its strength once damage has been taken. \n\nWhile lacking an internal generator, this considerably increases the module space for additional batteries, resulting in a module that tends to have a much greater capacity than other shield types, allowing them to take considerable amounts of punishment before collapsing. \n\nNormally shield batteries are not fielded on their own, instead being paired with deflectors or covariant arrays in order to allow the shields to replenish over time. An exception to this can be seen in some stations or other type of defensive structures, which rely on large amounts of shield batteries to withhold a siege until reinforcements arrive. \n\nNote that installing multiple shield modules on a single ship has diminishing returns."
+}
