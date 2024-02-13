@@ -1,6 +1,9 @@
 [submodule "vcpkg"]
 	path = vcpkg
 	url = https://github.com/microsoft/vcpkg
-[submodule "Genesis/ext/crashpad-cmake"]
-	path = Genesis/ext/crashpad-cmake
+[submodule "Genesis/libs/crashpad-cmake"]
+	path = Genesis/libs/crashpad-cmake
 	url = https://github.com/TheAssemblyArmada/crashpad-cmake
+[submodule "Game/bin/assets"]
+	path = Game/bin/assets
+	url = https://github.com/solace-10/Hexterminate-assets.git
