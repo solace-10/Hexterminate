@@ -1,7 +1,7 @@
 ﻿cmake_minimum_required(VERSION 3.14)
 project(Genesis)
 
-add_subdirectory("ext/crashpad-cmake")
+add_subdirectory("libs/crashpad-cmake")
 add_subdirectory("ext/soloud20200207")
 add_subdirectory("libs/imgui")
 
