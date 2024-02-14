@@ -11,13 +11,11 @@ source_group(TREE ${CMAKE_CURRENT_LIST_DIR}/src FILES ${SOURCE_FILES})
 
 find_package(imgui REQUIRED)
 find_package(Genesis REQUIRED)
-find_package(GLM REQUIRED)
 find_package(soloud REQUIRED)
 
 include_directories(
   src/ 
   ${GENESIS_INCLUDE_DIRS}
-  ${GLM_INCLUDE_DIRS}
   ${IMGUI_INCLUDE_DIRS}
   ${SOLOUD_INCLUDE_DIRS}
 )

@@ -7,6 +7,7 @@
     { "name": "bullet3" },
     { "name": "freetype" },
     { "name": "glew" },
+    { "name": "glm" },
     { "name": "nlohmann-json" },
     {
       "name": "rpclib",

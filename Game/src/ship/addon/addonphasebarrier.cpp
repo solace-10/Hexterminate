@@ -125,7 +125,7 @@ void AddonPhaseBarrier::CalculateSphereCenter()
 {
     // We need to know where the center of the sphere is so we can generate laser beams coming from it, rather than
     // the model's origin.
-    glm::vec3 dummyPosition;
+    glm::vec3 dummyPosition( 0.0f );
     if ( GetModule()->GetModel() != nullptr && GetModule()->GetModel()->GetDummy( "phasebarrier", &dummyPosition ) )
     {
         m_SphereCenter = dummyPosition.z;

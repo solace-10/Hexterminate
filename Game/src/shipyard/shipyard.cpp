@@ -477,7 +477,7 @@ bool Shipyard::ValidateDockedShip()
         const ModuleHexGrid& moduleHexGrid = m_pDockedShip->GetModuleHexGrid();
         moduleHexGrid.GetBoundingBox( x1, y1, x2, y2 );
 
-        glm::vec3 moduleLocalPos;
+        glm::vec3 moduleLocalPos( 0.0f );
         for ( int x = x1; x <= x2; ++x )
         {
             for ( int y = y1; y <= y2; ++y )
