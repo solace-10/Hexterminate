@@ -7,3 +7,6 @@
 [submodule "Game/bin/assets"]
 	path = Game/bin/assets
 	url = https://github.com/solace-10/Hexterminate-assets.git
+[submodule "Genesis/libs/steamworks"]
+	path = Genesis/libs/steamworks
+	url = https://github.com/solace-10/Hexterminate-steamworks.git

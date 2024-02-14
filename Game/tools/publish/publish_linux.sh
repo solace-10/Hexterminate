@@ -130,7 +130,7 @@ elif [ $1 == "steam" ]; then
         echo 2. Main
 
         read DEPOT
-        STEAMCMD=$PROJECT_ROOT/Genesis/libs/steamworks-1.57/sdk/tools/ContentBuilder/builder_linux/steamcmd.sh
+        STEAMCMD=$PROJECT_ROOT/Genesis/libs/steamworks/sdk/tools/ContentBuilder/builder_linux/steamcmd.sh
         if [ $DEPOT == "1" ]; then
             $STEAMCMD +login $HEXTERMINATE_STEAM_USERNAME $HEXTERMINATE_STEAM_PASSWORD +run_app_build $PROJECT_ROOT/Game/tools/publish/steampipe/linux_experimental.vdf +quit
         elif [ $DEPOT == "2" ]; then

@@ -111,7 +111,7 @@ if "%1"=="steam" (
         echo 1. Experimental
         echo 2. Main
         choice /C:12
-        set "STEAMCMD=%PROJECT_ROOT%\Genesis\libs\steamworks-1.57\sdk\tools\ContentBuilder\builder\steamcmd.exe"
+        set "STEAMCMD=%PROJECT_ROOT%\Genesis\libs\steamworks\sdk\tools\ContentBuilder\builder\steamcmd.exe"
         if "%ERRORLEVEL%"=="1" (
             %STEAMCMD% +login %HEXTERMINATE_STEAM_USERNAME% %HEXTERMINATE_STEAM_PASSWORD% +run_app_build %~dp0\steampipe\windows_experimental.vdf +quit
         )
