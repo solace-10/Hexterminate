@@ -26,6 +26,10 @@ add_library(Genesis STATIC ${SOURCE_FILES})
 add_dependencies(Genesis crashpad_handler)
 set_target_properties(Genesis PROPERTIES ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_CURRENT_LIST_DIR}/libs/Genesis/${CMAKE_HOST_SYSTEM_NAME}/${CMAKE_HOST_SYSTEM_PROCESSOR}/${CMAKE_BUILD_TYPE})
 
+# In GLM 0.9.9.0 the default behaviour for vector, matrix and quaternion types has changed to no longer default initialize.
+# This define restores the default initialization, as otherwise we'll need to hunt down each one of those types in the codebase.
+target_compile_definitions(Genesis PUBLIC GLM_FORCE_CTOR_INIT)
+
 if(WIN32)
     add_library(GenesisStatic INTERFACE)
     target_compile_options(GenesisStatic INTERFACE $<$<CONFIG:Debug>:/MTd> $<$<CONFIG:Release>:/MT>)
