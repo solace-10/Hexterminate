@@ -30,15 +30,16 @@
 namespace Hexterminate::UI
 {
 
-RootElement::RootElement()
-    : Element( "root" )
+RootElement::RootElement( const std::filesystem::path& designPath )
+    : Element( designPath.stem().u8string() )
+    , m_pDesign( nullptr )
 {
+    m_pDesign = std::make_unique<Design>( designPath );
+    m_pDesign->Load();
+
     GetPanel()->SetWidth( static_cast<float>( Genesis::Configuration::GetScreenWidth() ) );
     GetPanel()->SetHeight( static_cast<float>( Genesis::Configuration::GetScreenHeight() ) );
     Genesis::FrameWork::GetGuiManager()->AddElement( GetPanel() );
-
-    m_pDesign = std::make_unique<Design>();
-    m_pDesign->Load();
 }
 
 RootElement::~RootElement()

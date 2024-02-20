@@ -17,26 +17,26 @@
 
 #pragma once
 
+#include <vector>
+
 #include "ui/element.h"
 
 namespace Hexterminate::UI
 {
 
 //-----------------------------------------------------------------------------
-// This is the root UI element in the game. All other Elements should be added
-// to this one or as a child of an Element which has been added to this.
 // The RootElement automatically resizes itself to fully cover the window.
 //-----------------------------------------------------------------------------
 class RootElement : public Element
 {
 public:
-    RootElement();
+    RootElement( const std::filesystem::path& designPath );
     virtual ~RootElement() override;
 
     void Save();
     void Load();
 
-    Design* GetDesign() const;
+    virtual Design* GetDesign() const override;
 
 private:
     DesignUniquePtr m_pDesign;

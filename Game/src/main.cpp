@@ -293,8 +293,8 @@ void Game::Initialise()
 
     m_pAchievementsManager = new AchievementsManager();
     m_pShipOutline = std::make_unique<ShipOutline>();
-    m_pUIRootElement = std::make_unique<UI::RootElement>();
     m_pUIEditor = std::make_unique<UI::Editor>();
+    LoadUIDesigns();
 
     SetState( GameState::Intro );
 }
@@ -335,7 +335,14 @@ Genesis::TaskStatus Game::Update( float delta )
         ImGui::ShowDemoWindow( &m_ShowImguiTestWindow );
     }
 
-    m_pUIRootElement->Update();
+    for ( auto& pRootElement : m_UIRootElements )
+    {
+        if ( pRootElement )
+        {
+            pRootElement->Update();
+        }
+    }
+
     m_pUIEditor->UpdateDebugUI();
     GetBlackboard()->UpdateDebugUI();
     ShaderTweaksDebugWindow::Update();
@@ -1529,6 +1536,11 @@ void Game::Unpause()
     {
         GetPhysicsSimulation()->Pause( false );
     }
+}
+
+void Game::LoadUIDesigns()
+{
+    m_UIRootElements[ static_cast<size_t>( UIDesignId::MainMenu ) ] = std::make_unique<UI::RootElement>( "data/ui/designs/main_menu.json" );
 }
 
 //-------------------------------------------------------------------

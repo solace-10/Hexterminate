@@ -17,6 +17,7 @@
 
 #pragma once
 
+#include <array>
 #include <filesystem>
 #include <list>
 #include <memory>
@@ -158,6 +159,14 @@ enum class GameState
     Unknown
 };
 
+enum class UIDesignId
+{
+    MainMenu = 0,
+    GalaxyView,
+
+    Count
+};
+
 class Game : public Genesis::Task
 {
 public:
@@ -237,7 +246,8 @@ public:
     void Quit();
     bool IsQuitRequested() const;
 
-    UI::RootElement* GetUIRoot() const;
+    UI::RootElement* GetUIRoot( UIDesignId designId ) const;
+    std::array<UI::RootElement*, static_cast<size_t>( UIDesignId::Count )> GetUIRoots() const;
 
 private:
     void SetupFactions();
@@ -248,6 +258,7 @@ private:
     void SetupBackgrounds();
     void LoadGameAux();
     void ToggleImGui();
+    void LoadUIDesigns();
 
     MainMenu* m_pMainMenu;
     Console* m_pConsole;
@@ -301,7 +312,7 @@ private:
     GameMode m_GameMode;
     bool m_KillSave;
 
-    UI::RootElementUniquePtr m_pUIRootElement;
+    std::array<UI::RootElementUniquePtr, static_cast<size_t>( UIDesignId::Count )> m_UIRootElements;
     UI::EditorUniquePtr m_pUIEditor;
     bool m_ShowImguiTestWindow;
 
@@ -455,9 +466,21 @@ inline CursorType Game::GetCursorType() const
     return m_CursorType;
 }
 
-inline UI::RootElement* Game::GetUIRoot() const
+inline UI::RootElement* Game::GetUIRoot( UIDesignId id ) const
 {
-    return m_pUIRootElement.get();
+    return m_UIRootElements[ static_cast<size_t>( id ) ].get();
+}
+
+inline std::array<UI::RootElement*, static_cast<size_t>( UIDesignId::Count )> Game::GetUIRoots() const
+{
+    std::array<UI::RootElement*, static_cast<size_t>( UIDesignId::Count )> roots;
+
+    for ( size_t i = 0; i < static_cast<size_t>( UIDesignId::Count ); i++ )
+    {
+        roots[ i ] = m_UIRootElements[ i ].get();
+    }
+
+    return roots;
 }
 
 } // namespace Hexterminate

@@ -32,16 +32,24 @@ namespace Hexterminate::UI
 class Design
 {
 public:
-    Design();
+    Design( const std::filesystem::path& path );
+    ~Design();
 
     void Save();
     void Load();
 
     json& Get( const std::string& path );
+    const std::string& GetName() const;
 
 private:
+    std::string m_Name;
     std::filesystem::path m_Path;
     json m_Data;
 };
+
+inline const std::string& Design::GetName() const
+{
+    return m_Name;
+}
 
 } // namespace Hexterminate::UI

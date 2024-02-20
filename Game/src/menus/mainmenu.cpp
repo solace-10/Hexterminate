@@ -49,10 +49,10 @@ MainMenu::MainMenu()
     CreateCharacterImage();
 
     m_pMenu = std::make_shared<UI::Panel>( "Main menu" );
-    g_pGame->GetUIRoot()->Add( m_pMenu );
+    g_pGame->GetUIRoot( UIDesignId::MainMenu )->Add( m_pMenu );
 
     m_pTitle2 = std::make_shared<UI::Element>( "Title" );
-    g_pGame->GetUIRoot()->Add( m_pTitle2 );
+    g_pGame->GetUIRoot( UIDesignId::MainMenu )->Add( m_pTitle2 );
 
     m_pToggleGroup = std::make_shared<UI::ToggleGroup>();
 
@@ -80,7 +80,7 @@ MainMenu::MainMenu()
     {
         if ( pWindow != nullptr )
         {
-            g_pGame->GetUIRoot()->Add( pWindow );
+            g_pGame->GetUIRoot( UIDesignId::MainMenu )->Add( pWindow );
         }
     }
 
@@ -117,7 +117,7 @@ void MainMenu::CreateCharacterImage()
     const int offset = static_cast<int>( static_cast<float>( h ) * ratio * 0.66f );
     const int x = static_cast<int>( Genesis::Configuration::GetScreenWidth() ) - offset;
     m_pCharacterImage->SetPosition( x, 0 );
-    g_pGame->GetUIRoot()->Add( m_pCharacterImage );
+    g_pGame->GetUIRoot( UIDesignId::MainMenu )->Add( m_pCharacterImage );
     m_pCharacterImage->SetSize( w, h );
 }
 

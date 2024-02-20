@@ -196,7 +196,7 @@ void GalaxyRep::Initialise()
     m_pLayer->AddSceneObject( this, false );
 
     m_pGalaxyWindow = std::make_shared<GalaxyWindow>();
-    g_pGame->GetUIRoot()->Add( m_pGalaxyWindow );
+    g_pGame->GetUIRoot( UIDesignId::MainMenu )->Add( m_pGalaxyWindow );
     m_pGalaxyWindow->Show( false );
 }
 

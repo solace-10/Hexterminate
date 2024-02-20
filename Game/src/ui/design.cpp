@@ -19,47 +19,50 @@
 
 #include "ui/design.h"
 
-namespace Hexterminate
-{
-namespace UI
+namespace Hexterminate::UI
 {
 
-    Design::Design()
+Design::Design( const std::filesystem::path& path )
+    : m_Path( path )
+{
+    m_Name = m_Path.stem().generic_u8string();
+}
+
+Design::~Design()
+{
+
+}
+
+void Design::Save()
+{
+    std::ofstream file( m_Path, std::ios::out );
+    if ( file.is_open() )
     {
-        m_Path = "data/ui/design.json";
+        file << m_Data.dump( 4 ) << std::endl;
+        file.close();
+    }
+}
+
+void Design::Load()
+{
+    m_Data = {};
+
+    if ( std::filesystem::exists( m_Path ) == false || std::filesystem::file_size( m_Path ) == 0 )
+    {
+        return;
     }
 
-    void Design::Save()
+    std::ifstream file( m_Path, std::ios::in );
+    if ( file.is_open() )
     {
-        std::ofstream file( m_Path, std::ios::out );
-        if ( file.is_open() )
-        {
-            file << m_Data.dump( 4 ) << std::endl;
-            file.close();
-        }
+        file >> m_Data;
+        file.close();
     }
+}
 
-    void Design::Load()
-    {
-        m_Data = {};
+json& Design::Get( const std::string& path )
+{
+    return m_Data[ nlohmann::json_pointer<json>( path ) ];
+}
 
-        if ( std::filesystem::exists( m_Path ) == false || std::filesystem::file_size( m_Path ) == 0 )
-        {
-            return;
-        }
-
-        std::ifstream file( m_Path, std::ios::in );
-        if ( file.is_open() )
-        {
-            file >> m_Data;
-            file.close();
-        }
-    }
-
-    json& Design::Get( const std::string& path )
-    {
-        return m_Data[ nlohmann::json_pointer<json>( path ) ];
-    }
-
-} // namespace UI
-} // namespace Hexterminate
+} // namespace Hexterminate::UI

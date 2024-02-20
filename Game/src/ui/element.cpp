@@ -39,6 +39,8 @@ static const char* sElementPropertyAnchor = "anchor";
 
 Element::Element( const std::string& name )
     : m_Name( name )
+    , m_pPanel( nullptr )
+    , m_pDesign( nullptr )
     , m_IsPopupElement( false )
     , m_IsEditable( true )
     , m_IsDynamic( false )
@@ -84,7 +86,7 @@ void Element::Add( ElementSharedPtr pElement )
     m_Children.push_back( pElement );
     m_pPanel->AddElement( pElement->GetPanel() );
     pElement->ResolvePath( this );
-    pElement->LoadFromDesign();
+    pElement->LoadFromDesign( m_pDesign );
 }
 
 bool Element::IsHovered() const
@@ -97,15 +99,19 @@ void Element::Show( bool state )
     GetPanel()->Show( state );
 }
 
-void Element::LoadFromDesign()
+void Element::LoadFromDesign( Design* pDesign )
 {
-    if ( IsPathResolved() == false || IsDynamic() )
+    if ( pDesign != nullptr )
+    {
+        m_pDesign = pDesign;
+    }
+
+    if ( IsPathResolved() == false || IsDynamic() || m_pDesign == nullptr )
     {
         return;
     }
 
-    Design* pDesign = g_pGame->GetUIRoot()->GetDesign();
-    const json& data = pDesign->Get( GetPath() );
+    const json& data = m_pDesign->Get( GetPath() );
     if ( data.is_object() )
     {
         if ( data.contains( "properties" ) )
@@ -119,7 +125,7 @@ void Element::LoadFromDesign()
 
         for ( auto& pChildElement : m_Children )
         {
-            pChildElement->LoadFromDesign();
+            pChildElement->LoadFromDesign( m_pDesign );
         }
     }
 }
@@ -128,7 +134,19 @@ void Element::ResolvePath( Element* pParentElement )
 {
     std::stringstream path;
 
-    if ( pParentElement == g_pGame->GetUIRoot() )
+    bool isParentUIRoot = false;
+    for ( size_t i = 0; i < static_cast<size_t>( UIDesignId::Count ); i++ )
+    {
+        UIDesignId id = static_cast<UIDesignId>( i );
+        if ( pParentElement == g_pGame->GetUIRoot( id ) )
+        {
+            isParentUIRoot = true;
+            m_pDesign = pParentElement->GetDesign();
+            break;
+        }
+    }
+
+    if ( isParentUIRoot )
     {
         path << "/" << GetName();
     }

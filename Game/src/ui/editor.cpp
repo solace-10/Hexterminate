@@ -38,31 +38,50 @@ Editor::~Editor()
 
 void Editor::UpdateDebugUI()
 {
-    RootElement* pRoot = g_pGame->GetUIRoot();
-    if ( pRoot == nullptr )
-    {
-        return;
-    }
-
     if ( Genesis::ImGuiImpl::IsEnabled() && m_IsOpen )
     {
         ImGui::Begin( "UI editor", &m_IsOpen );
 
         if ( ImGui::Button( "Save" ) )
         {
-            pRoot->Save();
+            for ( auto& pRootElement : g_pGame->GetUIRoots() )
+            {
+                if ( pRootElement )
+                {
+                    pRootElement->Save();
+                }
+            }
         }
         ImGui::SameLine();
         if ( ImGui::Button( "Reload" ) )
         {
-            pRoot->Load();
+            for ( auto& pRootElement : g_pGame->GetUIRoots() )
+            {
+                if ( pRootElement )
+                {
+                    pRootElement->Load();
+                }
+            }
         }
 
         ImGui::BeginChild( "Hierarchy", ImVec2( ImGui::GetWindowContentRegionWidth() * 0.4f, -1.0f ), true );
-        for ( auto& pChild : pRoot->GetChildren() )
+
+        for ( auto& pRootElement : g_pGame->GetUIRoots() )
         {
-            RenderHierarchy( pChild );
+            if ( pRootElement == nullptr )
+            {
+                continue;
+            }
+
+            if ( ImGui::CollapsingHeader( pRootElement->GetName().c_str(), ImGuiTreeNodeFlags_DefaultOpen ) )
+            {
+                for ( auto& pChild : pRootElement->GetChildren() )
+                {
+                    RenderHierarchy( pChild );
+                }
+            }
         }
+
         ImGui::EndChild();
 
         ImGui::SameLine();

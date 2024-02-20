@@ -58,13 +58,13 @@ GalaxyWindow::GalaxyWindow()
     GetContentPanel()->Add( std::make_shared<UI::Image>( "Perks icon" ) );
 
     m_pFleetsButton = std::make_shared<UI::Button>( "Fleets button", [ this ]( const std::any& userData ) { ShowFleetWindow( !IsFleetWindowVisible() ); } );
-    g_pGame->GetUIRoot()->Add( m_pFleetsButton );
+    g_pGame->GetUIRoot( UIDesignId::MainMenu )->Add( m_pFleetsButton );
     m_pPerksButton = std::make_shared<UI::Button>( "Perks button", [ this ]( const std::any& userData ) { ShowPerksWindow( !IsPerksWindowVisible() ); } );
-    g_pGame->GetUIRoot()->Add( m_pPerksButton );
+    g_pGame->GetUIRoot( UIDesignId::MainMenu )->Add( m_pPerksButton );
 
     m_pFleetWindow = std::make_shared<FleetWindow>();
     m_pFleetWindow->Show( false );
-    g_pGame->GetUIRoot()->Add( m_pFleetWindow );
+    g_pGame->GetUIRoot( UIDesignId::MainMenu )->Add( m_pFleetWindow );
 
     m_pPerksWindow = new PerksWindow();
     m_pPerksWindow->Init();

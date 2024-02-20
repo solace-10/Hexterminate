@@ -70,6 +70,8 @@ public:
     // Genesis::Gui elements have been ported to the new system.
     Genesis::Gui::Panel* GetPanel() const;
 
+    virtual Design* GetDesign() const;
+
 protected:
     virtual void SaveProperties( json& properties );
     virtual void LoadProperties( const json& properties );
@@ -77,7 +79,7 @@ protected:
     const std::string& GetPath() const;
     bool IsPathResolved() const;
     void ResolvePath( Element* pParentElement );
-    void LoadFromDesign();
+    void LoadFromDesign( Design* pDesign );
     void SaveInternal( json& data, bool saveProperties = true );
 
     void InputIntExt( const char* label, int* v, bool isReadOnly = false );
@@ -86,6 +88,7 @@ private:
     std::string m_Name;
     std::string m_Path;
     Genesis::Gui::Panel* m_pPanel;
+    Design* m_pDesign;
     ElementList m_Children;
 
     bool m_IsPopupElement;
@@ -157,6 +160,11 @@ inline bool Element::IsDynamic() const
 inline void Element::SetDynamic( bool state )
 {
     m_IsDynamic = state;
+}
+
+inline Design* Element::GetDesign() const
+{
+    return m_pDesign;
 }
 
 } // namespace Hexterminate::UI
