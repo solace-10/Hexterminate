@@ -126,6 +126,7 @@ void Editor::RenderHierarchy( ElementSharedPtr pElement )
         if ( ImGui::IsItemClicked() )
         {
             m_pSelectedElement = pElement;
+            Genesis::FrameWork::GetGuiManager()->SetHighlightedElement( pElement->GetPanel() );
         }
     }
     else
@@ -135,6 +136,7 @@ void Editor::RenderHierarchy( ElementSharedPtr pElement )
         if ( ImGui::IsItemClicked() )
         {
             m_pSelectedElement = pElement;
+            Genesis::FrameWork::GetGuiManager()->SetHighlightedElement( pElement->GetPanel() );
         }
 
         if ( nodeOpen )

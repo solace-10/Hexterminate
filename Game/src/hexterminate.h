@@ -162,7 +162,7 @@ enum class GameState
 enum class UIDesignId
 {
     MainMenu = 0,
-    GalaxyView,
+    Shipyard,
 
     Count
 };
@@ -259,6 +259,7 @@ private:
     void LoadGameAux();
     void ToggleImGui();
     void LoadUIDesigns();
+    void LoadUIDesign( UIDesignId id, const std::filesystem::path& designPath );
 
     MainMenu* m_pMainMenu;
     Console* m_pConsole;

@@ -15,7 +15,6 @@
 // You should have received a copy of the GNU General Public License
 // along with Genesis. If not, see <http://www.gnu.org/licenses/>.
 
-#include "sound/soundmanager.h"
 #include "gui.h"
 #include "../configuration.h"
 #include "../genesis.h"
@@ -26,6 +25,7 @@
 #include "../shadercache.h"
 #include "../shaderuniform.h"
 #include "../vertexbuffer.h"
+#include "sound/soundmanager.h"
 
 namespace Genesis
 {
@@ -70,16 +70,18 @@ namespace Gui
     Shader* GuiManager::m_pTexturedShader = nullptr;
     ShaderUniform* GuiManager::m_pTexturedSamplerUniform = nullptr;
     ShaderUniform* GuiManager::m_pTexturedColourUniform = nullptr;
+    Shader* GuiManager::m_pHighlightShader = nullptr;
 
     GuiManager::GuiManager()
-        : m_pCursor( nullptr )
-        , mFocusedInputArea( nullptr )
+        : m_pHighlighted( nullptr )
+        , m_pCursor( nullptr )
+        , m_FocusedInputArea( nullptr )
     {
     }
 
     GuiManager::~GuiManager()
     {
-        for ( auto& pChildElement : mChildren )
+        for ( auto& pChildElement : m_Children )
         {
             delete pChildElement;
         }
@@ -95,6 +97,9 @@ namespace Gui
         m_pTexturedShader = pShaderCache->Load( "gui_textured" );
         m_pTexturedColourUniform = m_pTexturedShader->RegisterUniform( "k_colour", ShaderUniformType::FloatVector4 );
         m_pTexturedSamplerUniform = m_pTexturedShader->RegisterUniform( "k_sampler0", ShaderUniformType::Texture );
+        m_pHighlightShader = pShaderCache->Load( "gui_highlight" );
+
+        m_pHighlightedVB = std::make_unique<VertexBuffer>( GeometryType::Triangle, VBO_POSITION );
 
         m_pCursor = new Cursor();
     }
@@ -110,32 +115,32 @@ namespace Gui
 
         SDL_assert( pElement->IsOrphan() );
 
-        GuiElement::SortedInsertByDepth( pElement, mChildren );
+        GuiElement::SortedInsertByDepth( pElement, m_Children );
         pElement->OnParentSet();
     }
 
     TaskStatus GuiManager::Update( float delta )
     {
         // Delete all the pending "to remove" GUI elements
-        if ( !mToRemove.empty() )
+        if ( !m_ToRemove.empty() )
         {
-            for ( GuiElementList::iterator it = mToRemove.begin(); it != mToRemove.end(); it++ )
+            for ( GuiElementList::iterator it = m_ToRemove.begin(); it != m_ToRemove.end(); it++ )
             {
-                for ( GuiElementList::iterator it2 = mChildren.begin(); it2 != mChildren.end(); it2++ )
+                for ( GuiElementList::iterator it2 = m_Children.begin(); it2 != m_Children.end(); it2++ )
                 {
                     if ( *it == *it2 )
                     {
-                        mChildren.erase( it2 );
+                        m_Children.erase( it2 );
                         break;
                     }
                 }
                 delete *it;
             }
-            mToRemove.clear();
+            m_ToRemove.clear();
         }
 
         // Update all children
-        for ( auto& pChildElement : mChildren )
+        for ( auto& pChildElement : m_Children )
         {
             if ( pChildElement->IsVisible() )
                 pChildElement->Update( delta );
@@ -156,7 +161,7 @@ namespace Gui
 
         renderSystem->ViewOrtho();
 
-        for ( auto& pChildElement : mChildren )
+        for ( auto& pChildElement : m_Children )
         {
             if ( pChildElement->IsVisible() == false )
                 continue;
@@ -166,8 +171,10 @@ namespace Gui
             pChildElement->Render();
         }
 
+        RenderHighlight();
+
         // The cursor should be rendered after everything else
-		if ( m_pCursor->IsVisible() && ImGuiImpl::IsEnabled() == false )
+        if ( m_pCursor->IsVisible() && ImGuiImpl::IsEnabled() == false )
         {
             renderSystem->SetBlendMode( BlendMode::Blend );
             m_pCursor->UpdateClipRectangle();
@@ -193,7 +200,57 @@ namespace Gui
             SDL_StartTextInput();
         }
 
-        mFocusedInputArea = pInputArea;
+        m_FocusedInputArea = pInputArea;
+    }
+
+    void GuiManager::RebuildHighlightVertexBuffer()
+    {
+        if ( !m_pHighlighted )
+        {
+            return;
+        }
+
+        const glm::vec2 pos = m_pHighlighted->GetPositionAbsolute();
+        const glm::vec2 size = m_pHighlighted->GetSize();
+        const float t = 2.0f; // Border thickness
+
+        const std::vector<glm::vec3> v = 
+        {
+            { pos.x, pos.y, 0.0f },
+            { pos.x + t, pos.y + t, 0.0f },
+            { pos.x + size.x, pos.y, 0.0f },
+            { pos.x + size.x - t, pos.y + t, 0.0f },
+            { pos.x, pos.y + size.y, 0.0f },
+            { pos.x + t, pos.y + size.y - t, 0.0f },
+            { pos.x + size.x, pos.y + size.y, 0.0f },
+            { pos.x + size.x - t, pos.y + size.y - t, 0.0f }
+        };
+
+        const std::vector<glm::vec3> data = 
+        {
+            v[0], v[2], v[1],
+            v[1], v[2], v[3],
+            v[0], v[1], v[4],
+            v[4], v[1], v[5],
+            v[5], v[7], v[4],
+            v[7], v[6], v[4],
+            v[3], v[2], v[7],
+            v[2], v[6], v[7]
+        };
+
+        const float* pData = &(data[0].x);
+        m_pHighlightedVB->CopyData( pData, data.size() * 3, VBO_POSITION );
+    }
+
+    void GuiManager::RenderHighlight()
+    {
+        if ( m_pHighlighted )
+        {
+            FrameWork::GetRenderSystem()->SetBlendMode( BlendMode::Disabled );
+            m_pHighlighted->UpdateClipRectangle();
+            GetHighlightShader()->Use();
+            m_pHighlightedVB->Draw();
+        }
     }
 
     ///////////////////////////////////////////////////////////////////////////
@@ -209,7 +266,6 @@ namespace Gui
         , mShow( true )
         , mOrphan( true )
         , mAcceptsInput( true )
-        , mHighlighted( false )
         , mHiddenForCapture( false )
         , mDepth( 0 )
     {
@@ -257,7 +313,7 @@ namespace Gui
         }
 
         SDL_assert( pElement->IsOrphan() );
-		SDL_assert( pElement != this );
+        SDL_assert( pElement != this );
 
         SortedInsertByDepth( pElement, mChildren );
         pElement->mParent = this;
@@ -317,11 +373,6 @@ namespace Gui
 
     void GuiElement::Render()
     {
-        if ( mHighlighted )
-        {
-            RenderHighlight();
-        }
-
         GuiElementList::const_iterator itEnd = mChildren.end();
         for ( GuiElementList::const_iterator it = mChildren.begin(); it != itEnd; it++ )
         {
@@ -332,23 +383,6 @@ namespace Gui
             ( *it )->UpdateClipRectangle();
             ( *it )->Render();
         }
-    }
-
-    void GuiElement::RenderHighlight()
-    {
-        glm::vec2 pos = GetPositionAbsolute();
-
-        // Allows sharp lines when FSAA is enabled
-        pos.x += 0.5f;
-        pos.y += 0.5f;
-
-        glColor4f( 1.0f, 0.0f, 0.0f, 0.5f );
-        glBegin( GL_LINE_LOOP );
-        glVertex2f( pos.x + 1.0f, pos.y );
-        glVertex2f( pos.x + 1.0f, pos.y + mSize.y - 1.0f );
-        glVertex2f( pos.x + mSize.x - 1.0f, pos.y + mSize.y - 1.0f );
-        glVertex2f( pos.x + mSize.x - 1.0f, pos.y );
-        glEnd();
     }
 
     void GuiElement::UpdateClipRectangle()
@@ -377,7 +411,7 @@ namespace Gui
         }
 
         // glScissor origin is on the bottom left corner of the screen...
-        const int width = std::max( 0,  static_cast<int>( mClipRectangle.max.x - mClipRectangle.min.x ) );
+        const int width = std::max( 0, static_cast<int>( mClipRectangle.max.x - mClipRectangle.min.x ) );
         const int height = std::max( 0, static_cast<int>( mClipRectangle.max.y - mClipRectangle.min.y ) );
         glScissor(
             static_cast<int>( mClipRectangle.min.x ),
@@ -441,16 +475,16 @@ namespace Gui
 
     bool GuiElement::IsMouseInside() const
     {
-		if ( ImGuiImpl::IsEnabled() )
-		{
-			return false;
-		}
-		else
-		{
-			const glm::vec2& mousePos = FrameWork::GetInputManager()->GetMousePosition();
-			const glm::vec2& buttonAbsPos = GetPositionAbsolute();
-			return ( mousePos.x > buttonAbsPos.x && mousePos.x < buttonAbsPos.x + mSize.x && mousePos.y > buttonAbsPos.y && mousePos.y < buttonAbsPos.y + mSize.y );
-		}
+        if ( ImGuiImpl::IsEnabled() )
+        {
+            return false;
+        }
+        else
+        {
+            const glm::vec2& mousePos = FrameWork::GetInputManager()->GetMousePosition();
+            const glm::vec2& buttonAbsPos = GetPositionAbsolute();
+            return ( mousePos.x > buttonAbsPos.x && mousePos.x < buttonAbsPos.x + mSize.x && mousePos.y > buttonAbsPos.y && mousePos.y < buttonAbsPos.y + mSize.y );
+        }
     }
 
     ///////////////////////////////////////////////////////////////////////////
@@ -476,11 +510,11 @@ namespace Gui
 
     void Panel::Render()
     {
-        if ( mColour.a > 0.001f || IsHighlighted() )
+        if ( mColour.a > 0.001f )
         {
             const glm::vec2 pos = GetPositionAbsolute();
             m_pBackgroundVertexBuffer->CreateUntexturedQuad( pos.x, pos.y, mSize.x, mSize.y );
-            glm::vec4 colour = IsHighlighted() ? glm::vec4( 1.0f, 0.0f, 0.0f, 0.5f ) : glm::vec4( mColour.r, mColour.g, mColour.b, mColour.a );
+            glm::vec4 colour( mColour.r, mColour.g, mColour.b, mColour.a );
             GuiManager::GetUntexturedShaderColourUniform()->Set( colour );
             GuiManager::GetUntexturedShader()->Use();
             m_pBackgroundVertexBuffer->Draw();
@@ -493,7 +527,7 @@ namespace Gui
 
     void Panel::DrawBorder()
     {
-        char borderMode = IsHighlighted() ? PANEL_BORDER_ALL : mBorderMode;
+        char borderMode = mBorderMode;
         if ( borderMode == PANEL_BORDER_NONE )
         {
             return;
@@ -528,7 +562,7 @@ namespace Gui
         }
 
         m_pBorderVertexBuffer->CopyPositions( posData );
-        glm::vec4 colour = IsHighlighted() ? glm::vec4( 1.0f, 0.0f, 0.0f, 1.0f ) : glm::vec4( mBorderColour.r, mBorderColour.g, mBorderColour.b, mBorderColour.a );
+        glm::vec4 colour( mBorderColour.r, mBorderColour.g, mBorderColour.b, mBorderColour.a );
         GuiManager::GetUntexturedShaderColourUniform()->Set( glm::vec4( colour ) );
         GuiManager::GetUntexturedShader()->Use();
         m_pBorderVertexBuffer->Draw();
@@ -820,7 +854,7 @@ namespace Gui
         mText = new Text();
         mText->SetPosition( 0.0f, 0.0f );
         mText->SetSize( 256.0f, 256.0f );
-		mText->SetMultiLine( false );
+        mText->SetMultiLine( false );
         AddElement( mText );
     }
 
@@ -882,8 +916,8 @@ namespace Gui
 
         if ( mousePos.x < mClipRectangle.min.x || mousePos.x > mClipRectangle.max.x || mousePos.y < mClipRectangle.min.y || mousePos.y > mClipRectangle.max.y )
             return false;
-		else if ( ImGuiImpl::IsEnabled() )
-			return false;
+        else if ( ImGuiImpl::IsEnabled() )
+            return false;
 
         const glm::vec2& buttonAbsPos = GetPositionAbsolute();
         return ( mousePos.x > buttonAbsPos.x && mousePos.x < buttonAbsPos.x + mSize.x && mousePos.y > buttonAbsPos.y && mousePos.y < buttonAbsPos.y + mSize.y );
@@ -928,7 +962,7 @@ namespace Gui
         , m_BulletColour( 1.0f, 1.0f, 1.0f, 1.0f )
         , m_pCheckboxBulletVertexBuffer( nullptr )
         , m_pCheckboxBorderVertexBuffer( nullptr )
-		, m_pCheckboxCallback( pCallback )
+        , m_pCheckboxCallback( pCallback )
     {
         SetPosition( glm::vec2( x, y ) );
         SetSize( 32.0f + font->GetTextLength( text ), std::max( font->GetLineHeight(), CheckboxSquareSize ) );
@@ -976,7 +1010,7 @@ namespace Gui
         posData.push_back( glm::vec3( pos.x + offset, pos.y + offset, 0.0f ) );
         m_pCheckboxBorderVertexBuffer->CopyPositions( posData );
 
-        //m_pCheckboxBorderVertexBuffer->CreateUntexturedQuad( pos.x + offset, pos.y + offset, CheckboxSquareSize - offset * 2.0f, 8.0f );
+        // m_pCheckboxBorderVertexBuffer->CreateUntexturedQuad( pos.x + offset, pos.y + offset, CheckboxSquareSize - offset * 2.0f, 8.0f );
         GuiManager::GetUntexturedShaderColourUniform()->Set( glm::vec4( mBorderColour.r, mBorderColour.g, mBorderColour.b, mBorderColour.a ) );
         GuiManager::GetUntexturedShader()->Use();
         m_pCheckboxBorderVertexBuffer->Draw();
@@ -988,146 +1022,144 @@ namespace Gui
     {
         if ( GetAcceptsInput() )
         {
-			m_Checked = !m_Checked;
+            m_Checked = !m_Checked;
 
-			if (m_pCheckboxCallback != nullptr)
-			{
-				m_pCheckboxCallback(m_Checked);
-			}
+            if ( m_pCheckboxCallback != nullptr )
+            {
+                m_pCheckboxCallback( m_Checked );
+            }
         }
     }
 
+    ///////////////////////////////////////////////////////////////////////////
+    // RadioButton
+    ///////////////////////////////////////////////////////////////////////////
 
-	///////////////////////////////////////////////////////////////////////////
-	// RadioButton
-	///////////////////////////////////////////////////////////////////////////
+    static const float RadioButtonSquareSize = 16.0f;
+    RadioButton::RadioButtonGroups RadioButton::sRadioButtonGroups;
 
-	static const float RadioButtonSquareSize = 16.0f;
-	RadioButton::RadioButtonGroups RadioButton::sRadioButtonGroups;
+    RadioButton::RadioButton( int x, int y, ResourceFont* font, const std::string& text, const std::string& group, bool checked /* = false */, RadioButtonCallback pCallback /* = nullptr */ )
+        : m_Group( group )
+        , m_Checked( checked )
+        , m_BulletColour( 1.0f, 1.0f, 1.0f, 1.0f )
+        , m_pCallback( pCallback )
+    {
+        SetPosition( glm::vec2( x, y ) );
+        SetSize( 32.0f + font->GetTextLength( text ), std::max( font->GetLineHeight(), RadioButtonSquareSize ) );
+        SetFont( font );
+        SetText( text );
+        mText->SetPosition( RadioButtonSquareSize + 8.0f, 0.0f );
 
-	RadioButton::RadioButton( int x, int y, ResourceFont* font, const std::string& text, const std::string& group, bool checked /* = false */, RadioButtonCallback pCallback /* = nullptr */ ) : 
-	m_Group( group ),
-	m_Checked( checked ),
-	m_BulletColour( 1.0f, 1.0f, 1.0f, 1.0f ),
-	m_pCallback( pCallback )
-	{
-		SetPosition( glm::vec2( x, y ) );
-		SetSize( 32.0f + font->GetTextLength( text ), std::max( font->GetLineHeight(), RadioButtonSquareSize ) );
-		SetFont( font );
-		SetText( text );
-		mText->SetPosition( RadioButtonSquareSize + 8.0f, 0.0f );
+        m_pRadioButtonBulletVertexBuffer = std::make_unique<VertexBuffer>( GeometryType::Triangle, VBO_POSITION );
+        m_pRadioButtonBorderVertexBuffer = std::make_unique<VertexBuffer>( GeometryType::Line, VBO_POSITION );
 
-		m_pRadioButtonBulletVertexBuffer = std::make_unique< VertexBuffer >( GeometryType::Triangle, VBO_POSITION );
-		m_pRadioButtonBorderVertexBuffer = std::make_unique< VertexBuffer >( GeometryType::Line, VBO_POSITION );
+        AddToGroup();
+    }
 
-		AddToGroup();
-	}
+    RadioButton::~RadioButton()
+    {
+        RemoveFromGroup();
+    }
 
-	RadioButton::~RadioButton()
-	{
-		RemoveFromGroup();
-	}
+    void RadioButton::Render()
+    {
+        const glm::vec2& pos = GetPositionAbsolute();
 
-	void RadioButton::Render()
-	{
-		const glm::vec2& pos = GetPositionAbsolute();
+        m_pBackgroundVertexBuffer->CreateUntexturedQuad( pos.x, pos.y, RadioButtonSquareSize, RadioButtonSquareSize );
+        GuiManager::GetUntexturedShaderColourUniform()->Set( glm::vec4( mColour.r, mColour.g, mColour.b, mColour.a ) );
+        GuiManager::GetUntexturedShader()->Use();
+        m_pBackgroundVertexBuffer->Draw();
 
-		m_pBackgroundVertexBuffer->CreateUntexturedQuad( pos.x, pos.y, RadioButtonSquareSize, RadioButtonSquareSize );
-		GuiManager::GetUntexturedShaderColourUniform()->Set( glm::vec4( mColour.r, mColour.g, mColour.b, mColour.a ) );
-		GuiManager::GetUntexturedShader()->Use();
-		m_pBackgroundVertexBuffer->Draw();
+        // Bullet
+        float offset = m_Checked ? 4.0f : 6.0f;
+        m_pRadioButtonBulletVertexBuffer->CreateUntexturedQuad( pos.x + offset, pos.y + offset, RadioButtonSquareSize - offset * 2.0f, RadioButtonSquareSize - offset * 2.0f - 1.0f );
+        glm::vec4 colour = m_Checked ? glm::vec4( m_BulletColour.r, m_BulletColour.g, m_BulletColour.b, m_BulletColour.a ) : glm::vec4( 0.5f, 0.5f, 0.5f, 0.5f );
+        GuiManager::GetUntexturedShaderColourUniform()->Set( colour );
+        GuiManager::GetUntexturedShader()->Use();
+        m_pRadioButtonBulletVertexBuffer->Draw();
 
-		// Bullet
-		float offset = m_Checked ? 4.0f : 6.0f;
-		m_pRadioButtonBulletVertexBuffer->CreateUntexturedQuad( pos.x + offset, pos.y + offset, RadioButtonSquareSize - offset * 2.0f, RadioButtonSquareSize - offset * 2.0f - 1.0f );
-		glm::vec4 colour = m_Checked ? glm::vec4( m_BulletColour.r, m_BulletColour.g, m_BulletColour.b, m_BulletColour.a ) : glm::vec4( 0.5f, 0.5f, 0.5f, 0.5f );
-		GuiManager::GetUntexturedShaderColourUniform()->Set( colour );
-		GuiManager::GetUntexturedShader()->Use();
-		m_pRadioButtonBulletVertexBuffer->Draw();
+        // Border around the square
+        offset = 1.5f;
 
-		// Border around the square
-		offset = 1.5f;
+        PositionData posData( 8 );
+        posData.emplace_back( pos.x + offset, pos.y + offset, 0.0f );
+        posData.emplace_back( pos.x + RadioButtonSquareSize - offset, pos.y + offset, 0.0f );
+        posData.emplace_back( pos.x + RadioButtonSquareSize - offset, pos.y + offset, 0.0f );
+        posData.emplace_back( pos.x + RadioButtonSquareSize - offset, pos.y + RadioButtonSquareSize - offset - 1.0f, 0.0f );
+        posData.emplace_back( pos.x + RadioButtonSquareSize - offset, pos.y + RadioButtonSquareSize - offset - 1.0f, 0.0f );
+        posData.emplace_back( pos.x + offset, pos.y + RadioButtonSquareSize - offset - 1.0f, 0.0f );
+        posData.emplace_back( pos.x + offset, pos.y + RadioButtonSquareSize - offset - 1.0f, 0.0f );
+        posData.emplace_back( pos.x + offset, pos.y + offset, 0.0f );
 
-		PositionData posData( 8 );
-		posData.emplace_back( pos.x + offset, pos.y + offset, 0.0f );
-		posData.emplace_back( pos.x + RadioButtonSquareSize - offset, pos.y + offset, 0.0f );
-		posData.emplace_back( pos.x + RadioButtonSquareSize - offset, pos.y + offset, 0.0f );
-		posData.emplace_back( pos.x + RadioButtonSquareSize - offset, pos.y + RadioButtonSquareSize - offset - 1.0f, 0.0f );
-		posData.emplace_back( pos.x + RadioButtonSquareSize - offset, pos.y + RadioButtonSquareSize - offset - 1.0f, 0.0f );
-		posData.emplace_back( pos.x + offset, pos.y + RadioButtonSquareSize - offset - 1.0f, 0.0f );
-		posData.emplace_back( pos.x + offset, pos.y + RadioButtonSquareSize - offset - 1.0f, 0.0f );
-		posData.emplace_back( pos.x + offset, pos.y + offset, 0.0f );
+        m_pRadioButtonBorderVertexBuffer->CopyPositions( posData );
 
-		m_pRadioButtonBorderVertexBuffer->CopyPositions( posData );
+        GuiManager::GetUntexturedShaderColourUniform()->Set( glm::vec4( mBorderColour.r, mBorderColour.g, mBorderColour.b, mBorderColour.a ) );
+        GuiManager::GetUntexturedShader()->Use();
+        m_pRadioButtonBorderVertexBuffer->Draw();
 
-		GuiManager::GetUntexturedShaderColourUniform()->Set( glm::vec4( mBorderColour.r, mBorderColour.g, mBorderColour.b, mBorderColour.a ) );
-		GuiManager::GetUntexturedShader()->Use();
-		m_pRadioButtonBorderVertexBuffer->Draw();
+        GuiElement::Render();
+    }
 
-		GuiElement::Render();
-	}
+    void RadioButton::OnPress()
+    {
+        SetChecked( true );
 
-	void RadioButton::OnPress()
-	{
-		SetChecked( true );
+        if ( m_pCallback != nullptr )
+        {
+            m_pCallback();
+        }
+    }
 
-		if ( m_pCallback != nullptr )
-		{
-			m_pCallback();
-		}
-	}
+    void RadioButton::SetChecked( bool state )
+    {
+        m_Checked = state;
 
-	void RadioButton::SetChecked( bool state )
-	{
-		m_Checked = state;
+        if ( m_Checked )
+        {
+            auto it = sRadioButtonGroups.find( m_Group );
+            SDL_assert( it != sRadioButtonGroups.end() );
+            RadioButtonVector& radioButtons = it->second;
+            for ( auto& pRadioButton : radioButtons )
+            {
+                if ( pRadioButton != this )
+                {
+                    pRadioButton->SetChecked( false );
+                }
+            }
+        }
+    }
 
-		if ( m_Checked )
-		{
-			auto it = sRadioButtonGroups.find( m_Group );
-			SDL_assert( it != sRadioButtonGroups.end() );
-			RadioButtonVector& radioButtons = it->second;
-			for ( auto& pRadioButton : radioButtons )
-			{
-				if ( pRadioButton != this )
-				{
-					pRadioButton->SetChecked( false );
-				}
-			}
-		}
-	}
+    void RadioButton::AddToGroup()
+    {
+        auto it = sRadioButtonGroups.find( m_Group );
+        if ( it == sRadioButtonGroups.end() )
+        {
+            sRadioButtonGroups.insert( { m_Group, { this } } );
+        }
+        else
+        {
+            it->second.push_back( this );
+        }
+    }
 
-	void RadioButton::AddToGroup()
-	{
-		auto it = sRadioButtonGroups.find( m_Group );
-		if ( it == sRadioButtonGroups.end() )
-		{
-			sRadioButtonGroups.insert( { m_Group, { this } } );
-		}
-		else
-		{
-			it->second.push_back( this );
-		}
-	}
-
-	void RadioButton::RemoveFromGroup()
-	{
-		auto it = sRadioButtonGroups.find( m_Group );
-		if ( it != sRadioButtonGroups.end() )
-		{
-			RadioButtonVector& radioButtons = it->second;
-			for ( auto it2 = radioButtons.begin(); it2 != radioButtons.end(); it2++ )
-			{
-				RadioButton* pRadioButton = *it2;
-				if ( pRadioButton == this )
-				{
-					radioButtons.erase( it2 );
-					return;
-				}
-			}
-		}
-		SDL_assert( false ); // Radio button not found in the group?
-	}
-
+    void RadioButton::RemoveFromGroup()
+    {
+        auto it = sRadioButtonGroups.find( m_Group );
+        if ( it != sRadioButtonGroups.end() )
+        {
+            RadioButtonVector& radioButtons = it->second;
+            for ( auto it2 = radioButtons.begin(); it2 != radioButtons.end(); it2++ )
+            {
+                RadioButton* pRadioButton = *it2;
+                if ( pRadioButton == this )
+                {
+                    radioButtons.erase( it2 );
+                    return;
+                }
+            }
+        }
+        SDL_assert( false ); // Radio button not found in the group?
+    }
 
     ///////////////////////////////////////////////////////////////////////////
     // InputAreaFilter

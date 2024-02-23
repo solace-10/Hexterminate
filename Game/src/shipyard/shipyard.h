@@ -37,6 +37,9 @@ class PanelDocking;
 class PanelShipStats;
 class PanelShipyard;
 
+class ShipStatsWindow;
+using ShipStatsWindowSharedPtr = std::shared_ptr<ShipStatsWindow>;
+
 typedef std::unique_ptr<PanelDocking> PanelDockingUniquePtr;
 
 #ifdef _DEBUG
@@ -97,6 +100,7 @@ private:
     PanelDockingUniquePtr m_pPanelDocking;
     PanelShipyard* m_pPanel;
     PanelShipStats* m_pPanelShipStats;
+    ShipStatsWindowSharedPtr m_pShipStatsWindow;
     ModuleDetails* m_pModuleDetails;
 
     ModuleInfo* m_pGrabbedModule;

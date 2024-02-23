@@ -1,0 +1,432 @@
+{
+    "Ship stats window": {
+        "Content": {
+            "Capacitor panel": {
+                "Capacitor subtitle": {
+                    "properties": {
+                        "anchor": {
+                            "b": false,
+                            "l": true,
+                            "r": false,
+                            "t": true
+                        },
+                        "colour": {
+                            "a": 1.0,
+                            "b": 1.0,
+                            "g": 1.0,
+                            "r": 1.0
+                        },
+                        "font": "kimberley18light.fnt",
+                        "label": "???",
+                        "line_spacing": 1.399999976158142,
+                        "multiline": false,
+                        "position": {
+                            "x": 0.0,
+                            "y": 0.0
+                        },
+                        "size": {
+                            "h": 128.0,
+                            "w": 128.0
+                        }
+                    }
+                },
+                "properties": {
+                    "anchor": {
+                        "b": false,
+                        "l": true,
+                        "r": false,
+                        "t": true
+                    },
+                    "border": {
+                        "bottom": false,
+                        "left": false,
+                        "right": false,
+                        "top": false
+                    },
+                    "position": {
+                        "x": 0.0,
+                        "y": 0.0
+                    },
+                    "size": {
+                        "h": 128.0,
+                        "w": 128.0
+                    }
+                }
+            },
+            "Energy panel": {
+                "Energy subtitle": {
+                    "properties": {
+                        "anchor": {
+                            "b": false,
+                            "l": true,
+                            "r": false,
+                            "t": true
+                        },
+                        "colour": {
+                            "a": 1.0,
+                            "b": 1.0,
+                            "g": 1.0,
+                            "r": 1.0
+                        },
+                        "font": "kimberley18light.fnt",
+                        "label": "???",
+                        "line_spacing": 1.399999976158142,
+                        "multiline": false,
+                        "position": {
+                            "x": 0.0,
+                            "y": 0.0
+                        },
+                        "size": {
+                            "h": 128.0,
+                            "w": 128.0
+                        }
+                    }
+                },
+                "properties": {
+                    "anchor": {
+                        "b": false,
+                        "l": true,
+                        "r": false,
+                        "t": true
+                    },
+                    "border": {
+                        "bottom": false,
+                        "left": false,
+                        "right": false,
+                        "top": false
+                    },
+                    "position": {
+                        "x": 0.0,
+                        "y": 0.0
+                    },
+                    "size": {
+                        "h": 128.0,
+                        "w": 128.0
+                    }
+                }
+            },
+            "Fleet panel": {
+                "Fleet subtitle": {
+                    "properties": {
+                        "anchor": {
+                            "b": false,
+                            "l": true,
+                            "r": false,
+                            "t": true
+                        },
+                        "colour": {
+                            "a": 1.0,
+                            "b": 1.0,
+                            "g": 1.0,
+                            "r": 1.0
+                        },
+                        "font": "kimberley18light.fnt",
+                        "label": "???",
+                        "line_spacing": 1.399999976158142,
+                        "multiline": false,
+                        "position": {
+                            "x": 0.0,
+                            "y": 0.0
+                        },
+                        "size": {
+                            "h": 128.0,
+                            "w": 128.0
+                        }
+                    }
+                },
+                "properties": {
+                    "anchor": {
+                        "b": false,
+                        "l": true,
+                        "r": false,
+                        "t": true
+                    },
+                    "border": {
+                        "bottom": false,
+                        "left": false,
+                        "right": false,
+                        "top": false
+                    },
+                    "position": {
+                        "x": 0.0,
+                        "y": 0.0
+                    },
+                    "size": {
+                        "h": 128.0,
+                        "w": 128.0
+                    }
+                }
+            },
+            "Requisition ships panel ": {
+                "Requisition ships subtitle": {
+                    "properties": {
+                        "anchor": {
+                            "b": false,
+                            "l": true,
+                            "r": false,
+                            "t": true
+                        },
+                        "colour": {
+                            "a": 1.0,
+                            "b": 1.0,
+                            "g": 1.0,
+                            "r": 1.0
+                        },
+                        "font": "kimberley18light.fnt",
+                        "label": "???",
+                        "line_spacing": 1.399999976158142,
+                        "multiline": false,
+                        "position": {
+                            "x": 0.0,
+                            "y": 0.0
+                        },
+                        "size": {
+                            "h": 128.0,
+                            "w": 128.0
+                        }
+                    }
+                },
+                "properties": {
+                    "anchor": {
+                        "b": false,
+                        "l": true,
+                        "r": false,
+                        "t": true
+                    },
+                    "border": {
+                        "bottom": false,
+                        "left": false,
+                        "right": false,
+                        "top": false
+                    },
+                    "position": {
+                        "x": 0.0,
+                        "y": 0.0
+                    },
+                    "size": {
+                        "h": 128.0,
+                        "w": 128.0
+                    }
+                }
+            },
+            "Shields panel": {
+                "Shields subtitle": {
+                    "properties": {
+                        "anchor": {
+                            "b": false,
+                            "l": true,
+                            "r": false,
+                            "t": true
+                        },
+                        "colour": {
+                            "a": 1.0,
+                            "b": 1.0,
+                            "g": 1.0,
+                            "r": 1.0
+                        },
+                        "font": "kimberley18light.fnt",
+                        "label": "???",
+                        "line_spacing": 1.399999976158142,
+                        "multiline": false,
+                        "position": {
+                            "x": 0.0,
+                            "y": 0.0
+                        },
+                        "size": {
+                            "h": 128.0,
+                            "w": 128.0
+                        }
+                    }
+                },
+                "properties": {
+                    "anchor": {
+                        "b": false,
+                        "l": true,
+                        "r": false,
+                        "t": true
+                    },
+                    "border": {
+                        "bottom": false,
+                        "left": false,
+                        "right": false,
+                        "top": false
+                    },
+                    "position": {
+                        "x": 0.0,
+                        "y": 0.0
+                    },
+                    "size": {
+                        "h": 128.0,
+                        "w": 128.0
+                    }
+                }
+            },
+            "Weapons panel": {
+                "Weapons subtitle": {
+                    "properties": {
+                        "anchor": {
+                            "b": false,
+                            "l": true,
+                            "r": false,
+                            "t": true
+                        },
+                        "colour": {
+                            "a": 1.0,
+                            "b": 0.6901960968971252,
+                            "g": 0.6392157077789307,
+                            "r": 0.30980393290519714
+                        },
+                        "font": "kimberley18.fnt",
+                        "label": "> WEAPONRY",
+                        "line_spacing": 1.399999976158142,
+                        "multiline": false,
+                        "position": {
+                            "x": 4.0,
+                            "y": 4.0
+                        },
+                        "size": {
+                            "h": 128.0,
+                            "w": 256.0
+                        }
+                    }
+                },
+                "properties": {
+                    "anchor": {
+                        "b": false,
+                        "l": true,
+                        "r": false,
+                        "t": true
+                    },
+                    "border": {
+                        "bottom": false,
+                        "left": false,
+                        "right": false,
+                        "top": true
+                    },
+                    "position": {
+                        "x": 8.0,
+                        "y": 8.0
+                    },
+                    "size": {
+                        "h": 128.0,
+                        "w": 334.0
+                    }
+                }
+            },
+            "properties": {
+                "anchor": {
+                    "b": false,
+                    "l": true,
+                    "r": false,
+                    "t": true
+                },
+                "border": {
+                    "bottom": true,
+                    "left": false,
+                    "right": false,
+                    "top": true
+                },
+                "position": {
+                    "x": 0.0,
+                    "y": 32.0
+                },
+                "size": {
+                    "h": 568.0,
+                    "w": 350.0
+                }
+            }
+        },
+        "Title": {
+            "Close button": {
+                "properties": {
+                    "anchor": {
+                        "b": false,
+                        "l": true,
+                        "r": false,
+                        "t": true
+                    },
+                    "default_image": "",
+                    "hovered_image": "",
+                    "label": "???",
+                    "position": {
+                        "x": 0.0,
+                        "y": 0.0
+                    },
+                    "pressed_image": "",
+                    "size": {
+                        "h": 128.0,
+                        "w": 128.0
+                    }
+                }
+            },
+            "Title text": {
+                "properties": {
+                    "anchor": {
+                        "b": false,
+                        "l": true,
+                        "r": false,
+                        "t": true
+                    },
+                    "colour": {
+                        "a": 1.0,
+                        "b": 0.6899999976158142,
+                        "g": 0.6389999985694885,
+                        "r": 0.3089999854564667
+                    },
+                    "font": "kimberley22.fnt",
+                    "label": "SHIPYARD > OVERVIEW",
+                    "line_spacing": 1.399999976158142,
+                    "multiline": false,
+                    "position": {
+                        "x": 8.0,
+                        "y": 6.0
+                    },
+                    "size": {
+                        "h": 32.0,
+                        "w": 350.0
+                    }
+                }
+            },
+            "properties": {
+                "anchor": {
+                    "b": false,
+                    "l": true,
+                    "r": false,
+                    "t": true
+                },
+                "border": {
+                    "bottom": false,
+                    "left": false,
+                    "right": false,
+                    "top": true
+                },
+                "position": {
+                    "x": 0.0,
+                    "y": 0.0
+                },
+                "size": {
+                    "h": 32.0,
+                    "w": 350.0
+                }
+            }
+        },
+        "properties": {
+            "anchor": {
+                "b": false,
+                "l": true,
+                "r": false,
+                "t": true
+            },
+            "center_h": false,
+            "center_v": false,
+            "position": {
+                "x": 800.0,
+                "y": 60.0
+            },
+            "size": {
+                "h": 600.0,
+                "w": 350.0
+            }
+        }
+    }
+}

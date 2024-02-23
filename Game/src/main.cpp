@@ -1540,7 +1540,15 @@ void Game::Unpause()
 
 void Game::LoadUIDesigns()
 {
-    m_UIRootElements[ static_cast<size_t>( UIDesignId::MainMenu ) ] = std::make_unique<UI::RootElement>( "data/ui/designs/main_menu.json" );
+    LoadUIDesign( UIDesignId::MainMenu, "data/ui/designs/main_menu.json" );
+    LoadUIDesign( UIDesignId::Shipyard, "data/ui/designs/shipyard.json" );
+}
+
+void Game::LoadUIDesign( UIDesignId id, const std::filesystem::path& designPath )
+{
+    const size_t idx = static_cast<size_t>( id );
+    SDL_assert( m_UIRootElements[ idx ] == nullptr );
+    m_UIRootElements[ idx ] = std::make_unique<UI::RootElement>( designPath );
 }
 
 //-------------------------------------------------------------------

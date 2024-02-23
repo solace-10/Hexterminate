@@ -30,6 +30,7 @@
 #include "menus/paneldocking.h"
 #include "menus/panelshipstats.h"
 #include "menus/panelshipyard.h"
+#include "menus/shipstatswindow.h"
 #include "perks.h"
 #include "player.h"
 #include "sector/sector.h"
@@ -40,6 +41,7 @@
 #include "ship/ship.h"
 #include "ship/shipinfo.h"
 #include "shipyard/shipyard.h"
+#include "ui/rootelement.h"
 
 #ifdef _DEBUG
 #include "menus/panelshipyarddebug.h"
@@ -84,6 +86,11 @@ Shipyard::Shipyard( const glm::vec3& spawnPosition )
     LoadSFX();
 
     m_pModuleDetails = new ModuleDetails();
+
+    UI::RootElement* pShipyardRootElement = g_pGame->GetUIRoot( UIDesignId::Shipyard );
+    m_pShipStatsWindow = std::make_shared<ShipStatsWindow>();
+    m_pShipStatsWindow->Show( false );
+    pShipyardRootElement->Add( m_pShipStatsWindow );
 }
 
 Shipyard::~Shipyard()
@@ -410,6 +417,8 @@ bool Shipyard::Dock( Ship* pShip )
         m_pPanelShipStats = new PanelShipStats();
     }
 
+    m_pShipStatsWindow->Show( true );
+
     return true;
 }
 
@@ -449,6 +458,8 @@ bool Shipyard::Undock()
         delete m_pPanelDebug;
         m_pPanelDebug = nullptr;
 #endif
+
+        m_pShipStatsWindow->Show( false );
 
         m_BaseModelShowTimer = 0.0f;
         m_MaxY = 0;

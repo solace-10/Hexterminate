@@ -36,6 +36,9 @@ class Element;
 using ElementSharedPtr = std::shared_ptr<Element>;
 using ElementWeakPtr = std::weak_ptr<Element>;
 
+class Icon;
+using IconSharedPtr = std::shared_ptr<Icon>;
+
 class Image;
 using ImageSharedPtr = std::shared_ptr<Image>;
 

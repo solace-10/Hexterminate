@@ -70,30 +70,39 @@ namespace Gui
         void SetFocusedInputArea( InputArea* inputArea );
         InputArea* GetFocusedInputArea() const;
 
+        void SetHighlightedElement( GuiElement* pElement );
+
         static Shader* GetUntexturedShader();
         static ShaderUniform* GetUntexturedShaderColourUniform();
         static Shader* GetTexturedShader();
         static ShaderUniform* GetTexturedShaderColourUniform();
         static ShaderUniform* GetTexturedSamplerUniform();
+        static Shader* GetHighlightShader();
 
         Cursor* GetCursor() const;
 
     private:
-        GuiElementList mChildren;
-        GuiElementList mToRemove;
+        void RebuildHighlightVertexBuffer();
+        void RenderHighlight();
+
+        GuiElementList m_Children;
+        GuiElementList m_ToRemove;
+        GuiElement* m_pHighlighted;
+        VertexBufferUniquePtr m_pHighlightedVB;
 
         Cursor* m_pCursor;
 
         // Since we only have one keyboard, we can only be typing
         // on one input area at a time. So all keyboard input
         // will be redirected to this element.
-        InputArea* mFocusedInputArea;
+        InputArea* m_FocusedInputArea;
 
         static Shader* m_pUntexturedShader;
         static ShaderUniform* m_pUntexturedColourUniform;
         static Shader* m_pTexturedShader;
         static ShaderUniform* m_pTexturedSamplerUniform;
         static ShaderUniform* m_pTexturedColourUniform;
+        static Shader* m_pHighlightShader;
     };
 
 
@@ -147,8 +156,6 @@ namespace Gui
 
         const GuiElementList& GetChildren() const;
 
-        void SetHighlighted( bool state );
-        bool IsHighlighted() const;
         void SetHiddenForCapture( bool state );
         bool IsHiddenForCapture() const;
 
@@ -176,14 +183,11 @@ namespace Gui
         } mClipRectangle;
 
     private:
-        void RenderHighlight();
-
         GuiElement* mParent;
         GuiElementList mToRemove;
         BlendMode mBlendMode;
 
         bool mAcceptsInput;
-        bool mHighlighted;
         bool mHiddenForCapture;
         int mDepth;
     };
