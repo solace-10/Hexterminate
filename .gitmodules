@@ -6,7 +6,7 @@
 	url = https://github.com/TheAssemblyArmada/crashpad-cmake
 [submodule "Game/bin/assets"]
 	path = Game/bin/assets
-	url = https://github.com/solace-10/Hexterminate-assets.git
+	url = git@github.com:solace-10/Hexterminate-assets.git
 [submodule "Genesis/libs/steamworks"]
 	path = Genesis/libs/steamworks
-	url = https://github.com/solace-10/Hexterminate-steamworks.git
+	url = git@github.com:solace-10/Hexterminate-steamworks.git
