@@ -220,21 +220,21 @@
                         },
                         "colour": {
                             "a": 1.0,
-                            "b": 1.0,
-                            "g": 1.0,
-                            "r": 1.0
+                            "b": 0.6901960968971252,
+                            "g": 0.6392157077789307,
+                            "r": 0.30980393290519714
                         },
-                        "font": "kimberley18light.fnt",
-                        "label": "???",
+                        "font": "kimberley18.fnt",
+                        "label": "> SHIELDS",
                         "line_spacing": 1.399999976158142,
                         "multiline": false,
                         "position": {
-                            "x": 0.0,
-                            "y": 0.0
+                            "x": 4.0,
+                            "y": 4.0
                         },
                         "size": {
-                            "h": 128.0,
-                            "w": 128.0
+                            "h": 24.0,
+                            "w": 256.0
                         }
                     }
                 },
@@ -249,19 +249,247 @@
                         "bottom": false,
                         "left": false,
                         "right": false,
-                        "top": false
+                        "top": true
                     },
                     "position": {
-                        "x": 0.0,
-                        "y": 0.0
+                        "x": 8.0,
+                        "y": 132.0
                     },
                     "size": {
                         "h": 128.0,
-                        "w": 128.0
+                        "w": 270.0
                     }
                 }
             },
             "Weapons panel": {
+                "Energy icon": {
+                    "properties": {
+                        "anchor": {
+                            "b": false,
+                            "l": true,
+                            "r": false,
+                            "t": true
+                        },
+                        "file": "data/ui/icons/weaponry_energy.png",
+                        "position": {
+                            "x": 4.0,
+                            "y": 56.0
+                        },
+                        "size": {
+                            "h": 24.0,
+                            "w": 24.0
+                        }
+                    }
+                },
+                "Energy text": {
+                    "properties": {
+                        "anchor": {
+                            "b": false,
+                            "l": true,
+                            "r": false,
+                            "t": true
+                        },
+                        "colour": {
+                            "a": 1.0,
+                            "b": 1.0,
+                            "g": 1.0,
+                            "r": 1.0
+                        },
+                        "font": "kimberley18light.fnt",
+                        "label": "Energy",
+                        "line_spacing": 1.399999976158142,
+                        "multiline": false,
+                        "position": {
+                            "x": 34.0,
+                            "y": 58.0
+                        },
+                        "size": {
+                            "h": 24.0,
+                            "w": 128.0
+                        }
+                    }
+                },
+                "Energy value": {
+                    "properties": {
+                        "alignment": "right",
+                        "anchor": {
+                            "b": false,
+                            "l": true,
+                            "r": false,
+                            "t": true
+                        },
+                        "colour": {
+                            "a": 1.0,
+                            "b": 1.0,
+                            "g": 1.0,
+                            "r": 1.0
+                        },
+                        "font": "kimberley18light.fnt",
+                        "label": "???",
+                        "line_spacing": 1.399999976158142,
+                        "multiline": false,
+                        "position": {
+                            "x": 100.0,
+                            "y": 58.0
+                        },
+                        "size": {
+                            "h": 24.0,
+                            "w": 160.0
+                        }
+                    }
+                },
+                "Exotic icon": {
+                    "properties": {
+                        "anchor": {
+                            "b": false,
+                            "l": true,
+                            "r": false,
+                            "t": true
+                        },
+                        "file": "data/ui/icons/weaponry_exotic.png",
+                        "position": {
+                            "x": 4.0,
+                            "y": 84.0
+                        },
+                        "size": {
+                            "h": 24.0,
+                            "w": 24.0
+                        }
+                    }
+                },
+                "Exotic text": {
+                    "properties": {
+                        "anchor": {
+                            "b": false,
+                            "l": true,
+                            "r": false,
+                            "t": true
+                        },
+                        "colour": {
+                            "a": 1.0,
+                            "b": 1.0,
+                            "g": 1.0,
+                            "r": 1.0
+                        },
+                        "font": "kimberley18light.fnt",
+                        "label": "Exotic",
+                        "line_spacing": 1.399999976158142,
+                        "multiline": false,
+                        "position": {
+                            "x": 34.0,
+                            "y": 86.0
+                        },
+                        "size": {
+                            "h": 24.0,
+                            "w": 128.0
+                        }
+                    }
+                },
+                "Exotic value": {
+                    "properties": {
+                        "alignment": "right",
+                        "anchor": {
+                            "b": false,
+                            "l": true,
+                            "r": false,
+                            "t": true
+                        },
+                        "colour": {
+                            "a": 1.0,
+                            "b": 1.0,
+                            "g": 1.0,
+                            "r": 1.0
+                        },
+                        "font": "kimberley18light.fnt",
+                        "label": "???",
+                        "line_spacing": 1.399999976158142,
+                        "multiline": false,
+                        "position": {
+                            "x": 100.0,
+                            "y": 86.0
+                        },
+                        "size": {
+                            "h": 24.0,
+                            "w": 160.0
+                        }
+                    }
+                },
+                "Kinetic icon": {
+                    "properties": {
+                        "anchor": {
+                            "b": false,
+                            "l": true,
+                            "r": false,
+                            "t": true
+                        },
+                        "file": "data/ui/icons/weaponry_kinetic.png",
+                        "position": {
+                            "x": 4.0,
+                            "y": 28.0
+                        },
+                        "size": {
+                            "h": 24.0,
+                            "w": 24.0
+                        }
+                    }
+                },
+                "Kinetic text": {
+                    "properties": {
+                        "anchor": {
+                            "b": false,
+                            "l": true,
+                            "r": false,
+                            "t": true
+                        },
+                        "colour": {
+                            "a": 1.0,
+                            "b": 1.0,
+                            "g": 1.0,
+                            "r": 1.0
+                        },
+                        "font": "kimberley18light.fnt",
+                        "label": "Kinetic",
+                        "line_spacing": 1.399999976158142,
+                        "multiline": false,
+                        "position": {
+                            "x": 34.0,
+                            "y": 30.0
+                        },
+                        "size": {
+                            "h": 24.0,
+                            "w": 128.0
+                        }
+                    }
+                },
+                "Kinetic value": {
+                    "properties": {
+                        "alignment": "right",
+                        "anchor": {
+                            "b": false,
+                            "l": true,
+                            "r": false,
+                            "t": true
+                        },
+                        "colour": {
+                            "a": 1.0,
+                            "b": 1.0,
+                            "g": 1.0,
+                            "r": 1.0
+                        },
+                        "font": "kimberley18light.fnt",
+                        "label": "180 DPS",
+                        "line_spacing": 1.399999976158142,
+                        "multiline": false,
+                        "position": {
+                            "x": 100.0,
+                            "y": 30.0
+                        },
+                        "size": {
+                            "h": 24.0,
+                            "w": 160.0
+                        }
+                    }
+                },
                 "Weapons subtitle": {
                     "properties": {
                         "anchor": {
@@ -285,7 +513,7 @@
                             "y": 4.0
                         },
                         "size": {
-                            "h": 128.0,
+                            "h": 24.0,
                             "w": 256.0
                         }
                     }
@@ -308,8 +536,8 @@
                         "y": 8.0
                     },
                     "size": {
-                        "h": 128.0,
-                        "w": 334.0
+                        "h": 116.0,
+                        "w": 270.0
                     }
                 }
             },
@@ -332,7 +560,7 @@
                 },
                 "size": {
                     "h": 568.0,
-                    "w": 350.0
+                    "w": 286.0
                 }
             }
         },
@@ -383,7 +611,7 @@
                     },
                     "size": {
                         "h": 32.0,
-                        "w": 350.0
+                        "w": 286.0
                     }
                 }
             },
@@ -406,7 +634,7 @@
                 },
                 "size": {
                     "h": 32.0,
-                    "w": 350.0
+                    "w": 286.0
                 }
             }
         },
@@ -425,7 +653,7 @@
             },
             "size": {
                 "h": 600.0,
-                "w": 350.0
+                "w": 286.0
             }
         }
     }
