@@ -33,6 +33,7 @@ static const char* sTextPropertyLabel = "label";
 static const char* sTextPropertyFont = "font";
 static const char* sTextPropertyLineSpacing = "line_spacing";
 static const char* sTextPropertyColour = "colour";
+static const char* sTextPropertyAlignment = "alignment";
 
 Text::Text( const std::string& name )
     : Element( name )
@@ -40,6 +41,7 @@ Text::Text( const std::string& name )
     , m_pText( nullptr )
     , m_Label( "???" )
     , m_Colour( { 1.0f, 1.0f, 1.0f, 1.0f } )
+    , m_Alignment( Alignment::Left )
 {
     m_pText = new Genesis::Gui::Text();
     m_pText->SetSize( 256.0f, 16.0f );
@@ -69,6 +71,15 @@ void Text::SaveProperties( json& properties )
         { "b", m_Colour[ 2 ] },
         { "a", m_Colour[ 3 ] }
     };
+    
+    if ( m_Alignment == Alignment::Right )
+    {
+        properties[ sTextPropertyAlignment ] = "right";
+    }
+    else if ( m_Alignment == Alignment::Center )
+    {
+        properties[ sTextPropertyAlignment ] = "center";
+    }
 }
 
 void Text::LoadProperties( const json& properties )
@@ -115,6 +126,23 @@ void Text::LoadProperties( const json& properties )
         m_Colour[ 3 ] = colour[ "a" ].get<float>();
         m_pText->SetColour( m_Colour[ 0 ], m_Colour[ 1 ], m_Colour[ 2 ], m_Colour[ 3 ] );
     }
+
+    if ( properties.contains( sTextPropertyAlignment ) )
+    {
+        const std::string alignment = properties[ sTextPropertyAlignment ].get<std::string>();
+        if ( alignment == "right" )
+        {
+            SetAlignment( Alignment::Right );
+        }
+        else if ( alignment == "center" )
+        {
+            SetAlignment( Alignment::Center );
+        }
+        else
+        {
+            SetAlignment( Alignment::Left );
+        }
+    }
 }
 
 void Text::RenderProperties()
@@ -151,6 +179,12 @@ void Text::RenderProperties()
         }
         m_pText->SetText( m_Label );
 
+        int alignment = static_cast<int>( m_Alignment );
+        if ( ImGui::Combo("Alignment", &alignment, "Left\0Right\0Center\0\0") )
+        {
+            SetAlignment( static_cast<Alignment>( alignment ) );
+        }
+
         float lineSpacing = m_pText->GetLineSpacing();
         ImGui::InputFloat( "Line spacing", &lineSpacing );
         m_pText->SetLineSpacing( lineSpacing );
@@ -181,18 +215,47 @@ void Text::SetFont( const std::string& fontName )
     else
     {
         m_pText->SetFont( pFont );
+        RealignText();
     }
 }
 
 void Text::SetText( const std::string& text )
 {
     m_pText->SetText( text );
+    RealignText();
 }
 
 void Text::SetSize( int width, int height )
 {
     Element::SetSize( width, height );
     m_pText->SetSize( width, height );
+}
+
+void Text::SetAlignment( Alignment alignment )
+{
+    m_Alignment = alignment;
+    RealignText();
+}
+
+void Text::RealignText()
+{
+    if ( m_Alignment == Alignment::Left )
+    {
+        m_pText->SetPosition( 0, 0 );
+    }
+    else
+    {
+        const int textWidth = static_cast<int>( m_pText->GetFont()->GetTextLength( m_pText->GetText() ) );
+
+        if ( m_Alignment == Alignment::Right )
+        {
+            m_pText->SetPosition( GetWidth() - textWidth, 0 );
+        }
+        else if ( m_Alignment == Alignment::Center )
+        {
+            m_pText->SetPosition( ( GetWidth() - textWidth ) / 2, 0 );
+        }
+    }
 }
 
 } // namespace Hexterminate::UI

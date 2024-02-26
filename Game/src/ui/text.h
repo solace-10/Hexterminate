@@ -33,6 +33,14 @@ namespace Hexterminate::UI
 class Text : public Element
 {
 public:
+
+    enum class Alignment
+    {
+        Left,
+        Right,
+        Center
+    };
+
     Text( const std::string& name );
     virtual ~Text() override;
 
@@ -42,15 +50,19 @@ public:
     void SetColour( float r, float g, float b, float a );
     void SetFont( const std::string& font );
     void SetText( const std::string& text );
+    void SetAlignment( Alignment alignment );
 
 protected:
     virtual void SaveProperties( json& properties ) override;
     virtual void LoadProperties( const json& properties ) override;
 
+    void RealignText();
+
     bool m_Multiline;
     Genesis::Gui::Text* m_pText;
     std::string m_Label;
     std::array<float, 4> m_Colour;
+    Alignment m_Alignment;
 };
 
 } // namespace Hexterminate::UI
