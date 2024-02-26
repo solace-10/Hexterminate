@@ -106,6 +106,16 @@ void Editor::UpdateDebugUI()
 
         ImGui::EndChild();
         ImGui::End();
+
+        UI::ElementSharedPtr pHighlightedElement = m_pSelectedElement.lock();
+        if ( pHighlightedElement )
+        {
+            Genesis::FrameWork::GetGuiManager()->SetHighlightedElement( pHighlightedElement->GetPanel() );
+        }
+    }
+    else
+    {
+        Genesis::FrameWork::GetGuiManager()->SetHighlightedElement( nullptr );
     }
 }
 
@@ -126,7 +136,6 @@ void Editor::RenderHierarchy( ElementSharedPtr pElement )
         if ( ImGui::IsItemClicked() )
         {
             m_pSelectedElement = pElement;
-            Genesis::FrameWork::GetGuiManager()->SetHighlightedElement( pElement->GetPanel() );
         }
     }
     else
@@ -136,7 +145,6 @@ void Editor::RenderHierarchy( ElementSharedPtr pElement )
         if ( ImGui::IsItemClicked() )
         {
             m_pSelectedElement = pElement;
-            Genesis::FrameWork::GetGuiManager()->SetHighlightedElement( pElement->GetPanel() );
         }
 
         if ( nodeOpen )
