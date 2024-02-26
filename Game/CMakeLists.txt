@@ -99,6 +99,7 @@ if (CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
           -Wall 
           -Werror
           -Wno-reorder-ctor
+          -Wno-unused-variable
           -fstandalone-debug
      )
 elseif (CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
@@ -106,6 +107,7 @@ elseif (CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
           -Wall 
           -Werror
           -Wno-reorder-ctor
+          -Wno-unused-variable
      )
 elseif (CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
      target_compile_options(Game PRIVATE
