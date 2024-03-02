@@ -283,7 +283,7 @@ void Shipyard::UpdateInput()
         {
             ModuleInfo* pModuleInfo = pModule->GetModuleInfo();
             m_pDockedShip->RemoveModule( m_SelectedX, m_SelectedY );
-            m_pPanelShipStats->OnShipConfigurationChanged();
+            OnShipConfigurationChanged();
             g_pGame->GetPlayer()->GetInventory()->AddModule( pModuleInfo->GetName() );
             m_pPanel->UpdateModule( pModuleInfo );
             PlaySFX( m_pDisassemblySFX );
@@ -297,7 +297,7 @@ void Shipyard::UpdateInput()
         {
             SetGrabbedModule( pModule->GetModuleInfo() );
             m_pDockedShip->RemoveModule( m_SelectedX, m_SelectedY );
-            m_pPanelShipStats->OnShipConfigurationChanged();
+            OnShipConfigurationChanged();
             PlaySFX( m_pDisassemblySFX );
         }
     }
@@ -309,14 +309,14 @@ void Shipyard::UpdateInput()
             Module* pModule = m_pDockedShip->AddModule( GetGrabbedModule(), m_SelectedX, m_SelectedY );
             if ( pModule != nullptr )
             {
-                m_pPanelShipStats->OnShipConfigurationChanged();
+                OnShipConfigurationChanged();
                 PlaySFX( m_pAssemblySFX );
                 pModule->TriggerAssemblyEffect();
             }
         }
         else
         {
-            m_pPanelShipStats->OnShipConfigurationChanged();
+            OnShipConfigurationChanged();
             g_pGame->GetPlayer()->GetInventory()->AddModule( GetGrabbedModule()->GetName() );
         }
         SetGrabbedModule( nullptr );
@@ -325,7 +325,7 @@ void Shipyard::UpdateInput()
     else if ( !pressed && GetGrabbedModule() != nullptr )
     {
         g_pGame->GetPlayer()->GetInventory()->AddModule( GetGrabbedModule()->GetName() );
-        m_pPanelShipStats->OnShipConfigurationChanged();
+        OnShipConfigurationChanged();
         SetGrabbedModule( nullptr );
     }
     // Player is holding a module
@@ -621,6 +621,12 @@ void Shipyard::SetModuleDetails( ModuleInfo* pModuleInfo )
     m_pModuleDetails->SetModuleInfo( pModuleInfo );
 }
 
+void Shipyard::OnShipConfigurationChanged()
+{
+    m_pPanelShipStats->OnShipConfigurationChanged();
+    m_pShipStatsWindow->OnShipConfigurationChanged();
+}
+
 #ifdef _DEBUG
 
 void Shipyard::LoadFromFile( const std::string& filename )
@@ -658,7 +664,7 @@ void Shipyard::LoadFromFile( const std::string& filename )
         }
         fs.close();
 
-        m_pPanelShipStats->OnShipConfigurationChanged();
+        OnShipConfigurationChanged();
     }
     else
     {

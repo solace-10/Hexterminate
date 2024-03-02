@@ -85,6 +85,7 @@ private:
     void StoreHexGrid();
 
     void ProvideContextualTip();
+    void OnShipConfigurationChanged();
 
     void LoadSFX();
     void PlaySFX( Genesis::ResourceSound* pSFX );

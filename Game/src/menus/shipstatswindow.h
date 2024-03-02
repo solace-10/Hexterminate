@@ -17,6 +17,7 @@
 
 #pragma once
 
+#include "ship/moduleinfo.h"
 #include "ui/types.fwd.h"
 #include "ui/window.h"
 
@@ -34,28 +35,55 @@ public:
     virtual ~ShipStatsWindow();
     virtual void Show( bool state ) override;
 
+    void OnShipConfigurationChanged();
+
 private:
-    void AddSection( const std::string& baseName, UI::PanelSharedPtr& pPanel, UI::TextSharedPtr& pSubtitle );
-    void AddEntry( UI::PanelSharedPtr pParentPanel, const std::string& baseName, UI::IconSharedPtr& pIcon, UI::TextSharedPtr& pText, UI::TextSharedPtr& pValue );
+    struct Section
+    {
+        UI::PanelSharedPtr pPanel;
+        UI::TextSharedPtr pSubtitle;    
+    };
 
-    UI::PanelSharedPtr m_pWeaponsPanel;
-    UI::TextSharedPtr m_pWeaponsSubtitle;
-    UI::PanelSharedPtr m_pShieldsPanel;
-    UI::TextSharedPtr m_pShieldsSubtitle;
-    UI::PanelSharedPtr m_pCapacitorPanel;
-    UI::TextSharedPtr m_pCapacitorSubtitle;
-    UI::PanelSharedPtr m_pEnergyMatrixPanel;
-    UI::TextSharedPtr m_pEnergyMatrixSubtitle;
+    struct Entry
+    {
+        UI::IconSharedPtr pIcon;
+        UI::TextSharedPtr pText;
+        UI::TextSharedPtr pValue;
+    };
 
-    UI::IconSharedPtr m_pWeaponryKineticIcon;
-    UI::TextSharedPtr m_pWeaponryKineticText;
-    UI::TextSharedPtr m_pWeaponryKineticValue;
-    UI::IconSharedPtr m_pWeaponryEnergyIcon;
-    UI::TextSharedPtr m_pWeaponryEnergyText;
-    UI::TextSharedPtr m_pWeaponryEnergyValue;
-    UI::IconSharedPtr m_pWeaponryExoticIcon;
-    UI::TextSharedPtr m_pWeaponryExoticText;
-    UI::TextSharedPtr m_pWeaponryExoticValue;
+    void AddSection( const std::string& baseName, Section& section );
+    void AddEntry( Section& section, const std::string& baseName, Entry& entry );
+
+    void UpdateWeaponryStats();
+    void UpdateShieldStats();
+    void UpdateCapacitorStats();
+    void UpdateEnergyGridStats();
+    void UpdateNavigationStats();
+    float CalculateBonusMultiplier( TowerBonus towerBonus ) const;
+
+    Section m_Weaponry;
+    Entry m_WeaponryKinetic;
+    Entry m_WeaponryEnergy;
+    Entry m_WeaponryExotic;
+    
+    Section m_Shields;
+    Entry m_ShieldsCapacity;
+    Entry m_ShieldsRecharge;
+    Entry m_ShieldsEfficiency;
+
+    Section m_Capacitor;
+    Entry m_CapacitorCapacity;
+    Entry m_CapacitorRecharge;
+    Entry m_CapacitorWeapons;
+    Entry m_CapacitorAddons;
+
+    Section m_Grid;
+    Entry m_GridUsed;
+    Entry m_GridAvailable;
+
+    Section m_Navigation;
+    Entry m_NavigationLinear;
+    Entry m_NavigationAngular;
 };
 
 } // namespace Hexterminate
