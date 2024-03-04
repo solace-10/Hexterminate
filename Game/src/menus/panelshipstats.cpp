@@ -62,15 +62,15 @@ PanelShipStats::PanelShipStats()
 
     m_pMainPanel = new Genesis::Gui::Panel();
     m_pMainPanel->SetPosition( screenWidth - panelWidth - outerBorder, outerBorder );
-    m_pMainPanel->SetColour( 0.0f, 0.0f, 0.0f, 0.25f );
-    m_pMainPanel->SetBorderColour( 1.0f, 1.0f, 1.0f, 0.25f );
+    m_pMainPanel->SetColor( 0.0f, 0.0f, 0.0f, 0.25f );
+    m_pMainPanel->SetBorderColor( 1.0f, 1.0f, 1.0f, 0.25f );
     m_pMainPanel->SetBorderMode( Genesis::Gui::PANEL_BORDER_ALL );
     pGuiManager->AddElement( m_pMainPanel );
 
     m_pTitle = new Genesis::Gui::Text();
     m_pTitle->SetSize( 256.0f, 16.0f );
     m_pTitle->SetPosition( innerBorder, innerBorder );
-    m_pTitle->SetColour( EVA_TEXT_COLOUR );
+    m_pTitle->SetColor( EVA_TEXT_COLOR );
     m_pTitle->SetFont( EVA_FONT );
     m_pTitle->SetText( "Shipyard > Overview" );
     m_pMainPanel->AddElement( m_pTitle );
@@ -325,8 +325,8 @@ void PanelShipStats::UpdateReactorStats()
     m_pGridAvailableRow->Set( 1, ToString( floor( m_PowerGrid - m_PowerGridUsage ) ) + "u" );
 
     Genesis::Color clr = ( m_PowerGrid >= m_PowerGridUsage ) ? Genesis::Color( 1.0f, 1.0f, 1.0f ) : Genesis::Color( 1.0f, 0.0f, 0.0f );
-    m_pGridUsedRow->SetColour( clr );
-    m_pGridAvailableRow->SetColour( clr );
+    m_pGridUsedRow->SetColor( clr );
+    m_pGridAvailableRow->SetColor( clr );
 }
 
 float PanelShipStats::CalculateBonusMultiplier( TowerBonus towerBonus ) const

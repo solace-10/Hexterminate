@@ -31,12 +31,12 @@ public:
     Meter();
     void Init( int initialValue, int maxValue );
     void SetValue( int value );
-    void SetPipColour( const Genesis::Color& colour );
-    void SetPipColour( float r, float g, float b, float a );
+    void SetPipColor( const Genesis::Color& color );
+    void SetPipColor( float r, float g, float b, float a );
 
 protected:
     PanelVector m_Panels;
-    Genesis::Color m_PipColour;
+    Genesis::Color m_PipColor;
 };
 
 } // namespace Hexterminate

@@ -2,7 +2,7 @@
 
 in vec2 UV;
 
-out vec4 colour;
+out vec4 color;
 
 uniform float k_time = 0;
 
@@ -14,5 +14,5 @@ float rand( vec2 co )
 void main()
 {
 	float ns = rand( vec2( UV.x + k_time, UV.y + k_time ) ) / 2 + 0.1;
-	colour = vec4( ns, 0.0, 0.0, 1.0 );
+	color = vec4( ns, 0.0, 0.0, 1.0 );
 }

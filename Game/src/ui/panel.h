@@ -28,9 +28,9 @@ public:
     Panel( const std::string& name );
 
     virtual void RenderProperties() override;
-    void SetColour( float r, float g, float b, float a );
+    void SetColor( float r, float g, float b, float a );
     void SetBorders( bool left, bool right, bool top, bool bottom );
-    void SetBorderColour( float r, float g, float b, float a );
+    void SetBorderColor( float r, float g, float b, float a );
 
 protected:
     virtual void SaveProperties( json& properties ) override;

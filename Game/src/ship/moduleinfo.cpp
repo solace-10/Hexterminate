@@ -38,7 +38,7 @@ namespace Hexterminate
 // Misc functions
 ///////////////////////////////////////////////////////////////////////////////
 
-Genesis::Color ModuleRarityToColour( ModuleRarity rarity )
+Genesis::Color ModuleRarityToColor( ModuleRarity rarity )
 {
     using Genesis::Color;
 
@@ -195,7 +195,7 @@ ModuleInfo::ModuleInfo( tinyxml2::XMLElement* pModuleElement )
     , m_Model( "" )
     , m_Health( BaseModuleHealth )
     , m_Rarity( ModuleRarity::Common )
-    , m_OverlayColour( 0.0f, 0.0f, 0.0f, 0.0f )
+    , m_OverlayColor( 0.0f, 0.0f, 0.0f, 0.0f )
     , m_PowerGrid( 0.0f )
 {
     using namespace Genesis;
@@ -211,7 +211,7 @@ ModuleInfo::ModuleInfo( tinyxml2::XMLElement* pModuleElement )
         Xml::Serialise( pElement, "Model", m_Model );
         Xml::Serialise( pElement, "ExtraHealth", extraHealth );
         Xml::Serialise( pElement, "Rarity", m_Rarity );
-        Xml::Serialise( pElement, "OverlayColour", m_OverlayColour );
+        Xml::Serialise( pElement, "OverlayColor", m_OverlayColor );
         Xml::Serialise( pElement, "ContextualTip", m_ContextualTip );
         Xml::Serialise( pElement, "PowerGrid", m_PowerGrid );
     }
@@ -225,11 +225,11 @@ ModuleInfo::ModuleInfo( tinyxml2::XMLElement* pModuleElement )
 
     m_Health += extraHealth;
 
-    // If we are using an overlay colour, we bump the intensity fractionally to make
+    // If we are using an overlay color, we bump the intensity fractionally to make
     // the pattern more dynamic.
-    if ( m_OverlayColour.a > 0.0f && m_OverlayColour.a <= 0.9f )
+    if ( m_OverlayColor.a > 0.0f && m_OverlayColor.a <= 0.9f )
     {
-        m_OverlayColour.a += gRand( 0.0f, 0.1f );
+        m_OverlayColor.a += gRand( 0.0f, 0.1f );
     }
 
     SDL_assert_release( m_Name != "" );
@@ -481,16 +481,16 @@ WeaponInfo::WeaponInfo( tinyxml2::XMLElement* pModuleElement )
         Xml::Serialise( pElement, "Swarm", m_IsSwarm );
         Xml::Serialise( pElement, "BeamWidth", m_BeamWidth );
         Xml::Serialise( pElement, "BeamLifetime", m_BeamLifetime );
-        Xml::Serialise( pElement, "BeamColourR", m_BeamColour.r );
-        Xml::Serialise( pElement, "BeamColourG", m_BeamColour.g );
-        Xml::Serialise( pElement, "BeamColourB", m_BeamColour.b );
+        Xml::Serialise( pElement, "BeamColorR", m_BeamColor.r );
+        Xml::Serialise( pElement, "BeamColorG", m_BeamColor.g );
+        Xml::Serialise( pElement, "BeamColorB", m_BeamColor.b );
         Xml::Serialise( pElement, "OnFireSFX", onFireSFX );
         Xml::Serialise( pElement, "OnHitSFX", onHitSFX );
         Xml::Serialise( pElement, "OnHitSFXDistance", m_OnHitSFXDistance );
         Xml::Serialise( pElement, "MuzzleflashScale", m_MuzzleflashScale );
-        Xml::Serialise( pElement, "MuzzleflashColourR", m_MuzzleflashColour.r );
-        Xml::Serialise( pElement, "MuzzleflashColourG", m_MuzzleflashColour.g );
-        Xml::Serialise( pElement, "MuzzleflashColourB", m_MuzzleflashColour.b );
+        Xml::Serialise( pElement, "MuzzleflashColorR", m_MuzzleflashColor.r );
+        Xml::Serialise( pElement, "MuzzleflashColorG", m_MuzzleflashColor.g );
+        Xml::Serialise( pElement, "MuzzleflashColorB", m_MuzzleflashColor.b );
 
         if ( strcmp( pElement->Value(), "System" ) == 0 )
         {
@@ -523,14 +523,14 @@ WeaponInfo::WeaponInfo( tinyxml2::XMLElement* pModuleElement )
     SDL_assert_release( m_Range > 0.0f );
     SDL_assert_release( m_Tracking >= 0.0f );
     SDL_assert_release( m_BeamWidth > 0.0f );
-    SDL_assert_release( m_BeamColour.r >= 0.0f && m_BeamColour.r <= 1.0f );
-    SDL_assert_release( m_BeamColour.g >= 0.0f && m_BeamColour.g <= 1.0f );
-    SDL_assert_release( m_BeamColour.b >= 0.0f && m_BeamColour.b <= 1.0f );
+    SDL_assert_release( m_BeamColor.r >= 0.0f && m_BeamColor.r <= 1.0f );
+    SDL_assert_release( m_BeamColor.g >= 0.0f && m_BeamColor.g <= 1.0f );
+    SDL_assert_release( m_BeamColor.b >= 0.0f && m_BeamColor.b <= 1.0f );
     SDL_assert_release( m_OnHitSFXDistance > 0.0f );
     SDL_assert_release( m_MuzzleflashScale > 0.0f );
-    SDL_assert_release( m_MuzzleflashColour.r >= 0.0f && m_MuzzleflashColour.r <= 1.0f );
-    SDL_assert_release( m_MuzzleflashColour.g >= 0.0f && m_MuzzleflashColour.g <= 1.0f );
-    SDL_assert_release( m_MuzzleflashColour.b >= 0.0f && m_MuzzleflashColour.b <= 1.0f );
+    SDL_assert_release( m_MuzzleflashColor.r >= 0.0f && m_MuzzleflashColor.r <= 1.0f );
+    SDL_assert_release( m_MuzzleflashColor.g >= 0.0f && m_MuzzleflashColor.g <= 1.0f );
+    SDL_assert_release( m_MuzzleflashColor.b >= 0.0f && m_MuzzleflashColor.b <= 1.0f );
 
     m_pOnFireSFX = Genesis::ResourceSound::LoadAs3D( onFireSFX );
     m_pOnHitSFX = Genesis::ResourceSound::LoadAs3D( onHitSFX );

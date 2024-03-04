@@ -81,8 +81,8 @@ TutorialWindow::TutorialWindow()
 
     m_pMainPanel = new Gui::Panel();
     m_pMainPanel->SetSize( panelWidth, panelHeight );
-    m_pMainPanel->SetColour( EVA_COLOUR_BACKGROUND );
-    m_pMainPanel->SetBorderColour( EVA_COLOUR_BORDER );
+    m_pMainPanel->SetColor( EVA_COLOR_BACKGROUND );
+    m_pMainPanel->SetBorderColor( EVA_COLOR_BORDER );
     m_pMainPanel->SetBorderMode( Gui::PANEL_BORDER_NONE );
     m_pMainPanel->SetPosition( floor( ( Configuration::GetScreenWidth() - panelWidth ) / 2.0f ), 26.0f );
     m_pMainPanel->SetDepth( 100 );
@@ -93,7 +93,7 @@ TutorialWindow::TutorialWindow()
     m_pIcon->SetPosition( 4.0f, 4.0f );
     m_pIcon->SetSize( 131.0f, 160.0f );
     m_pIcon->SetTexture( nullptr );
-    m_pIcon->SetColour( 1.0f, 1.0f, 1.0f, 1.0f );
+    m_pIcon->SetColor( 1.0f, 1.0f, 1.0f, 1.0f );
     m_pIcon->SetTexture( (ResourceImage*)pRm->GetResource( "data/ui/portraits/FleetIntelligenceOfficer.jpg" ) );
     m_pIcon->SetShader( FrameWork::GetRenderSystem()->GetShaderCache()->Load( "gui_portrait" ) );
     m_pMainPanel->AddElement( m_pIcon );
@@ -101,7 +101,7 @@ TutorialWindow::TutorialWindow()
     m_pTitle = new Gui::Text();
     m_pTitle->SetSize( panelWidth, panelHeight );
     m_pTitle->SetPosition( 139.0f, 8.0f );
-    m_pTitle->SetColour( Genesis::Color( 1.0f, 1.0f, 1.0f, 1.0f ) );
+    m_pTitle->SetColor( Genesis::Color( 1.0f, 1.0f, 1.0f, 1.0f ) );
     m_pTitle->SetFont( EVA_FONT_BOLD );
     m_pTitle->SetText( "Fleet Intelligence Officer" );
     m_pMainPanel->AddElement( m_pTitle );
@@ -109,7 +109,7 @@ TutorialWindow::TutorialWindow()
     m_pContent = new Gui::Text();
     m_pContent->SetSize( panelWidth - 139.0f, panelHeight - 28.0f );
     m_pContent->SetPosition( 139.0f, 40.0f );
-    m_pContent->SetColour( Genesis::Color( 0.85f, 0.85f, 0.85f, 1.0f ) );
+    m_pContent->SetColor( Genesis::Color( 0.85f, 0.85f, 0.85f, 1.0f ) );
     m_pContent->SetFont( EVA_FONT );
     m_pContent->SetText( "" );
     m_pMainPanel->AddElement( m_pContent );
@@ -117,9 +117,9 @@ TutorialWindow::TutorialWindow()
     m_pNextButton = new TutorialNextButton( this );
     m_pNextButton->SetPosition( 0.0f, 0.0f );
     m_pNextButton->SetSize( panelWidth, 32.0f );
-    m_pNextButton->SetColour( Genesis::Color( 1.0f, 1.0f, 1.0f, 0.05f ) );
-    m_pNextButton->SetHoverColour( EVA_BUTTON_COLOUR_HOVER );
-    m_pNextButton->SetBorderColour( EVA_BUTTON_COLOUR_BORDER );
+    m_pNextButton->SetColor( Genesis::Color( 1.0f, 1.0f, 1.0f, 0.05f ) );
+    m_pNextButton->SetHoverColor( EVA_BUTTON_COLOR_HOVER );
+    m_pNextButton->SetBorderColor( EVA_BUTTON_COLOR_BORDER );
     m_pNextButton->SetBorderMode( Genesis::Gui::PANEL_BORDER_NONE );
     m_pNextButton->SetFont( EVA_FONT );
     m_pNextButton->SetText( "Click to continue" );

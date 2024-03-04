@@ -51,20 +51,20 @@ namespace Gui
         m_pScrollbarBackground = new Panel();
         m_pScrollbarBackground->SetPosition( GetWidth() - scrollbarSize, scrollbarSize );
         m_pScrollbarBackground->SetSize( scrollbarSize, GetHeight() - scrollbarSize * 2 );
-        m_pScrollbarBackground->SetColour( 0.0f, 0.0f, 0.0f, 0.3f );
+        m_pScrollbarBackground->SetColor( 0.0f, 0.0f, 0.0f, 0.3f );
         GuiElement::AddElement( m_pScrollbarBackground );
 
         m_pScrollbar = new Panel();
         m_pScrollbar->SetPosition( GetWidth() - scrollbarSize, scrollbarSize );
         m_pScrollbar->SetSize( scrollbarSize, 64 );
-        m_pScrollbar->SetColour( 1.0f, 1.0f, 1.0f, 0.3f );
+        m_pScrollbar->SetColor( 1.0f, 1.0f, 1.0f, 0.3f );
         GuiElement::AddElement( m_pScrollbar );
 
         ResourceImage* pUpImage = (ResourceImage*)FrameWork::GetResourceManager()->GetResource( "data/ui/icons/arrowup.png" );
         m_pScrollUp = new Image();
         m_pScrollUp->SetPosition( GetWidth() - scrollbarSize, 0 );
         m_pScrollUp->SetSize( scrollbarSize, scrollbarSize );
-        m_pScrollUp->SetColour( 1.0f, 1.0f, 1.0f, 1.0f );
+        m_pScrollUp->SetColor( 1.0f, 1.0f, 1.0f, 1.0f );
         m_pScrollUp->SetTexture( pUpImage );
         GuiElement::AddElement( m_pScrollUp );
 
@@ -72,7 +72,7 @@ namespace Gui
         m_pScrollDown = new Image();
         m_pScrollDown->SetPosition( GetWidth() - scrollbarSize, GetHeight() - scrollbarSize );
         m_pScrollDown->SetSize( scrollbarSize, scrollbarSize );
-        m_pScrollDown->SetColour( 1.0f, 1.0f, 1.0f, 1.0f );
+        m_pScrollDown->SetColor( 1.0f, 1.0f, 1.0f, 1.0f );
         m_pScrollDown->SetTexture( pDownImage );
         GuiElement::AddElement( m_pScrollDown );
     }
@@ -136,7 +136,7 @@ namespace Gui
         const float scrollingSpeed = 160.0f;
 
         const bool insideScrollbar = IsMouseInside( m_pScrollbar );
-        m_pScrollbar->SetColour( 1.0f, 1.0f, 1.0f, ( m_GrabAndHold || insideScrollbar ) ? 0.6f : 0.3f );
+        m_pScrollbar->SetColor( 1.0f, 1.0f, 1.0f, ( m_GrabAndHold || insideScrollbar ) ? 0.6f : 0.3f );
 
         float offset = 0.0f;
         InputManager* pInputManager = FrameWork::GetInputManager();

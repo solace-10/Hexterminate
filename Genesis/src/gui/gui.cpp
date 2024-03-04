@@ -66,10 +66,10 @@ namespace Gui
     ///////////////////////////////////////////////////////////////////////////
 
     Shader* GuiManager::m_pUntexturedShader = nullptr;
-    ShaderUniform* GuiManager::m_pUntexturedColourUniform = nullptr;
+    ShaderUniform* GuiManager::m_pUntexturedColorUniform = nullptr;
     Shader* GuiManager::m_pTexturedShader = nullptr;
     ShaderUniform* GuiManager::m_pTexturedSamplerUniform = nullptr;
-    ShaderUniform* GuiManager::m_pTexturedColourUniform = nullptr;
+    ShaderUniform* GuiManager::m_pTexturedColorUniform = nullptr;
     Shader* GuiManager::m_pHighlightShader = nullptr;
 
     GuiManager::GuiManager()
@@ -93,9 +93,9 @@ namespace Gui
     {
         ShaderCache* pShaderCache = FrameWork::GetRenderSystem()->GetShaderCache();
         m_pUntexturedShader = pShaderCache->Load( "gui_untextured" );
-        m_pUntexturedColourUniform = m_pUntexturedShader->RegisterUniform( "k_colour", ShaderUniformType::FloatVector4 );
+        m_pUntexturedColorUniform = m_pUntexturedShader->RegisterUniform( "k_color", ShaderUniformType::FloatVector4 );
         m_pTexturedShader = pShaderCache->Load( "gui_textured" );
-        m_pTexturedColourUniform = m_pTexturedShader->RegisterUniform( "k_colour", ShaderUniformType::FloatVector4 );
+        m_pTexturedColorUniform = m_pTexturedShader->RegisterUniform( "k_color", ShaderUniformType::FloatVector4 );
         m_pTexturedSamplerUniform = m_pTexturedShader->RegisterUniform( "k_sampler0", ShaderUniformType::Texture );
         m_pHighlightShader = pShaderCache->Load( "gui_highlight" );
 
@@ -492,9 +492,9 @@ namespace Gui
     ///////////////////////////////////////////////////////////////////////////
 
     Panel::Panel()
-        : mColour( 1.0f, 1.0f, 1.0f, 1.0 )
-        , mBorderColour( 1.0f, 1.0f, 1.0f, 1.0f )
-        , mBorderMode( PANEL_BORDER_NONE )
+        : m_Color( 1.0f, 1.0f, 1.0f, 1.0 )
+        , m_BorderColor( 1.0f, 1.0f, 1.0f, 1.0f )
+        , m_BorderMode( PANEL_BORDER_NONE )
         , m_pBackgroundVertexBuffer( nullptr )
         , m_pBorderVertexBuffer( nullptr )
     {
@@ -510,12 +510,12 @@ namespace Gui
 
     void Panel::Render()
     {
-        if ( mColour.a > 0.001f )
+        if ( m_Color.a > 0.001f )
         {
             const glm::vec2 pos = GetPositionAbsolute();
             m_pBackgroundVertexBuffer->CreateUntexturedQuad( pos.x, pos.y, mSize.x, mSize.y );
-            glm::vec4 colour( mColour.r, mColour.g, mColour.b, mColour.a );
-            GuiManager::GetUntexturedShaderColourUniform()->Set( colour );
+            glm::vec4 color( m_Color.r, m_Color.g, m_Color.b, m_Color.a );
+            GuiManager::GetUntexturedShaderColorUniform()->Set( color );
             GuiManager::GetUntexturedShader()->Use();
             m_pBackgroundVertexBuffer->Draw();
         }
@@ -527,7 +527,7 @@ namespace Gui
 
     void Panel::DrawBorder()
     {
-        char borderMode = mBorderMode;
+        char borderMode = m_BorderMode;
         if ( borderMode == PANEL_BORDER_NONE )
         {
             return;
@@ -562,8 +562,8 @@ namespace Gui
         }
 
         m_pBorderVertexBuffer->CopyPositions( posData );
-        glm::vec4 colour( mBorderColour.r, mBorderColour.g, mBorderColour.b, mBorderColour.a );
-        GuiManager::GetUntexturedShaderColourUniform()->Set( glm::vec4( colour ) );
+        glm::vec4 color( m_BorderColor.r, m_BorderColor.g, m_BorderColor.b, m_BorderColor.a );
+        GuiManager::GetUntexturedShaderColorUniform()->Set( glm::vec4( color ) );
         GuiManager::GetUntexturedShader()->Use();
         m_pBorderVertexBuffer->Draw();
     }
@@ -575,7 +575,7 @@ namespace Gui
     Cursor::Cursor()
     {
         SetSize( 16, 16 );
-        SetColour( 1.0f, 1.0f, 1.0f, 1.0f );
+        SetColor( 1.0f, 1.0f, 1.0f, 1.0f );
         SetBorderMode( PANEL_BORDER_NONE );
         SetHiddenForCapture( true );
 
@@ -615,7 +615,7 @@ namespace Gui
         : m_pImage( nullptr )
         , m_pImageVertexBuffer( nullptr )
         , m_pOverrideShader( nullptr )
-        , m_pOverrideShaderColourUniform( nullptr )
+        , m_pOverrideShaderColorUniform( nullptr )
         , m_pOverrideShaderSamplerUniform( nullptr )
     {
         m_pImageVertexBuffer = new VertexBuffer( GeometryType::Triangle, VBO_POSITION | VBO_UV );
@@ -633,9 +633,9 @@ namespace Gui
 
         if ( m_pOverrideShader != nullptr )
         {
-            if ( m_pOverrideShaderColourUniform != nullptr )
+            if ( m_pOverrideShaderColorUniform != nullptr )
             {
-                m_pOverrideShaderColourUniform->Set( mColour.glm() );
+                m_pOverrideShaderColorUniform->Set( m_Color.glm() );
             }
 
             if ( m_pOverrideShaderSamplerUniform != nullptr && m_pImage != nullptr )
@@ -647,7 +647,7 @@ namespace Gui
         }
         else
         {
-            GuiManager::GetTexturedShaderColourUniform()->Set( mColour.glm() );
+            GuiManager::GetTexturedShaderColorUniform()->Set( m_Color.glm() );
 
             if ( m_pImage != nullptr )
             {
@@ -670,12 +670,12 @@ namespace Gui
 
         if ( m_pOverrideShader != nullptr )
         {
-            m_pOverrideShaderColourUniform = m_pOverrideShader->RegisterUniform( "k_colour", ShaderUniformType::FloatVector4 );
+            m_pOverrideShaderColorUniform = m_pOverrideShader->RegisterUniform( "k_color", ShaderUniformType::FloatVector4 );
             m_pOverrideShaderSamplerUniform = m_pOverrideShader->RegisterUniform( "k_sampler0", ShaderUniformType::Texture );
         }
         else
         {
-            m_pOverrideShaderColourUniform = nullptr;
+            m_pOverrideShaderColorUniform = nullptr;
             m_pOverrideShaderSamplerUniform = nullptr;
         }
     }
@@ -721,7 +721,7 @@ namespace Gui
         , m_pFont( nullptr )
         , m_Text( "" )
         , m_ProcessedText( "" )
-        , m_Colour( 1.0f, 1.0f, 1.0f, 1.0f )
+        , m_Color( 1.0f, 1.0f, 1.0f, 1.0f )
         , m_pVertexBuffer( nullptr )
         , m_LineSpacing( 1.0f )
     {
@@ -747,7 +747,7 @@ namespace Gui
 
         const glm::vec2& pos = GetPositionAbsolute();
         const unsigned int vertexCount = m_pFont->PopulateVertexBuffer( *m_pVertexBuffer, floorf( pos.x ), floorf( pos.y ), m_ProcessedText, m_LineSpacing );
-        GuiManager::GetTexturedShaderColourUniform()->Set( glm::vec4( m_Colour.r, m_Colour.g, m_Colour.b, m_Colour.a ) );
+        GuiManager::GetTexturedShaderColorUniform()->Set( glm::vec4( m_Color.r, m_Color.g, m_Color.b, m_Color.a ) );
         GuiManager::GetTexturedSamplerUniform()->Set( m_pFont->GetPage(), GL_TEXTURE0 );
         GuiManager::GetTexturedShader()->Use();
         m_pVertexBuffer->Draw( vertexCount );
@@ -839,9 +839,9 @@ namespace Gui
     ///////////////////////////////////////////////////////////////////////////
 
     Button::Button()
-        : mHoverColour( 1.0f, 1.0f, 1.0f, 1.0f )
-        , mIconColour( 1.0f, 1.0f, 1.0f, 1.0f )
-        , mIconHoverColour( 1.0f, 1.0f, 1.0f, 1.0f )
+        : m_HoverColor( 1.0f, 1.0f, 1.0f, 1.0f )
+        , m_IconColor( 1.0f, 1.0f, 1.0f, 1.0f )
+        , m_IconHoverColor( 1.0f, 1.0f, 1.0f, 1.0f )
         , mIsEnabled( true )
         , m_pIcon( nullptr )
         , m_pIconVertexBuffer( nullptr )
@@ -851,11 +851,11 @@ namespace Gui
 
         SetBorderMode( PANEL_BORDER_ALL );
 
-        mText = new Text();
-        mText->SetPosition( 0.0f, 0.0f );
-        mText->SetSize( 256.0f, 256.0f );
-        mText->SetMultiLine( false );
-        AddElement( mText );
+        m_pText = new Text();
+        m_pText->SetPosition( 0.0f, 0.0f );
+        m_pText->SetSize( 256.0f, 256.0f );
+        m_pText->SetMultiLine( false );
+        AddElement( m_pText );
     }
 
     Button::~Button()
@@ -872,7 +872,7 @@ namespace Gui
 
         if ( m_pIconVertexBuffer == nullptr )
         {
-            m_pIconVertexBuffer = new VertexBuffer( GeometryType::Triangle, VBO_POSITION | VBO_UV | VBO_COLOUR );
+            m_pIconVertexBuffer = new VertexBuffer( GeometryType::Triangle, VBO_POSITION | VBO_UV | VBO_COLOR );
         }
     }
 
@@ -881,15 +881,15 @@ namespace Gui
         const bool buttonHovered = IsMouseInside() && GetAcceptsInput();
 
         // The rectangle itself
-        glm::vec4 colour( mColour.r, mColour.g, mColour.b, mColour.a );
+        glm::vec4 color( m_Color.r, m_Color.g, m_Color.b, m_Color.a );
         if ( buttonHovered )
         {
-            colour = glm::vec4( mHoverColour.r, mHoverColour.g, mHoverColour.b, mHoverColour.a );
+            color = glm::vec4( m_HoverColor.r, m_HoverColor.g, m_HoverColor.b, m_HoverColor.a );
         }
 
         const glm::vec2 pos = GetPositionAbsolute();
         m_pBackgroundVertexBuffer->CreateUntexturedQuad( pos.x, pos.y, mSize.x, mSize.y );
-        GuiManager::GetUntexturedShaderColourUniform()->Set( colour );
+        GuiManager::GetUntexturedShaderColorUniform()->Set( color );
         GuiManager::GetUntexturedShader()->Use();
         m_pBackgroundVertexBuffer->Draw();
 
@@ -897,10 +897,10 @@ namespace Gui
         {
             const glm::vec2 iconSize( (float)m_pIcon->GetWidth(), (float)m_pIcon->GetHeight() );
             const glm::vec2 iconPos( pos.x + 2.0f, pos.y );
-            const glm::vec4 iconColour = buttonHovered ? mIconHoverColour.glm() : mIconColour.glm();
-            m_pIconVertexBuffer->CreateTexturedQuad( iconPos.x, iconPos.y, iconSize.x, iconSize.y, iconColour );
+            const glm::vec4 iconColor = buttonHovered ? m_IconHoverColor.glm() : m_IconColor.glm();
+            m_pIconVertexBuffer->CreateTexturedQuad( iconPos.x, iconPos.y, iconSize.x, iconSize.y, iconColor );
             GuiManager::GetTexturedSamplerUniform()->Set( m_pIcon, GL_TEXTURE0 );
-            GuiManager::GetTexturedShaderColourUniform()->Set( iconColour );
+            GuiManager::GetTexturedShaderColorUniform()->Set( iconColor );
             GuiManager::GetTexturedShader()->Use();
             m_pIconVertexBuffer->Draw();
         }
@@ -925,14 +925,14 @@ namespace Gui
 
     void Button::SetText( const std::string& text )
     {
-        const float textWidth = mText->GetFont()->GetTextLength( text );
+        const float textWidth = m_pText->GetFont()->GetTextLength( text );
         // Make sure the text always "fits" in the button
-        mText->SetSize( textWidth * 1.5f, 32.0f );
+        m_pText->SetSize( textWidth * 1.5f, 32.0f );
         // Center the text on the button - flooring coordinates to make sure we render correctly
         const float textPosX = floor( ( GetSize().x - textWidth ) * 0.5f );
-        const float textPosY = floor( ( GetSize().y - mText->GetFont()->GetLineHeight() ) * 0.5f + 0.5f );
-        mText->SetPosition( textPosX, textPosY );
-        mText->SetText( text );
+        const float textPosY = floor( ( GetSize().y - m_pText->GetFont()->GetLineHeight() ) * 0.5f + 0.5f );
+        m_pText->SetPosition( textPosX, textPosY );
+        m_pText->SetText( text );
     }
 
     void Button::OnMousePressedCallback()
@@ -959,7 +959,7 @@ namespace Gui
 
     Checkbox::Checkbox( int x, int y, ResourceFont* font, const std::string& text, bool checked /* = false */, CheckboxCallback pCallback /* = nullptr */ )
         : m_Checked( checked )
-        , m_BulletColour( 1.0f, 1.0f, 1.0f, 1.0f )
+        , m_BulletColor( 1.0f, 1.0f, 1.0f, 1.0f )
         , m_pCheckboxBulletVertexBuffer( nullptr )
         , m_pCheckboxBorderVertexBuffer( nullptr )
         , m_pCheckboxCallback( pCallback )
@@ -968,7 +968,7 @@ namespace Gui
         SetSize( 32.0f + font->GetTextLength( text ), std::max( font->GetLineHeight(), CheckboxSquareSize ) );
         SetFont( font );
         SetText( text );
-        mText->SetPosition( CheckboxSquareSize + 8.0f, 0.0f );
+        m_pText->SetPosition( CheckboxSquareSize + 8.0f, 0.0f );
 
         m_pCheckboxBulletVertexBuffer = new VertexBuffer( GeometryType::Triangle, VBO_POSITION );
         m_pCheckboxBorderVertexBuffer = new VertexBuffer( GeometryType::LineStrip, VBO_POSITION );
@@ -985,7 +985,7 @@ namespace Gui
         const glm::vec2& pos = GetPositionAbsolute();
 
         m_pBackgroundVertexBuffer->CreateUntexturedQuad( pos.x, pos.y, CheckboxSquareSize, CheckboxSquareSize );
-        GuiManager::GetUntexturedShaderColourUniform()->Set( glm::vec4( mColour.r, mColour.g, mColour.b, mColour.a ) );
+        GuiManager::GetUntexturedShaderColorUniform()->Set( glm::vec4( m_Color.r, m_Color.g, m_Color.b, m_Color.a ) );
         GuiManager::GetUntexturedShader()->Use();
         m_pBackgroundVertexBuffer->Draw();
 
@@ -994,7 +994,7 @@ namespace Gui
         {
             const float offset = 3.0f;
             m_pCheckboxBulletVertexBuffer->CreateUntexturedQuad( pos.x + offset, pos.y + offset, CheckboxSquareSize - offset * 2.0f, CheckboxSquareSize - offset * 2.0f - 1.0f );
-            GuiManager::GetUntexturedShaderColourUniform()->Set( glm::vec4( m_BulletColour.r, m_BulletColour.g, m_BulletColour.b, m_BulletColour.a ) );
+            GuiManager::GetUntexturedShaderColorUniform()->Set( glm::vec4( m_BulletColor.r, m_BulletColor.g, m_BulletColor.b, m_BulletColor.a ) );
             GuiManager::GetUntexturedShader()->Use();
             m_pCheckboxBulletVertexBuffer->Draw();
         }
@@ -1011,7 +1011,7 @@ namespace Gui
         m_pCheckboxBorderVertexBuffer->CopyPositions( posData );
 
         // m_pCheckboxBorderVertexBuffer->CreateUntexturedQuad( pos.x + offset, pos.y + offset, CheckboxSquareSize - offset * 2.0f, 8.0f );
-        GuiManager::GetUntexturedShaderColourUniform()->Set( glm::vec4( mBorderColour.r, mBorderColour.g, mBorderColour.b, mBorderColour.a ) );
+        GuiManager::GetUntexturedShaderColorUniform()->Set( glm::vec4( m_BorderColor.r, m_BorderColor.g, m_BorderColor.b, m_BorderColor.a ) );
         GuiManager::GetUntexturedShader()->Use();
         m_pCheckboxBorderVertexBuffer->Draw();
 
@@ -1041,14 +1041,14 @@ namespace Gui
     RadioButton::RadioButton( int x, int y, ResourceFont* font, const std::string& text, const std::string& group, bool checked /* = false */, RadioButtonCallback pCallback /* = nullptr */ )
         : m_Group( group )
         , m_Checked( checked )
-        , m_BulletColour( 1.0f, 1.0f, 1.0f, 1.0f )
+        , m_BulletColor( 1.0f, 1.0f, 1.0f, 1.0f )
         , m_pCallback( pCallback )
     {
         SetPosition( glm::vec2( x, y ) );
         SetSize( 32.0f + font->GetTextLength( text ), std::max( font->GetLineHeight(), RadioButtonSquareSize ) );
         SetFont( font );
         SetText( text );
-        mText->SetPosition( RadioButtonSquareSize + 8.0f, 0.0f );
+        m_pText->SetPosition( RadioButtonSquareSize + 8.0f, 0.0f );
 
         m_pRadioButtonBulletVertexBuffer = std::make_unique<VertexBuffer>( GeometryType::Triangle, VBO_POSITION );
         m_pRadioButtonBorderVertexBuffer = std::make_unique<VertexBuffer>( GeometryType::Line, VBO_POSITION );
@@ -1066,15 +1066,15 @@ namespace Gui
         const glm::vec2& pos = GetPositionAbsolute();
 
         m_pBackgroundVertexBuffer->CreateUntexturedQuad( pos.x, pos.y, RadioButtonSquareSize, RadioButtonSquareSize );
-        GuiManager::GetUntexturedShaderColourUniform()->Set( glm::vec4( mColour.r, mColour.g, mColour.b, mColour.a ) );
+        GuiManager::GetUntexturedShaderColorUniform()->Set( glm::vec4( m_Color.r, m_Color.g, m_Color.b, m_Color.a ) );
         GuiManager::GetUntexturedShader()->Use();
         m_pBackgroundVertexBuffer->Draw();
 
         // Bullet
         float offset = m_Checked ? 4.0f : 6.0f;
         m_pRadioButtonBulletVertexBuffer->CreateUntexturedQuad( pos.x + offset, pos.y + offset, RadioButtonSquareSize - offset * 2.0f, RadioButtonSquareSize - offset * 2.0f - 1.0f );
-        glm::vec4 colour = m_Checked ? glm::vec4( m_BulletColour.r, m_BulletColour.g, m_BulletColour.b, m_BulletColour.a ) : glm::vec4( 0.5f, 0.5f, 0.5f, 0.5f );
-        GuiManager::GetUntexturedShaderColourUniform()->Set( colour );
+        glm::vec4 color = m_Checked ? glm::vec4( m_BulletColor.r, m_BulletColor.g, m_BulletColor.b, m_BulletColor.a ) : glm::vec4( 0.5f, 0.5f, 0.5f, 0.5f );
+        GuiManager::GetUntexturedShaderColorUniform()->Set( color );
         GuiManager::GetUntexturedShader()->Use();
         m_pRadioButtonBulletVertexBuffer->Draw();
 
@@ -1093,7 +1093,7 @@ namespace Gui
 
         m_pRadioButtonBorderVertexBuffer->CopyPositions( posData );
 
-        GuiManager::GetUntexturedShaderColourUniform()->Set( glm::vec4( mBorderColour.r, mBorderColour.g, mBorderColour.b, mBorderColour.a ) );
+        GuiManager::GetUntexturedShaderColorUniform()->Set( glm::vec4( m_BorderColor.r, m_BorderColor.g, m_BorderColor.b, m_BorderColor.a ) );
         GuiManager::GetUntexturedShader()->Use();
         m_pRadioButtonBorderVertexBuffer->Draw();
 
@@ -1210,7 +1210,7 @@ namespace Gui
         , m_ShowCaret( false )
         , m_Filter( InputAreaFilter::ACCEPT_PRINTABLE )
     {
-        mText->SetPosition( 0.0f, 0.0f );
+        m_pText->SetPosition( 0.0f, 0.0f );
     }
 
     void InputArea::Update( float delta )
@@ -1256,7 +1256,7 @@ namespace Gui
         char c = ev.text[ 0 ];
 
         // Don't add anything else if we don't have enough space or if it is an invalid character
-        if ( m_Filter.Accepts( c ) && mText->GetFont()->GetTextLength( m_PrependText + m_SavedText + c ) < mText->GetSize().x )
+        if ( m_Filter.Accepts( c ) && m_pText->GetFont()->GetTextLength( m_PrependText + m_SavedText + c ) < m_pText->GetSize().x )
         {
             m_SavedText += c;
             UpdateText();
@@ -1304,13 +1304,13 @@ namespace Gui
 
     void InputArea::UpdateText()
     {
-        mText->SetSize( GetSize().x - 8.0f, mText->GetFont()->GetLineHeight() );
-        int yPos = (int)( ( GetSize().y - mText->GetFont()->GetLineHeight() ) * 0.5f + 0.5f );
-        mText->SetPosition( 8.0f, (float)yPos );
+        m_pText->SetSize( GetSize().x - 8.0f, m_pText->GetFont()->GetLineHeight() );
+        int yPos = (int)( ( GetSize().y - m_pText->GetFont()->GetLineHeight() ) * 0.5f + 0.5f );
+        m_pText->SetPosition( 8.0f, (float)yPos );
         if ( m_ShowCaret )
-            mText->SetText( m_PrependText + m_SavedText + '_' );
+            m_pText->SetText( m_PrependText + m_SavedText + '_' );
         else
-            mText->SetText( m_PrependText + m_SavedText );
+            m_pText->SetText( m_PrependText + m_SavedText );
     }
 
 } // namespace Gui

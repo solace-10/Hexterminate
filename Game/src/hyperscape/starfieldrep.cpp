@@ -46,7 +46,7 @@ StarfieldRep::StarfieldRep( Starfield* pStarfield )
     using namespace Genesis;
     m_pStarShader = FrameWork::GetRenderSystem()->GetShaderCache()->Load( "hyperscape_starfield" );
     m_pStarfieldParallax = m_pStarShader->RegisterUniform( "k_parallax", ShaderUniformType::FloatVector2 );
-    m_pStarfieldVB = new VertexBuffer( GeometryType::Triangle, VBO_POSITION | VBO_UV | VBO_COLOUR );
+    m_pStarfieldVB = new VertexBuffer( GeometryType::Triangle, VBO_POSITION | VBO_UV | VBO_COLOR );
 
     const size_t numVertices = pStarfield->GetEntries().size() * 6;
     m_PositionData.resize( numVertices );
@@ -129,7 +129,7 @@ void StarfieldRep::BuildStarfield()
 
     m_pStarfieldVB->CopyPositions( m_PositionData );
     m_pStarfieldVB->CopyUVs( m_UVData );
-    m_pStarfieldVB->CopyColours( m_ColorData );
+    m_pStarfieldVB->CopyColors( m_ColorData );
 }
 
 } // namespace Hexterminate

@@ -46,9 +46,9 @@ RadioButton::RadioButton( const std::string& name, const std::string& groupName,
                 pCallback();
             }
         } );
-    m_pRadioButton->SetBorderColour( EVA_BUTTON_COLOUR_BORDER );
-    m_pRadioButton->SetColour( EVA_BUTTON_COLOUR_BACKGROUND );
-    m_pRadioButton->SetBulletColour( EVA_CHECKBOX_BULLET_COLOUR );
+    m_pRadioButton->SetBorderColor( EVA_BUTTON_COLOR_BORDER );
+    m_pRadioButton->SetColor( EVA_BUTTON_COLOR_BACKGROUND );
+    m_pRadioButton->SetBulletColor( EVA_CHECKBOX_BULLET_COLOR );
 
     GetPanel()->AddElement( m_pRadioButton );
 

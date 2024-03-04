@@ -2,7 +2,7 @@
 
 in vec2 UV;
 
-out vec4 colour;
+out vec4 color;
 
 uniform sampler2D k_sampler0;
 uniform float k_time = 0.0;
@@ -30,11 +30,11 @@ void main()
 	vec4 c2 = texture( k_sampler0, coord / ( size - vec2( t * 0.129, 0.0 ) ) );
 	vec4 c3 = texture( k_sampler0, coord / ( size + vec2( t * 0.14, 0.0 ) ) );
 
-	colour = vec4( c3.r, c2.g, c1.b, 1 );
+	color = vec4( c3.r, c2.g, c1.b, 1 );
 
 	float r = rand( vec2( UV.x + k_time, UV.y + k_time ) );
-	colour = colour * 0.9 + colour * r * 0.2;
+	color = color * 0.9 + color * r * 0.2;
 
-	float luminance = dot( colour.xyz, vec3( 0.2126, 0.7152, 0.0722 ) );
-	colour = vec4( luminance, luminance, luminance, 1.0 ) * colour * scanline;
+	float luminance = dot( color.xyz, vec3( 0.2126, 0.7152, 0.0722 ) );
+	color = vec4( luminance, luminance, luminance, 1.0 ) * color * scanline;
 }

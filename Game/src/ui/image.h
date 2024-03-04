@@ -19,6 +19,8 @@
 
 #include <filesystem>
 
+#include <color.h>
+
 #include "ui/element.h"
 
 namespace Genesis
@@ -55,7 +57,8 @@ public:
 
     void SetAutoSize( bool autoSize );
     void SetBlendMode( BlendMode blendMode );
-    void SetColour( float r, float g, float b, float a );
+    void SetColor( const Genesis::Color& color );
+    void SetColor( float r, float g, float b, float a );
     void SetPath( const std::string& filename );
     void SetShader( const std::string& shaderName );
 

@@ -54,8 +54,8 @@ Element::Element( const std::string& name )
     m_pPanel = new Genesis::Gui::Panel();
     m_pPanel->SetSize( 128.0f, 128.0f );
     m_pPanel->SetPosition( 0.0f, 0.0f );
-    m_pPanel->SetColour( 0.0f, 0.0f, 0.0f, 0.0f );
-    m_pPanel->SetBorderColour( 0.0f, 0.0f, 0.0f, 0.0f );
+    m_pPanel->SetColor( 0.0f, 0.0f, 0.0f, 0.0f );
+    m_pPanel->SetBorderColor( 0.0f, 0.0f, 0.0f, 0.0f );
 }
 
 Element::~Element()

@@ -63,7 +63,7 @@ void Beam::SetupBeam()
 {
     using namespace Genesis;
 
-    m_pBeamVertexBuffer = new VertexBuffer( GeometryType::Triangle, VBO_POSITION | VBO_UV | VBO_COLOUR );
+    m_pBeamVertexBuffer = new VertexBuffer( GeometryType::Triangle, VBO_POSITION | VBO_UV | VBO_COLOR );
 
     if ( m_pShader == nullptr )
     {
@@ -79,7 +79,7 @@ void Beam::SetupBeamFlare()
 {
     using namespace Genesis;
 
-    m_pFlareVertexBuffer = new VertexBuffer( GeometryType::Triangle, VBO_POSITION | VBO_UV | VBO_COLOUR );
+    m_pFlareVertexBuffer = new VertexBuffer( GeometryType::Triangle, VBO_POSITION | VBO_UV | VBO_COLOR );
 
     if ( m_pFlareShader == nullptr )
     {
@@ -132,21 +132,21 @@ void Beam::Render()
     const mat4 modelMatrix = translation * rotation;
 
     const float opacity = GetOpacity();
-    const Genesis::Color& beamColour = m_pOwner->GetInfo()->GetBeamColour();
+    const Genesis::Color& beamColor = m_pOwner->GetInfo()->GetBeamColor();
 
-    RenderBeam( modelMatrix, beamColour, opacity );
-    RenderBeamFlare( modelMatrix, beamColour, opacity );
+    RenderBeam( modelMatrix, beamColor, opacity );
+    RenderBeamFlare( modelMatrix, beamColor, opacity );
 
     FrameWork::GetRenderSystem()->SetBlendMode( BlendMode::Disabled );
 }
 
-void Beam::RenderBeam( const glm::mat4& modelMatrix, const Genesis::Color& beamColour, float opacity )
+void Beam::RenderBeam( const glm::mat4& modelMatrix, const Genesis::Color& beamColor, float opacity )
 {
     using namespace Genesis;
 
     PositionData posData;
     UVData uvData;
-    ColourData colourData;
+    ColorData colorData;
 
     const float u = 1.0f;
     const float v = 1.0f;
@@ -154,10 +154,10 @@ void Beam::RenderBeam( const glm::mat4& modelMatrix, const Genesis::Color& beamC
     const float l = m_pOwner->GetInfo()->GetRange( m_pOwner->GetOwner() ) * GetHitFraction();
     const float offset = m_pOwner->GetInfo()->GetBeamWidth() * 0.5f;
 
-    const glm::vec4 colour( beamColour.r, beamColour.g, beamColour.b, opacity );
+    const glm::vec4 color( beamColor.r, beamColor.g, beamColor.b, opacity );
     for ( int i = 0; i < 6; ++i )
     {
-        colourData.push_back( colour );
+        colorData.push_back( color );
     }
 
     posData.emplace_back( -hw, offset, 0.0f ); // 0
@@ -176,16 +176,16 @@ void Beam::RenderBeam( const glm::mat4& modelMatrix, const Genesis::Color& beamC
 
     m_pBeamVertexBuffer->CopyPositions( posData );
     m_pBeamVertexBuffer->CopyUVs( uvData );
-    m_pBeamVertexBuffer->CopyColours( colourData );
+    m_pBeamVertexBuffer->CopyColors( colorData );
 
     m_pShader->Use( modelMatrix );
     m_pBeamVertexBuffer->Draw();
 }
 
-void Beam::RenderBeamFlare( const glm::mat4& modelMatrix, const Genesis::Color& beamColour, float opacity )
+void Beam::RenderBeamFlare( const glm::mat4& modelMatrix, const Genesis::Color& beamColor, float opacity )
 {
     const float w = m_pOwner->GetInfo()->GetBeamWidth() * 1.5f;
-    m_pFlareVertexBuffer->CreateTexturedQuad( -w, w, w * 2.0f, -w, beamColour.glm() );
+    m_pFlareVertexBuffer->CreateTexturedQuad( -w, w, w * 2.0f, -w, beamColor.glm() );
     m_pFlareShader->Use( modelMatrix );
     m_pFlareVertexBuffer->Draw();
 }

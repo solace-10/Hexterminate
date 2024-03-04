@@ -45,7 +45,7 @@ PanelDocking::PanelDocking()
 
     m_pDockingText = new Genesis::Gui::Text();
     m_pDockingText->SetFont( EVA_FONT );
-    m_pDockingText->SetColour( EVA_TEXT_COLOUR );
+    m_pDockingText->SetColor( EVA_TEXT_COLOR );
     m_pDockingText->SetSize( 340, 64 );
     m_pDockingText->SetText( "Press 'F' to dock" );
     m_pDockingText->SetPosition( 197, 111 );

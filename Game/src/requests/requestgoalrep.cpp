@@ -41,7 +41,7 @@
 namespace Hexterminate
 {
 
-RequestGoalRep::RequestGoalRep( RequestGoal* pOwner, const Color& colour )
+RequestGoalRep::RequestGoalRep( RequestGoal* pOwner, const Color& color )
     : m_pDescription( nullptr )
     , m_pBackground( nullptr )
     , m_pPointOfInterest( nullptr )
@@ -58,15 +58,15 @@ RequestGoalRep::RequestGoalRep( RequestGoal* pOwner, const Color& colour )
     m_pBackground = new Genesis::Gui::Panel();
     m_pBackground->SetSize( 260.0f, 20.0f );
     m_pBackground->SetPosition( 0.0f, 0.0f );
-    m_pBackground->SetColour( colour );
-    m_pBackground->SetBorderColour( 1.0f, 1.0f, 1.0f, 0.25f );
+    m_pBackground->SetColor( color );
+    m_pBackground->SetBorderColor( 1.0f, 1.0f, 1.0f, 0.25f );
     m_pBackground->SetBorderMode( Genesis::Gui::PANEL_BORDER_NONE );
     pGuiManager->AddElement( m_pBackground );
 
     m_pDescription = new Genesis::Gui::Text();
     m_pDescription->SetSize( 256.0f, 16.0f );
     m_pDescription->SetPosition( 2.0f, 2.0f );
-    m_pDescription->SetColour( Color( 1.0f, 1.0f, 1.0f, 1.0f ) );
+    m_pDescription->SetColor( Color( 1.0f, 1.0f, 1.0f, 1.0f ) );
     m_pDescription->SetFont( EVA_FONT );
     m_pDescription->SetText( "???" );
     m_pDescription->SetMultiLine( false );
@@ -74,7 +74,7 @@ RequestGoalRep::RequestGoalRep( RequestGoal* pOwner, const Color& colour )
 
     m_pPointOfInterest = new PointOfInterest();
     m_pPointOfInterest->SetPosition( 0.0f, 0.0f );
-    m_pPointOfInterest->SetColour( Genesis::Color( 0.0f, 0.6f, 0.6f, 0.6f ) );
+    m_pPointOfInterest->SetColor( Genesis::Color( 0.0f, 0.6f, 0.6f, 0.6f ) );
     pGuiManager->AddElement( m_pPointOfInterest );
 
     Show( g_pGame->GetGalaxy()->GetRepresentation()->IsVisible() );

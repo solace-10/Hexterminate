@@ -14,7 +14,7 @@ namespace GuiExtended
         Genesis::Gui::Text* pTextElement = new Genesis::Gui::Text();
         pTextElement->SetSize( w, h );
         pTextElement->SetPosition( x, y );
-        pTextElement->SetColour( EVA_TEXT_COLOUR );
+        pTextElement->SetColor( EVA_TEXT_COLOR );
         pTextElement->SetFont( bold ? EVA_FONT_BOLD : EVA_FONT );
         pTextElement->SetMultiLine( multiline );
         pTextElement->SetText( text );

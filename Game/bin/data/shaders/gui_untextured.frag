@@ -1,10 +1,10 @@
 #version 330 core
 
-out vec4 colour;
+out vec4 color;
 
-uniform vec4 k_colour = vec4( 1, 0, 0, 0.5 );
+uniform vec4 k_color = vec4( 1, 0, 0, 0.5 );
 
 void main()
 {
-	colour = k_colour;
+	color = k_color;
 }

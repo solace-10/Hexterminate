@@ -5,7 +5,7 @@ in vec3 objPosition;
 in vec3 normal;
 in vec3 viewDir;
 
-out vec4 colour;
+out vec4 color;
 
 uniform sampler2D k_sampler0; // diffuse
 uniform sampler2D k_sampler1; // specular
@@ -29,8 +29,8 @@ uniform vec4 k_clip = vec4( 0, 0, 0, 0 );
 uniform vec4 k_clipForward = vec4( 1, 0, 0, 0 );
 uniform int k_clipActive = 0;
 
-// Ikeda effect colour, used by armour modules. Alpha controls the pattern's intensity.
-uniform vec4 k_overlayColour = vec4( 0, 0, 0, 0 );
+// Ikeda effect color, used by armour modules. Alpha controls the pattern's intensity.
+uniform vec4 k_overlayColor = vec4( 0, 0, 0, 0 );
 
 uniform int k_empActive = 0;
 
@@ -91,7 +91,7 @@ vec4 ikeda( vec2 uv, float intensity )
 
 void main()
 {
-	colour = vec4( 0, 0, 0, 1 );
+	color = vec4( 0, 0, 0, 1 );
 	vec4 objPosWorld = vec4(objPosition - k_clip.xyz, 1.0);
 	vec3 lightDir = normalize( vec3( 1, 0.25, 1 ) );
 
@@ -115,7 +115,7 @@ void main()
 	float repairEdge = 0.0;
 	if (lum > k_repairEdgeOffset && lum < k_repairEdgeOffset + 0.05)
 		repairEdge = 1.0;
-	vec4 repairEdgeColour = vec4(0.373, 0.441, 0.306, 1) * k_repairEdgeAlpha * repairEdge;
+	vec4 repairEdgeColor = vec4(0.373, 0.441, 0.306, 1) * k_repairEdgeAlpha * repairEdge;
 
 	vec4 paintMask = texture( k_sampler2, UV );
 	vec4 paintPrimary = paintMask.r * k_primaryPaint;
@@ -127,25 +127,25 @@ void main()
 	vec4 emissive = texture( k_sampler2 , UV).b * k_e;
 
 	//
-	vec4 ikedaOverlay = vec4( k_overlayColour.rgb, 1 ) * ikeda( UV, k_overlayColour.a );
+	vec4 ikedaOverlay = vec4( k_overlayColor.rgb, 1 ) * ikeda( UV, k_overlayColor.a );
 
-	colour = clamp( k_a + specular + paintedDiffuse + repairEdgeColour + emissive + ikedaOverlay, 0, 1 );
+	color = clamp( k_a + specular + paintedDiffuse + repairEdgeColor + emissive + ikedaOverlay, 0, 1 );
 
 	// Damage component
 	vec4 damageMap = texture( k_sampler3, UV );
 	if ( damageMap.b >= k_health ) // The damage cutoff layer is in the blue channel
 	{
 		float glowFactor = abs(cos(k_time * 0.5)) * 0.5 + 0.5;
-		colour *= damageMap.r;
-		colour = clamp( colour + ( 1 - damageMap.r ) * damageMap.g * vec4( 1, 0.4, 0, 1 ) * glowFactor, 0, 1 );
+		color *= damageMap.r;
+		color = clamp( color + ( 1 - damageMap.r ) * damageMap.g * vec4( 1, 0.4, 0, 1 ) * glowFactor, 0, 1 );
 	}
 
 	if ( k_empActive == 1 )
 	{
 		float c = random( vec2( UV.x + k_time, UV.y + k_time ) ) * 0.25;
-		colour.g = clamp( colour.g + c, 0, 1 );
-		colour.b = clamp( colour.b + c, 0, 1 );
+		color.g = clamp( color.g + c, 0, 1 );
+		color.b = clamp( color.b + c, 0, 1 );
 	}
 
-	colour.a = 1;
+	color.a = 1;
 }

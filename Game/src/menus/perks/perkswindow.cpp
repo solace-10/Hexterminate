@@ -56,8 +56,8 @@ void PerksWindow::Init()
 
     m_pMainPanel = new Genesis::Gui::Panel();
     m_pMainPanel->SetSize( panelWidth, panelHeight );
-    m_pMainPanel->SetColour( EVA_COLOUR_BACKGROUND );
-    m_pMainPanel->SetBorderColour( EVA_COLOUR_BORDER );
+    m_pMainPanel->SetColor( EVA_COLOR_BACKGROUND );
+    m_pMainPanel->SetBorderColor( EVA_COLOR_BORDER );
     m_pMainPanel->SetBorderMode( Genesis::Gui::PANEL_BORDER_ALL );
     m_pMainPanel->SetPosition(
         (int)( ( Genesis::Configuration::GetScreenWidth() - panelWidth ) / 2.0f ),
@@ -68,10 +68,10 @@ void PerksWindow::Init()
     m_pButtonClose = new ButtonEvent( this, Genesis::Gui::GuiEvent::Close );
     m_pButtonClose->SetPosition( panelWidth - 32, 0 );
     m_pButtonClose->SetSize( 32, 32 );
-    m_pButtonClose->SetColour( 0.0f, 0.0f, 0.0f, 0.0f );
-    m_pButtonClose->SetHoverColour( 0.0f, 0.0f, 0.0f, 0.0f );
-    m_pButtonClose->SetIconColour( EVA_BUTTON_ICON_COLOUR );
-    m_pButtonClose->SetIconHoverColour( EVA_BUTTON_ICON_COLOUR_HOVER );
+    m_pButtonClose->SetColor( 0.0f, 0.0f, 0.0f, 0.0f );
+    m_pButtonClose->SetHoverColor( 0.0f, 0.0f, 0.0f, 0.0f );
+    m_pButtonClose->SetIconColor( EVA_BUTTON_ICON_COLOR );
+    m_pButtonClose->SetIconHoverColor( EVA_BUTTON_ICON_COLOR_HOVER );
     m_pButtonClose->SetIcon( "data/ui/icons/close.png" );
     m_pButtonClose->SetBorderMode( Genesis::Gui::PANEL_BORDER_NONE );
     m_pMainPanel->AddElement( m_pButtonClose );
@@ -152,8 +152,8 @@ PerkCategoryPanel* PerksWindow::AddCategory( const std::string& category, const 
     const int panelHeight = 144;
     PerkCategoryPanel* pPanel = new PerkCategoryPanel();
     pPanel->SetSize( m_pScrollingElement->GetWidth() - m_pScrollingElement->GetScrollbarWidth() - 8, panelHeight );
-    pPanel->SetColour( 1.0f, 1.0f, 1.0f, 1.0f );
-    pPanel->SetBorderColour( EVA_COLOUR_BORDER );
+    pPanel->SetColor( 1.0f, 1.0f, 1.0f, 1.0f );
+    pPanel->SetBorderColor( EVA_COLOR_BORDER );
     pPanel->SetBorderMode( Genesis::Gui::PANEL_BORDER_ALL );
     pPanel->SetPosition( 4, static_cast<int>( m_Categories.size() ) * ( panelHeight + 4 ) );
     pPanel->SetTexture( pBackgroundImage );

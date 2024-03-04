@@ -1,9 +1,9 @@
 #version 330 core
 
 in vec2 UV;
-in vec4 vcolour;
+in vec4 vcolor;
 
-out vec4 colour;
+out vec4 color;
 
 uniform sampler2D k_sampler0;
 uniform float k_time = 0;
@@ -13,7 +13,7 @@ uniform float k_shieldStrength = 1;	// Value between 0 and 1
 uniform float k_quantumScale = 1.0f;
 uniform float k_quantumGaps = 0.1f;
 uniform float k_quantumIntensity = 8.0f;
-uniform vec3 k_quantumColour = vec3( 1.0, 1.0, 1.0 );
+uniform vec3 k_quantumColor = vec3( 1.0, 1.0, 1.0 );
 
 const float pi = 3.14159265359;
 const float triangleScale = 0.816497161855865; // ratio of edge length and height
@@ -71,7 +71,7 @@ void main()
 	{
 		vec2 p = UV;
 		p *= k_quantumScale;
-		colour = vec4(k_quantumColour, min(getColor(p), 1.0f));
+		color = vec4(k_quantumColor, min(getColor(p), 1.0f));
 	}
 	else
 	{
@@ -83,6 +83,6 @@ void main()
 		vec2 uv = vec2( UV.x, UV.y + sin( k_time ) * 0.1 );
 		vec4 grid = texture( k_sampler0, uv ) + texture( k_sampler0, UV );
 
-		colour = clamp( vcolour * shieldNoiseMultiplier + vec4( 0.2, 0.2, 0.2, 0 ), 0, 1 ) * grid;
+		color = clamp( vcolor * shieldNoiseMultiplier + vec4( 0.2, 0.2, 0.2, 0 ), 0, 1 ) * grid;
 	}
 }

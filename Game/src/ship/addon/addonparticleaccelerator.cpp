@@ -104,7 +104,7 @@ void AddonParticleAccelerator::Activate()
     m_AimingLaser.m_Timer = 2.75f;
     m_AimingLaser.m_Width = 4.0f;
     m_AimingLaser.m_Offset = 0.0f;
-    m_AimingLaser.m_Colour = Genesis::Color( 1.0f, 0.0f, 0.0f );
+    m_AimingLaser.m_Color = Genesis::Color( 1.0f, 0.0f, 0.0f );
 
     m_Stage = Stage::Aiming;
 
@@ -133,7 +133,7 @@ void AddonParticleAccelerator::UpdateFiring( float delta )
         particleLaser.m_Duration = particleLaser.m_Timer = gRand( 0.25f, 1.25f );
         particleLaser.m_Width = gRand( 3.0f, 6.0f );
         particleLaser.m_Offset = gClamp( static_cast<float>( distribution( m_RandomEngine ) ), -6.0f, 6.0f );
-        particleLaser.m_Colour = ( gRand( 0, 3 ) > 0 ) ? Genesis::Color( 0.0f, 0.5f, 1.0f ) : Genesis::Color( 1.0f, 0.5f, 0.1f );
+        particleLaser.m_Color = ( gRand( 0, 3 ) > 0 ) ? Genesis::Color( 0.0f, 0.5f, 1.0f ) : Genesis::Color( 1.0f, 0.5f, 0.1f );
 
         m_TimeToNextShot = gRand( 0.0f, 0.05f );
         m_TimesToFire--;
@@ -157,7 +157,7 @@ void AddonParticleAccelerator::UpdateLaser( float delta )
         m_AimingLaser.m_Laser = Laser(
             source,
             target,
-            m_AimingLaser.m_Colour,
+            m_AimingLaser.m_Color,
             m_AimingLaser.m_Width );
 
         pLaserManager->AddLaser( m_AimingLaser.m_Laser );
@@ -184,7 +184,7 @@ void AddonParticleAccelerator::UpdateLaser( float delta )
                     particleLaser.m_Laser = Laser(
                         sourceOffset,
                         targetOffset,
-                        particleLaser.m_Colour,
+                        particleLaser.m_Color,
                         laserWidth );
 
                     pLaserManager->AddLaser( particleLaser.m_Laser );

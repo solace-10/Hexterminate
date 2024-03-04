@@ -44,7 +44,7 @@ public:
 
 private:
     void PushBackUVs( Genesis::UVData& uvData );
-    void PushBackColours( Genesis::ColourData& colourData, const Genesis::Color& colour, float initialWidth, float currentWidth, float nextWidth );
+    void PushBackColors( Genesis::ColorData& colorData, const Genesis::Color& color, float initialWidth, float currentWidth, float nextWidth );
 
     TrailManager* m_pTrailManager;
     Genesis::Shader* m_pShader;

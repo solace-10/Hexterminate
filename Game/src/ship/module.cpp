@@ -558,7 +558,7 @@ void ArmourModule::CalculateOverlayIntensity()
     m_OverlayIntensity = std::max( intensityFromRegeneration, intensityFromDamage );
 }
 
-const glm::vec4 ArmourModule::GetOverlayColour() const
+const glm::vec4 ArmourModule::GetOverlayColor() const
 {
     if ( IsUnbrokenStateActive() )
     {
@@ -566,9 +566,9 @@ const glm::vec4 ArmourModule::GetOverlayColour() const
     }
     else
     {
-        glm::vec4 overlayColour = m_pInfo->GetOverlayColour().glm();
-        overlayColour.a *= m_OverlayIntensity;
-        return overlayColour;
+        glm::vec4 overlayColor = m_pInfo->GetOverlayColor().glm();
+        overlayColor.a *= m_OverlayIntensity;
+        return overlayColor;
     }
 }
 
@@ -687,7 +687,7 @@ void EngineModule::UpdateTrail()
     Ship* pShip = GetOwner();
     if ( pShip != nullptr && m_pTrail == nullptr && m_Output > 0.0f )
     {
-        m_pTrail = new Trail( 10.0f, 3.5f, pShip->GetFaction()->GetColour( pShip->IsFlagship() ? FactionColourId::GlowFlagship : FactionColourId::Glow ) );
+        m_pTrail = new Trail( 10.0f, 3.5f, pShip->GetFaction()->GetColor( pShip->IsFlagship() ? FactionColorId::GlowFlagship : FactionColorId::Glow ) );
         g_pGame->GetCurrentSector()->GetTrailManager()->Add( m_pTrail );
     }
     else if ( m_pTrail != nullptr && m_Output <= 0.0f )
@@ -1028,7 +1028,7 @@ void TowerModule::RemoveBonus()
     }
 }
 
-const glm::vec4 TowerModule::GetOverlayColour( Ship* pShip ) const
+const glm::vec4 TowerModule::GetOverlayColor( Ship* pShip ) const
 {
     const float ratio = GetHealth() / GetModuleInfo()->GetHealth( pShip );
     const glm::vec4 red( 1.0f, 0.0f, 0.0f, 0.8f );

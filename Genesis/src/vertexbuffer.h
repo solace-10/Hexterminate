@@ -34,13 +34,13 @@ namespace Genesis
 static const unsigned int VBO_POSITION = 1;
 static const unsigned int VBO_UV = 1 << 1;
 static const unsigned int VBO_NORMAL = 1 << 2;
-static const unsigned int VBO_COLOUR = 1 << 3;
+static const unsigned int VBO_COLOR = 1 << 3;
 static const unsigned int VB_2D = 1 << 4;
 
 typedef std::vector<glm::vec3> PositionData;
 typedef std::vector<glm::vec2> UVData;
 typedef std::vector<glm::vec3> NormalData;
-typedef std::vector<glm::vec4> ColourData;
+typedef std::vector<glm::vec4> ColorData;
 
 enum class GeometryType
 {
@@ -61,17 +61,17 @@ public:
     void CopyUVs( const UVData& data, size_t count );
     void CopyNormals( const NormalData& data );
     void CopyNormals( const NormalData& data, size_t count );
-    void CopyColours( const ColourData& data );
-    void CopyColours( const ColourData& data, size_t count );
+    void CopyColors( const ColorData& data );
+    void CopyColors( const ColorData& data, size_t count );
     void CopyData( const float* pData, size_t count, unsigned int destination );
 
     void Draw( uint32_t numVertices = 0 ); // Draw the vertex buffer. Passing 0 to this function will draw the entire buffer.
     void Draw( uint32_t startVertex, uint32_t numVertices, void* pIndices = nullptr );
 
     void CreateUntexturedQuad( float x, float y, float width, float height );
-    void CreateUntexturedQuad( float x, float y, float width, float height, const glm::vec4& colour );
+    void CreateUntexturedQuad( float x, float y, float width, float height, const glm::vec4& color );
     void CreateTexturedQuad( float x, float y, float width, float height );
-    void CreateTexturedQuad( float x, float y, float width, float height, const glm::vec4& colour );
+    void CreateTexturedQuad( float x, float y, float width, float height, const glm::vec4& color );
 
 private:
     void SetModeFromGeometryType( GeometryType type );
@@ -82,7 +82,7 @@ private:
     GLuint m_Position;
     GLuint m_UV;
     GLuint m_Normal;
-    GLuint m_Colour;
+    GLuint m_Color;
     std::array<uint32_t, 4> m_Size;
     GLenum m_Mode;
 };

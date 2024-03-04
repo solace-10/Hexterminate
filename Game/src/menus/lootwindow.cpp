@@ -65,7 +65,7 @@ LootWindow::LootWindow()
 
     m_pMainPanel = new Gui::Panel();
     m_pMainPanel->SetSize( m_PanelWidth, m_PanelHeight );
-    m_pMainPanel->SetColour( 0.0f, 0.0f, 0.0f, 0.0f );
+    m_pMainPanel->SetColor( 0.0f, 0.0f, 0.0f, 0.0f );
     m_pMainPanel->SetBorderMode( Gui::PANEL_BORDER_NONE );
     m_pMainPanel->SetPosition( ( Configuration::GetScreenWidth() - m_PanelWidth ) / 2.0f, 8.0f );
     m_pMainPanel->SetHiddenForCapture( true );
@@ -78,7 +78,7 @@ LootWindow::LootWindow()
     m_pIcon->SetPosition( ( m_PanelWidth - m_IconSize ) / 2.0f, 96.0f );
     m_pIcon->SetSize( m_IconSize, m_IconSize );
     m_pIcon->SetTexture( nullptr );
-    m_pIcon->SetColour( 1.0f, 1.0f, 1.0f, 1.0f );
+    m_pIcon->SetColor( 1.0f, 1.0f, 1.0f, 1.0f );
     m_pIcon->SetShader( pIconShader );
     m_pIcon->SetTexture( pLootIcon );
     m_pMainPanel->AddElement( m_pIcon );
@@ -88,7 +88,7 @@ LootWindow::LootWindow()
     m_pWingsLeft->SetPosition( 0.0f, 0.0f );
     m_pWingsLeft->SetSize( (int)pWingsLeft->GetWidth(), (int)pWingsLeft->GetHeight() );
     m_pWingsLeft->SetTexture( pWingsLeft );
-    m_pWingsLeft->SetColour( 1.0f, 1.0f, 1.0f, 1.0f );
+    m_pWingsLeft->SetColor( 1.0f, 1.0f, 1.0f, 1.0f );
     m_pWingsLeft->SetShader( pWingsShader );
     m_pMainPanel->AddElement( m_pWingsLeft );
 
@@ -97,26 +97,26 @@ LootWindow::LootWindow()
     m_pWingsRight->SetPosition( m_PanelWidth - pWingsRight->GetWidth(), 0.0f );
     m_pWingsRight->SetSize( (int)pWingsRight->GetWidth(), (int)pWingsRight->GetHeight() );
     m_pWingsRight->SetTexture( pWingsRight );
-    m_pWingsRight->SetColour( 1.0f, 1.0f, 1.0f, 1.0f );
+    m_pWingsRight->SetColor( 1.0f, 1.0f, 1.0f, 1.0f );
     m_pWingsRight->SetShader( pWingsShader );
     m_pMainPanel->AddElement( m_pWingsRight );
 
     m_pModuleName = new Gui::Text();
     m_pModuleName->SetSize( m_PanelWidth, 32.0f );
-    m_pModuleName->SetColour( EVA_TEXT_COLOUR );
+    m_pModuleName->SetColor( EVA_TEXT_COLOR );
     m_pModuleName->SetFont( EVA_FONT );
     m_pMainPanel->AddElement( m_pModuleName );
 
     m_pPerkMeter = new Meter();
     m_pPerkMeter->Init( 0, 10 );
     m_pPerkMeter->SetPosition( floorf( ( m_PanelWidth - m_pPerkMeter->GetWidth() ) / 2.0f ), 200.0f );
-    m_pPerkMeter->SetBorderColour( 1.0f, 1.0f, 1.0f, 1.0f );
+    m_pPerkMeter->SetBorderColor( 1.0f, 1.0f, 1.0f, 1.0f );
     m_pMainPanel->AddElement( m_pPerkMeter );
 
     m_pPerkAcquired = new Gui::Text();
     m_pPerkAcquired->SetPosition( 0, 220 );
     m_pPerkAcquired->SetSize( m_PanelWidth, 32.0f );
-    m_pPerkAcquired->SetColour( EVA_TEXT_COLOUR );
+    m_pPerkAcquired->SetColor( EVA_TEXT_COLOR );
     m_pPerkAcquired->SetFont( EVA_FONT );
     m_pMainPanel->AddElement( m_pPerkAcquired );
 
@@ -155,24 +155,24 @@ void LootWindow::Update( float delta )
         }
         m_pMainPanel->SetPosition( ( Genesis::Configuration::GetScreenWidth() - m_PanelWidth ) / 2.0f, yOffset );
 
-        // Sets the colours & sizes of the loot window elements.
-        // Colour is based on the module's rarity.
+        // Sets the colors & sizes of the loot window elements.
+        // Color is based on the module's rarity.
         const float alpha = CalculateAlpha();
         const float iconScalingAmount = CalculateIconScaling();
         const float iconSize = m_IconSize * iconScalingAmount;
         m_pIcon->SetSize( iconSize, iconSize );
         m_pIcon->SetPosition( ( m_PanelWidth - iconSize ) / 2.0f, 128.0f - iconSize / 2.0f );
-        m_pIcon->SetColour( Genesis::Color( 1.0f, 1.0f, 1.0f, alpha ) );
-        m_pPerkMeter->SetColour( 0.0f, 0.0f, 0.0f, 0.5f * alpha );
-        m_pPerkMeter->SetBorderColour( 1.0f, 1.0f, 1.0f, 0.5f * alpha );
-        m_pPerkMeter->SetPipColour( 1.0f, 1.0f, 1.0f, 0.75f * alpha );
+        m_pIcon->SetColor( Genesis::Color( 1.0f, 1.0f, 1.0f, alpha ) );
+        m_pPerkMeter->SetColor( 0.0f, 0.0f, 0.0f, 0.5f * alpha );
+        m_pPerkMeter->SetBorderColor( 1.0f, 1.0f, 1.0f, 0.5f * alpha );
+        m_pPerkMeter->SetPipColor( 1.0f, 1.0f, 1.0f, 0.75f * alpha );
 
-        Genesis::Color highlightColour = ModuleRarityToColour( m_LootQueue.front().pModuleInfo->GetRarity() );
-        highlightColour.a = CalculateAlpha();
-        m_pModuleName->SetColour( highlightColour );
-        m_pWingsLeft->SetColour( highlightColour );
-        m_pWingsRight->SetColour( highlightColour );
-        m_pPerkAcquired->SetColour( highlightColour );
+        Genesis::Color highlightColor = ModuleRarityToColor( m_LootQueue.front().pModuleInfo->GetRarity() );
+        highlightColor.a = CalculateAlpha();
+        m_pModuleName->SetColor( highlightColor );
+        m_pWingsLeft->SetColor( highlightColor );
+        m_pWingsRight->SetColor( highlightColor );
+        m_pPerkAcquired->SetColor( highlightColor );
 
         if ( m_DisplayTimer >= sMaximumDisplayTime )
         {
@@ -198,9 +198,9 @@ void LootWindow::Update( float delta )
         }
 
         m_pModuleName->SetText( lootText.str() );
-        Genesis::Color textColour = ModuleRarityToColour( loot.pModuleInfo->GetRarity() );
-        textColour.a = CalculateAlpha();
-        m_pModuleName->SetColour( textColour );
+        Genesis::Color textColor = ModuleRarityToColor( loot.pModuleInfo->GetRarity() );
+        textColor.a = CalculateAlpha();
+        m_pModuleName->SetColor( textColor );
 
         // Centers the name of the module
         const float textWidth = m_pModuleName->GetFont()->GetTextLength( lootText.str() );

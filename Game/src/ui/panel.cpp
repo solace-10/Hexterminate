@@ -28,8 +28,8 @@ Panel::Panel( const std::string& name )
 {
     m_BorderLeft = m_BorderRight = m_BorderBottom = m_BorderTop = false;
 
-    GetPanel()->SetColour( 0.0f, 0.0f, 0.0f, 0.7f );
-    GetPanel()->SetBorderColour( 0.22f, 0.22f, 0.22f, 1.0f );
+    GetPanel()->SetColor( 0.0f, 0.0f, 0.0f, 0.7f );
+    GetPanel()->SetBorderColor( 0.22f, 0.22f, 0.22f, 1.0f );
 }
 
 void Panel::SaveProperties( json& properties )
@@ -77,9 +77,9 @@ void Panel::RenderProperties()
     }
 }
 
-void Panel::SetColour( float r, float g, float b, float a )
+void Panel::SetColor( float r, float g, float b, float a )
 {
-    GetPanel()->SetColour( r, g, b, a );
+    GetPanel()->SetColor( r, g, b, a );
 }
 
 void Panel::SetBorders( bool left, bool right, bool top, bool bottom )
@@ -91,9 +91,9 @@ void Panel::SetBorders( bool left, bool right, bool top, bool bottom )
     ApplyBorder();
 }
 
-void Panel::SetBorderColour( float r, float g, float b, float a )
+void Panel::SetBorderColor( float r, float g, float b, float a )
 {
-    GetPanel()->SetBorderColour( r, g, b, a );
+    GetPanel()->SetBorderColor( r, g, b, a );
 }
 
 void Panel::ApplyBorder()

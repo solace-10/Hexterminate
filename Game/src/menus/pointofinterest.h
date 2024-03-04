@@ -73,7 +73,7 @@ public:
     void SetStart( const glm::vec2& position );
     void SetEnd( const glm::vec2& position );
     void SetEnd( PointOfInterestTarget* pPointOfInterestTarget );
-    void SetColour( const Genesis::Color& colour );
+    void SetColor( const Genesis::Color& color );
 
 private:
     glm::vec2 m_Start;
@@ -83,7 +83,7 @@ private:
     Genesis::Shader* m_pShader;
     Genesis::VertexBuffer* m_pVertexBuffer;
 
-    Genesis::Color m_Colour;
+    Genesis::Color m_Color;
 };
 
 inline void PointOfInterest::SetStart( const glm::vec2& position )
@@ -102,9 +102,9 @@ inline void PointOfInterest::SetEnd( PointOfInterestTarget* pPointOfInterestTarg
     m_pDynamicEnd = pPointOfInterestTarget;
 }
 
-inline void PointOfInterest::SetColour( const Genesis::Color& colour )
+inline void PointOfInterest::SetColor( const Genesis::Color& color )
 {
-    m_Colour = colour;
+    m_Color = color;
 }
 
 } // namespace Hexterminate

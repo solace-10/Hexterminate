@@ -5,7 +5,7 @@ in vec3 objPosition;
 in vec3 normal;
 in vec3 viewDir;
 
-out vec4 colour;
+out vec4 color;
 
 uniform sampler2D k_sampler0;	// energy texture
 uniform float k_health = 1;
@@ -20,7 +20,7 @@ void main()
 
 	if ( k_health <= 0 || k_empActive == 1 )
 	{
-		colour = vec4( 0, 0, 0, 1 );
+		color = vec4( 0, 0, 0, 1 );
 	}
 	else
 	{
@@ -29,6 +29,6 @@ void main()
 		vec4 diffuse =  texture( k_sampler0, uv );
 		vec4 diffuse2 = texture( k_sampler0, uv2 );
 
-		colour = clamp(diffuse - diffuse2, 0, 1) * vec4( 0.31, 0.85, 0.85, 1 );
+		color = clamp(diffuse - diffuse2, 0, 1) * vec4( 0.31, 0.85, 0.85, 1 );
 	}
 }

@@ -42,8 +42,8 @@ public:
     StarInfo( unsigned int seed );
 
     unsigned int GetSeed() const;
-    const glm::vec3& GetCoreColour() const;
-    const glm::vec3& GetCoronaColour() const;
+    const glm::vec3& GetCoreColor() const;
+    const glm::vec3& GetCoronaColor() const;
     const glm::vec2& GetOffset() const;
     float GetDistance() const;
 
@@ -52,8 +52,8 @@ public:
 private:
     unsigned int m_Seed;
     unsigned int m_SurfaceTemperature;
-    glm::vec3 m_CoreColour;
-    glm::vec3 m_CoronaColour;
+    glm::vec3 m_CoreColor;
+    glm::vec3 m_CoronaColor;
     glm::vec2 m_Offset;
     float m_Distance;
     StarType m_StarType;
@@ -64,14 +64,14 @@ inline unsigned int StarInfo::GetSeed() const
     return m_Seed;
 }
 
-inline const glm::vec3& StarInfo::GetCoreColour() const
+inline const glm::vec3& StarInfo::GetCoreColor() const
 {
-    return m_CoreColour;
+    return m_CoreColor;
 }
 
-inline const glm::vec3& StarInfo::GetCoronaColour() const
+inline const glm::vec3& StarInfo::GetCoronaColor() const
 {
-    return m_CoronaColour;
+    return m_CoronaColor;
 }
 
 inline const glm::vec2& StarInfo::GetOffset() const
@@ -91,18 +91,18 @@ inline float StarInfo::GetDistance() const
 class StarSurfaceTemperatureInfo
 {
 public:
-    StarSurfaceTemperatureInfo( StarType starType, unsigned int surfaceTemperature, const glm::vec3& coreColour, const glm::vec3& coronaColour );
+    StarSurfaceTemperatureInfo( StarType starType, unsigned int surfaceTemperature, const glm::vec3& coreColor, const glm::vec3& coronaColor );
 
     StarType GetStarType() const;
     unsigned int GetSurfaceTemperature() const;
-    const glm::vec3& GetCoreColour() const;
-    const glm::vec3& GetCoronaColour() const;
+    const glm::vec3& GetCoreColor() const;
+    const glm::vec3& GetCoronaColor() const;
 
 private:
     StarType m_StarType;
     unsigned int m_SurfaceTemperature;
-    glm::vec3 m_CoreColour;
-    glm::vec3 m_CoronaColour;
+    glm::vec3 m_CoreColor;
+    glm::vec3 m_CoronaColor;
 };
 
 inline StarType StarSurfaceTemperatureInfo::GetStarType() const
@@ -115,14 +115,14 @@ inline unsigned int StarSurfaceTemperatureInfo::GetSurfaceTemperature() const
     return m_SurfaceTemperature;
 }
 
-inline const glm::vec3& StarSurfaceTemperatureInfo::GetCoreColour() const
+inline const glm::vec3& StarSurfaceTemperatureInfo::GetCoreColor() const
 {
-    return m_CoreColour;
+    return m_CoreColor;
 }
 
-inline const glm::vec3& StarSurfaceTemperatureInfo::GetCoronaColour() const
+inline const glm::vec3& StarSurfaceTemperatureInfo::GetCoronaColor() const
 {
-    return m_CoronaColour;
+    return m_CoronaColor;
 }
 
 } // namespace Hexterminate

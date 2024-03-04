@@ -92,7 +92,7 @@ MainMenu::MainMenu()
     m_pTitleImage->SetPosition( 8.0f, 10.0f );
     m_pTitleImage->SetSize( (float)pTitleImage->GetWidth(), (float)pTitleImage->GetHeight() );
     m_pTitleImage->SetTexture( pTitleImage );
-    m_pTitleImage->SetColour( 1.0f, 1.0f, 1.0f, 1.0f );
+    m_pTitleImage->SetColor( 1.0f, 1.0f, 1.0f, 1.0f );
     m_pTitle->GetMainPanel()->AddElement( m_pTitleImage );
 
     CreateVersionText();

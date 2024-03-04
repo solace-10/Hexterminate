@@ -35,7 +35,7 @@
 namespace Hexterminate
 {
 
-static const Genesis::Color sCampaignGoalColour( 0.0f, 0.0f, 0.6f, 0.6f );
+static const Genesis::Color sCampaignGoalColor( 0.0f, 0.0f, 0.6f, 0.6f );
 
 CampaignRequest::CampaignRequest( RequestManager* pRequestManager )
     : ImperialRequest( pRequestManager )
@@ -93,7 +93,7 @@ void CampaignRequest::UpdateExpansionArc( float delta )
     SectorInfo* pSectorAster = g_pGame->GetGalaxy()->GetSectorInfo( 9, 11 );
     if ( m_pExpansionGoal == nullptr && pBlackboard->Exists( sFirstExpansionEvent ) && pBlackboard->Exists( sFirstExpansionEventCompleted ) == false )
     {
-        m_pExpansionGoal = std::make_shared<RequestGoal>( pSectorAster, "Campaign: claim Aster 9/11", sCampaignGoalColour );
+        m_pExpansionGoal = std::make_shared<RequestGoal>( pSectorAster, "Campaign: claim Aster 9/11", sCampaignGoalColor );
         AddGoal( m_pExpansionGoal );
         SetThreatScore( 0 );
     }
@@ -127,7 +127,7 @@ void CampaignRequest::UpdateExpansionArc( float delta )
 
     if ( m_pExpansionGoal == nullptr && pBlackboard->Exists( sSecondExpansionEvent ) && pBlackboard->Exists( sSecondExpansionEventCompleted ) == false )
     {
-        m_pExpansionGoal = std::make_shared<RequestGoal>( pSectorSyrion, "Campaign: claim Syrion 8/14", sCampaignGoalColour );
+        m_pExpansionGoal = std::make_shared<RequestGoal>( pSectorSyrion, "Campaign: claim Syrion 8/14", sCampaignGoalColor );
         AddGoal( m_pExpansionGoal );
         SetThreatScore( GetShipThreatScore( "special_turret", FactionId::Neutral ) * 2 );
     }
@@ -180,7 +180,7 @@ void CampaignRequest::UpdatePirateArc( float delta )
             Faction* pPirateFaction = g_pGame->GetFaction( FactionId::Pirate );
             for ( auto& pControlledSector : pPirateFaction->GetControlledSectors() )
             {
-                RequestGoalSharedPtr pGoal = std::make_shared<RequestGoal>( pControlledSector, "Campaign: defeat Raiders", sCampaignGoalColour );
+                RequestGoalSharedPtr pGoal = std::make_shared<RequestGoal>( pControlledSector, "Campaign: defeat Raiders", sCampaignGoalColor );
                 m_PirateSectorGoals.push_back( pGoal );
                 AddGoal( pGoal );
                 SetThreatScore( 0 );
@@ -219,7 +219,7 @@ void CampaignRequest::UpdatePirateArc( float delta )
             {
                 if ( pFleet->HasFlagship() )
                 {
-                    m_pFleetGoal = std::make_shared<RequestGoal>( pFleet, "Campaign: destroy Navarre Hexer's flagship", sCampaignGoalColour );
+                    m_pFleetGoal = std::make_shared<RequestGoal>( pFleet, "Campaign: destroy Navarre Hexer's flagship", sCampaignGoalColor );
                     AddGoal( m_pFleetGoal );
                     SetThreatScore( 0 );
                     break;
@@ -300,7 +300,7 @@ void CampaignRequest::UpdateMarauderArc( float delta )
 
     if ( pBlackboard->Exists( sConquerSurtr ) && pBlackboard->Exists( sConquerSurtrCompleted ) == false && GoalExists( pSectorSurtr ) == false )
     {
-        AddGoal( std::make_shared<RequestGoal>( pSectorSurtr, "Campaign: destroy broadcast relay", sCampaignGoalColour ) );
+        AddGoal( std::make_shared<RequestGoal>( pSectorSurtr, "Campaign: destroy broadcast relay", sCampaignGoalColor ) );
         SetThreatScore( GetShipThreatScore( "special_fimbulvetr", FactionId::Marauders ) );
     }
     else if ( pBlackboard->Exists( sConquerSurtrCompleted ) == false && pSectorSurtr->GetFaction()->GetFactionId() == FactionId::Empire )
@@ -314,7 +314,7 @@ void CampaignRequest::UpdateMarauderArc( float delta )
 
     if ( pBlackboard->Exists( sConquerMuspell ) && pBlackboard->Exists( sConquerMuspellCompleted ) == false && GoalExists( pSectorMuspell ) == false )
     {
-        AddGoal( std::make_shared<RequestGoal>( pSectorMuspell, "Campaign: destroy battlestation", sCampaignGoalColour ) );
+        AddGoal( std::make_shared<RequestGoal>( pSectorMuspell, "Campaign: destroy battlestation", sCampaignGoalColor ) );
         SetThreatScore(
             GetShipThreatScore( "special_battlestation", FactionId::Marauders ) + GetShipThreatScore( "special_naglfar", FactionId::Marauders ) );
     }
@@ -344,7 +344,7 @@ void CampaignRequest::UpdateMarauderArc( float delta )
     }
     else if ( pBlackboard->Exists( sConquerValhalla ) && pBlackboard->Exists( sConquerValhallaCompleted ) == false && GoalExists( pSectorValhalla ) == false )
     {
-        AddGoal( std::make_shared<RequestGoal>( pSectorValhalla, "Campaign: capture Valhalla", sCampaignGoalColour ) );
+        AddGoal( std::make_shared<RequestGoal>( pSectorValhalla, "Campaign: capture Valhalla", sCampaignGoalColor ) );
     }
     else if ( pBlackboard->Exists( sConquerValhalla ) && pSectorValhalla->GetFaction()->GetFactionId() == FactionId::Empire )
     {
@@ -408,7 +408,7 @@ void CampaignRequest::UpdateAscentArc( float delta )
     SDL_assert( pSectorSolarisSecundus != nullptr );
     if ( pBlackboard->Exists( sConquerSolarisSecundus ) && pBlackboard->Exists( sConquerSolarisSecundusCompleted ) == false && GoalExists( pSectorSolarisSecundus ) == false )
     {
-        AddGoal( std::make_shared<RequestGoal>( pSectorSolarisSecundus, "Campaign: capture Solaris Secundus", sCampaignGoalColour ) );
+        AddGoal( std::make_shared<RequestGoal>( pSectorSolarisSecundus, "Campaign: capture Solaris Secundus", sCampaignGoalColor ) );
         SetThreatScore( 999999 ); // Overwhelming!
         pSectorSolarisSecundus->SetHyperspaceInhibitor( false );
     }
@@ -457,7 +457,7 @@ void CampaignRequest::UpdateIrianiArc( float delta )
     SDL_assert( pSectorIrianiPrime != nullptr );
     if ( pBlackboard->Exists( sConquerIrianiPrime ) && pBlackboard->Exists( sConquerIrianiPrimeCompleted ) == false && GoalExists( pSectorIrianiPrime ) == false )
     {
-        AddGoal( std::make_shared<RequestGoal>( pSectorIrianiPrime, "Campaign: conquer Iriani Prime", sCampaignGoalColour ) );
+        AddGoal( std::make_shared<RequestGoal>( pSectorIrianiPrime, "Campaign: conquer Iriani Prime", sCampaignGoalColor ) );
         SetThreatScore( 999999 ); // Overwhelming!
     }
     else if ( pBlackboard->Exists( sConquerIrianiPrimeCompleted ) == false && pSectorIrianiPrime->GetFaction()->GetFactionId() == FactionId::Empire )
@@ -517,7 +517,7 @@ void CampaignRequest::UpdateChrysamereArc( float delta )
     SDL_assert( pSectorCradle != nullptr );
     if ( pBlackboard->Exists( sEnterCradle ) && pBlackboard->Exists( sEnterCradleCompleted ) == false && GoalExists( pSectorCradle ) == false )
     {
-        AddGoal( std::make_shared<RequestGoal>( pSectorCradle, "Campaign: enter the Cradle of Isaldren", sCampaignGoalColour ) );
+        AddGoal( std::make_shared<RequestGoal>( pSectorCradle, "Campaign: enter the Cradle of Isaldren", sCampaignGoalColor ) );
         pSectorCradle->SetFaction( g_pGame->GetFaction( FactionId::Special ), true, false );
         pSectorCradle->SetProceduralSpawning( false );
         pSectorCradle->SetShipyard( false );

@@ -52,7 +52,7 @@ public:
     virtual void Show( bool state ) override;
 
 private:
-    Genesis::Color GetThreatRatingColour( ThreatRating rating ) const;
+    Genesis::Color GetThreatRatingColor( ThreatRating rating ) const;
     std::string GetThreatRatingText( ThreatRating rating ) const;
 
     SectorInfo* m_pSectorInfo;

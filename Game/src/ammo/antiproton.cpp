@@ -72,7 +72,7 @@ void Antiproton::Create( Weapon* pWeapon, float additionalRotation /* = 0.0f */ 
         }
     }
 
-    m_pVertexBuffer = new VertexBuffer( GeometryType::Triangle, VBO_POSITION | VBO_UV | VBO_COLOUR );
+    m_pVertexBuffer = new VertexBuffer( GeometryType::Triangle, VBO_POSITION | VBO_UV | VBO_COLOR );
 
     if ( m_pShader == nullptr )
     {

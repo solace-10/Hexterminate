@@ -39,7 +39,7 @@ public:
 
     inline int GetId() const { return m_Id; }
     inline const std::string& GetFilename() const { return m_Filename; }
-    inline const Genesis::Color& GetAmbientColour() const { return m_Ambient; }
+    inline const Genesis::Color& GetAmbientColor() const { return m_Ambient; }
 
 private:
     int m_Id;

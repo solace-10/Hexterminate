@@ -1,9 +1,9 @@
 #version 330 core
 
 in vec2 UV;
-in vec4 vcolour;
+in vec4 vcolor;
 
-out vec4 colour;
+out vec4 color;
 
 uniform float k_time = 0.0;
 uniform float k_internalRadius = 0.1;
@@ -67,18 +67,18 @@ vec4 flare( float alpha, vec2 main, float seed, float dir )
 void main()
 {
     vec2 uv = UV - 0.5;
-	colour = vec4(0.0);
+	color = vec4(0.0);
 	float len = length(uv);
 	float alpha = pow(clamp( k_externalRadius - len + k_internalRadius, 0.0, k_externalRadius )/ k_externalRadius ,6.0);
-	colour += flare(alpha,uv,75.0,1.0);
-	colour += flare(alpha,uv,35.0,1.0);
-	colour += flare(alpha,uv,21.0,1.0);
-	colour += flare(alpha,uv,1.2,1.0);
-	colour.xyz = clamp(colour.xyz,0.0,1.0);
+	color += flare(alpha,uv,75.0,1.0);
+	color += flare(alpha,uv,35.0,1.0);
+	color += flare(alpha,uv,21.0,1.0);
+	color += flare(alpha,uv,1.2,1.0);
+	color.xyz = clamp(color.xyz,0.0,1.0);
 	if (alpha >= 0.99)
     {
-		colour.xyz -= (alpha - 0.99) * 150.0 * vcolour.r;
+		color.xyz -= (alpha - 0.99) * 150.0 * vcolor.r;
 	}
 
-	//colour = vec4(UV.x, UV.y, 0.0f, 1.0f);
+	//color = vec4(UV.x, UV.y, 0.0f, 1.0f);
 }

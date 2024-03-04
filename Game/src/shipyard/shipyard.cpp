@@ -151,13 +151,13 @@ void Shipyard::InitialiseModels()
     MaterialList& shipyardMaterials = m_pShipyardModel->GetMaterials();
     for ( Material* pMaterial : shipyardMaterials )
     {
-        // Sets the ambient colour for all the shipyard's materials
+        // Sets the ambient color for all the shipyard's materials
         // This needs to match the behaviour of the ship's modules to achieve a consistent illumination across the scene.
         ShaderUniform* pAmbientUniform = pMaterial->shader->RegisterUniform( "k_a", ShaderUniformType::FloatVector4, false );
         if ( pAmbientUniform != nullptr )
         {
             const Background* pBackground = g_pGame->GetCurrentSector()->GetBackground();
-            pAmbientUniform->Set( pBackground->GetAmbientColour() );
+            pAmbientUniform->Set( pBackground->GetAmbientColor() );
         }
     }
 }
@@ -419,6 +419,8 @@ bool Shipyard::Dock( Ship* pShip )
 
     m_pShipStatsWindow->Show( true );
 
+    OnShipConfigurationChanged();
+
     return true;
 }
 
@@ -488,7 +490,6 @@ bool Shipyard::ValidateDockedShip()
         const ModuleHexGrid& moduleHexGrid = m_pDockedShip->GetModuleHexGrid();
         moduleHexGrid.GetBoundingBox( x1, y1, x2, y2 );
 
-        glm::vec3 moduleLocalPos( 0.0f );
         for ( int x = x1; x <= x2; ++x )
         {
             for ( int y = y1; y <= y2; ++y )
@@ -508,9 +509,6 @@ bool Shipyard::ValidateDockedShip()
                     else if ( type == ModuleType::Reactor )
                     {
                         numReactors++;
-
-                        // ReactorInfo* pReactorInfo = static_cast<ReactorInfo*>( pModule->GetModuleInfo() );
-                        //energyGenerated += pReactorInfo->GetCapacitorRechargeRate();
                     }
                     else if ( type == ModuleType::Addon )
                     {

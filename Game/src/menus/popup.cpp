@@ -46,7 +46,7 @@ Popup::Popup()
     m_pBackground = new Genesis::Gui::Panel();
     m_pBackground->SetSize( static_cast<float>( Genesis::Configuration::GetScreenWidth() ), static_cast<float>( Genesis::Configuration::GetScreenHeight() ) );
     m_pBackground->SetPosition( 0.0f, 0.0f );
-    m_pBackground->SetColour( 0.0f, 0.0f, 0.0f, 0.5f );
+    m_pBackground->SetColor( 0.0f, 0.0f, 0.0f, 0.5f );
     m_pBackground->SetBorderMode( Genesis::Gui::PANEL_BORDER_NONE );
     m_pBackground->Show( false );
     m_pBackground->SetDepth( 9999 );
@@ -58,7 +58,7 @@ Popup::Popup()
 
     m_pText = new Genesis::Gui::Text();
     m_pText->SetFont( EVA_FONT );
-    m_pText->SetColour( EVA_TEXT_COLOUR );
+    m_pText->SetColor( EVA_TEXT_COLOR );
     m_pText->SetSize( Genesis::Configuration::GetScreenWidth(), 64 );
     m_pText->SetPosition( 0, 8 );
     m_pWindow->GetMainPanel()->AddElement( m_pText );
@@ -68,9 +68,9 @@ Popup::Popup()
         m_pButton[ i ] = new ButtonPopup( this );
         m_pButton[ i ]->SetPosition( centreX - 128.0f - 4.0f, 32.0f );
         m_pButton[ i ]->SetSize( 128.0f, 32.0f );
-        m_pButton[ i ]->SetColour( Genesis::Color( 1.0f, 1.0f, 1.0f, 0.05f ) );
-        m_pButton[ i ]->SetHoverColour( EVA_BUTTON_COLOUR_HOVER );
-        m_pButton[ i ]->SetBorderColour( EVA_BUTTON_COLOUR_BORDER );
+        m_pButton[ i ]->SetColor( Genesis::Color( 1.0f, 1.0f, 1.0f, 0.05f ) );
+        m_pButton[ i ]->SetHoverColor( EVA_BUTTON_COLOR_HOVER );
+        m_pButton[ i ]->SetBorderColor( EVA_BUTTON_COLOR_BORDER );
         m_pButton[ i ]->SetBorderMode( Genesis::Gui::PANEL_BORDER_NONE );
         m_pButton[ i ]->SetFont( EVA_FONT );
         m_pButton[ i ]->SetCallbackState( PopupState::Undefined );

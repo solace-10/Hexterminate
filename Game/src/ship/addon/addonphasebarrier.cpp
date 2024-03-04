@@ -68,7 +68,7 @@ AddonPhaseBarrier::AddonPhaseBarrier( AddonModule* pModule, Ship* pOwner )
     , m_pClipActiveUniform( nullptr )
     , m_pClipUniform( nullptr )
     , m_pClipForwardUniform( nullptr )
-    , m_pAmbientColourUniform( nullptr )
+    , m_pAmbientColorUniform( nullptr )
     , m_pActiveUniform( nullptr )
     , m_pGhost( nullptr )
     , m_pCollisionInfo( nullptr )
@@ -85,7 +85,7 @@ AddonPhaseBarrier::AddonPhaseBarrier( AddonModule* pModule, Ship* pOwner )
     m_pTexture = (ResourceImage*)FrameWork::GetResourceManager()->GetResource( "data/images/shieldgrid.jpg" );
     m_pTexture->EnableMipMapping( false );
 
-    m_pVertexBuffer = new VertexBuffer( GeometryType::Triangle, VBO_POSITION | VBO_UV | VBO_COLOUR );
+    m_pVertexBuffer = new VertexBuffer( GeometryType::Triangle, VBO_POSITION | VBO_UV | VBO_COLOR );
     m_pShader = FrameWork::GetRenderSystem()->GetShaderCache()->Load( "phasebarrier" );
     ShaderUniform* pSampler = m_pShader->RegisterUniform( "k_sampler0", ShaderUniformType::Texture );
     pSampler->Set( m_pTexture, GL_TEXTURE0 );
@@ -99,7 +99,7 @@ AddonPhaseBarrier::AddonPhaseBarrier( AddonModule* pModule, Ship* pOwner )
     m_pClipActiveUniform = pSphereShader->RegisterUniform( "k_clipActive", ShaderUniformType::Integer, false );
     m_pClipUniform = pSphereShader->RegisterUniform( "k_clip", ShaderUniformType::FloatVector4, false );
     m_pClipForwardUniform = pSphereShader->RegisterUniform( "k_clipForward", ShaderUniformType::FloatVector4, false );
-    m_pAmbientColourUniform = pSphereShader->RegisterUniform( "k_a", ShaderUniformType::FloatVector4, false );
+    m_pAmbientColorUniform = pSphereShader->RegisterUniform( "k_a", ShaderUniformType::FloatVector4, false );
 
     // Is the phase barrier active or not? This is passed to the shader to toggle the glow. Value either 0.0 or 1.0.
     m_pActiveUniform = pSphereShader->RegisterUniform( "k_active", ShaderUniformType::Float );
@@ -255,7 +255,7 @@ void AddonPhaseBarrier::CreateLasers( const glm::vec3& barrierOrigin, const glm:
     glm::vec3 dir = glm::normalize( barrierPosition - barrierOrigin );
 
     LaserManager* pLaserManager = g_pGame->GetCurrentSector()->GetLaserManager();
-    Genesis::Color barrierColour( 1.0f, 0.55f, 0.0f, 0.65f );
+    Genesis::Color barrierColor( 1.0f, 0.55f, 0.0f, 0.65f );
 
     // The laser origin is at the edge of the phase barrier's sphere
     glm::vec3 laserOrigin = GetModule()->GetWorldPosition() + glm::vec3( 0.0f, 0.0f, m_SphereCenter );
@@ -264,16 +264,16 @@ void AddonPhaseBarrier::CreateLasers( const glm::vec3& barrierOrigin, const glm:
     // We have three beams, one to the left, one to the right and one randomly in-between
     const float halfCoverage = m_Coverage / 2.0f;
     glm::vec3 leftLaserEndPosition = glm::vec3( -dir.y * halfCoverage, dir.x * halfCoverage, 0.0f ) + barrierPosition;
-    Laser laserLeft( laserOrigin, leftLaserEndPosition, barrierColour, 1.5f );
+    Laser laserLeft( laserOrigin, leftLaserEndPosition, barrierColor, 1.5f );
     pLaserManager->AddLaser( laserLeft );
 
     glm::vec3 rightLaserEndPosition = glm::vec3( dir.y * halfCoverage, -dir.x * halfCoverage, 0.0f ) + barrierPosition;
-    Laser laserRight( laserOrigin, rightLaserEndPosition, barrierColour, 1.5f );
+    Laser laserRight( laserOrigin, rightLaserEndPosition, barrierColor, 1.5f );
     pLaserManager->AddLaser( laserRight );
 
     float randomFactor = gRand( 0.0f, 2.0f );
     glm::vec3 centreLaserEndPosition = rightLaserEndPosition + glm::vec3( -dir.y * halfCoverage * randomFactor, dir.x * halfCoverage * randomFactor, 0.0f );
-    Laser centreLaser( laserOrigin, centreLaserEndPosition, barrierColour, 1.5f );
+    Laser centreLaser( laserOrigin, centreLaserEndPosition, barrierColor, 1.5f );
     pLaserManager->AddLaser( centreLaser );
 }
 
@@ -295,9 +295,9 @@ void AddonPhaseBarrier::Render( const glm::mat4& /*moduleModelTransform*/ )
     pShipShaderUniforms->Get( ShipShaderUniform::ClipForward )->Get( &clipForward );
     m_pClipForwardUniform->Set( clipForward );
 
-    glm::vec4 ambientColour;
-    pShipShaderUniforms->Get( ShipShaderUniform::AmbientColour )->Get( &ambientColour );
-    m_pAmbientColourUniform->Set( ambientColour );
+    glm::vec4 ambientColor;
+    pShipShaderUniforms->Get( ShipShaderUniform::AmbientColor )->Get( &ambientColor );
+    m_pAmbientColorUniform->Set( ambientColor );
 
     m_pActiveUniform->Set( IsActive() ? 1.0f : 0.0f );
 
@@ -382,18 +382,18 @@ void AddonPhaseBarrier::CreateGeometry()
     m_pVertexBuffer->CopyPositions( posData );
     m_pVertexBuffer->CopyUVs( uvData );
 
-    UpdateColour();
+    UpdateColor();
 }
 
-void AddonPhaseBarrier::UpdateColour()
+void AddonPhaseBarrier::UpdateColor()
 {
     using namespace Genesis;
 
-    ColourData colourData;
-    colourData.reserve( sMaxPhaseBarrierPoints * 3 * 6 );
+    ColorData colorData;
+    colorData.reserve( sMaxPhaseBarrierPoints * 3 * 6 );
 
     const float alphaMultiplier[ 4 ] = { 0.0f, 1.0f, 1.0f, 0.75f };
-    const Genesis::Color shieldColour( 1.0f, 0.35f, 0.0f, 1.0f );
+    const Genesis::Color shieldColor( 1.0f, 0.35f, 0.0f, 1.0f );
 
     for ( int k = 0; k < 3; ++k )
     {
@@ -402,17 +402,17 @@ void AddonPhaseBarrier::UpdateColour()
 
         for ( int i = 0; i < sMaxPhaseBarrierPoints; ++i )
         {
-            colourData.emplace_back( shieldColour.r * am1, shieldColour.g * am1, shieldColour.b * am1, 0.5f * am1 );
-            colourData.emplace_back( shieldColour.r * am2, shieldColour.g * am2, shieldColour.b * am2, 0.5f * am2 );
-            colourData.emplace_back( shieldColour.r * am1, shieldColour.g * am1, shieldColour.b * am1, 0.5f * am1 );
+            colorData.emplace_back( shieldColor.r * am1, shieldColor.g * am1, shieldColor.b * am1, 0.5f * am1 );
+            colorData.emplace_back( shieldColor.r * am2, shieldColor.g * am2, shieldColor.b * am2, 0.5f * am2 );
+            colorData.emplace_back( shieldColor.r * am1, shieldColor.g * am1, shieldColor.b * am1, 0.5f * am1 );
 
-            colourData.emplace_back( shieldColour.r * am2, shieldColour.g * am2, shieldColour.b * am2, 0.5f * am2 );
-            colourData.emplace_back( shieldColour.r * am2, shieldColour.g * am2, shieldColour.b * am2, 0.5f * am2 );
-            colourData.emplace_back( shieldColour.r * am1, shieldColour.g * am1, shieldColour.b * am1, 0.5f * am1 );
+            colorData.emplace_back( shieldColor.r * am2, shieldColor.g * am2, shieldColor.b * am2, 0.5f * am2 );
+            colorData.emplace_back( shieldColor.r * am2, shieldColor.g * am2, shieldColor.b * am2, 0.5f * am2 );
+            colorData.emplace_back( shieldColor.r * am1, shieldColor.g * am1, shieldColor.b * am1, 0.5f * am1 );
         }
     }
 
-    m_pVertexBuffer->CopyColours( colourData );
+    m_pVertexBuffer->CopyColors( colorData );
 }
 
 void AddonPhaseBarrier::CreatePhysicsGhost()

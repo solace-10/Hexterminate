@@ -49,7 +49,7 @@ Background::Background( const BackgroundInfo* pBackgroundInfo, StarInfo* pStarIn
     , m_pVertexBuffer( nullptr )
     , m_pStarInfo( pStarInfo )
     , m_pStarOffset( nullptr )
-    , m_AmbientColour( pBackgroundInfo->GetAmbientColour().glm() )
+    , m_AmbientColor( pBackgroundInfo->GetAmbientColor().glm() )
 {
     using namespace Genesis;
 
@@ -72,11 +72,11 @@ Background::Background( const BackgroundInfo* pBackgroundInfo, StarInfo* pStarIn
 
     if ( pStarInfo != nullptr )
     {
-        ShaderUniform* pCoreColour = m_pShader->RegisterUniform( "k_coreColour", ShaderUniformType::FloatVector3 );
-        pCoreColour->Set( pStarInfo->GetCoreColour() );
+        ShaderUniform* pCoreColor = m_pShader->RegisterUniform( "k_coreColor", ShaderUniformType::FloatVector3 );
+        pCoreColor->Set( pStarInfo->GetCoreColor() );
 
-        ShaderUniform* pCoronaColour = m_pShader->RegisterUniform( "k_coronaColour", ShaderUniformType::FloatVector3 );
-        pCoronaColour->Set( pStarInfo->GetCoronaColour() );
+        ShaderUniform* pCoronaColor = m_pShader->RegisterUniform( "k_coronaColor", ShaderUniformType::FloatVector3 );
+        pCoronaColor->Set( pStarInfo->GetCoronaColor() );
 
         ShaderUniform* pDistance = m_pShader->RegisterUniform( "k_distance", ShaderUniformType::Float );
         pDistance->Set( pStarInfo->GetDistance() );
@@ -97,7 +97,7 @@ Background::Background( const BackgroundInfo* pBackgroundInfo, StarInfo* pStarIn
         ShaderUniform* pStarUvScale = m_pShader->RegisterUniform( "k_starUvScale", ShaderUniformType::FloatVector2 );
         pStarUvScale->Set( starUvScale );
 
-        m_AmbientColour = glm::mix( m_pBackgroundInfo->GetAmbientColour().glm(), glm::vec4( pStarInfo->GetCoreColour(), 1.0f ), 0.2f );
+        m_AmbientColor = glm::mix( m_pBackgroundInfo->GetAmbientColor().glm(), glm::vec4( pStarInfo->GetCoreColor(), 1.0f ), 0.2f );
 
         // If we are attempting to take a ship capture screenshot, move the star well out of the way!
         if ( g_pGame->IsShipCaptureModeActive() )

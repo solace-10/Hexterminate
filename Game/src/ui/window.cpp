@@ -42,13 +42,13 @@ Window::Window( const std::string& name, bool canBeClosed /* = false */ )
 
     m_pTitlePanel = std::make_shared<Panel>( "Title" );
     m_pTitlePanel->SetBorders( false, false, true, false );
-    m_pTitlePanel->SetBorderColour( 0.309f, 0.639f, 0.690f, 1.0f );
+    m_pTitlePanel->SetBorderColor( 0.309f, 0.639f, 0.690f, 1.0f );
     m_pTitlePanel->SetSize( 128, sTitleHeight );
     Add( m_pTitlePanel );
 
     m_pTitleText = std::make_shared<Text>( "Title text" );
     m_pTitleText->SetFont( "kimberley22.fnt" );
-    m_pTitleText->SetColour( 0.309f, 0.639f, 0.690f, 1.0f );
+    m_pTitleText->SetColor( 0.309f, 0.639f, 0.690f, 1.0f );
     m_pTitleText->SetPosition( 8, 6 );
     m_pTitlePanel->Add( m_pTitleText );
 

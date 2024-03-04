@@ -53,7 +53,7 @@ SilverThreadRep::SilverThreadRep( SilverThread* pSilverThread )
 
     m_pStarShader = pShaderCache->Load( "hyperscape_star" );
     m_pStarParallax = m_pStarShader->RegisterUniform( "k_parallax", ShaderUniformType::FloatVector2 );
-    m_pLocationVB = new VertexBuffer( GeometryType::Triangle, VBO_POSITION | VBO_UV | VBO_COLOUR );
+    m_pLocationVB = new VertexBuffer( GeometryType::Triangle, VBO_POSITION | VBO_UV | VBO_COLOR );
     const size_t locationReserveSize = 128;
     m_LocationPosData.resize( locationReserveSize );
     m_LocationUVData.resize( locationReserveSize );
@@ -61,7 +61,7 @@ SilverThreadRep::SilverThreadRep( SilverThread* pSilverThread )
 
     m_pLinkShader = pShaderCache->Load( "hyperscape_link" );
     m_pLinkParallax = m_pLinkShader->RegisterUniform( "k_parallax", ShaderUniformType::FloatVector2 );
-    m_pLinkVB = new VertexBuffer( GeometryType::Triangle, VBO_POSITION | VBO_UV | VBO_COLOUR );
+    m_pLinkVB = new VertexBuffer( GeometryType::Triangle, VBO_POSITION | VBO_UV | VBO_COLOR );
     m_LinkPosData.resize( locationReserveSize );
     m_LinkUVData.resize( locationReserveSize );
     m_LinkColorData.resize( locationReserveSize );
@@ -208,7 +208,7 @@ void SilverThreadRep::RebuildLocationVB()
         m_LocationUVData[ slotsUsed + 5 ] = glm::vec2( 1.0f, 1.0f ); // 3
 
         const float coreSize = 0.01f + static_cast<float>( pStarInfo->GetSeed() % 1000 ) / 10000.0f;
-        const glm::vec3& color = pStarInfo->GetCoreColour();
+        const glm::vec3& color = pStarInfo->GetCoreColor();
         for ( int i = 0; i < 6; ++i )
         {
             m_LocationColorData[ slotsUsed + i ] = glm::vec4( color.r, color.g, color.b, coreSize );
@@ -262,7 +262,7 @@ void SilverThreadRep::RebuildLocationVB()
 
     m_pLocationVB->CopyPositions( m_LocationPosData, slotsUsed );
     m_pLocationVB->CopyUVs( m_LocationUVData, slotsUsed );
-    m_pLocationVB->CopyColours( m_LocationColorData, slotsUsed );
+    m_pLocationVB->CopyColors( m_LocationColorData, slotsUsed );
 }
 
 void SilverThreadRep::RebuildLinkVB()
@@ -320,7 +320,7 @@ void SilverThreadRep::RebuildLinkVB()
 
     m_pLinkVB->CopyPositions( m_LinkPosData, slotsUsed );
     m_pLinkVB->CopyUVs( m_LinkUVData, slotsUsed );
-    m_pLinkVB->CopyColours( m_LinkColorData, slotsUsed );
+    m_pLinkVB->CopyColors( m_LinkColorData, slotsUsed );
 }
 
 } // namespace Hexterminate

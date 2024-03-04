@@ -73,9 +73,9 @@ namespace Gui
         void SetHighlightedElement( GuiElement* pElement );
 
         static Shader* GetUntexturedShader();
-        static ShaderUniform* GetUntexturedShaderColourUniform();
+        static ShaderUniform* GetUntexturedShaderColorUniform();
         static Shader* GetTexturedShader();
-        static ShaderUniform* GetTexturedShaderColourUniform();
+        static ShaderUniform* GetTexturedShaderColorUniform();
         static ShaderUniform* GetTexturedSamplerUniform();
         static Shader* GetHighlightShader();
 
@@ -98,10 +98,10 @@ namespace Gui
         InputArea* m_FocusedInputArea;
 
         static Shader* m_pUntexturedShader;
-        static ShaderUniform* m_pUntexturedColourUniform;
+        static ShaderUniform* m_pUntexturedColorUniform;
         static Shader* m_pTexturedShader;
         static ShaderUniform* m_pTexturedSamplerUniform;
-        static ShaderUniform* m_pTexturedColourUniform;
+        static ShaderUniform* m_pTexturedColorUniform;
         static Shader* m_pHighlightShader;
     };
 
@@ -212,21 +212,21 @@ namespace Gui
 
         virtual void Render();
 
-        const Color& GetColour() const;
-        void SetColour( const Color& colour );
-        void SetColour( float r, float g, float b, float a );
+        const Color& GetColor() const;
+        void SetColor( const Color& color );
+        void SetColor( float r, float g, float b, float a );
 
-        const Color& GetBorderColour() const;
-        void SetBorderColour( const Color& colour );
-        void SetBorderColour( float r, float g, float b, float a );
+        const Color& GetBorderColor() const;
+        void SetBorderColor( const Color& color );
+        void SetBorderColor( float r, float g, float b, float a );
         void SetBorderMode( char borderMode );
 
     protected:
         void DrawBorder();
 
-        Color mColour;
-        Color mBorderColour;
-        char mBorderMode;
+        Color m_Color;
+        Color m_BorderColor;
+        char m_BorderMode;
 
         VertexBuffer* m_pBackgroundVertexBuffer;
         VertexBuffer* m_pBorderVertexBuffer;
@@ -252,7 +252,7 @@ namespace Gui
         VertexBuffer* m_pImageVertexBuffer;
         ResourceImage* m_pImage;
         Shader* m_pOverrideShader;
-        ShaderUniform* m_pOverrideShaderColourUniform;
+        ShaderUniform* m_pOverrideShaderColorUniform;
         ShaderUniform* m_pOverrideShaderSamplerUniform;
     };
 
@@ -304,9 +304,9 @@ namespace Gui
         ResourceFont* GetFont() const;
         const std::string& GetText() const;
         void SetText( const std::string& text );
-        const Color& GetColour() const;
-        void SetColour( const Color& colour );
-        void SetColour( float r, float g, float b, float a );
+        const Color& GetColor() const;
+        void SetColor( const Color& color );
+        void SetColor( float r, float g, float b, float a );
         void SetMultiLine( bool enabled );
         int GetLineCount() const;
         void AlignToCentre();
@@ -322,7 +322,7 @@ namespace Gui
         ResourceFont* m_pFont;
         std::string m_Text;
         std::string m_ProcessedText;
-        Color m_Colour;
+        Color m_Color;
         VertexBuffer* m_pVertexBuffer;
         float m_LineSpacing;
     };
@@ -341,28 +341,28 @@ namespace Gui
         virtual void OnPress(){};
         virtual void OnRelease(){};
         virtual void SetText( const std::string& text );
-        void SetTextColour( const Color& colour );
+        void SetTextColor( const Color& color );
         void SetFont( ResourceFont* font );
         bool IsMouseInside() const;
-        const Color& GetHoverColour() const;
-        void SetHoverColour( const Color& colour );
-        void SetHoverColour( float r, float g, float b, float a );
+        const Color& GetHoverColor() const;
+        void SetHoverColor( const Color& color );
+        void SetHoverColor( float r, float g, float b, float a );
         void SetIcon( const std::string& filename );
-        const Color& GetIconColour() const;
-        void SetIconColour( const Color& colour );
-        void SetIconColour( float r, float g, float b, float a );
-        const Color& GetIconHoverColour() const;
-        void SetIconHoverColour( const Color& colour );
-        void SetIconHoverColour( float r, float g, float b, float a );
+        const Color& GetIconColor() const;
+        void SetIconColor( const Color& color );
+        void SetIconColor( float r, float g, float b, float a );
+        const Color& GetIconHoverColor() const;
+        void SetIconHoverColor( const Color& color );
+        void SetIconHoverColor( float r, float g, float b, float a );
 
         virtual void Enable( bool state ) { mIsEnabled = state; }
         virtual bool IsEnabled() const { return mIsEnabled; }
 
     protected:
-        Color mHoverColour;
-        Color mIconColour;
-        Color mIconHoverColour;
-        Text* mText;
+        Color m_HoverColor;
+        Color m_IconColor;
+        Color m_IconHoverColor;
+        Text* m_pText;
         bool mIsEnabled;
         ResourceImage* m_pIcon;
 
@@ -394,12 +394,12 @@ namespace Gui
         bool IsPressed() const;
         void SetPressed( bool state );
 
-        const Color& GetBulletColour() const;
-        void SetBulletColour( const Color& colour );
-        void SetBulletColour( float r, float g, float b, float a );
+        const Color& GetBulletColor() const;
+        void SetBulletColor( const Color& color );
+        void SetBulletColor( float r, float g, float b, float a );
 
     private:
-        Color m_BulletColour;
+        Color m_BulletColor;
         bool m_Checked;
         VertexBuffer* m_pCheckboxBulletVertexBuffer;
         VertexBuffer* m_pCheckboxBorderVertexBuffer;
@@ -424,9 +424,9 @@ namespace Gui
 		bool IsChecked() const;
 		void SetChecked( bool state );
 
-		const Color& GetBulletColour() const;
-		void SetBulletColour( const Color& colour );
-		void SetBulletColour( float r, float g, float b, float a );
+		const Color& GetBulletColor() const;
+		void SetBulletColor( const Color& color );
+		void SetBulletColor( float r, float g, float b, float a );
 
 	private:
 		using RadioButtonVector = std::vector< RadioButton* >;
@@ -436,7 +436,7 @@ namespace Gui
 		void AddToGroup();
 		void RemoveFromGroup();
 
-		Color m_BulletColour;
+		Color m_BulletColor;
 		bool m_Checked;
 		VertexBufferUniquePtr m_pRadioButtonBulletVertexBuffer;
 		VertexBufferUniquePtr m_pRadioButtonBorderVertexBuffer;

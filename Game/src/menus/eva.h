@@ -22,17 +22,17 @@
 namespace Hexterminate
 {
 
-#define EVA_COLOUR_BACKGROUND Genesis::Color( 0.00f, 0.00f, 0.00f, 0.50f )
-#define EVA_COLOUR_BORDER Genesis::Color( 1.00f, 1.00f, 1.00f, 0.50f )
-#define EVA_BUTTON_COLOUR_BACKGROUND Genesis::Color( 0.00f, 0.00f, 0.00f, 0.30f )
-#define EVA_BUTTON_COLOUR_HOVER Genesis::Color( 1.00f, 1.00f, 1.00f, 0.10f )
-#define EVA_BUTTON_COLOUR_BORDER Genesis::Color( 0.68f, 0.72f, 0.82f, 1.00f )
-#define EVA_BUTTON_ICON_COLOUR Genesis::Color( 1.00f, 1.00f, 1.00f, 0.80f )
-#define EVA_BUTTON_ICON_COLOUR_HOVER Genesis::Color( 1.00f, 1.00f, 1.00f, 1.00f )
-#define EVA_COLOUR_TITLEBAR_BACKGROUND Genesis::Color( 0.68f, 0.72f, 0.82f, 0.60f )
-#define EVA_TEXT_COLOUR Genesis::Color( 1.00f, 1.00f, 1.00f, 0.80f )
-#define EVA_TEXT_COLOUR_DISABLED Genesis::Color( 0.40f, 0.40f, 0.40f, 0.40f )
-#define EVA_CHECKBOX_BULLET_COLOUR Genesis::Color( 0.00f, 1.00f, 1.00f, 0.80f )
+#define EVA_COLOR_BACKGROUND Genesis::Color( 0.00f, 0.00f, 0.00f, 0.50f )
+#define EVA_COLOR_BORDER Genesis::Color( 1.00f, 1.00f, 1.00f, 0.50f )
+#define EVA_BUTTON_COLOR_BACKGROUND Genesis::Color( 0.00f, 0.00f, 0.00f, 0.30f )
+#define EVA_BUTTON_COLOR_HOVER Genesis::Color( 1.00f, 1.00f, 1.00f, 0.10f )
+#define EVA_BUTTON_COLOR_BORDER Genesis::Color( 0.68f, 0.72f, 0.82f, 1.00f )
+#define EVA_BUTTON_ICON_COLOR Genesis::Color( 1.00f, 1.00f, 1.00f, 0.80f )
+#define EVA_BUTTON_ICON_COLOR_HOVER Genesis::Color( 1.00f, 1.00f, 1.00f, 1.00f )
+#define EVA_COLOR_TITLEBAR_BACKGROUND Genesis::Color( 0.68f, 0.72f, 0.82f, 0.60f )
+#define EVA_TEXT_COLOR Genesis::Color( 1.00f, 1.00f, 1.00f, 0.80f )
+#define EVA_TEXT_COLOR_DISABLED Genesis::Color( 0.40f, 0.40f, 0.40f, 0.40f )
+#define EVA_CHECKBOX_BULLET_COLOR Genesis::Color( 0.00f, 1.00f, 1.00f, 0.80f )
 
 #define EVA_FONT (Genesis::ResourceFont*)Genesis::FrameWork::GetResourceManager()->GetResource( "data/fonts/fixedsys16.fnt" )
 #define EVA_FONT_BOLD (Genesis::ResourceFont*)Genesis::FrameWork::GetResourceManager()->GetResource( "data/fonts/fixedsys16bold.fnt" )

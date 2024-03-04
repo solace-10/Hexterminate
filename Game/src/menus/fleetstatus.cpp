@@ -50,8 +50,8 @@ FleetStatus::FleetStatus()
 
     m_pMainPanel = new Genesis::Gui::Panel();
     m_pMainPanel->SetPosition( outerBorder, outerBorder );
-    m_pMainPanel->SetColour( 0.0f, 0.0f, 0.0f, 0.40f );
-    m_pMainPanel->SetBorderColour( 1.0f, 1.0f, 1.0f, 0.25f );
+    m_pMainPanel->SetColor( 0.0f, 0.0f, 0.0f, 0.40f );
+    m_pMainPanel->SetBorderColor( 1.0f, 1.0f, 1.0f, 0.25f );
     m_pMainPanel->SetBorderMode( Genesis::Gui::PANEL_BORDER_ALL );
     pGuiManager->AddElement( m_pMainPanel );
 
@@ -107,7 +107,7 @@ void FleetStatus::AddShip( Ship* pShip )
     }
 }
 
-Genesis::Color FleetStatus::GetShipIntegrityColour( int integrity ) const
+Genesis::Color FleetStatus::GetShipIntegrityColor( int integrity ) const
 {
     if ( integrity > 75 )
     {
@@ -152,7 +152,7 @@ void FleetStatus::Update()
                 std::stringstream integrityText;
                 integrityText << std::setw( 4 ) << std::right << integrity << "%";
                 entry.m_pRow->Set( 1, integrityText.str() );
-                entry.m_pRow->SetColour( GetShipIntegrityColour( integrity ) );
+                entry.m_pRow->SetColor( GetShipIntegrityColor( integrity ) );
 
                 if ( entry.m_Destroyed == false && entry.m_pShip->IsDestroyed() )
                 {

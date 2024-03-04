@@ -58,7 +58,7 @@ void PerkPanel::Init( Perk perk, const std::string& name, const std::string& des
 
     m_pIcon = new PerkButton( this, perk, cost );
     m_pIcon->SetSize( 64, 64 );
-    m_pIcon->SetColour( 1.0f, 1.0f, 1.0f, 1.0f );
+    m_pIcon->SetColor( 1.0f, 1.0f, 1.0f, 1.0f );
     m_pIcon->SetBorderMode( Genesis::Gui::PANEL_BORDER_NONE );
     m_pIcon->SetPosition( GetWidth() / 2 - 32, 8 );
     m_pIcon->SetTexture( (Genesis::ResourceImage*)Genesis::FrameWork::GetResourceManager()->GetResource( icon ) );
@@ -68,7 +68,7 @@ void PerkPanel::Init( Perk perk, const std::string& name, const std::string& des
     if ( state != PerkState::Enabled )
     {
         m_pCost = GuiExtended::CreateText( 8, 32, 256, 32, std::to_string( cost ), this, true );
-        m_pCost->SetColour( 1.0f, 1.0f, 1.0f, 1.0f );
+        m_pCost->SetColor( 1.0f, 1.0f, 1.0f, 1.0f );
         AlignToCentre( m_pCost );
     }
 
@@ -125,21 +125,21 @@ void PerkPanel::SetState( PerkState state )
 
     if ( state == PerkState::Disabled )
     {
-        m_pIcon->SetColour( 1.0f, 0.0f, 0.0f, 0.6f );
+        m_pIcon->SetColor( 1.0f, 0.0f, 0.0f, 0.6f );
         m_pIcon->SetEnabled( false );
-        m_pTitle->SetColour( 1.0f, 1.0f, 1.0f, 0.6f );
+        m_pTitle->SetColor( 1.0f, 1.0f, 1.0f, 0.6f );
     }
     else if ( state == PerkState::Locked )
     {
-        m_pIcon->SetColour( 0.5f, 0.5f, 0.5f, 0.6f );
+        m_pIcon->SetColor( 0.5f, 0.5f, 0.5f, 0.6f );
         m_pIcon->SetEnabled( true );
-        m_pTitle->SetColour( 1.0f, 1.0f, 1.0f, 0.6f );
+        m_pTitle->SetColor( 1.0f, 1.0f, 1.0f, 0.6f );
     }
     else
     {
-        m_pIcon->SetColour( 1.0f, 1.0f, 1.0f, 1.0f );
+        m_pIcon->SetColor( 1.0f, 1.0f, 1.0f, 1.0f );
         m_pIcon->SetEnabled( false );
-        m_pTitle->SetColour( EVA_TEXT_COLOUR );
+        m_pTitle->SetColor( EVA_TEXT_COLOR );
         showCost = false;
     }
 

@@ -32,7 +32,7 @@ static const char* sTextPropertyMultiline = "multiline";
 static const char* sTextPropertyLabel = "label";
 static const char* sTextPropertyFont = "font";
 static const char* sTextPropertyLineSpacing = "line_spacing";
-static const char* sTextPropertyColour = "colour";
+static const char* sTextPropertyColor = "color";
 static const char* sTextPropertyAlignment = "alignment";
 
 Text::Text( const std::string& name )
@@ -40,12 +40,12 @@ Text::Text( const std::string& name )
     , m_Multiline( false )
     , m_pText( nullptr )
     , m_Label( "???" )
-    , m_Colour( { 1.0f, 1.0f, 1.0f, 1.0f } )
+    , m_Color( { 1.0f, 1.0f, 1.0f, 1.0f } )
     , m_Alignment( Alignment::Left )
 {
     m_pText = new Genesis::Gui::Text();
     m_pText->SetSize( 256.0f, 16.0f );
-    m_pText->SetColour( 1.0f, 1.0f, 1.0f, 1.0f );
+    m_pText->SetColor( 1.0f, 1.0f, 1.0f, 1.0f );
     m_pText->SetMultiLine( false );
     m_pText->SetFont( Fonts::Get( "kimberley18light.fnt" ) );
     m_pText->SetLineSpacing( 1.4f );
@@ -65,13 +65,13 @@ void Text::SaveProperties( json& properties )
     properties[ sTextPropertyLabel ] = m_Label;
     properties[ sTextPropertyFont ] = m_pText->GetFont()->GetFilename().GetName();
     properties[ sTextPropertyLineSpacing ] = m_pText->GetLineSpacing();
-    properties[ sTextPropertyColour ] = {
-        { "r", m_Colour[ 0 ] },
-        { "g", m_Colour[ 1 ] },
-        { "b", m_Colour[ 2 ] },
-        { "a", m_Colour[ 3 ] }
+    properties[ sTextPropertyColor ] = {
+        { "r", m_Color[ 0 ] },
+        { "g", m_Color[ 1 ] },
+        { "b", m_Color[ 2 ] },
+        { "a", m_Color[ 3 ] }
     };
-    
+
     if ( m_Alignment == Alignment::Right )
     {
         properties[ sTextPropertyAlignment ] = "right";
@@ -117,14 +117,14 @@ void Text::LoadProperties( const json& properties )
         m_pText->SetLineSpacing( properties[ sTextPropertyLineSpacing ].get<float>() );
     }
 
-    if ( properties.contains( sTextPropertyColour ) )
+    if ( properties.contains( sTextPropertyColor ) )
     {
-        const json& colour = properties[ sTextPropertyColour ];
-        m_Colour[ 0 ] = colour[ "r" ].get<float>();
-        m_Colour[ 1 ] = colour[ "g" ].get<float>();
-        m_Colour[ 2 ] = colour[ "b" ].get<float>();
-        m_Colour[ 3 ] = colour[ "a" ].get<float>();
-        m_pText->SetColour( m_Colour[ 0 ], m_Colour[ 1 ], m_Colour[ 2 ], m_Colour[ 3 ] );
+        const json& color = properties[ sTextPropertyColor ];
+        m_Color[ 0 ] = color[ "r" ].get<float>();
+        m_Color[ 1 ] = color[ "g" ].get<float>();
+        m_Color[ 2 ] = color[ "b" ].get<float>();
+        m_Color[ 3 ] = color[ "a" ].get<float>();
+        m_pText->SetColor( m_Color[ 0 ], m_Color[ 1 ], m_Color[ 2 ], m_Color[ 3 ] );
     }
 
     if ( properties.contains( sTextPropertyAlignment ) )
@@ -169,18 +169,23 @@ void Text::RenderProperties()
             m_pText->SetMultiLine( m_Multiline );
         }
 
+        bool textChanged = false;
         if ( m_Multiline )
         {
-            ImGui::InputTextMultiline( "Text", &m_Label, ImVec2( 0, ImGui::GetTextLineHeight() * 8 ) );
+            textChanged = ImGui::InputTextMultiline( "Text", &m_Label, ImVec2( 0, ImGui::GetTextLineHeight() * 8 ) );
         }
         else
         {
-            ImGui::InputText( "Text", &m_Label );
+            textChanged = ImGui::InputText( "Text", &m_Label );
         }
-        m_pText->SetText( m_Label );
+
+        if ( textChanged )
+        {
+            SetText( m_Label );
+        }
 
         int alignment = static_cast<int>( m_Alignment );
-        if ( ImGui::Combo("Alignment", &alignment, "Left\0Right\0Center\0\0") )
+        if ( ImGui::Combo( "Alignment", &alignment, "Left\0Right\0Center\0\0" ) )
         {
             SetAlignment( static_cast<Alignment>( alignment ) );
         }
@@ -189,20 +194,25 @@ void Text::RenderProperties()
         ImGui::InputFloat( "Line spacing", &lineSpacing );
         m_pText->SetLineSpacing( lineSpacing );
 
-        if ( ImGui::ColorEdit4( "Colour", m_Colour.data() ) )
+        if ( ImGui::ColorEdit4( "Color", m_Color.data() ) )
         {
-            m_pText->SetColour( m_Colour[ 0 ], m_Colour[ 1 ], m_Colour[ 2 ], m_Colour[ 3 ] );
+            m_pText->SetColor( m_Color[ 0 ], m_Color[ 1 ], m_Color[ 2 ], m_Color[ 3 ] );
         }
     }
 }
 
-void Text::SetColour( float r, float g, float b, float a )
+void Text::SetColor( const Genesis::Color& color )
 {
-    m_pText->SetColour( r, g, b, a );
-    m_Colour[ 0 ] = r;
-    m_Colour[ 1 ] = g;
-    m_Colour[ 2 ] = b;
-    m_Colour[ 3 ] = a;
+    m_pText->SetColor( color );
+    m_Color[ 0 ] = color.r;
+    m_Color[ 1 ] = color.g;
+    m_Color[ 2 ] = color.b;
+    m_Color[ 3 ] = color.a;
+}
+
+void Text::SetColor( float r, float g, float b, float a )
+{
+    SetColor( Genesis::Color( r, g, b, a ) );
 }
 
 void Text::SetFont( const std::string& fontName )

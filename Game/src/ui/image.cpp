@@ -40,8 +40,8 @@ Image::Image( const std::string& name, const std::string& path /* = "" */ )
 {
     using namespace Genesis;
 
-    GetPanel()->SetColour( 0.0f, 0.0f, 0.0f, 0.0f );
-    GetPanel()->SetBorderColour( 0.0f, 0.0f, 0.0f, 0.0f );
+    GetPanel()->SetColor( 0.0f, 0.0f, 0.0f, 0.0f );
+    GetPanel()->SetBorderColor( 0.0f, 0.0f, 0.0f, 0.0f );
     m_pImage = new Genesis::Gui::Image();
     GetPanel()->AddElement( m_pImage );
 
@@ -57,9 +57,14 @@ void Image::SetBlendMode( BlendMode blendMode )
     m_pImage->SetBlendMode( static_cast<Genesis::BlendMode>( blendMode ) );
 }
 
-void Image::SetColour( float r, float g, float b, float a )
+void Image::SetColor( const Genesis::Color& color )
 {
-    m_pImage->SetColour( r, g, b, a );
+    SetColor( color.r, color.g, color.b, color.a );
+}
+
+void Image::SetColor( float r, float g, float b, float a )
+{
+    m_pImage->SetColor( r, g, b, a );
 }
 
 void Image::SetPath( const std::string& filename )

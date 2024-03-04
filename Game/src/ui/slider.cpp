@@ -38,12 +38,12 @@ Slider::Slider( const std::string& name, OnValueChanged onValueChanged /* = null
 
     m_pBar = std::make_shared<Panel>( "Bar" );
     m_pBar->SetEditable( false );
-    m_pBar->SetColour( 0.5f, 0.5f, 0.5f, 1.0f );
+    m_pBar->SetColor( 0.5f, 0.5f, 0.5f, 1.0f );
     Add( m_pBar );
 
     m_pHandle = std::make_shared<Panel>( "Handle" );
     m_pHandle->SetEditable( false );
-    m_pHandle->SetColour( 0.309f, 0.639f, 0.690f, 1.0f );
+    m_pHandle->SetColor( 0.309f, 0.639f, 0.690f, 1.0f );
     Add( m_pHandle );
 
     SetSize( 256, 16 );
@@ -65,11 +65,11 @@ void Slider::Update()
 
     if ( m_pHandle->IsHovered() || m_Grabbed )
     {
-        m_pHandle->SetColour( 0.0f, 1.0f, 1.0f, 1.0f );
+        m_pHandle->SetColor( 0.0f, 1.0f, 1.0f, 1.0f );
     }
     else
     {
-        m_pHandle->SetColour( 0.309f, 0.639f, 0.690f, 1.0f );
+        m_pHandle->SetColor( 0.309f, 0.639f, 0.690f, 1.0f );
     }
 
     if ( m_Grabbed )

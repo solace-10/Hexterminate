@@ -44,13 +44,13 @@ ScrollingElement::ScrollingElement( const std::string& name )
 
     m_pScrollbarBackground = std::make_shared<UI::Panel>( "Scrollbar background" );
     m_pScrollbarBackground->SetEditable( false );
-    m_pScrollbarBackground->SetColour( 0.0f, 0.0f, 0.0f, 0.3f );
+    m_pScrollbarBackground->SetColor( 0.0f, 0.0f, 0.0f, 0.3f );
     Add( m_pScrollbarBackground );
 
     m_pScrollbar = std::make_shared<UI::Panel>( "Scrollbar" );
     m_pScrollbar->SetEditable( false );
     m_pScrollbar->SetSize( GetScrollbarWidth(), GetScrollbarHeight() );
-    m_pScrollbar->SetColour( 1.0f, 1.0f, 1.0f, 0.3f );
+    m_pScrollbar->SetColor( 1.0f, 1.0f, 1.0f, 0.3f );
     m_pScrollbarBackground->Add( m_pScrollbar );
 
     m_pScrollUp = std::make_shared<UI::Image>( "Scroll up image", "data/ui/icons/arrowup.png" );
@@ -85,7 +85,7 @@ void ScrollingElement::Update()
     const float scrollingSpeed = 160.0f;
 
     const bool insideScrollbar = m_pScrollbar->IsHovered();
-    m_pScrollbar->SetColour( 1.0f, 1.0f, 1.0f, ( m_GrabAndHold || insideScrollbar ) ? 0.6f : 0.3f );
+    m_pScrollbar->SetColor( 1.0f, 1.0f, 1.0f, ( m_GrabAndHold || insideScrollbar ) ? 0.6f : 0.3f );
 
     float offset = 0.0f;
     InputManager* pInputManager = FrameWork::GetInputManager();

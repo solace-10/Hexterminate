@@ -58,7 +58,7 @@ void PerkTooltip::Init( const std::string& name, const std::string& description,
 
     m_pMainPanel = new Genesis::Gui::Panel();
     m_pMainPanel->SetSize( panelWidth, panelHeight );
-    m_pMainPanel->SetColour( Genesis::Color( 0.0f, 0.0f, 0.0f, 0.85f ) );
+    m_pMainPanel->SetColor( Genesis::Color( 0.0f, 0.0f, 0.0f, 0.85f ) );
     m_pMainPanel->SetBorderMode( Genesis::Gui::PANEL_BORDER_NONE );
     m_pMainPanel->Show( false );
     pGuiManager->AddElement( m_pMainPanel );
@@ -80,7 +80,7 @@ void PerkTooltip::Init( const std::string& name, const std::string& description,
     m_pCostIcon = new Genesis::Gui::Image();
     m_pCostIcon->SetSize( 16, 16 );
     m_pCostIcon->SetPosition( panelWidth - 21, 8 );
-    m_pCostIcon->SetColour( 1.0f, 1.0f, 1.0f, 0.9f );
+    m_pCostIcon->SetColor( 1.0f, 1.0f, 1.0f, 0.9f );
     m_pCostIcon->SetTexture( (Genesis::ResourceImage*)Genesis::FrameWork::GetResourceManager()->GetResource( "data/ui/icons/perks.png" ) );
     m_pMainPanel->AddElement( m_pCostIcon );
 }
@@ -94,7 +94,7 @@ void PerkTooltip::SetState( PerkState state )
         m_pCostIcon->Show( false );
         m_pCost->Show( false );
         m_pState->SetText( "Already purchased." );
-        m_pState->SetColour( Genesis::Color( 0.0f, 1.0f, 0.0f, 0.8f ) );
+        m_pState->SetColor( Genesis::Color( 0.0f, 1.0f, 0.0f, 0.8f ) );
     }
     else if ( state == PerkState::Locked )
     {
@@ -103,14 +103,14 @@ void PerkTooltip::SetState( PerkState state )
 
         if ( g_pGame->GetPlayer() == nullptr || m_Cost > g_pGame->GetPlayer()->GetPerkPoints() )
         {
-            m_pCost->SetColour( Genesis::Color( 1.0f, 0.0f, 0.0f, 0.8f ) );
-            m_pState->SetColour( Genesis::Color( 1.0f, 0.0f, 0.0f, 0.8f ) );
+            m_pCost->SetColor( Genesis::Color( 1.0f, 0.0f, 0.0f, 0.8f ) );
+            m_pState->SetColor( Genesis::Color( 1.0f, 0.0f, 0.0f, 0.8f ) );
             m_pState->SetText( "Insufficient perk points." );
         }
         else
         {
-            m_pCost->SetColour( EVA_TEXT_COLOUR );
-            m_pState->SetColour( Genesis::Color( 0.0f, 1.0f, 1.0f, 0.8f ) );
+            m_pCost->SetColor( EVA_TEXT_COLOR );
+            m_pState->SetColor( Genesis::Color( 0.0f, 1.0f, 1.0f, 0.8f ) );
             m_pState->SetText( "Can purchase perk." );
         }
     }
@@ -121,14 +121,14 @@ void PerkTooltip::SetState( PerkState state )
 
         if ( g_pGame->GetPlayer() == nullptr || m_Cost > g_pGame->GetPlayer()->GetPerkPoints() )
         {
-            m_pCost->SetColour( Genesis::Color( 1.0f, 0.0f, 0.0f, 0.8f ) );
+            m_pCost->SetColor( Genesis::Color( 1.0f, 0.0f, 0.0f, 0.8f ) );
         }
         else
         {
-            m_pCost->SetColour( EVA_TEXT_COLOUR );
+            m_pCost->SetColor( EVA_TEXT_COLOR );
         }
 
-        m_pState->SetColour( Genesis::Color( 1.0f, 0.0f, 0.0f, 0.8f ) );
+        m_pState->SetColor( Genesis::Color( 1.0f, 0.0f, 0.0f, 0.8f ) );
         m_pState->SetText( "Previous perk required." );
     }
 }

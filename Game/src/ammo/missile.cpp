@@ -39,7 +39,7 @@ Missile::Missile()
     , m_pTargetShip( nullptr )
     , m_LaunchTimer( 0.0f )
     , m_GlowSize( 30.0f )
-    , m_GlowColour( 0.8f, 0.8f, 0.8f, 1.0f )
+    , m_GlowColor( 0.8f, 0.8f, 0.8f, 1.0f )
 {
     m_SwarmTimer = (float)( rand() % 314 ) / 100.0f;
 }
@@ -177,7 +177,7 @@ void Missile::UpdateGlow()
     Sprite sprite(
         source,
         destination,
-        GetGlowColour(),
+        GetGlowColor(),
         size,
         0 );
 

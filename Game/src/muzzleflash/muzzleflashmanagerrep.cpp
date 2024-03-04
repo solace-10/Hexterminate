@@ -49,7 +49,7 @@ MuzzleflashManagerRep::MuzzleflashManagerRep( MuzzleflashManager* pManager )
     ShaderUniform* pDiffuseSamplerUniform = m_pShader->RegisterUniform( "k_sampler0", ShaderUniformType::Texture );
     pDiffuseSamplerUniform->Set( pTexture, GL_TEXTURE0 );
 
-    m_pVertexBuffer = new VertexBuffer( GeometryType::Triangle, VBO_POSITION | VBO_UV | VBO_COLOUR );
+    m_pVertexBuffer = new VertexBuffer( GeometryType::Triangle, VBO_POSITION | VBO_UV | VBO_COLOR );
 }
 
 MuzzleflashManagerRep::~MuzzleflashManagerRep()
@@ -70,10 +70,10 @@ void MuzzleflashManagerRep::Update( float delta )
 
     PositionData posData;
     UVData uvData;
-    ColourData colourData;
+    ColorData colorData;
     posData.reserve( 512 );
     uvData.reserve( 512 );
-    colourData.reserve( 512 );
+    colorData.reserve( 512 );
 
     const MuzzleflashDataVector& muzzleflashes = m_pManager->GetMuzzleflashes();
     glm::vec3 p1, p2, d;
@@ -119,7 +119,7 @@ void MuzzleflashManagerRep::Update( float delta )
             posData.push_back( v[ 3 ] );
 
             PushBackUVs( uvData );
-            PushBackColours( colourData, muzzleflash.GetWeapon()->GetInfo()->GetMuzzleflashColour() );
+            PushBackColors( colorData, muzzleflash.GetWeapon()->GetInfo()->GetMuzzleflashColor() );
         }
     }
 
@@ -128,7 +128,7 @@ void MuzzleflashManagerRep::Update( float delta )
     {
         m_pVertexBuffer->CopyPositions( posData );
         m_pVertexBuffer->CopyUVs( uvData );
-        m_pVertexBuffer->CopyColours( colourData );
+        m_pVertexBuffer->CopyColors( colorData );
     }
 }
 
@@ -148,14 +148,14 @@ void MuzzleflashManagerRep::PushBackUVs( Genesis::UVData& uvData )
     }
 }
 
-void MuzzleflashManagerRep::PushBackColours( Genesis::ColourData& colourData, const Genesis::Color& colour )
+void MuzzleflashManagerRep::PushBackColors( Genesis::ColorData& colorData, const Genesis::Color& color )
 {
     using namespace Genesis;
-    const float r = colour.r;
-    const float g = colour.g;
-    const float b = colour.b;
+    const float r = color.r;
+    const float g = color.g;
+    const float b = color.b;
     const float a = 1.0f;
-    const glm::vec4 colours[ 4 ] = {
+    const glm::vec4 colors[ 4 ] = {
         glm::vec4( r, g, b, a ),
         glm::vec4( r, g, b, a ),
         glm::vec4( r, g, b, a ),
@@ -164,7 +164,7 @@ void MuzzleflashManagerRep::PushBackColours( Genesis::ColourData& colourData, co
 
     for ( Uint32 i = 0; i < sMuzzleflashNumBaseIndices; ++i )
     {
-        colourData.push_back( colours[ sMuzzleflashBaseIndices[ i ] ] );
+        colorData.push_back( colors[ sMuzzleflashBaseIndices[ i ] ] );
     }
 }
 

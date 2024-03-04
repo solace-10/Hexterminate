@@ -39,14 +39,14 @@ PointOfInterest::PointOfInterest()
 {
     using namespace Genesis;
 
-    m_Colour.Set( 1.0f, 1.0f, 1.0f, 1.0f );
+    m_Color.Set( 1.0f, 1.0f, 1.0f, 1.0f );
 
     SetSize(
         static_cast<float>( Genesis::Configuration::GetScreenWidth() ),
         static_cast<float>( Genesis::Configuration::GetScreenHeight() ) );
 
-    m_pVertexBuffer = new VertexBuffer( GeometryType::Line, VBO_POSITION | VBO_UV | VBO_COLOUR );
-    m_pShader = FrameWork::GetRenderSystem()->GetShaderCache()->Load( "untextured_vertex_coloured" );
+    m_pVertexBuffer = new VertexBuffer( GeometryType::Line, VBO_POSITION | VBO_UV | VBO_COLOR );
+    m_pShader = FrameWork::GetRenderSystem()->GetShaderCache()->Load( "untextured_vertex_colored" );
 }
 
 PointOfInterest::~PointOfInterest()
@@ -66,12 +66,12 @@ void PointOfInterest::Render()
     posData.push_back( glm::vec3( m_Start.x, m_Start.y, 0.0f ) );
     posData.push_back( glm::vec3( end.x, end.y, 0.0f ) );
 
-    ColourData colourData;
-    colourData.push_back( m_Colour.glm() );
-    colourData.push_back( m_Colour.glm() );
+    ColorData colorData;
+    colorData.push_back( m_Color.glm() );
+    colorData.push_back( m_Color.glm() );
 
     m_pVertexBuffer->CopyPositions( posData );
-    m_pVertexBuffer->CopyColours( colourData );
+    m_pVertexBuffer->CopyColors( colorData );
 
     m_pShader->Use();
     m_pVertexBuffer->Draw();

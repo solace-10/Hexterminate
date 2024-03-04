@@ -39,8 +39,8 @@ bool ParticleSort( const Particle* pA, const Particle* pB )
 ParticleManagerRep::ParticleManagerRep( ParticleManager* pParticleManager )
     : m_pParticleManager( pParticleManager )
 {
-    m_pPass[ 0 ] = new ParticlePass( Genesis::BlendMode::Add, "textured_vertex_coloured", true );
-    m_pPass[ 1 ] = new ParticlePass( Genesis::BlendMode::Blend, "textured_vertex_coloured", false );
+    m_pPass[ 0 ] = new ParticlePass( Genesis::BlendMode::Add, "textured_vertex_colored", true );
+    m_pPass[ 1 ] = new ParticlePass( Genesis::BlendMode::Blend, "textured_vertex_colored", false );
 }
 
 ParticleManagerRep::~ParticleManagerRep()
@@ -93,7 +93,7 @@ void ParticleManagerRep::Update( float delta )
 
         pPass->m_PositionData.clear();
         pPass->m_UVData.clear();
-        pPass->m_ColourData.clear();
+        pPass->m_ColorData.clear();
 
         for ( auto& particleRenderData : pPass->m_Data )
         {
@@ -101,7 +101,7 @@ void ParticleManagerRep::Update( float delta )
 
             for ( auto& particle : particleRenderData.particles )
             {
-                AddQuad( particleRenderData.pAtlas, particle, pPass->m_PositionData, pPass->m_UVData, pPass->m_ColourData );
+                AddQuad( particleRenderData.pAtlas, particle, pPass->m_PositionData, pPass->m_UVData, pPass->m_ColorData );
             }
         }
 
@@ -109,7 +109,7 @@ void ParticleManagerRep::Update( float delta )
         {
             pPass->m_pVertexBuffer->CopyPositions( pPass->m_PositionData );
             pPass->m_pVertexBuffer->CopyUVs( pPass->m_UVData );
-            pPass->m_pVertexBuffer->CopyColours( pPass->m_ColourData );
+            pPass->m_pVertexBuffer->CopyColors( pPass->m_ColorData );
         }
     }
 }
@@ -132,7 +132,7 @@ int ParticleManagerRep::FindIndexForTexture( ParticlePass* pPass, int id )
     return i;
 }
 
-void ParticleManagerRep::AddQuad( const Genesis::Gui::Atlas* pAtlas, const Particle* pParticle, Genesis::PositionData& vertices, Genesis::UVData& uvs, Genesis::ColourData& colours )
+void ParticleManagerRep::AddQuad( const Genesis::Gui::Atlas* pAtlas, const Particle* pParticle, Genesis::PositionData& vertices, Genesis::UVData& uvs, Genesis::ColorData& colors )
 {
     float u1, u2, v1, v2;
     if ( pAtlas->GetElementCount() > 0 )
@@ -174,10 +174,10 @@ void ParticleManagerRep::AddQuad( const Genesis::Gui::Atlas* pAtlas, const Parti
     uvs.push_back( glm::vec2( u1, v2 ) );
 
     const float alpha = pParticle->GetAlpha();
-    glm::vec4 colour( 1.0f, 1.0f, 1.0f, alpha );
+    glm::vec4 color( 1.0f, 1.0f, 1.0f, alpha );
     for ( int i = 0; i < 6; ++i )
     {
-        colours.push_back( colour );
+        colors.push_back( color );
     }
 }
 

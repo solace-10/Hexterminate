@@ -78,9 +78,9 @@ void PanelShipyardDebug::CreateFactionSelectButtons()
         m_pButtonFactionSelect[ i ] = new ButtonFactionSelect( this, (FactionId)i );
         m_pButtonFactionSelect[ i ]->SetPosition( x, 32.0f );
         m_pButtonFactionSelect[ i ]->SetSize( w, w );
-        m_pButtonFactionSelect[ i ]->SetColour( EVA_BUTTON_COLOUR_BACKGROUND );
-        m_pButtonFactionSelect[ i ]->SetHoverColour( EVA_BUTTON_COLOUR_HOVER );
-        m_pButtonFactionSelect[ i ]->SetBorderColour( EVA_BUTTON_COLOUR_BORDER );
+        m_pButtonFactionSelect[ i ]->SetColor( EVA_BUTTON_COLOR_BACKGROUND );
+        m_pButtonFactionSelect[ i ]->SetHoverColor( EVA_BUTTON_COLOR_HOVER );
+        m_pButtonFactionSelect[ i ]->SetBorderColor( EVA_BUTTON_COLOR_BORDER );
         m_pButtonFactionSelect[ i ]->SetBorderMode( Genesis::Gui::PANEL_BORDER_ALL );
         m_pButtonFactionSelect[ i ]->SetFont( EVA_FONT );
         m_pButtonFactionSelect[ i ]->SetText( g_pGame->GetFaction( (FactionId)i )->GetName() );
@@ -97,9 +97,9 @@ void PanelShipyardDebug::CreateButtonSave()
     m_pButtonSave = new ButtonSaveHexGrid( this );
     m_pButtonSave->SetPosition( 666.0f, (float)Genesis::Configuration::GetScreenHeight() - 40.0f );
     m_pButtonSave->SetSize( (float)( screenWidth - 666 - 8 ), 32.0f );
-    m_pButtonSave->SetColour( EVA_BUTTON_COLOUR_BACKGROUND );
-    m_pButtonSave->SetHoverColour( EVA_BUTTON_COLOUR_HOVER );
-    m_pButtonSave->SetBorderColour( EVA_BUTTON_COLOUR_BORDER );
+    m_pButtonSave->SetColor( EVA_BUTTON_COLOR_BACKGROUND );
+    m_pButtonSave->SetHoverColor( EVA_BUTTON_COLOR_HOVER );
+    m_pButtonSave->SetBorderColor( EVA_BUTTON_COLOR_BORDER );
     m_pButtonSave->SetBorderMode( Genesis::Gui::PANEL_BORDER_ALL );
     m_pButtonSave->SetFont( EVA_FONT );
     m_pButtonSave->SetText( "Save hexgrid" );
@@ -116,7 +116,7 @@ void PanelShipyardDebug::CreateTableWindow()
     m_pTableTitle = new Genesis::Gui::Text();
     m_pTableTitle->SetSize( 256, 32 );
     m_pTableTitle->SetPosition( 8.0f, 8.0f );
-    m_pTableTitle->SetColour( EVA_TEXT_COLOUR );
+    m_pTableTitle->SetColor( EVA_TEXT_COLOR );
     m_pTableTitle->SetFont( EVA_FONT );
 
     if ( sLoadedFilename != "" )

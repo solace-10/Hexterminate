@@ -28,7 +28,7 @@ namespace Hexterminate
 Rocket::Rocket()
 {
     SetGlowSize( 25.0f );
-    SetGlowColour( Genesis::Color( 1.0f, 0.4f, 0.0f, 1.0f ) );
+    SetGlowColor( Genesis::Color( 1.0f, 0.4f, 0.0f, 1.0f ) );
 }
 
 MissileType Rocket::GetType() const

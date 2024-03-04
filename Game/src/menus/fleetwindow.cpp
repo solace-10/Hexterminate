@@ -92,13 +92,13 @@ void FleetWindow::Show( bool state )
                 rsi.pInfluenceText->SetText( influenceText.str() );
                 if ( HasSufficientInfluence( rsi.pShipInfo ) )
                 {
-                    rsi.pInfluenceIcon->SetColour( 1.0f, 1.0f, 1.0f, 1.0f );
-                    rsi.pInfluenceText->SetColour( 1.0f, 1.0f, 1.0f, 1.0f );
+                    rsi.pInfluenceIcon->SetColor( 1.0f, 1.0f, 1.0f, 1.0f );
+                    rsi.pInfluenceText->SetColor( 1.0f, 1.0f, 1.0f, 1.0f );
                 }
                 else
                 {
-                    rsi.pInfluenceIcon->SetColour( 1.0f, 0.0f, 0.0f, 1.0f );
-                    rsi.pInfluenceText->SetColour( 1.0f, 0.0f, 0.0f, 1.0f );
+                    rsi.pInfluenceIcon->SetColor( 1.0f, 0.0f, 0.0f, 1.0f );
+                    rsi.pInfluenceText->SetColor( 1.0f, 0.0f, 0.0f, 1.0f );
                 }
 
                 std::optional<Perk> requiredPerk = rsi.pShipInfo->GetRequiredPerk();
@@ -118,13 +118,13 @@ void FleetWindow::Show( bool state )
 
                     if ( g_pGame->GetPlayer()->GetPerks()->IsEnabled( requiredPerk.value() ) )
                     {
-                        rsi.pPerkIcon->SetColour( 1.0f, 1.0f, 1.0f, 1.0f );
-                        rsi.pPerkText->SetColour( 1.0f, 1.0f, 1.0f, 1.0f );
+                        rsi.pPerkIcon->SetColor( 1.0f, 1.0f, 1.0f, 1.0f );
+                        rsi.pPerkText->SetColor( 1.0f, 1.0f, 1.0f, 1.0f );
                     }
                     else
                     {
-                        rsi.pPerkIcon->SetColour( 1.0f, 0.0f, 0.0f, 1.0f );
-                        rsi.pPerkText->SetColour( 1.0f, 0.0f, 0.0f, 1.0f );
+                        rsi.pPerkIcon->SetColor( 1.0f, 0.0f, 0.0f, 1.0f );
+                        rsi.pPerkText->SetColor( 1.0f, 0.0f, 0.0f, 1.0f );
                     }
                 }
 
@@ -164,7 +164,7 @@ void FleetWindow::PopulateFleetShips()
         fsi.pBackground->Add( fsi.pReturnButton );
         fsi.pUnavailableIcon = std::make_shared<UI::Image>( "Unavailable icon" );
         fsi.pUnavailableIcon->SetShader( "gui_textured" );
-        fsi.pUnavailableIcon->SetColour( 1.0f, 0.0f, 0.0f, 1.0f );
+        fsi.pUnavailableIcon->SetColor( 1.0f, 0.0f, 0.0f, 1.0f );
         fsi.pBackground->Add( fsi.pUnavailableIcon );
         fsi.pUnavailableText = std::make_shared<UI::Text>( "Unavailable text" );
         fsi.pBackground->Add( fsi.pUnavailableText );

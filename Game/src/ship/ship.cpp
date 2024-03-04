@@ -1041,11 +1041,11 @@ void Ship::SetSharedShaderParameters( Module* pModule, Genesis::Material* pMater
 
     if ( pMaterial->shader == m_pUniforms->GetShader() )
     {
-        const Color& primaryColour = IsFlagship() ? GetFaction()->GetColour( FactionColourId::PrimaryFlagship ) : GetFaction()->GetColour( FactionColourId::Primary );
-        m_pUniforms->Set( ShipShaderUniform::PrimaryPaint, primaryColour.glm() );
+        const Color& primaryColor = IsFlagship() ? GetFaction()->GetColor( FactionColorId::PrimaryFlagship ) : GetFaction()->GetColor( FactionColorId::Primary );
+        m_pUniforms->Set( ShipShaderUniform::PrimaryPaint, primaryColor.glm() );
 
-        const Color& secondaryColour = IsFlagship() ? GetFaction()->GetColour( FactionColourId::SecondaryFlagship ) : GetFaction()->GetColour( FactionColourId::Secondary );
-        m_pUniforms->Set( ShipShaderUniform::SecondaryPaint, secondaryColour.glm() );
+        const Color& secondaryColor = IsFlagship() ? GetFaction()->GetColor( FactionColorId::SecondaryFlagship ) : GetFaction()->GetColor( FactionColorId::Secondary );
+        m_pUniforms->Set( ShipShaderUniform::SecondaryPaint, secondaryColor.glm() );
 
         const float healthRatio = pModule->GetHealth() / pModule->GetModuleInfo()->GetHealth( this );
         m_pUniforms->Set( ShipShaderUniform::Health, healthRatio );
@@ -1069,33 +1069,33 @@ void Ship::SetSharedShaderParameters( Module* pModule, Genesis::Material* pMater
         }
 
         const Background* pBackground = g_pGame->GetCurrentSector()->GetBackground();
-        const glm::vec4& ambient = pBackground->GetAmbientColour();
-        m_pUniforms->Set( ShipShaderUniform::AmbientColour, ambient );
+        const glm::vec4& ambient = pBackground->GetAmbientColor();
+        m_pUniforms->Set( ShipShaderUniform::AmbientColor, ambient );
 
-        const Genesis::Color& emissive = GetFaction()->GetColour( FactionColourId::Glow );
-        m_pUniforms->Set( ShipShaderUniform::EmissiveColour, emissive.glm() );
+        const Genesis::Color& emissive = GetFaction()->GetColor( FactionColorId::Glow );
+        m_pUniforms->Set( ShipShaderUniform::EmissiveColor, emissive.glm() );
 
         const float assemblyPercentage = pModule->GetAssemblyPercentage();
         ModuleType moduleType = pModule->GetModuleInfo()->GetType();
         if ( assemblyPercentage < 1.0f )
         {
             const float intensity = 1.0f - assemblyPercentage;
-            glm::vec4 overlayColour( 0.0f, 1.0f, 1.0f, intensity );
-            m_pUniforms->Set( ShipShaderUniform::OverlayColour, overlayColour );
+            glm::vec4 overlayColor( 0.0f, 1.0f, 1.0f, intensity );
+            m_pUniforms->Set( ShipShaderUniform::OverlayColor, overlayColor );
         }
         else if ( moduleType == ModuleType::Armour )
         {
             ArmourModule* pArmourModule = (ArmourModule*)pModule;
-            m_pUniforms->Set( ShipShaderUniform::OverlayColour, pArmourModule->GetOverlayColour() );
+            m_pUniforms->Set( ShipShaderUniform::OverlayColor, pArmourModule->GetOverlayColor() );
         }
         else if ( moduleType == ModuleType::Tower )
         {
             TowerModule* pTowerModule = (TowerModule*)pModule;
-            m_pUniforms->Set( ShipShaderUniform::OverlayColour, pTowerModule->GetOverlayColour( this ) );
+            m_pUniforms->Set( ShipShaderUniform::OverlayColor, pTowerModule->GetOverlayColor( this ) );
         }
         else
         {
-            m_pUniforms->Set( ShipShaderUniform::OverlayColour, glm::vec4( 0.0f ) );
+            m_pUniforms->Set( ShipShaderUniform::OverlayColor, glm::vec4( 0.0f ) );
         }
           
         if ( moduleType == ModuleType::Reactor)
@@ -1103,11 +1103,11 @@ void Ship::SetSharedShaderParameters( Module* pModule, Genesis::Material* pMater
             ReactorInfo* pReactorInfo = static_cast<ReactorInfo*>( pModule->GetModuleInfo() );
             if ( pReactorInfo->GetVariant() == ReactorVariant::Unstable )
             {
-                m_pUniforms->Set( ShipShaderUniform::EmissiveColour, glm::vec4( 1.0f, 0.3f, 0.0f, 1.0f ) );
+                m_pUniforms->Set( ShipShaderUniform::EmissiveColor, glm::vec4( 1.0f, 0.3f, 0.0f, 1.0f ) );
             }
             else
             {
-                m_pUniforms->Set( ShipShaderUniform::EmissiveColour, glm::vec4( 0.0f, 1.0f, 1.0f, 1.0f ) );
+                m_pUniforms->Set( ShipShaderUniform::EmissiveColor, glm::vec4( 0.0f, 1.0f, 1.0f, 1.0f ) );
             }
         }
 

@@ -68,7 +68,7 @@ public:
     Genesis::VertexBuffer* m_pVertexBuffer;
     Genesis::PositionData m_PositionData;
     Genesis::UVData m_UVData;
-    Genesis::ColourData m_ColourData;
+    Genesis::ColorData m_ColorData;
 
     EmitterRenderData m_Data;
 };

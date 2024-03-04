@@ -61,7 +61,7 @@ private:
     void DestroyPhysicsGhost();
     Genesis::Physics::ShapeSharedPtr CreatePhysicsShape();
     void CreateGeometry();
-    void UpdateColour();
+    void UpdateColor();
     void CreateLasers( const glm::vec3& barrierOrigin, const glm::vec3& barrierPosition );
     void CalculateSphereCenter();
     void CalculateSphereRadius();
@@ -75,7 +75,7 @@ private:
     Genesis::ShaderUniform* m_pClipActiveUniform;
     Genesis::ShaderUniform* m_pClipUniform;
     Genesis::ShaderUniform* m_pClipForwardUniform;
-    Genesis::ShaderUniform* m_pAmbientColourUniform;
+    Genesis::ShaderUniform* m_pAmbientColorUniform;
     Genesis::ShaderUniform* m_pActiveUniform;
 
     Genesis::Physics::Ghost* m_pGhost;

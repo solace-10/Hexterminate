@@ -2,7 +2,7 @@
 
 in vec2 UV;
 
-out vec4 colour;
+out vec4 color;
 
 uniform float k_time = 0;
 uniform sampler2D k_sampler0;
@@ -21,5 +21,5 @@ void main()
 	newUV = newUV * rotMat + vec2( 0.5, 0.5 );
 	sampledTexture = texture( k_sampler0, newUV );
 
-	colour = vec4( sampledTexture.r, sampledTexture.r, sampledTexture.r, sampledTexture.a );
+	color = vec4( sampledTexture.r, sampledTexture.r, sampledTexture.r, sampledTexture.a );
 }

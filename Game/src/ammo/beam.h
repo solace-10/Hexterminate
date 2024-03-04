@@ -51,8 +51,8 @@ protected:
 private:
     void SetupBeam();
     void SetupBeamFlare();
-    void RenderBeam( const glm::mat4& modelMatrix, const Genesis::Color& beamColour, float opacity );
-    void RenderBeamFlare( const glm::mat4& modelMatrix, const Genesis::Color& beamColour, float opacity );
+    void RenderBeam( const glm::mat4& modelMatrix, const Genesis::Color& beamColor, float opacity );
+    void RenderBeamFlare( const glm::mat4& modelMatrix, const Genesis::Color& beamColor, float opacity );
 
     static Genesis::Shader* m_pShader;
     static Genesis::Shader* m_pFlareShader;

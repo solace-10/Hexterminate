@@ -29,35 +29,36 @@
                             "r": false,
                             "t": true
                         },
-                        "colour": {
+                        "color": {
                             "a": 1.0,
                             "b": 1.0,
                             "g": 1.0,
                             "r": 1.0
                         },
                         "font": "kimberley18light.fnt",
-                        "label": "???",
+                        "label": "Addons",
                         "line_spacing": 1.399999976158142,
                         "multiline": false,
                         "position": {
-                            "x": 0.0,
-                            "y": 0.0
+                            "x": 34.0,
+                            "y": 114.0
                         },
                         "size": {
-                            "h": 128.0,
+                            "h": 24.0,
                             "w": 128.0
                         }
                     }
                 },
                 "Addons value": {
                     "properties": {
+                        "alignment": "right",
                         "anchor": {
                             "b": false,
                             "l": true,
                             "r": false,
                             "t": true
                         },
-                        "colour": {
+                        "color": {
                             "a": 1.0,
                             "b": 1.0,
                             "g": 1.0,
@@ -68,12 +69,12 @@
                         "line_spacing": 1.399999976158142,
                         "multiline": false,
                         "position": {
-                            "x": 0.0,
-                            "y": 0.0
+                            "x": 100.0,
+                            "y": 114.0
                         },
                         "size": {
-                            "h": 128.0,
-                            "w": 128.0
+                            "h": 24.0,
+                            "w": 160.0
                         }
                     }
                 },
@@ -85,7 +86,7 @@
                             "r": false,
                             "t": true
                         },
-                        "colour": {
+                        "color": {
                             "a": 1.0,
                             "b": 0.6901960968971252,
                             "g": 0.6392157077789307,
@@ -132,35 +133,36 @@
                             "r": false,
                             "t": true
                         },
-                        "colour": {
+                        "color": {
                             "a": 1.0,
                             "b": 1.0,
                             "g": 1.0,
                             "r": 1.0
                         },
                         "font": "kimberley18light.fnt",
-                        "label": "???",
+                        "label": "Storage",
                         "line_spacing": 1.399999976158142,
                         "multiline": false,
                         "position": {
-                            "x": 0.0,
-                            "y": 0.0
+                            "x": 34.0,
+                            "y": 30.0
                         },
                         "size": {
-                            "h": 128.0,
+                            "h": 24.0,
                             "w": 128.0
                         }
                     }
                 },
                 "Capacity value": {
                     "properties": {
+                        "alignment": "right",
                         "anchor": {
                             "b": false,
                             "l": true,
                             "r": false,
                             "t": true
                         },
-                        "colour": {
+                        "color": {
                             "a": 1.0,
                             "b": 1.0,
                             "g": 1.0,
@@ -171,12 +173,12 @@
                         "line_spacing": 1.399999976158142,
                         "multiline": false,
                         "position": {
-                            "x": 0.0,
-                            "y": 0.0
+                            "x": 100.0,
+                            "y": 30.0
                         },
                         "size": {
-                            "h": 128.0,
-                            "w": 128.0
+                            "h": 24.0,
+                            "w": 160.0
                         }
                     }
                 },
@@ -207,35 +209,36 @@
                             "r": false,
                             "t": true
                         },
-                        "colour": {
+                        "color": {
                             "a": 1.0,
                             "b": 1.0,
                             "g": 1.0,
                             "r": 1.0
                         },
                         "font": "kimberley18light.fnt",
-                        "label": "???",
+                        "label": "Recharge",
                         "line_spacing": 1.399999976158142,
                         "multiline": false,
                         "position": {
-                            "x": 0.0,
-                            "y": 0.0
+                            "x": 34.0,
+                            "y": 58.0
                         },
                         "size": {
-                            "h": 128.0,
+                            "h": 24.0,
                             "w": 128.0
                         }
                     }
                 },
                 "Recharge value": {
                     "properties": {
+                        "alignment": "right",
                         "anchor": {
                             "b": false,
                             "l": true,
                             "r": false,
                             "t": true
                         },
-                        "colour": {
+                        "color": {
                             "a": 1.0,
                             "b": 1.0,
                             "g": 1.0,
@@ -246,12 +249,12 @@
                         "line_spacing": 1.399999976158142,
                         "multiline": false,
                         "position": {
-                            "x": 0.0,
-                            "y": 0.0
+                            "x": 100.0,
+                            "y": 58.0
                         },
                         "size": {
-                            "h": 128.0,
-                            "w": 128.0
+                            "h": 24.0,
+                            "w": 160.0
                         }
                     }
                 },
@@ -282,35 +285,36 @@
                             "r": false,
                             "t": true
                         },
-                        "colour": {
+                        "color": {
                             "a": 1.0,
                             "b": 1.0,
                             "g": 1.0,
                             "r": 1.0
                         },
                         "font": "kimberley18light.fnt",
-                        "label": "???",
+                        "label": "Weapons",
                         "line_spacing": 1.399999976158142,
                         "multiline": false,
                         "position": {
-                            "x": 0.0,
-                            "y": 0.0
+                            "x": 34.0,
+                            "y": 86.0
                         },
                         "size": {
-                            "h": 128.0,
+                            "h": 24.0,
                             "w": 128.0
                         }
                     }
                 },
                 "Weapons value": {
                     "properties": {
+                        "alignment": "right",
                         "anchor": {
                             "b": false,
                             "l": true,
                             "r": false,
                             "t": true
                         },
-                        "colour": {
+                        "color": {
                             "a": 1.0,
                             "b": 1.0,
                             "g": 1.0,
@@ -321,12 +325,12 @@
                         "line_spacing": 1.399999976158142,
                         "multiline": false,
                         "position": {
-                            "x": 0.0,
-                            "y": 0.0
+                            "x": 100.0,
+                            "y": 86.0
                         },
                         "size": {
-                            "h": 128.0,
-                            "w": 128.0
+                            "h": 24.0,
+                            "w": 160.0
                         }
                     }
                 },
@@ -349,7 +353,7 @@
                     },
                     "size": {
                         "h": 144.0,
-                        "w": 278.0
+                        "w": 270.0
                     }
                 }
             },
@@ -362,14 +366,14 @@
                             "r": false,
                             "t": true
                         },
-                        "file": "",
+                        "file": "data/ui/icons/weaponry_energy.png",
                         "position": {
-                            "x": 0.0,
-                            "y": 0.0
+                            "x": 4.0,
+                            "y": 56.0
                         },
                         "size": {
-                            "h": 128.0,
-                            "w": 128.0
+                            "h": 24.0,
+                            "w": 24.0
                         }
                     }
                 },
@@ -381,51 +385,52 @@
                             "r": false,
                             "t": true
                         },
-                        "colour": {
+                        "color": {
                             "a": 1.0,
                             "b": 1.0,
                             "g": 1.0,
                             "r": 1.0
                         },
                         "font": "kimberley18light.fnt",
-                        "label": "???",
+                        "label": "Available",
                         "line_spacing": 1.399999976158142,
                         "multiline": false,
                         "position": {
-                            "x": 0.0,
-                            "y": 0.0
+                            "x": 34.0,
+                            "y": 58.0
                         },
                         "size": {
-                            "h": 128.0,
+                            "h": 24.0,
                             "w": 128.0
                         }
                     }
                 },
                 "Available value": {
                     "properties": {
+                        "alignment": "right",
                         "anchor": {
                             "b": false,
                             "l": true,
                             "r": false,
                             "t": true
                         },
-                        "colour": {
+                        "color": {
                             "a": 1.0,
                             "b": 1.0,
                             "g": 1.0,
                             "r": 1.0
                         },
                         "font": "kimberley18light.fnt",
-                        "label": "???",
+                        "label": "0 GW/s",
                         "line_spacing": 1.399999976158142,
                         "multiline": false,
                         "position": {
-                            "x": 0.0,
-                            "y": 0.0
+                            "x": 100.0,
+                            "y": 58.0
                         },
                         "size": {
-                            "h": 128.0,
-                            "w": 128.0
+                            "h": 24.0,
+                            "w": 160.0
                         }
                     }
                 },
@@ -437,7 +442,7 @@
                             "r": false,
                             "t": true
                         },
-                        "colour": {
+                        "color": {
                             "a": 1.0,
                             "b": 0.6901960968971252,
                             "g": 0.6392157077789307,
@@ -465,14 +470,14 @@
                             "r": false,
                             "t": true
                         },
-                        "file": "",
+                        "file": "data/ui/icons/weaponry_energy.png",
                         "position": {
-                            "x": 0.0,
-                            "y": 0.0
+                            "x": 4.0,
+                            "y": 28.0
                         },
                         "size": {
-                            "h": 128.0,
-                            "w": 128.0
+                            "h": 24.0,
+                            "w": 24.0
                         }
                     }
                 },
@@ -484,51 +489,52 @@
                             "r": false,
                             "t": true
                         },
-                        "colour": {
+                        "color": {
                             "a": 1.0,
                             "b": 1.0,
                             "g": 1.0,
                             "r": 1.0
                         },
                         "font": "kimberley18light.fnt",
-                        "label": "???",
+                        "label": "Used",
                         "line_spacing": 1.399999976158142,
                         "multiline": false,
                         "position": {
-                            "x": 0.0,
-                            "y": 0.0
+                            "x": 34.0,
+                            "y": 30.0
                         },
                         "size": {
-                            "h": 128.0,
+                            "h": 24.0,
                             "w": 128.0
                         }
                     }
                 },
                 "Used value": {
                     "properties": {
+                        "alignment": "right",
                         "anchor": {
                             "b": false,
                             "l": true,
                             "r": false,
                             "t": true
                         },
-                        "colour": {
+                        "color": {
                             "a": 1.0,
                             "b": 1.0,
                             "g": 1.0,
                             "r": 1.0
                         },
                         "font": "kimberley18light.fnt",
-                        "label": "???",
+                        "label": "0 GW/s",
                         "line_spacing": 1.399999976158142,
                         "multiline": false,
                         "position": {
-                            "x": 0.0,
-                            "y": 0.0
+                            "x": 100.0,
+                            "y": 30.0
                         },
                         "size": {
-                            "h": 128.0,
-                            "w": 128.0
+                            "h": 24.0,
+                            "w": 160.0
                         }
                     }
                 },
@@ -547,11 +553,11 @@
                     },
                     "position": {
                         "x": 8.0,
-                        "y": 411.0
+                        "y": 408.0
                     },
                     "size": {
-                        "h": 128.0,
-                        "w": 278.0
+                        "h": 88.0,
+                        "w": 270.0
                     }
                 }
             },
@@ -564,7 +570,7 @@
                             "r": false,
                             "t": true
                         },
-                        "colour": {
+                        "color": {
                             "a": 1.0,
                             "b": 1.0,
                             "g": 1.0,
@@ -616,7 +622,7 @@
                             "r": false,
                             "t": true
                         },
-                        "colour": {
+                        "color": {
                             "a": 1.0,
                             "b": 1.0,
                             "g": 1.0,
@@ -668,14 +674,14 @@
                             "r": false,
                             "t": true
                         },
-                        "file": "",
+                        "file": "data/ui/icons/weaponry_energy.png",
                         "position": {
-                            "x": 0.0,
-                            "y": 0.0
+                            "x": 4.0,
+                            "y": 56.0
                         },
                         "size": {
-                            "h": 128.0,
-                            "w": 128.0
+                            "h": 24.0,
+                            "w": 24.0
                         }
                     }
                 },
@@ -687,51 +693,52 @@
                             "r": false,
                             "t": true
                         },
-                        "colour": {
+                        "color": {
                             "a": 1.0,
                             "b": 1.0,
                             "g": 1.0,
                             "r": 1.0
                         },
                         "font": "kimberley18light.fnt",
-                        "label": "???",
+                        "label": "Angular rotation",
                         "line_spacing": 1.399999976158142,
                         "multiline": false,
                         "position": {
-                            "x": 0.0,
-                            "y": 0.0
+                            "x": 34.0,
+                            "y": 58.0
                         },
                         "size": {
-                            "h": 128.0,
+                            "h": 24.0,
                             "w": 128.0
                         }
                     }
                 },
                 "Angular value": {
                     "properties": {
+                        "alignment": "right",
                         "anchor": {
                             "b": false,
                             "l": true,
                             "r": false,
                             "t": true
                         },
-                        "colour": {
+                        "color": {
                             "a": 1.0,
                             "b": 1.0,
                             "g": 1.0,
                             "r": 1.0
                         },
                         "font": "kimberley18light.fnt",
-                        "label": "???",
+                        "label": "0 rad/s",
                         "line_spacing": 1.399999976158142,
                         "multiline": false,
                         "position": {
-                            "x": 0.0,
-                            "y": 0.0
+                            "x": 100.0,
+                            "y": 58.0
                         },
                         "size": {
-                            "h": 128.0,
-                            "w": 128.0
+                            "h": 24.0,
+                            "w": 160.0
                         }
                     }
                 },
@@ -743,14 +750,14 @@
                             "r": false,
                             "t": true
                         },
-                        "file": "",
+                        "file": "data/ui/icons/weaponry_energy.png",
                         "position": {
-                            "x": 0.0,
-                            "y": 0.0
+                            "x": 4.0,
+                            "y": 28.0
                         },
                         "size": {
-                            "h": 128.0,
-                            "w": 128.0
+                            "h": 24.0,
+                            "w": 24.0
                         }
                     }
                 },
@@ -762,51 +769,52 @@
                             "r": false,
                             "t": true
                         },
-                        "colour": {
+                        "color": {
                             "a": 1.0,
                             "b": 1.0,
                             "g": 1.0,
                             "r": 1.0
                         },
                         "font": "kimberley18light.fnt",
-                        "label": "???",
+                        "label": "Top speed",
                         "line_spacing": 1.399999976158142,
                         "multiline": false,
                         "position": {
-                            "x": 0.0,
-                            "y": 0.0
+                            "x": 34.0,
+                            "y": 30.0
                         },
                         "size": {
-                            "h": 128.0,
+                            "h": 24.0,
                             "w": 128.0
                         }
                     }
                 },
                 "Linear value": {
                     "properties": {
+                        "alignment": "right",
                         "anchor": {
                             "b": false,
                             "l": true,
                             "r": false,
                             "t": true
                         },
-                        "colour": {
+                        "color": {
                             "a": 1.0,
                             "b": 1.0,
                             "g": 1.0,
                             "r": 1.0
                         },
                         "font": "kimberley18light.fnt",
-                        "label": "???",
+                        "label": "0 m/s",
                         "line_spacing": 1.399999976158142,
                         "multiline": false,
                         "position": {
-                            "x": 0.0,
-                            "y": 0.0
+                            "x": 100.0,
+                            "y": 30.0
                         },
                         "size": {
-                            "h": 128.0,
-                            "w": 128.0
+                            "h": 24.0,
+                            "w": 160.0
                         }
                     }
                 },
@@ -818,7 +826,7 @@
                             "r": false,
                             "t": true
                         },
-                        "colour": {
+                        "color": {
                             "a": 1.0,
                             "b": 0.6901960968971252,
                             "g": 0.6392157077789307,
@@ -853,11 +861,11 @@
                     },
                     "position": {
                         "x": 8.0,
-                        "y": 527.0
+                        "y": 504.0
                     },
                     "size": {
-                        "h": 128.0,
-                        "w": 278.0
+                        "h": 88.0,
+                        "w": 270.0
                     }
                 }
             },
@@ -870,7 +878,7 @@
                             "r": false,
                             "t": true
                         },
-                        "colour": {
+                        "color": {
                             "a": 1.0,
                             "b": 1.0,
                             "g": 1.0,
@@ -941,7 +949,7 @@
                             "r": false,
                             "t": true
                         },
-                        "colour": {
+                        "color": {
                             "a": 1.0,
                             "b": 1.0,
                             "g": 1.0,
@@ -970,7 +978,7 @@
                             "r": false,
                             "t": true
                         },
-                        "colour": {
+                        "color": {
                             "a": 1.0,
                             "b": 1.0,
                             "g": 1.0,
@@ -1017,7 +1025,7 @@
                             "r": false,
                             "t": true
                         },
-                        "colour": {
+                        "color": {
                             "a": 1.0,
                             "b": 1.0,
                             "g": 1.0,
@@ -1046,7 +1054,7 @@
                             "r": false,
                             "t": true
                         },
-                        "colour": {
+                        "color": {
                             "a": 1.0,
                             "b": 1.0,
                             "g": 1.0,
@@ -1093,7 +1101,7 @@
                             "r": false,
                             "t": true
                         },
-                        "colour": {
+                        "color": {
                             "a": 1.0,
                             "b": 1.0,
                             "g": 1.0,
@@ -1122,7 +1130,7 @@
                             "r": false,
                             "t": true
                         },
-                        "colour": {
+                        "color": {
                             "a": 1.0,
                             "b": 1.0,
                             "g": 1.0,
@@ -1150,7 +1158,7 @@
                             "r": false,
                             "t": true
                         },
-                        "colour": {
+                        "color": {
                             "a": 1.0,
                             "b": 0.6901960968971252,
                             "g": 0.6392157077789307,
@@ -1221,7 +1229,7 @@
                             "r": false,
                             "t": true
                         },
-                        "colour": {
+                        "color": {
                             "a": 1.0,
                             "b": 1.0,
                             "g": 1.0,
@@ -1250,7 +1258,7 @@
                             "r": false,
                             "t": true
                         },
-                        "colour": {
+                        "color": {
                             "a": 1.0,
                             "b": 1.0,
                             "g": 1.0,
@@ -1297,7 +1305,7 @@
                             "r": false,
                             "t": true
                         },
-                        "colour": {
+                        "color": {
                             "a": 1.0,
                             "b": 1.0,
                             "g": 1.0,
@@ -1326,7 +1334,7 @@
                             "r": false,
                             "t": true
                         },
-                        "colour": {
+                        "color": {
                             "a": 1.0,
                             "b": 1.0,
                             "g": 1.0,
@@ -1373,7 +1381,7 @@
                             "r": false,
                             "t": true
                         },
-                        "colour": {
+                        "color": {
                             "a": 1.0,
                             "b": 1.0,
                             "g": 1.0,
@@ -1402,7 +1410,7 @@
                             "r": false,
                             "t": true
                         },
-                        "colour": {
+                        "color": {
                             "a": 1.0,
                             "b": 1.0,
                             "g": 1.0,
@@ -1430,7 +1438,7 @@
                             "r": false,
                             "t": true
                         },
-                        "colour": {
+                        "color": {
                             "a": 1.0,
                             "b": 0.6901960968971252,
                             "g": 0.6392157077789307,
@@ -1491,7 +1499,7 @@
                     "y": 32.0
                 },
                 "size": {
-                    "h": 568.0,
+                    "h": 600.0,
                     "w": 286.0
                 }
             }
@@ -1527,7 +1535,7 @@
                         "r": false,
                         "t": true
                     },
-                    "colour": {
+                    "color": {
                         "a": 1.0,
                         "b": 0.6899999976158142,
                         "g": 0.6389999985694885,
@@ -1584,7 +1592,7 @@
                 "y": 60.0
             },
             "size": {
-                "h": 600.0,
+                "h": 632.0,
                 "w": 286.0
             }
         }

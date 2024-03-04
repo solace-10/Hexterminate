@@ -24,7 +24,7 @@ namespace Hexterminate
 {
 
 Meter::Meter()
-    : m_PipColour( 1.0f, 1.0f, 1.0f, 0.5f )
+    : m_PipColor( 1.0f, 1.0f, 1.0f, 0.5f )
 {
 }
 
@@ -39,8 +39,8 @@ void Meter::Init( int initialValue, int maxValue )
     const int panelSize = 12;
     const int panelSpacing = 2;
 
-    SetColour( EVA_COLOUR_BACKGROUND );
-    SetBorderColour( EVA_COLOUR_BORDER );
+    SetColor( EVA_COLOR_BACKGROUND );
+    SetBorderColor( EVA_COLOR_BORDER );
     SetBorderMode( Genesis::Gui::PANEL_BORDER_ALL );
     SetSize( ( panelSize + panelSpacing ) * maxValue + panelSpacing + 1, panelSize + panelSpacing * 2 );
 
@@ -49,7 +49,7 @@ void Meter::Init( int initialValue, int maxValue )
         m_Panels[ i ] = new Genesis::Gui::Panel();
         m_Panels[ i ]->SetPosition( ( panelSize + panelSpacing ) * i + panelSpacing + 1, panelSpacing );
         m_Panels[ i ]->SetSize( panelSize, panelSize );
-        m_Panels[ i ]->SetColour( m_PipColour );
+        m_Panels[ i ]->SetColor( m_PipColor );
         m_Panels[ i ]->SetBorderMode( Genesis::Gui::PANEL_BORDER_NONE );
         m_Panels[ i ]->Show( ( i + 1 ) <= initialValue );
 
@@ -65,19 +65,19 @@ void Meter::SetValue( int value )
     }
 }
 
-void Meter::SetPipColour( const Genesis::Color& colour )
+void Meter::SetPipColor( const Genesis::Color& color )
 {
-    m_PipColour = colour;
+    m_PipColor = color;
 
     for ( auto& pPip : m_Panels )
     {
-        pPip->SetColour( colour );
+        pPip->SetColor( color );
     }
 }
 
-void Meter::SetPipColour( float r, float g, float b, float a )
+void Meter::SetPipColor( float r, float g, float b, float a )
 {
-    SetPipColour( Genesis::Color( r, g, b, a ) );
+    SetPipColor( Genesis::Color( r, g, b, a ) );
 }
 
 } // namespace Hexterminate

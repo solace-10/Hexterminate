@@ -20,6 +20,8 @@
 #include <array>
 #include <string>
 
+#include <color.h>
+
 #include "ui/element.h"
 
 namespace Genesis::Gui
@@ -47,7 +49,8 @@ public:
     virtual void RenderProperties() override;
     virtual void SetSize( int width, int height ) override;
 
-    void SetColour( float r, float g, float b, float a );
+    void SetColor( const Genesis::Color& color );
+    void SetColor( float r, float g, float b, float a );
     void SetFont( const std::string& font );
     void SetText( const std::string& text );
     void SetAlignment( Alignment alignment );
@@ -61,7 +64,7 @@ protected:
     bool m_Multiline;
     Genesis::Gui::Text* m_pText;
     std::string m_Label;
-    std::array<float, 4> m_Colour;
+    std::array<float, 4> m_Color;
     Alignment m_Alignment;
 };
 

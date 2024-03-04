@@ -58,9 +58,9 @@ namespace Genesis::Gui
         return m_pUntexturedShader;
     }
 
-    inline ShaderUniform* GuiManager::GetUntexturedShaderColourUniform()
+    inline ShaderUniform* GuiManager::GetUntexturedShaderColorUniform()
     {
-        return m_pUntexturedColourUniform;
+        return m_pUntexturedColorUniform;
     }
 
     inline Shader* GuiManager::GetTexturedShader()
@@ -68,9 +68,9 @@ namespace Genesis::Gui
         return m_pTexturedShader;
     }
 
-    inline ShaderUniform* GuiManager::GetTexturedShaderColourUniform()
+    inline ShaderUniform* GuiManager::GetTexturedShaderColorUniform()
     {
-        return m_pTexturedColourUniform;
+        return m_pTexturedColorUniform;
     }
 
     inline ShaderUniform* GuiManager::GetTexturedSamplerUniform()
@@ -193,39 +193,39 @@ namespace Genesis::Gui
     // Panel
     ///////////////////////////////////////////////////////////////////////////
 
-    inline const Color& Panel::GetColour() const
+    inline const Color& Panel::GetColor() const
     {
-        return mColour;
+        return m_Color;
     }
 
-    inline void Panel::SetColour( const Color& colour )
+    inline void Panel::SetColor( const Color& color )
     {
-        mColour = colour;
+        m_Color = color;
     }
 
-    inline void Panel::SetColour( float r, float g, float b, float a )
+    inline void Panel::SetColor( float r, float g, float b, float a )
     {
-        mColour.Set( r, g, b, a );
+        m_Color.Set( r, g, b, a );
     }
 
-    inline const Color& Panel::GetBorderColour() const
+    inline const Color& Panel::GetBorderColor() const
     {
-        return mBorderColour;
+        return m_BorderColor;
     }
 
-    inline void Panel::SetBorderColour( const Color& colour )
+    inline void Panel::SetBorderColor( const Color& color )
     {
-        mBorderColour = colour;
+        m_BorderColor = color;
     }
 
-    inline void Panel::SetBorderColour( float r, float g, float b, float a )
+    inline void Panel::SetBorderColor( float r, float g, float b, float a )
     {
-        mBorderColour.Set( r, g, b, a );
+        m_BorderColor.Set( r, g, b, a );
     }
 
     inline void Panel::SetBorderMode( char borderMode )
     {
-        mBorderMode = borderMode;
+        m_BorderMode = borderMode;
     }
 
     ///////////////////////////////////////////////////////////////////////////
@@ -276,19 +276,19 @@ namespace Genesis::Gui
         }
     }
 
-    inline const Color& Text::GetColour() const
+    inline const Color& Text::GetColor() const
     {
-        return m_Colour;
+        return m_Color;
     }
 
-    inline void Text::SetColour( const Color& colour )
+    inline void Text::SetColor( const Color& color )
     {
-        m_Colour = colour;
+        m_Color = color;
     }
 
-    inline void Text::SetColour( float r, float g, float b, float a )
+    inline void Text::SetColor( float r, float g, float b, float a )
     {
-        m_Colour.Set( r, g, b, a );
+        m_Color = Color( r, g, b, a );
     }
 
     inline void Text::SetLineSpacing( float value )
@@ -305,59 +305,59 @@ namespace Genesis::Gui
     // Button
     ///////////////////////////////////////////////////////////////////////////
 
-    inline const Color& Button::GetHoverColour() const
+    inline const Color& Button::GetHoverColor() const
     {
-        return mHoverColour;
+        return m_HoverColor;
     }
 
-    inline void Button::SetHoverColour( const Color& colour )
+    inline void Button::SetHoverColor( const Color& color )
     {
-        mHoverColour = colour;
+        m_HoverColor = color;
     }
 
-    inline void Button::SetHoverColour( float r, float g, float b, float a )
+    inline void Button::SetHoverColor( float r, float g, float b, float a )
     {
-        mHoverColour.Set( r, g, b, a );
+        m_HoverColor.Set( r, g, b, a );
     }
 
-    inline const Color& Button::GetIconColour() const
+    inline const Color& Button::GetIconColor() const
     {
-        return mIconColour;
+        return m_IconColor;
     }
 
-    inline void Button::SetIconColour( float r, float g, float b, float a )
+    inline void Button::SetIconColor( float r, float g, float b, float a )
     {
-        mIconColour.Set( r, g, b, a );
+        m_IconColor.Set( r, g, b, a );
     }
 
-    inline void Button::SetIconColour( const Color& colour )
+    inline void Button::SetIconColor( const Color& color )
     {
-        mIconColour = colour;
+        m_IconColor = color;
     }
 
-    inline const Color& Button::GetIconHoverColour() const
+    inline const Color& Button::GetIconHoverColor() const
     {
-        return mIconHoverColour;
+        return m_IconHoverColor;
     }
 
-    inline void Button::SetIconHoverColour( float r, float g, float b, float a )
+    inline void Button::SetIconHoverColor( float r, float g, float b, float a )
     {
-        mIconHoverColour.Set( r, g, b, a );
+        m_IconHoverColor.Set( r, g, b, a );
     }
 
-    inline void Button::SetIconHoverColour( const Color& colour )
+    inline void Button::SetIconHoverColor( const Color& color )
     {
-        mIconHoverColour = colour;
+        m_IconHoverColor = color;
     }
 
     inline void Button::SetFont( ResourceFont* font )
     {
-        mText->SetFont( font );
+        m_pText->SetFont( font );
     }
 
-    inline void Button::SetTextColour( const Color& colour )
+    inline void Button::SetTextColor( const Color& color )
     {
-        mText->SetColour( colour );
+        m_pText->SetColor( color );
     }
 
     ///////////////////////////////////////////////////////////////////////////
@@ -374,19 +374,19 @@ namespace Genesis::Gui
         m_Checked = state;
     }
 
-    inline const Color& Checkbox::GetBulletColour() const
+    inline const Color& Checkbox::GetBulletColor() const
     {
-        return m_BulletColour;
+        return m_BulletColor;
     }
 
-    inline void Checkbox::SetBulletColour( const Color& colour )
+    inline void Checkbox::SetBulletColor( const Color& color )
     {
-        m_BulletColour = colour;
+        m_BulletColor = color;
     }
 
-    inline void Checkbox::SetBulletColour( float r, float g, float b, float a )
+    inline void Checkbox::SetBulletColor( float r, float g, float b, float a )
     {
-        m_BulletColour.Set( r, g, b, a );
+        m_BulletColor.Set( r, g, b, a );
     }
 
     ///////////////////////////////////////////////////////////////////////////
@@ -398,19 +398,19 @@ namespace Genesis::Gui
         return m_Checked;
     }
 
-    inline const Color& RadioButton::GetBulletColour() const
+    inline const Color& RadioButton::GetBulletColor() const
     {
-        return m_BulletColour;
+        return m_BulletColor;
     }
 
-    inline void RadioButton::SetBulletColour( const Color& colour )
+    inline void RadioButton::SetBulletColor( const Color& color )
     {
-        m_BulletColour = colour;
+        m_BulletColor = color;
     }
 
-    inline void RadioButton::SetBulletColour( float r, float g, float b, float a )
+    inline void RadioButton::SetBulletColor( float r, float g, float b, float a )
     {
-        m_BulletColour.Set( r, g, b, a );
+        m_BulletColor.Set( r, g, b, a );
     }
 
     ///////////////////////////////////////////////////////////////////////////

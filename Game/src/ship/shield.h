@@ -78,7 +78,7 @@ public:
 
 private:
     void CreateGeometry();
-    void UpdateColour();
+    void UpdateColor();
     void RenderRegularShield( const glm::mat4& modelTransform );
     void RenderQuantumShield( const glm::mat4& modelTransform );
 
@@ -87,13 +87,13 @@ private:
     Genesis::ResourceImage* m_pTexture;
     Genesis::Shader* m_pShader;
     Genesis::VertexBuffer* m_pVertexBuffer;
-    Genesis::ColourData m_ColourData;
+    Genesis::ColorData m_ColorData;
     Genesis::ShaderUniform* m_pQuantumModeUniform;
     Genesis::ShaderUniform* m_pShieldStrengthUniform;
     Genesis::ShaderUniform* m_pQuantumShieldScaleUniform;
     Genesis::ShaderUniform* m_pQuantumShieldTriangleGapUniform;
     Genesis::ShaderUniform* m_pQuantumShieldIntensityUniform;
-    Genesis::ShaderUniform* m_pQuantumShieldColourUniform;
+    Genesis::ShaderUniform* m_pQuantumShieldColorUniform;
 
     float m_RadiusX;
     float m_RadiusY;

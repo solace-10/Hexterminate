@@ -40,7 +40,7 @@ ParticlePass::ParticlePass( Genesis::BlendMode blendMode, const std::string& sha
     RenderSystem* pRenderSystem = FrameWork::GetRenderSystem();
     m_pShader = pRenderSystem->GetShaderCache()->Load( shader );
     m_pSamplerUniform = m_pShader->RegisterUniform( "k_sampler0", ShaderUniformType::Texture );
-    m_pVertexBuffer = new VertexBuffer( GeometryType::Triangle, VBO_POSITION | VBO_UV | VBO_COLOUR );
+    m_pVertexBuffer = new VertexBuffer( GeometryType::Triangle, VBO_POSITION | VBO_UV | VBO_COLOR );
 }
 
 ParticlePass::~ParticlePass()

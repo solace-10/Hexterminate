@@ -2,10 +2,10 @@
 
 in vec2 UV;
 
-out vec3 colour;
+out vec3 color;
 
-uniform vec3 k_coreColour = vec3( 0.8, 0.65, 0.3 );
-uniform vec3 k_coronaColour = vec3( 0.8, 0.35, 0.1 );
+uniform vec3 k_coreColor = vec3( 0.8, 0.65, 0.3 );
+uniform vec3 k_coronaColor = vec3( 0.8, 0.35, 0.1 );
 uniform vec2 k_offset = vec2( 0.0, 0.0 );
 uniform float k_distance = 1.0;
 uniform vec2 k_resolution = vec2( 512.0, 512.0 );
@@ -98,22 +98,22 @@ vec4 star( in vec2 uv )
 	}
 	
 	float starGlow = min( max( 1.0 - dist * ( 1.0 - brightness ), 0.0 ), 1.0 );
-	vec4 fragColour;
-	fragColour.rgb = vec3( f * ( 0.75 + brightness * 0.3 ) * k_coreColour ) + starSphere + corona * k_coreColour + starGlow * k_coronaColour;
-	fragColour.a = ( 0.299 * fragColour.g + 0.587 * fragColour.g + 0.114 * fragColour.b );
-	return fragColour;
+	vec4 fragColor;
+	fragColor.rgb = vec3( f * ( 0.75 + brightness * 0.3 ) * k_coreColor ) + starSphere + corona * k_coreColor + starGlow * k_coronaColor;
+	fragColor.a = ( 0.299 * fragColor.g + 0.587 * fragColor.g + 0.114 * fragColor.b );
+	return fragColor;
 }
 
 void main()
 {
 	if ( k_hasStar )
 	{
-		vec4 backgroundColour = texture( k_backgroundSampler, UV );
-		vec4 starColour = star( UV * k_starUvScale );
-		colour = mix( backgroundColour.rgb, starColour.rgb, starColour.a );
+		vec4 backgroundColor = texture( k_backgroundSampler, UV );
+		vec4 starColor = star( UV * k_starUvScale );
+		color = mix( backgroundColor.rgb, starColor.rgb, starColor.a );
 	}
 	else
 	{
-		colour = texture( k_backgroundSampler, UV ).rgb;
+		color = texture( k_backgroundSampler, UV ).rgb;
 	}
 }

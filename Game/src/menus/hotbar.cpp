@@ -53,7 +53,7 @@ Hotbar::Hotbar()
     m_pBackground->SetPosition( 0.0f, 0.0f );
     m_pBackground->SetSize( (float)pHotbarBgImage->GetWidth(), (float)pHotbarBgImage->GetHeight() );
     m_pBackground->SetTexture( pHotbarBgImage );
-    m_pBackground->SetColour( 1.0f, 1.0f, 1.0f, 1.0f );
+    m_pBackground->SetColor( 1.0f, 1.0f, 1.0f, 1.0f );
     m_pRoot->AddElement( m_pBackground );
 
     ResourceImage* pHotbarBg2Image = (ResourceImage*)FrameWork::GetResourceManager()->GetResource( "data/ui/hotbar/background2.png" );
@@ -61,7 +61,7 @@ Hotbar::Hotbar()
     m_pBackground2->SetPosition( 40.0f, 0.0f );
     m_pBackground2->SetSize( (float)pHotbarBg2Image->GetWidth(), (float)pHotbarBg2Image->GetHeight() );
     m_pBackground2->SetTexture( pHotbarBg2Image );
-    m_pBackground2->SetColour( 1.0f, 1.0f, 1.0f, 1.0f );
+    m_pBackground2->SetColor( 1.0f, 1.0f, 1.0f, 1.0f );
     m_pRoot->AddElement( m_pBackground2 );
 
     // Both the shield bar and the bridge's health bar are inside a panel, so they can be clipped when
@@ -95,7 +95,7 @@ Hotbar::Hotbar()
     m_pPower->SetPosition( 40.0f, 0.0f );
     m_pPower->SetSize( 16.0f, 512.0f );
     m_pPower->SetTexture( pPowerImage );
-    m_pPower->SetColour( 1.0f, 1.0f, 1.0f, 1.0f );
+    m_pPower->SetColor( 1.0f, 1.0f, 1.0f, 1.0f );
     m_pPower->SetBlendMode( BlendMode::Screen );
     m_pRoot->AddElement( m_pPower );
 
@@ -111,21 +111,21 @@ Hotbar::Hotbar()
         m_pAddonGui[ i ] = new Gui::Image();
         m_pAddonGui[ i ]->SetPosition( offsetX, iterOffsetY );
         m_pAddonGui[ i ]->SetSize( iconSize, iconSize );
-        m_pAddonGui[ i ]->SetColour( 1.0f, 1.0f, 1.0f, 1.0f );
+        m_pAddonGui[ i ]->SetColor( 1.0f, 1.0f, 1.0f, 1.0f );
         m_pAddonGui[ i ]->Show( false );
 
         m_pTextGui[ i ] = new Gui::Text();
         m_pTextGui[ i ]->SetFont( EVA_FONT );
         m_pTextGui[ i ]->SetPosition( offsetX + 58, iterOffsetY );
         m_pTextGui[ i ]->SetSize( 128.0f, 128.0f );
-        m_pTextGui[ i ]->SetColour( 0.0f, 1.0f, 1.0f, 0.75f );
+        m_pTextGui[ i ]->SetColor( 0.0f, 1.0f, 1.0f, 0.75f );
         m_pTextGui[ i ]->SetMultiLine( false );
         m_pTextGui[ i ]->SetText( sKeyNames[ i ] );
 
         m_pCooldownGui[ i ] = new Gui::Panel();
         m_pCooldownGui[ i ]->SetPosition( offsetX + 12.0f, iterOffsetY + iconSize - 8.0f );
         m_pCooldownGui[ i ]->SetSize( iconSize - 24.0f, 4.0f );
-        m_pCooldownGui[ i ]->SetColour( 0.0f, 1.0f, 1.0f, 0.75f );
+        m_pCooldownGui[ i ]->SetColor( 0.0f, 1.0f, 1.0f, 0.75f );
         m_pCooldownGui[ i ]->Show( false );
 
         m_pRoot->AddElement( m_pAddonGui[ i ] );
@@ -349,13 +349,13 @@ void Hotbar::UpdateAbilities( Ship* pPlayerShip )
         }
 
         if ( ability.inCooldown )
-            m_pAddonGui[ i ]->SetColour( 1.0f, 1.0f, 1.0f, 0.33f );
+            m_pAddonGui[ i ]->SetColor( 1.0f, 1.0f, 1.0f, 0.33f );
         else if ( ability.isActive )
-            m_pAddonGui[ i ]->SetColour( 0.0f, 1.0f, 0.25f, 1.0f );
+            m_pAddonGui[ i ]->SetColor( 0.0f, 1.0f, 0.25f, 1.0f );
         else if ( ability.isUsable == false )
-            m_pAddonGui[ i ]->SetColour( 1.0f, 0.0f, 0.0f, 0.33f );
+            m_pAddonGui[ i ]->SetColor( 1.0f, 0.0f, 0.0f, 0.33f );
         else
-            m_pAddonGui[ i ]->SetColour( 1.0f, 1.0f, 1.0f, 1.0f );
+            m_pAddonGui[ i ]->SetColor( 1.0f, 1.0f, 1.0f, 1.0f );
     }
 }
 

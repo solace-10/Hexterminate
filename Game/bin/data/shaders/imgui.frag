@@ -1,12 +1,12 @@
 #version 330 core
 
 in vec2 UV;
-in vec4 vColour;
+in vec4 vColor;
 
-out vec4 colour;
+out vec4 color;
 
 uniform sampler2D k_sampler0;
 void main()
 {
-	colour = vColour * texture( k_sampler0, UV );
+	color = vColor * texture( k_sampler0, UV );
 }

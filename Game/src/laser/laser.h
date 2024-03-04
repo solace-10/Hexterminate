@@ -38,28 +38,28 @@ public:
     Laser()
         : m_Source( 0.0f, 0.0f, 0.0f )
         , m_Destination( 1.0f, 0.0f, 0.0f )
-        , m_Colour( 1.0f, 1.0f, 1.0f, 1.0f )
+        , m_Color( 1.0f, 1.0f, 1.0f, 1.0f )
         , m_Width( 1.0f )
     {
     }
 
-    Laser( const glm::vec3& source, const glm::vec3& destination, const Genesis::Color& colour, float width )
+    Laser( const glm::vec3& source, const glm::vec3& destination, const Genesis::Color& color, float width )
         : m_Source( source )
         , m_Destination( destination )
-        , m_Colour( colour )
+        , m_Color( color )
         , m_Width( width )
     {
     }
 
     const glm::vec3& GetSource() const;
     const glm::vec3& GetDestination() const;
-    const Genesis::Color& GetColour() const;
+    const Genesis::Color& GetColor() const;
     float GetWidth() const;
 
 private:
     glm::vec3 m_Source;
     glm::vec3 m_Destination;
-    Genesis::Color m_Colour;
+    Genesis::Color m_Color;
     float m_Width;
 };
 
@@ -73,9 +73,9 @@ inline const glm::vec3& Laser::GetDestination() const
     return m_Destination;
 }
 
-inline const Genesis::Color& Laser::GetColour() const
+inline const Genesis::Color& Laser::GetColor() const
 {
-    return m_Colour;
+    return m_Color;
 }
 
 inline float Laser::GetWidth() const

@@ -56,15 +56,15 @@ SectorDetails::SectorDetails()
     m_pThreatBackground = new Genesis::Gui::Panel();
     m_pThreatBackground->SetSize( 260.0f, 20.0f );
     m_pThreatBackground->SetPosition( 0.0f, 0.0f );
-    m_pThreatBackground->SetColour( 1.0f, 1.0f, 1.0f, 1.0f );
-    m_pThreatBackground->SetBorderColour( 1.0f, 1.0f, 1.0f, 0.5f );
+    m_pThreatBackground->SetColor( 1.0f, 1.0f, 1.0f, 1.0f );
+    m_pThreatBackground->SetBorderColor( 1.0f, 1.0f, 1.0f, 0.5f );
     m_pThreatBackground->SetBorderMode( Genesis::Gui::PANEL_BORDER_NONE );
     m_pMainPanel->AddElement( m_pThreatBackground );
 
     m_pTitle = new Genesis::Gui::Text();
     m_pTitle->SetSize( 256.0f, 16.0f );
     m_pTitle->SetPosition( 2.0f, 2.0f );
-    m_pTitle->SetColour( Genesis::Color( 1.0f, 1.0f, 1.0f, 1.0f ) );
+    m_pTitle->SetColor( Genesis::Color( 1.0f, 1.0f, 1.0f, 1.0f ) );
     m_pTitle->SetFont( EVA_FONT );
     m_pTitle->SetText( "Threat rating: ???" );
     m_pThreatBackground->AddElement( m_pTitle );
@@ -74,9 +74,9 @@ SectorDetails::SectorDetails()
         m_pDeployProbeButton = new DeployProbeButton();
         m_pDeployProbeButton->SetPosition( 8.0f, 0.0f );
         m_pDeployProbeButton->SetSize( 244.0f, 32.0f );
-        m_pDeployProbeButton->SetColour( Genesis::Color( 1.0f, 1.0f, 1.0f, 0.05f ) );
-        m_pDeployProbeButton->SetHoverColour( EVA_BUTTON_COLOUR_HOVER );
-        m_pDeployProbeButton->SetBorderColour( EVA_BUTTON_COLOUR_BORDER );
+        m_pDeployProbeButton->SetColor( Genesis::Color( 1.0f, 1.0f, 1.0f, 0.05f ) );
+        m_pDeployProbeButton->SetHoverColor( EVA_BUTTON_COLOR_HOVER );
+        m_pDeployProbeButton->SetBorderColor( EVA_BUTTON_COLOR_BORDER );
         m_pDeployProbeButton->SetBorderMode( Genesis::Gui::PANEL_BORDER_ALL );
         m_pDeployProbeButton->SetFont( EVA_FONT );
         m_pDeployProbeButton->SetText( "Deploy probe (500 RU)" );
@@ -85,9 +85,9 @@ SectorDetails::SectorDetails()
         m_pDeployStarfortButton = new DeployStarfortButton();
         m_pDeployStarfortButton->SetPosition( 8.0f, 0.0f );
         m_pDeployStarfortButton->SetSize( 244.0f, 32.0f );
-        m_pDeployStarfortButton->SetColour( Genesis::Color( 1.0f, 1.0f, 1.0f, 0.05f ) );
-        m_pDeployStarfortButton->SetHoverColour( EVA_BUTTON_COLOUR_HOVER );
-        m_pDeployStarfortButton->SetBorderColour( EVA_BUTTON_COLOUR_BORDER );
+        m_pDeployStarfortButton->SetColor( Genesis::Color( 1.0f, 1.0f, 1.0f, 0.05f ) );
+        m_pDeployStarfortButton->SetHoverColor( EVA_BUTTON_COLOR_HOVER );
+        m_pDeployStarfortButton->SetBorderColor( EVA_BUTTON_COLOR_BORDER );
         m_pDeployStarfortButton->SetBorderMode( Genesis::Gui::PANEL_BORDER_ALL );
         m_pDeployStarfortButton->SetFont( EVA_FONT );
         m_pDeployStarfortButton->SetText( "Deploy starfort (4000 RU)" );
@@ -97,9 +97,9 @@ SectorDetails::SectorDetails()
     m_pEnterSectorButton = new EnterSectorButton();
     m_pEnterSectorButton->SetPosition( 8.0f, 0.0f );
     m_pEnterSectorButton->SetSize( 244.0f, 32.0f );
-    m_pEnterSectorButton->SetColour( Genesis::Color( 1.0f, 1.0f, 1.0f, 0.05f ) );
-    m_pEnterSectorButton->SetHoverColour( EVA_BUTTON_COLOUR_HOVER );
-    m_pEnterSectorButton->SetBorderColour( EVA_BUTTON_COLOUR_BORDER );
+    m_pEnterSectorButton->SetColor( Genesis::Color( 1.0f, 1.0f, 1.0f, 0.05f ) );
+    m_pEnterSectorButton->SetHoverColor( EVA_BUTTON_COLOR_HOVER );
+    m_pEnterSectorButton->SetBorderColor( EVA_BUTTON_COLOR_BORDER );
     m_pEnterSectorButton->SetBorderMode( Genesis::Gui::PANEL_BORDER_ALL );
     m_pEnterSectorButton->SetFont( EVA_FONT );
     m_pEnterSectorButton->SetText( "Enter sector" );
@@ -231,9 +231,9 @@ void SectorDetails::SetSectorInfo( SectorInfo* pSectorInfo )
         SetContents( contents.str() );
 
         ThreatRating threatRating = pSectorInfo->GetThreatRating();
-        const Genesis::Color& threatRatingColour = GetThreatRatingColour( threatRating );
-        m_pThreatBackground->SetColour( threatRatingColour );
-        m_pPointOfInterest->SetColour( threatRatingColour );
+        const Genesis::Color& threatRatingColor = GetThreatRatingColor( threatRating );
+        m_pThreatBackground->SetColor( threatRatingColor );
+        m_pPointOfInterest->SetColor( threatRatingColor );
         m_pTitle->SetText( GetThreatRatingText( threatRating ) );
 
         // Position the "Enter sector" button below the contents.
@@ -259,15 +259,15 @@ void SectorDetails::SetSectorInfo( SectorInfo* pSectorInfo )
 
         if ( pSectorInfo->HasHyperspaceInhibitor() )
         {
-            m_pEnterSectorButton->SetColour( Genesis::Color( 1.0f, 1.0f, 1.0f, 0.05f ) );
-            m_pEnterSectorButton->SetHoverColour( Genesis::Color( 1.0f, 1.0f, 1.0f, 0.05f ) );
-            m_pEnterSectorButton->SetTextColour( Genesis::Color( 1.0f, 1.0f, 1.0f, 0.2f ) );
+            m_pEnterSectorButton->SetColor( Genesis::Color( 1.0f, 1.0f, 1.0f, 0.05f ) );
+            m_pEnterSectorButton->SetHoverColor( Genesis::Color( 1.0f, 1.0f, 1.0f, 0.05f ) );
+            m_pEnterSectorButton->SetTextColor( Genesis::Color( 1.0f, 1.0f, 1.0f, 0.2f ) );
         }
         else
         {
-            m_pEnterSectorButton->SetColour( Genesis::Color( 1.0f, 1.0f, 1.0f, 0.05f ) );
-            m_pEnterSectorButton->SetHoverColour( EVA_BUTTON_COLOUR_HOVER );
-            m_pEnterSectorButton->SetTextColour( Genesis::Color( 1.0f, 1.0f, 1.0f, 1.0f ) );
+            m_pEnterSectorButton->SetColor( Genesis::Color( 1.0f, 1.0f, 1.0f, 0.05f ) );
+            m_pEnterSectorButton->SetHoverColor( EVA_BUTTON_COLOR_HOVER );
+            m_pEnterSectorButton->SetTextColor( Genesis::Color( 1.0f, 1.0f, 1.0f, 1.0f ) );
         }
     }
 
@@ -275,7 +275,7 @@ void SectorDetails::SetSectorInfo( SectorInfo* pSectorInfo )
     m_pPointOfInterest->Show( pSectorInfo != nullptr );
 }
 
-Genesis::Color SectorDetails::GetThreatRatingColour( ThreatRating rating ) const
+Genesis::Color SectorDetails::GetThreatRatingColor( ThreatRating rating ) const
 {
     using namespace Genesis;
 
@@ -348,7 +348,7 @@ void DeployProbeButton::Update( float delta )
 
     if ( m_pSectorInfo->HasProbe() )
     {
-        SetTextColour( Genesis::Color( 1.0f, 0.0f, 0.0f, 1.0f ) );
+        SetTextColor( Genesis::Color( 1.0f, 0.0f, 0.0f, 1.0f ) );
         m_CanDeploy = false;
     }
     else
@@ -357,12 +357,12 @@ void DeployProbeButton::Update( float delta )
         bool isValidSector = ( sectorFactionId == FactionId::Neutral || sectorFactionId == FactionId::Empire );
         if ( g_pGame->GetPlayer()->GetInfluence() < m_Cost || isValidSector == false )
         {
-            SetTextColour( Genesis::Color( 1.0f, 0.0f, 0.0f, 1.0f ) );
+            SetTextColor( Genesis::Color( 1.0f, 0.0f, 0.0f, 1.0f ) );
             m_CanDeploy = false;
         }
         else
         {
-            SetTextColour( Genesis::Color( 1.0f, 1.0f, 1.0f, 1.0f ) );
+            SetTextColor( Genesis::Color( 1.0f, 1.0f, 1.0f, 1.0f ) );
             m_CanDeploy = true;
         }
     }
@@ -405,7 +405,7 @@ void DeployStarfortButton::Update( float delta )
 
     if ( m_pSectorInfo->HasStarfort() )
     {
-        SetTextColour( Genesis::Color( 1.0f, 0.0f, 0.0f, 1.0f ) );
+        SetTextColor( Genesis::Color( 1.0f, 0.0f, 0.0f, 1.0f ) );
         m_CanDeploy = false;
     }
     else
@@ -414,12 +414,12 @@ void DeployStarfortButton::Update( float delta )
         bool isValidSector = ( sectorFactionId == FactionId::Empire );
         if ( g_pGame->GetPlayer()->GetInfluence() < m_Cost || isValidSector == false )
         {
-            SetTextColour( Genesis::Color( 1.0f, 0.0f, 0.0f, 1.0f ) );
+            SetTextColor( Genesis::Color( 1.0f, 0.0f, 0.0f, 1.0f ) );
             m_CanDeploy = false;
         }
         else
         {
-            SetTextColour( Genesis::Color( 1.0f, 1.0f, 1.0f, 1.0f ) );
+            SetTextColor( Genesis::Color( 1.0f, 1.0f, 1.0f, 1.0f ) );
             m_CanDeploy = true;
         }
     }

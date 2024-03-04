@@ -17,6 +17,8 @@
 
 #pragma once
 
+#include <color.h>
+
 #include "ship/moduleinfo.h"
 #include "ui/types.fwd.h"
 #include "ui/window.h"
@@ -60,6 +62,7 @@ private:
     void UpdateEnergyGridStats();
     void UpdateNavigationStats();
     float CalculateBonusMultiplier( TowerBonus towerBonus ) const;
+    void SetEntryColor( Entry& entry, const Genesis::Color& color );
 
     Section m_Weaponry;
     Entry m_WeaponryKinetic;

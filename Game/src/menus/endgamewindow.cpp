@@ -55,7 +55,7 @@ void EndGameWindow::Init()
 
     m_pMainPanel = new Genesis::Gui::Image();
     m_pMainPanel->SetSize( panelWidth, panelHeight );
-    m_pMainPanel->SetBorderColour( EVA_COLOUR_BORDER );
+    m_pMainPanel->SetBorderColor( EVA_COLOR_BORDER );
     m_pMainPanel->SetBorderMode( Genesis::Gui::PANEL_BORDER_ALL );
     m_pMainPanel->SetPosition(
         (int)( ( Genesis::Configuration::GetScreenWidth() - panelWidth ) / 2.0f ),
@@ -67,10 +67,10 @@ void EndGameWindow::Init()
     m_pButtonClose = new ButtonEvent( this, Genesis::Gui::GuiEvent::Close );
     m_pButtonClose->SetPosition( panelWidth - 32, 0 );
     m_pButtonClose->SetSize( 32, 32 );
-    m_pButtonClose->SetColour( 0.0f, 0.0f, 0.0f, 0.0f );
-    m_pButtonClose->SetHoverColour( 0.0f, 0.0f, 0.0f, 0.0f );
-    m_pButtonClose->SetIconColour( EVA_BUTTON_ICON_COLOUR );
-    m_pButtonClose->SetIconHoverColour( EVA_BUTTON_ICON_COLOUR_HOVER );
+    m_pButtonClose->SetColor( 0.0f, 0.0f, 0.0f, 0.0f );
+    m_pButtonClose->SetHoverColor( 0.0f, 0.0f, 0.0f, 0.0f );
+    m_pButtonClose->SetIconColor( EVA_BUTTON_ICON_COLOR );
+    m_pButtonClose->SetIconHoverColor( EVA_BUTTON_ICON_COLOR_HOVER );
     m_pButtonClose->SetIcon( "data/ui/icons/close.png" );
     m_pButtonClose->SetBorderMode( Genesis::Gui::PANEL_BORDER_NONE );
     m_pMainPanel->AddElement( m_pButtonClose );
@@ -78,9 +78,9 @@ void EndGameWindow::Init()
     m_pButtonResume = new ButtonEvent( this, Genesis::Gui::GuiEvent::Close );
     m_pButtonResume->SetPosition( panelWidth / 2 + 32, panelHeight - 150 );
     m_pButtonResume->SetSize( 160, 32 );
-    m_pButtonResume->SetColour( EVA_BUTTON_COLOUR_BACKGROUND );
-    m_pButtonResume->SetHoverColour( EVA_BUTTON_COLOUR_HOVER );
-    m_pButtonResume->SetBorderColour( EVA_BUTTON_COLOUR_BORDER );
+    m_pButtonResume->SetColor( EVA_BUTTON_COLOR_BACKGROUND );
+    m_pButtonResume->SetHoverColor( EVA_BUTTON_COLOR_HOVER );
+    m_pButtonResume->SetBorderColor( EVA_BUTTON_COLOR_BORDER );
     m_pButtonResume->SetBorderMode( Genesis::Gui::PANEL_BORDER_ALL );
     m_pButtonResume->SetFont( EVA_FONT );
     m_pButtonResume->SetText( "Carry on" );
@@ -89,9 +89,9 @@ void EndGameWindow::Init()
     m_pButtonReturnToMenu = new ButtonReturnToMenu();
     m_pButtonReturnToMenu->SetPosition( panelWidth / 2 - 192, panelHeight - 150 );
     m_pButtonReturnToMenu->SetSize( 160, 32 );
-    m_pButtonReturnToMenu->SetColour( EVA_BUTTON_COLOUR_BACKGROUND );
-    m_pButtonReturnToMenu->SetHoverColour( EVA_BUTTON_COLOUR_HOVER );
-    m_pButtonReturnToMenu->SetBorderColour( EVA_BUTTON_COLOUR_BORDER );
+    m_pButtonReturnToMenu->SetColor( EVA_BUTTON_COLOR_BACKGROUND );
+    m_pButtonReturnToMenu->SetHoverColor( EVA_BUTTON_COLOR_HOVER );
+    m_pButtonReturnToMenu->SetBorderColor( EVA_BUTTON_COLOR_BORDER );
     m_pButtonReturnToMenu->SetBorderMode( Genesis::Gui::PANEL_BORDER_ALL );
     m_pButtonReturnToMenu->SetFont( EVA_FONT );
     m_pButtonReturnToMenu->SetText( "Return to menu" );

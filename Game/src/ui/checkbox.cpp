@@ -46,9 +46,9 @@ Checkbox::Checkbox( const std::string& name, CheckboxPressedCallback pCallback /
             }
         } );
 
-    m_pCheckbox->SetBorderColour( EVA_BUTTON_COLOUR_BORDER );
-    m_pCheckbox->SetColour( EVA_BUTTON_COLOUR_BACKGROUND );
-    m_pCheckbox->SetBulletColour( EVA_CHECKBOX_BULLET_COLOUR );
+    m_pCheckbox->SetBorderColor( EVA_BUTTON_COLOR_BORDER );
+    m_pCheckbox->SetColor( EVA_BUTTON_COLOR_BACKGROUND );
+    m_pCheckbox->SetBulletColor( EVA_CHECKBOX_BULLET_COLOR );
     GetPanel()->AddElement( m_pCheckbox );
 
     m_pText = std::make_shared<Text>( "Text" );

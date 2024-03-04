@@ -140,8 +140,8 @@ GalaxyRep::GalaxyRep( Galaxy* pGalaxy )
     m_HomeworldImages[ (int)FactionId::Special ] = nullptr;
     m_HomeworldImages[ (int)FactionId::Hegemon ] = static_cast<ResourceImage*>( pRm->GetResource( "data/ui/sector/homeworld/hegemon.png" ) );
 
-    m_pSectorVB = new VertexBuffer( GeometryType::Triangle, VBO_POSITION | VBO_UV | VBO_COLOUR );
-    m_pSectorInhibitorVB = new VertexBuffer( GeometryType::Triangle, VBO_POSITION | VBO_UV | VBO_COLOUR );
+    m_pSectorVB = new VertexBuffer( GeometryType::Triangle, VBO_POSITION | VBO_UV | VBO_COLOR );
+    m_pSectorInhibitorVB = new VertexBuffer( GeometryType::Triangle, VBO_POSITION | VBO_UV | VBO_COLOR );
     m_pSectorHomeworldVB = new VertexBuffer( GeometryType::Triangle, VBO_POSITION | VBO_UV );
 
     ResourceImage* pSectorCrossImage = static_cast<ResourceImage*>( pRm->GetResource( "data/ui/sector/sector_cross.png" ) );
@@ -356,12 +356,12 @@ void GalaxyRep::UpdateDrawInfo()
                     continue;
                 }
 
-                drawInfo.colour = pFaction->GetColour( FactionColourId::Base );
-                drawInfo.colour.a = 0.3f;
+                drawInfo.color = pFaction->GetColor( FactionColorId::Base );
+                drawInfo.color.a = 0.3f;
             }
             else
             {
-                drawInfo.colour = Genesis::Color( 0.0f, 0.0f, 0.0f, 0.6f );
+                drawInfo.color = Genesis::Color( 0.0f, 0.0f, 0.0f, 0.6f );
             }
 
             m_SectorDrawInfo.push_back( drawInfo );
@@ -605,7 +605,7 @@ void GalaxyRep::DrawSectorsThreatRatings()
     }
 }
 
-void GalaxyRep::DrawSectors( SectorDrawInfoVector& drawInfoVec, Genesis::Shader* pShader, Genesis::ShaderUniformInstances* pShaderUniforms, bool useFactionColour )
+void GalaxyRep::DrawSectors( SectorDrawInfoVector& drawInfoVec, Genesis::Shader* pShader, Genesis::ShaderUniformInstances* pShaderUniforms, bool useFactionColor )
 {
     using namespace Genesis;
 
@@ -616,12 +616,12 @@ void GalaxyRep::DrawSectors( SectorDrawInfoVector& drawInfoVec, Genesis::Shader*
 
     PositionData posData;
     UVData uvData;
-    ColourData colourData;
+    ColorData colorData;
 
     const size_t numVertices = drawInfoVec.size() * 6;
     posData.reserve( numVertices );
     uvData.reserve( numVertices );
-    colourData.reserve( numVertices );
+    colorData.reserve( numVertices );
 
     for ( auto& drawInfo : drawInfoVec )
     {
@@ -644,16 +644,16 @@ void GalaxyRep::DrawSectors( SectorDrawInfoVector& drawInfoVec, Genesis::Shader*
         uvData.emplace_back( 1.0f, 1.0f ); // 2
         uvData.emplace_back( 1.0f, 0.0f ); // 3
 
-        const glm::vec4 colour = useFactionColour ? drawInfo.colour.glm() : glm::vec4( 1.0f, 1.0f, 1.0f, 0.75f );
+        const glm::vec4 color = useFactionColor ? drawInfo.color.glm() : glm::vec4( 1.0f, 1.0f, 1.0f, 0.75f );
         for ( int i = 0; i < 6; ++i )
         {
-            colourData.push_back( colour );
+            colorData.push_back( color );
         }
     }
 
     m_pSectorVB->CopyPositions( posData );
     m_pSectorVB->CopyUVs( uvData );
-    m_pSectorVB->CopyColours( colourData );
+    m_pSectorVB->CopyColors( colorData );
     pShader->Use( pShaderUniforms );
     m_pSectorVB->Draw( static_cast<uint32_t>( numVertices ) );
 }

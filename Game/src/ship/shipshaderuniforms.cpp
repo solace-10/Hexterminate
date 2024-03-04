@@ -41,9 +41,9 @@ ShipShaderUniforms::ShipShaderUniforms()
     m_Uniforms[ (int)ShipShaderUniform::ClipActive ] = m_pShader->RegisterUniform( "k_clipActive", ShaderUniformType::Integer, false );
     m_Uniforms[ (int)ShipShaderUniform::Clip ] = m_pShader->RegisterUniform( "k_clip", ShaderUniformType::FloatVector4, false );
     m_Uniforms[ (int)ShipShaderUniform::ClipForward ] = m_pShader->RegisterUniform( "k_clipForward", ShaderUniformType::FloatVector4, false );
-    m_Uniforms[ (int)ShipShaderUniform::AmbientColour ] = m_pShader->RegisterUniform( "k_a", ShaderUniformType::FloatVector4, false );
-    m_Uniforms[ (int)ShipShaderUniform::EmissiveColour ] = m_pShader->RegisterUniform( "k_e", ShaderUniformType::FloatVector4, false );
-    m_Uniforms[ (int)ShipShaderUniform::OverlayColour ] = m_pShader->RegisterUniform( "k_overlayColour", ShaderUniformType::FloatVector4, false );
+    m_Uniforms[ (int)ShipShaderUniform::AmbientColor ] = m_pShader->RegisterUniform( "k_a", ShaderUniformType::FloatVector4, false );
+    m_Uniforms[ (int)ShipShaderUniform::EmissiveColor ] = m_pShader->RegisterUniform( "k_e", ShaderUniformType::FloatVector4, false );
+    m_Uniforms[ (int)ShipShaderUniform::OverlayColor ] = m_pShader->RegisterUniform( "k_overlayColor", ShaderUniformType::FloatVector4, false );
     m_Uniforms[ (int)ShipShaderUniform::EMPActive ] = m_pShader->RegisterUniform( "k_empActive", ShaderUniformType::Integer, false );
     m_Uniforms[ (int)ShipShaderUniform::DiffuseMap ] = m_pShader->RegisterUniform( "k_sampler0", ShaderUniformType::Texture );
     m_Uniforms[ (int)ShipShaderUniform::SpecularMap ] = m_pShader->RegisterUniform( "k_sampler1", ShaderUniformType::Texture );

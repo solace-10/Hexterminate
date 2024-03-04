@@ -45,7 +45,7 @@ class TableRow
 public:
     TableRow()
         : m_pUserData( nullptr )
-        , m_Colour( EVA_TEXT_COLOUR )
+        , m_Color( EVA_TEXT_COLOR )
         , m_pFont( EVA_FONT ){};
     virtual ~TableRow(){};
 
@@ -54,8 +54,8 @@ public:
     const std::string& Get( unsigned int pos ) const;
     void SetUserData( void* pUserData );
     void* GetUserData() const;
-    void SetColour( const Genesis::Color& colour );
-    const Genesis::Color& GetColour() const;
+    void SetColor( const Genesis::Color& color );
+    const Genesis::Color& GetColor() const;
     void SetFont( Genesis::ResourceFont* pFont );
     Genesis::ResourceFont* GetFont() const;
 
@@ -67,7 +67,7 @@ public:
 private:
     TableRowContents m_Contents;
     void* m_pUserData;
-    Genesis::Color m_Colour;
+    Genesis::Color m_Color;
     Genesis::ResourceFont* m_pFont;
 };
 
@@ -101,14 +101,14 @@ inline const TableRowContents& TableRow::GetContents() const
     return m_Contents;
 }
 
-inline void TableRow::SetColour( const Genesis::Color& colour )
+inline void TableRow::SetColor( const Genesis::Color& color )
 {
-    m_Colour = colour;
+    m_Color = color;
 }
 
-inline const Genesis::Color& TableRow::GetColour() const
+inline const Genesis::Color& TableRow::GetColor() const
 {
-    return m_Colour;
+    return m_Color;
 }
 
 inline void TableRow::SetFont( Genesis::ResourceFont* pFont )

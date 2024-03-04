@@ -53,7 +53,7 @@ typedef std::weak_ptr<RequestGoalRep> RequestGoalRepWeakPtr;
 class RequestGoalRep
 {
 public:
-    RequestGoalRep( RequestGoal* pOwner, const Color& colour );
+    RequestGoalRep( RequestGoal* pOwner, const Color& color );
     ~RequestGoalRep();
 
     void Update( GalaxyRep* pGalaxyRep );

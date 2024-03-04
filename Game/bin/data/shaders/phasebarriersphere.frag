@@ -3,7 +3,7 @@
 in vec2 UV;
 in vec3 objPosition;
 
-out vec3 colour;
+out vec3 color;
 
 uniform sampler2D k_sampler0;
 uniform float k_time = 0.0;
@@ -89,10 +89,10 @@ void main()
 	vec2 shiftedUV = UV;
 	shiftedUV.x += k_time * 0.2;
 
-	colour = texture( k_sampler0, shiftedUV ).rgb;
+	color = texture( k_sampler0, shiftedUV ).rgb;
 
 	vec3 edgeDetect = 1.0f - edgeDetectPS( shiftedUV, gNPixels, gThreshhold + sin( k_time ) * 0.1 );
-	vec3 edgeDetectColourised = edgeDetect * vec3( 1.0, 0.3, 0.0f ) * k_active;
+	vec3 edgeDetectColorised = edgeDetect * vec3( 1.0, 0.3, 0.0f ) * k_active;
 
-	colour = min( k_a.rgb + colour + edgeDetectColourised, 1.0 );
+	color = min( k_a.rgb + color + edgeDetectColorised, 1.0 );
 }

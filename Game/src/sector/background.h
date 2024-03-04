@@ -45,7 +45,7 @@ public:
     virtual void Update( float delta ) override;
     virtual void Render() override;
 
-    const glm::vec4& GetAmbientColour() const;
+    const glm::vec4& GetAmbientColor() const;
 
 private:
     void CreateGeometry();
@@ -55,12 +55,12 @@ private:
     Genesis::VertexBuffer* m_pVertexBuffer;
     StarInfo* m_pStarInfo;
     Genesis::ShaderUniform* m_pStarOffset;
-    glm::vec4 m_AmbientColour;
+    glm::vec4 m_AmbientColor;
 };
 
-inline const glm::vec4& Background::GetAmbientColour() const
+inline const glm::vec4& Background::GetAmbientColor() const
 {
-    return m_AmbientColour;
+    return m_AmbientColor;
 }
 
 } // namespace Hexterminate

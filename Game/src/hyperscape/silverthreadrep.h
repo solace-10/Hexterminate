@@ -69,7 +69,7 @@ private:
     Genesis::VertexBuffer* m_pLocationVB;
     Genesis::PositionData m_LocationPosData;
     Genesis::UVData m_LocationUVData;
-    Genesis::ColourData m_LocationColorData;
+    Genesis::ColorData m_LocationColorData;
 
     struct LocationScreenData
     {
@@ -83,7 +83,7 @@ private:
     Genesis::VertexBuffer* m_pLinkVB;
     Genesis::PositionData m_LinkPosData;
     Genesis::UVData m_LinkUVData;
-    Genesis::ColourData m_LinkColorData;
+    Genesis::ColorData m_LinkColorData;
 
     Genesis::LayerSharedPtr m_pLayer;
 

@@ -75,7 +75,7 @@ struct SectorDrawInfo
         y = _y;
     };
 
-    Genesis::Color colour;
+    Genesis::Color color;
     int x, y;
 };
 
@@ -117,7 +117,7 @@ private:
     void UpdateGoalDrawInfo();
 
     void DrawBackground();
-    void DrawSectors( SectorDrawInfoVector& drawInfoVec, Genesis::Shader* pShader, Genesis::ShaderUniformInstances* pShaderUniforms, bool useFactionColour );
+    void DrawSectors( SectorDrawInfoVector& drawInfoVec, Genesis::Shader* pShader, Genesis::ShaderUniformInstances* pShaderUniforms, bool useFactionColor );
     void DrawSectorsThreatRatings();
     void DrawHomeworldSectors();
     void DrawGrid();

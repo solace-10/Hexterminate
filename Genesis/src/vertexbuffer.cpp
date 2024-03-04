@@ -32,7 +32,7 @@ VertexBuffer::VertexBuffer( GeometryType type, unsigned int flags )
     , m_Position( 0 )
     , m_UV( 0 )
     , m_Normal( 0 )
-    , m_Colour( 0 )
+    , m_Color( 0 )
     , m_Mode( GL_TRIANGLES )
 {
     m_Size.fill( 0 );
@@ -54,9 +54,9 @@ VertexBuffer::VertexBuffer( GeometryType type, unsigned int flags )
         glGenBuffers( 1, &m_Normal );
     }
 
-    if ( flags & VBO_COLOUR )
+    if ( flags & VBO_COLOR )
     {
-        glGenBuffers( 1, &m_Colour );
+        glGenBuffers( 1, &m_Color );
     }
 
     SetModeFromGeometryType( type );
@@ -79,9 +79,9 @@ VertexBuffer::~VertexBuffer()
         glDeleteBuffers( 1, &m_Normal );
     }
 
-    if ( m_Colour != -1 )
+    if ( m_Color != -1 )
     {
-        glDeleteBuffers( 1, &m_Colour );
+        glDeleteBuffers( 1, &m_Color );
     }
 
     glDeleteVertexArrays( 1, &m_VAO );
@@ -126,20 +126,20 @@ void VertexBuffer::CreateUntexturedQuad( float x, float y, float width, float he
     CopyData( vertices, 18, VBO_POSITION );
 }
 
-void VertexBuffer::CreateUntexturedQuad( float x, float y, float width, float height, const glm::vec4& colour )
+void VertexBuffer::CreateUntexturedQuad( float x, float y, float width, float height, const glm::vec4& color )
 {
     CreateUntexturedQuad( x, y, width, height );
 
-    const float colours[] = {
-        colour.r, colour.g, colour.b, colour.a,
-        colour.r, colour.g, colour.b, colour.a,
-        colour.r, colour.g, colour.b, colour.a,
-        colour.r, colour.g, colour.b, colour.a,
-        colour.r, colour.g, colour.b, colour.a,
-        colour.r, colour.g, colour.b, colour.a
+    const float colors[] = {
+        color.r, color.g, color.b, color.a,
+        color.r, color.g, color.b, color.a,
+        color.r, color.g, color.b, color.a,
+        color.r, color.g, color.b, color.a,
+        color.r, color.g, color.b, color.a,
+        color.r, color.g, color.b, color.a
     };
 
-    CopyData( colours, 24, Genesis::VBO_COLOUR );
+    CopyData( colors, 24, Genesis::VBO_COLOR );
 }
 
 void VertexBuffer::CreateTexturedQuad( float x, float y, float width, float height )
@@ -158,20 +158,20 @@ void VertexBuffer::CreateTexturedQuad( float x, float y, float width, float heig
     CopyData( uvs, 12, Genesis::VBO_UV );
 }
 
-void VertexBuffer::CreateTexturedQuad( float x, float y, float width, float height, const glm::vec4& colour )
+void VertexBuffer::CreateTexturedQuad( float x, float y, float width, float height, const glm::vec4& color )
 {
     CreateTexturedQuad( x, y, width, height );
 
-    const float colours[] = {
-        colour.r, colour.g, colour.b, colour.a,
-        colour.r, colour.g, colour.b, colour.a,
-        colour.r, colour.g, colour.b, colour.a,
-        colour.r, colour.g, colour.b, colour.a,
-        colour.r, colour.g, colour.b, colour.a,
-        colour.r, colour.g, colour.b, colour.a
+    const float colors[] = {
+        color.r, color.g, color.b, color.a,
+        color.r, color.g, color.b, color.a,
+        color.r, color.g, color.b, color.a,
+        color.r, color.g, color.b, color.a,
+        color.r, color.g, color.b, color.a,
+        color.r, color.g, color.b, color.a
     };
 
-    CopyData( colours, 24, Genesis::VBO_COLOUR );
+    CopyData( colors, 24, Genesis::VBO_COLOR );
 }
 
 void VertexBuffer::CopyPositions( const PositionData& data )
@@ -204,14 +204,14 @@ void VertexBuffer::CopyNormals( const NormalData& data, size_t count )
     CopyData( &data[ 0 ][ 0 ], count * 3, VBO_NORMAL );
 }
 
-void VertexBuffer::CopyColours( const ColourData& data )
+void VertexBuffer::CopyColors( const ColorData& data )
 {
-    CopyData( &data[ 0 ][ 0 ], data.size() * 4, VBO_COLOUR );
+    CopyData( &data[ 0 ][ 0 ], data.size() * 4, VBO_COLOR );
 }
 
-void VertexBuffer::CopyColours( const ColourData& data, size_t count )
+void VertexBuffer::CopyColors( const ColorData& data, size_t count )
 {
-    CopyData( &data[ 0 ][ 0 ], count * 4, VBO_COLOUR );
+    CopyData( &data[ 0 ][ 0 ], count * 4, VBO_COLOR );
 }
 
 void VertexBuffer::CopyData( const float* pData, size_t size, unsigned int destination )
@@ -233,10 +233,10 @@ void VertexBuffer::CopyData( const float* pData, size_t size, unsigned int desti
         SDL_assert( m_Flags & VBO_NORMAL );
         glBindBuffer( GL_ARRAY_BUFFER, m_Normal );
     }
-    else if ( destination == VBO_COLOUR )
+    else if ( destination == VBO_COLOR )
     {
-        SDL_assert( m_Flags & VBO_COLOUR );
-        glBindBuffer( GL_ARRAY_BUFFER, m_Colour );
+        SDL_assert( m_Flags & VBO_COLOR );
+        glBindBuffer( GL_ARRAY_BUFFER, m_Color );
     }
 
     const unsigned int idx = GetSizeIndex( destination );
@@ -297,10 +297,10 @@ void VertexBuffer::Draw( uint32_t startVertex, uint32_t numVertices, void* pIndi
         glVertexAttribPointer( 2, 3, GL_FLOAT, GL_FALSE, 0, (void*)0 );
     }
 
-    if ( m_Flags & VBO_COLOUR )
+    if ( m_Flags & VBO_COLOR )
     {
         glEnableVertexAttribArray( 3 );
-        glBindBuffer( GL_ARRAY_BUFFER, m_Colour );
+        glBindBuffer( GL_ARRAY_BUFFER, m_Color );
         glVertexAttribPointer( 3, 4, GL_FLOAT, GL_FALSE, 0, (void*)0 );
     }
 
@@ -328,7 +328,7 @@ void VertexBuffer::Draw( uint32_t startVertex, uint32_t numVertices, void* pIndi
         glDisableVertexAttribArray( 2 );
     }
 
-    if ( m_Flags & VBO_COLOUR )
+    if ( m_Flags & VBO_COLOR )
     {
         glDisableVertexAttribArray( 3 );
     }

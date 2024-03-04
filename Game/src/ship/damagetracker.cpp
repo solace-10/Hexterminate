@@ -142,10 +142,10 @@ void DamageTrackerDebugWindow::Update()
                     const float damage = pTracker->GetDamage( factionId );
                     if ( damage > 0.0f )
                     {
-                        bool overrideColour = false;
+                        bool overrideColor = false;
                         if ( ( factionId == FactionId::Player && damage > highestContributorDamage * ShipRewardThreshold ) || ( factionId == highestContributor ) )
                         {
-                            overrideColour = true;
+                            overrideColor = true;
                             ImGui::PushStyleColor( ImGuiCol_Text, ImVec4( 1.0f, 0.0f, 0.0f, 1.0f ) );
                         }
 
@@ -156,7 +156,7 @@ void DamageTrackerDebugWindow::Update()
                         ImGui::NextColumn();
                         ImGui::Columns( 1 );
 
-                        if ( overrideColour )
+                        if ( overrideColor )
                         {
                             ImGui::PopStyleColor();
                         }

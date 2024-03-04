@@ -27,7 +27,7 @@ namespace Hexterminate
 
 Torpedo::Torpedo()
 {
-    SetGlowColour( Genesis::Color( 1.0f, 1.0f, 1.0f, 1.0f ) );
+    SetGlowColor( Genesis::Color( 1.0f, 1.0f, 1.0f, 1.0f ) );
 }
 
 MissileType Torpedo::GetType() const

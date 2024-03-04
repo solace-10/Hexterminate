@@ -30,8 +30,8 @@
 namespace Hexterminate
 {
 
-#define TABLE_COLOUR_ROW_1 glm::vec4( 1.00f, 1.00f, 1.00f, 0.05f )
-#define TABLE_COLOUR_ROW_2 glm::vec4( 0.00f, 0.00f, 0.00f, 0.20f )
+#define TABLE_COLOR_ROW_1 glm::vec4( 1.00f, 1.00f, 1.00f, 0.05f )
+#define TABLE_COLOR_ROW_2 glm::vec4( 0.00f, 0.00f, 0.00f, 0.20f )
 
 Table::Table()
     : m_PositionsDirty( false )
@@ -48,8 +48,8 @@ Table::Table()
 
     m_MousePressedToken = FrameWork::GetInputManager()->AddMouseCallback( std::bind( &Table::OnMousePressedCallback, this ), MouseButton::Left, ButtonState::Pressed );
 
-    m_pShader = FrameWork::GetRenderSystem()->GetShaderCache()->Load( "untextured_vertex_coloured" );
-    m_pVertexBuffer = new VertexBuffer( GeometryType::Triangle, VBO_POSITION | VBO_COLOUR );
+    m_pShader = FrameWork::GetRenderSystem()->GetShaderCache()->Load( "untextured_vertex_colored" );
+    m_pVertexBuffer = new VertexBuffer( GeometryType::Triangle, VBO_POSITION | VBO_COLOR );
 }
 
 Table::~Table()
@@ -80,14 +80,14 @@ void Table::Render()
 
     size_t maxRows = static_cast<size_t>( mSize.y / m_RowHeight );
     glm::vec2 pos = GetPositionAbsolute();
-    glm::vec4 colour[ 2 ] = { TABLE_COLOUR_ROW_1, TABLE_COLOUR_ROW_2 };
+    glm::vec4 color[ 2 ] = { TABLE_COLOR_ROW_1, TABLE_COLOR_ROW_2 };
 
     PositionData posData;
-    ColourData colourData;
+    ColorData colorData;
 
     const size_t numVertices = maxRows * 6;
     posData.reserve( numVertices );
-    colourData.reserve( numVertices );
+    colorData.reserve( numVertices );
 
     for ( size_t i = 0; i < maxRows; ++i )
     {
@@ -100,15 +100,15 @@ void Table::Render()
         posData.emplace_back( pos.x + mSize.x, y2, 0.0f ); // 2
         posData.emplace_back( pos.x + mSize.x, y1, 0.0f ); // 3
 
-        const glm::vec4& rowColour = colour[ i % 2 ];
+        const glm::vec4& rowColor = color[ i % 2 ];
         for ( int j = 0; j < 6; ++j )
         {
-            colourData.push_back( rowColour );
+            colorData.push_back( rowColor );
         }
     }
 
     m_pVertexBuffer->CopyPositions( posData );
-    m_pVertexBuffer->CopyColours( colourData );
+    m_pVertexBuffer->CopyColors( colorData );
     m_pShader->Use();
     m_pVertexBuffer->Draw( static_cast<uint32_t>( numVertices ) );
 
@@ -208,7 +208,7 @@ void Table::UpdateContents()
             pTextElement->SetMultiLine( false );
             pTextElement->SetSize( 256, 32 );
             pTextElement->SetPosition( 8.0f, 8.0f );
-            pTextElement->SetColour( pRow->GetColour() );
+            pTextElement->SetColor( pRow->GetColor() );
             pTextElement->SetFont( pRow->GetFont() );
             pTextElement->SetText( text );
             m_Text.push_back( pTextElement );

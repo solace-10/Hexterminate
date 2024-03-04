@@ -54,7 +54,7 @@ HyperspaceMenu::HyperspaceMenu()
 
     m_pText = new Genesis::Gui::Text();
     m_pText->SetFont( EVA_FONT );
-    m_pText->SetColour( EVA_TEXT_COLOUR );
+    m_pText->SetColor( EVA_TEXT_COLOR );
     m_pText->SetSize( 256.0f, 64.0f );
     m_pText->SetText( "Jump into hyperspace?" );
     m_pText->SetPosition( 0.0f, 8.0f );
@@ -63,7 +63,7 @@ HyperspaceMenu::HyperspaceMenu()
 
     m_pText2 = new Genesis::Gui::Text();
     m_pText2->SetFont( EVA_FONT );
-    m_pText2->SetColour( EVA_TEXT_COLOUR );
+    m_pText2->SetColor( EVA_TEXT_COLOR );
     m_pText2->SetSize( 256.0f, 64.0f );
     m_pText2->SetPosition( 0.0f, 24.0f );
     m_pWindow->GetMainPanel()->AddElement( m_pText2 );
@@ -71,9 +71,9 @@ HyperspaceMenu::HyperspaceMenu()
     m_pButtonJump = new ButtonHyperspaceJump( this );
     m_pButtonJump->SetPosition( centreX - 128.0f - 4.0f, 32.0f );
     m_pButtonJump->SetSize( 128.0f, 32.0f );
-    m_pButtonJump->SetColour( Genesis::Color( 1.0f, 1.0f, 1.0f, 0.05f ) );
-    m_pButtonJump->SetHoverColour( EVA_BUTTON_COLOUR_HOVER );
-    m_pButtonJump->SetBorderColour( EVA_BUTTON_COLOUR_BORDER );
+    m_pButtonJump->SetColor( Genesis::Color( 1.0f, 1.0f, 1.0f, 0.05f ) );
+    m_pButtonJump->SetHoverColor( EVA_BUTTON_COLOR_HOVER );
+    m_pButtonJump->SetBorderColor( EVA_BUTTON_COLOR_BORDER );
     m_pButtonJump->SetBorderMode( Genesis::Gui::PANEL_BORDER_NONE );
     m_pButtonJump->SetFont( EVA_FONT );
     m_pButtonJump->SetText( "Jump" );
@@ -82,9 +82,9 @@ HyperspaceMenu::HyperspaceMenu()
     m_pButtonCancel = new ButtonHyperspaceCancel( this );
     m_pButtonCancel->SetPosition( centreX + 4.0f, 32.0f );
     m_pButtonCancel->SetSize( 128.0f, 32.0f );
-    m_pButtonCancel->SetColour( Genesis::Color( 1.0f, 1.0f, 1.0f, 0.05f ) );
-    m_pButtonCancel->SetHoverColour( EVA_BUTTON_COLOUR_HOVER );
-    m_pButtonCancel->SetBorderColour( EVA_BUTTON_COLOUR_BORDER );
+    m_pButtonCancel->SetColor( Genesis::Color( 1.0f, 1.0f, 1.0f, 0.05f ) );
+    m_pButtonCancel->SetHoverColor( EVA_BUTTON_COLOR_HOVER );
+    m_pButtonCancel->SetBorderColor( EVA_BUTTON_COLOR_BORDER );
     m_pButtonCancel->SetBorderMode( Genesis::Gui::PANEL_BORDER_NONE );
     m_pButtonCancel->SetFont( EVA_FONT );
     m_pButtonCancel->SetText( "Cancel" );

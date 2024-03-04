@@ -51,13 +51,13 @@ enum class FactionId
     Count
 };
 
-enum class FactionColourId
+enum class FactionColorId
 {
-    Base = 0, // Colour by which this faction is represented in the Sector view and possibly in text.
-    Primary, // Main colour the ship's modules are painted with.
-    Secondary, // Secondary colour for small details on the ship's modules.
-    PrimaryFlagship, // Primary colour for flagships.
-    SecondaryFlagship, // Secondary colour for flagships.
+    Base = 0, // Color by which this faction is represented in the Sector view and possibly in text.
+    Primary, // Main color the ship's modules are painted with.
+    Secondary, // Secondary color for small details on the ship's modules.
+    PrimaryFlagship, // Primary color for flagships.
+    SecondaryFlagship, // Secondary color for flagships.
     Glow, // Used by engine trails.
     GlowFlagship, // Flagship variant.
     FleetChevron, // Fleet chevron in the galaxy view.
@@ -76,7 +76,7 @@ enum class FactionPresence
 struct FactionInfo
 {
     std::string m_Name;
-    Genesis::Color m_Colours[ static_cast<unsigned int>( FactionColourId::Count ) ];
+    Genesis::Color m_Colors[ static_cast<unsigned int>( FactionColorId::Count ) ];
     int m_BaseFleetPoints; // Initial fleet size (in points) when the game starts.
     float m_SectorToShipyardRatio; // Optimal number of shipyards for the amount of sectors controlled by this faction.
     FleetDoctrine m_Doctrine;
@@ -102,7 +102,7 @@ public:
     virtual ~Faction() {}
 
     inline const std::string& GetName() const { return m_Info.m_Name; }
-    inline const Genesis::Color& GetColour( FactionColourId id ) const { return m_Info.m_Colours[ (int)id ]; }
+    inline const Genesis::Color& GetColor( FactionColorId id ) const { return m_Info.m_Colors[ (int)id ]; }
     virtual void AddControlledSector( SectorInfo* pSector, bool immediate, bool takenByPlayer );
     void RemoveControlledSector( SectorInfo* pSector, bool immediate = false );
     inline const SectorInfoVector& GetControlledSectors() const { return m_ControlledSectors; }

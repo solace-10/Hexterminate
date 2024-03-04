@@ -43,8 +43,8 @@ m_pVertexBuffer( nullptr )
 		m_LookupSin[ i ] = sinf( theta * i );
 	}
 
-	m_pVertexBuffer = new VertexBuffer( GeometryType::Line, VBO_POSITION | VBO_COLOUR );
-	m_pShader = FrameWork::GetRenderSystem()->GetShaderCache()->Load( "untextured_vertex_coloured" );
+	m_pVertexBuffer = new VertexBuffer( GeometryType::Line, VBO_POSITION | VBO_COLOR );
+	m_pShader = FrameWork::GetRenderSystem()->GetShaderCache()->Load( "untextured_vertex_colored" );
 }
 
 DebugRender::~DebugRender()
@@ -69,20 +69,20 @@ void DebugRender::RenderLines()
 	}
 
 	PositionData posData;
-	ColourData colourData;
+	ColorData colorData;
 
 	for ( auto& line : m_Lines )
 	{
 		posData.push_back( line.start );
 		posData.push_back( line.end );
 
-		glm::vec4 colour( line.colour, 1.0f );
-		colourData.push_back( colour );
-		colourData.push_back( colour );
+		glm::vec4 color( line.color, 1.0f );
+		colorData.push_back( color );
+		colorData.push_back( color );
 	}
 
 	m_pVertexBuffer->CopyPositions( posData );
-	m_pVertexBuffer->CopyColours( colourData );
+	m_pVertexBuffer->CopyColors( colorData );
 
 	RenderSystem* pRenderSystem = FrameWork::GetRenderSystem();
 	pRenderSystem->SetBlendMode( BlendMode::Blend );
@@ -105,28 +105,28 @@ void DebugRender::RenderCircles()
 	}
 
 	PositionData posData;
-	ColourData colourData;
+	ColorData colorData;
 
 	for ( auto& circle : m_Circles )
 	{
-		glm::vec4 colour( circle.colour, 1.0f );
+		glm::vec4 color( circle.color, 1.0f );
 
 		for ( int j = 0; j < DEBUG_RENDER_CIRCLE_SIDES - 1; ++j )
 		{
 			posData.push_back( glm::vec3( circle.origin.x + circle.radius * m_LookupCos[ j     ], circle.origin.y + circle.radius * m_LookupSin[ j     ], circle.origin.z ) );
 			posData.push_back( glm::vec3( circle.origin.x + circle.radius * m_LookupCos[ j + 1 ], circle.origin.y + circle.radius * m_LookupSin[ j + 1 ], circle.origin.z ) );
-			colourData.push_back( colour );
-			colourData.push_back( colour );
+			colorData.push_back( color );
+			colorData.push_back( color );
 		}
 
 		posData.push_back( glm::vec3( circle.origin.x + circle.radius * m_LookupCos[ DEBUG_RENDER_CIRCLE_SIDES - 1 ], circle.origin.y + circle.radius * m_LookupSin[ DEBUG_RENDER_CIRCLE_SIDES - 1 ], circle.origin.z ) );
 		posData.push_back( glm::vec3( circle.origin.x + circle.radius * m_LookupCos[ 0 ], circle.origin.y + circle.radius * m_LookupSin[ 0 ], circle.origin.z ) );
-		colourData.push_back( colour );
-		colourData.push_back( colour );
+		colorData.push_back( color );
+		colorData.push_back( color );
 	}
 
 	m_pVertexBuffer->CopyPositions( posData );
-	m_pVertexBuffer->CopyColours( colourData );
+	m_pVertexBuffer->CopyColors( colorData );
 
 	RenderSystem* pRenderSystem = FrameWork::GetRenderSystem();
 	pRenderSystem->SetBlendMode( BlendMode::Blend );
@@ -148,7 +148,7 @@ void DebugRender::RenderText()
 
 	//for ( auto& data : m_Texts )
 	//{
-	//	pFont->Render( data.x, data.y, 0.0f, 0.0f, data.text, Genesis::Colour( data.colour.x, data.colour.y, data.colour(2), data.colour(3) ) );
+	//	pFont->Render( data.x, data.y, 0.0f, 0.0f, data.text, Genesis::Color( data.color.x, data.color.y, data.color(2), data.color(3) ) );
 	//}
 
 	//Genesis::FrameWork::GetRenderSystem()->ViewPerspective();
@@ -156,41 +156,41 @@ void DebugRender::RenderText()
 	m_Texts.clear();
 }
 
-void DebugRender::DrawLine( const glm::vec2& start, const glm::vec2& end, const glm::vec3& colour )
+void DebugRender::DrawLine( const glm::vec2& start, const glm::vec2& end, const glm::vec3& color )
 {
-	DrawLine( glm::vec3( start, 0.0f ), glm::vec3( end, 0.0f ), colour );
+	DrawLine( glm::vec3( start, 0.0f ), glm::vec3( end, 0.0f ), color );
 }
 
-void DebugRender::DrawLine( const glm::vec3& start, const glm::vec3& end, const glm::vec3& colour )
+void DebugRender::DrawLine( const glm::vec3& start, const glm::vec3& end, const glm::vec3& color )
 {
 	DebugRenderLine line;
 	line.start = start;
 	line.end = end;
-	line.colour = colour;
+	line.color = color;
 	m_Lines.push_back( line );
 }
 
-void DebugRender::DrawCircle( const glm::vec2& origin, float radius, const glm::vec3& colour )
+void DebugRender::DrawCircle( const glm::vec2& origin, float radius, const glm::vec3& color )
 {
-	DrawCircle( glm::vec3( origin, 0.0f ), radius, colour );
+	DrawCircle( glm::vec3( origin, 0.0f ), radius, color );
 }
 
-void DebugRender::DrawCircle( const glm::vec3& origin, float radius, const glm::vec3& colour )
+void DebugRender::DrawCircle( const glm::vec3& origin, float radius, const glm::vec3& color )
 {
 	DebugRenderCircle circle;
 	circle.origin = origin;
 	circle.radius = radius;
-	circle.colour = colour;
+	circle.color = color;
 	m_Circles.push_back( circle );
 }
 
-void DebugRender::DrawText( float x, float y, const std::string& str, const glm::vec3& colour )
+void DebugRender::DrawText( float x, float y, const std::string& str, const glm::vec3& color )
 {
 	DebugRenderText text;
 	text.x = x;
 	text.y = y;
 	text.text = str;
-	text.colour = colour;
+	text.color = color;
 	m_Texts.push_back( text );
 }
 

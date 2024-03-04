@@ -26,14 +26,14 @@ namespace Hexterminate
 class Trail
 {
 public:
-    Trail( float initialWidth, float decay, const Genesis::Color& colour );
+    Trail( float initialWidth, float decay, const Genesis::Color& color );
     ~Trail(){};
 
     void AddPoint( const glm::vec3& position );
     const TrailPointDataList& GetData() const;
     float GetInitialWidth() const;
     void SetInitialWidth( float value );
-    const Genesis::Color& GetColour() const;
+    const Genesis::Color& GetColor() const;
     void Update( float delta );
     void SetOrphan();
     bool IsOrphan() const;
@@ -43,7 +43,7 @@ private:
     TrailPointDataList m_Data;
     float m_InitialWidth;
     float m_Decay;
-    Genesis::Color m_Colour;
+    Genesis::Color m_Color;
     bool m_IsOrphan;
     int m_ActivePoints;
 };
@@ -63,9 +63,9 @@ inline void Trail::SetInitialWidth( float value )
     m_InitialWidth = value;
 }
 
-inline const Genesis::Color& Trail::GetColour() const
+inline const Genesis::Color& Trail::GetColor() const
 {
-    return m_Colour;
+    return m_Color;
 }
 
 inline void Trail::SetOrphan()

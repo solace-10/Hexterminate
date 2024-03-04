@@ -56,10 +56,10 @@ void ParticleManager::Update( float delta )
     }
 
     //#ifdef _DEBUG
-    //	glm::vec3 colour = ( activeEmitters < sMaxEmitters ) ? glm::vec3( 0.0f, 1.0f, 0.0f ) : glm::vec3( 1.0f, 0.0f, 0.0f );
+    //	glm::vec3 color = ( activeEmitters < sMaxEmitters ) ? glm::vec3( 0.0f, 1.0f, 0.0f ) : glm::vec3( 1.0f, 0.0f, 0.0f );
     //	std::stringstream ss;
     //	ss << "Active emitters: " << activeEmitters << "/" << sMaxEmitters;
-    //	g_pGame->GetDebugRender()->DrawText( 16.0f, 16.0f, ss.str(), colour );
+    //	g_pGame->GetDebugRender()->DrawText( 16.0f, 16.0f, ss.str(), color );
     //#endif
 }
 

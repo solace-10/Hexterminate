@@ -49,7 +49,7 @@ public:
 
 private:
     void AddFleetRows();
-    Genesis::Color GetShipIntegrityColour( int integrity ) const;
+    Genesis::Color GetShipIntegrityColor( int integrity ) const;
 
     Genesis::Gui::Panel* m_pMainPanel;
     Table* m_pTable;

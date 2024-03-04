@@ -42,7 +42,7 @@ MusicTitle::MusicTitle()
 
     m_pTextGui = new Gui::Text();
     m_pTextGui->SetFont( EVA_FONT );
-    m_pTextGui->SetColour( EVA_TEXT_COLOUR );
+    m_pTextGui->SetColor( EVA_TEXT_COLOR );
     m_pTextGui->SetSize( 300.0f, 16.0f );
     m_pTextGui->SetPosition( 40.0f, 12.0f );
     m_pTextGui->SetHiddenForCapture( true );
@@ -52,7 +52,7 @@ MusicTitle::MusicTitle()
     m_pIcon->SetPosition( 4.0f, 4.0f );
     m_pIcon->SetSize( 32.0f, 32.0f );
     m_pIcon->SetTexture( (ResourceImage*)FrameWork::GetResourceManager()->GetResource( "data/ui/icons/headphones.png" ) );
-    m_pIcon->SetColour( 1.0f, 1.0f, 1.0f, 0.0f );
+    m_pIcon->SetColor( 1.0f, 1.0f, 1.0f, 0.0f );
     m_pIcon->SetHiddenForCapture( true );
     FrameWork::GetGuiManager()->AddElement( m_pIcon );
 }
@@ -85,8 +85,8 @@ void MusicTitle::Update( float delta )
         else if ( p > 4.0f )
             alpha = 1.0f - std::min( p - 4.0f, 1.0f );
 
-        m_pTextGui->SetColour( 1.0f, 1.0f, 1.0f, alpha );
-        m_pIcon->SetColour( 1.0f, 1.0f, 1.0f, alpha );
+        m_pTextGui->SetColor( 1.0f, 1.0f, 1.0f, alpha );
+        m_pIcon->SetColor( 1.0f, 1.0f, 1.0f, alpha );
 
         isVisible = ( alpha > 0.0f );
 

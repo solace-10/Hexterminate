@@ -91,11 +91,11 @@ void Meter::UpdatePips()
     {
         if ( i < m_Pips - 1 )
         {
-            m_Panels[ i ]->SetColour( 0.4f, 0.4f, 0.4f, 1.0f );
+            m_Panels[ i ]->SetColor( 0.4f, 0.4f, 0.4f, 1.0f );
         }
         else
         {
-            m_Panels[ i ]->SetColour( 0.309f, 0.639f, 0.690f, 1.0f );
+            m_Panels[ i ]->SetColor( 0.309f, 0.639f, 0.690f, 1.0f );
         }
 
         m_Panels[ i ]->Show( i < m_Pips );

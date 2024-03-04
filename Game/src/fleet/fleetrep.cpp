@@ -61,11 +61,11 @@ FleetRep::FleetRep( Fleet* pFleet )
     m_pImage = (ResourceImage*)FrameWork::GetResourceManager()->GetResource( "data/ui/sector/fleet.png" );
     m_pImageFlagship = (ResourceImage*)FrameWork::GetResourceManager()->GetResource( "data/ui/sector/fleetflagship.png" );
 
-    m_pShader = FrameWork::GetRenderSystem()->GetShaderCache()->Load( "textured_vertex_coloured" );
+    m_pShader = FrameWork::GetRenderSystem()->GetShaderCache()->Load( "textured_vertex_colored" );
     m_pDiffuseSampler = m_pShader->RegisterUniform( "k_sampler0", ShaderUniformType::Texture );
     m_pDiffuseSampler->Set( m_pImage, GL_TEXTURE0 );
 
-    m_pVertexBuffer = new VertexBuffer( GeometryType::Triangle, VBO_POSITION | VBO_UV | VBO_COLOUR );
+    m_pVertexBuffer = new VertexBuffer( GeometryType::Triangle, VBO_POSITION | VBO_UV | VBO_COLOR );
 }
 
 FleetRep::~FleetRep()
@@ -171,7 +171,7 @@ void FleetRep::DrawChevron()
         m_Angle = atan2( positionDelta.y, positionDelta.x );
     }
 
-    const Genesis::Color& clr = m_pFleet->GetFaction()->GetColour( FactionColourId::FleetChevron );
+    const Genesis::Color& clr = m_pFleet->GetFaction()->GetColor( FactionColorId::FleetChevron );
     m_pVertexBuffer->CreateTexturedQuad( -16.0f, -16.0f, 32.0f, 32.0f, clr.glm() );
     m_pDiffuseSampler->Set( m_pFleet->HasFlagship() ? m_pImageFlagship : m_pImage, GL_TEXTURE0 );
     const glm::mat4 modelMatrix = glm::translate( glm::vec3( screenPos.x, screenPos.y, 0.0f ) ) * glm::rotate( glm::mat4( 1.0f ), m_Angle, glm::vec3( 0.0f, 0.0f, 1.0f ) );

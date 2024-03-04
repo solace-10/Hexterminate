@@ -58,7 +58,7 @@ namespace Gui
                 const glm::vec2& pos = GetPositionAbsolute();
                 m_pImageVertexBuffer->CreateTexturedQuad( pos.x, pos.y, mSize.x, mSize.y );
 
-                GuiManager::GetTexturedShaderColourUniform()->Set( mColour.glm() );
+                GuiManager::GetTexturedShaderColorUniform()->Set( m_Color.glm() );
                 GuiManager::GetTexturedSamplerUniform()->Set( texture, GL_TEXTURE0 );
                 GuiManager::GetTexturedShader()->Use();
 

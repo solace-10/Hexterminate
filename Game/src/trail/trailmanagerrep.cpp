@@ -49,7 +49,7 @@ TrailManagerRep::TrailManagerRep( TrailManager* pTrailManager )
     ShaderUniform* pDiffuseSamplerUniform = m_pShader->RegisterUniform( "k_sampler0", ShaderUniformType::Texture );
     pDiffuseSamplerUniform->Set( pTexture, GL_TEXTURE0 );
 
-    m_pVertexBuffer = new VertexBuffer( GeometryType::Triangle, VBO_POSITION | VBO_UV | VBO_COLOUR );
+    m_pVertexBuffer = new VertexBuffer( GeometryType::Triangle, VBO_POSITION | VBO_UV | VBO_COLOR );
 }
 
 TrailManagerRep::~TrailManagerRep()
@@ -65,10 +65,10 @@ void TrailManagerRep::Update( float delta )
 
     PositionData posData;
     UVData uvData;
-    ColourData colourData;
+    ColorData colorData;
     posData.reserve( 512 );
     uvData.reserve( 512 );
-    colourData.reserve( 512 );
+    colorData.reserve( 512 );
 
     const TrailList& trails = m_pTrailManager->GetTrails();
     glm::vec3 p1, p2, d;
@@ -120,7 +120,7 @@ void TrailManagerRep::Update( float delta )
             posData.push_back( v[ 3 ] );
 
             PushBackUVs( uvData );
-            PushBackColours( colourData, pTrail->GetColour(), pTrail->GetInitialWidth(), it->GetWidth(), nextIt->GetWidth() );
+            PushBackColors( colorData, pTrail->GetColor(), pTrail->GetInitialWidth(), it->GetWidth(), nextIt->GetWidth() );
 
             useLast = true;
         }
@@ -145,7 +145,7 @@ void TrailManagerRep::Update( float delta )
     {
         m_pVertexBuffer->CopyPositions( posData );
         m_pVertexBuffer->CopyUVs( uvData );
-        m_pVertexBuffer->CopyColours( colourData );
+        m_pVertexBuffer->CopyColors( colorData );
 
         m_NumVertices = posData.size();
     }
@@ -167,15 +167,15 @@ void TrailManagerRep::PushBackUVs( Genesis::UVData& uvData )
     }
 }
 
-void TrailManagerRep::PushBackColours( Genesis::ColourData& colourData, const Genesis::Color& colour, float initialWidth, float currentWidth, float nextWidth )
+void TrailManagerRep::PushBackColors( Genesis::ColorData& colorData, const Genesis::Color& color, float initialWidth, float currentWidth, float nextWidth )
 {
     using namespace Genesis;
-    const float r = colour.r;
-    const float g = colour.g;
-    const float b = colour.b;
+    const float r = color.r;
+    const float g = color.g;
+    const float b = color.b;
     const float a1 = currentWidth / initialWidth;
     const float a2 = nextWidth / initialWidth;
-    const glm::vec4 colours[ 4 ] = {
+    const glm::vec4 colors[ 4 ] = {
         glm::vec4( r, g, b, a1 ),
         glm::vec4( r, g, b, a2 ),
         glm::vec4( r, g, b, a2 ),
@@ -183,7 +183,7 @@ void TrailManagerRep::PushBackColours( Genesis::ColourData& colourData, const Ge
     };
 
     for ( Uint32 i = 0; i < sNumBaseIndices; ++i )
-        colourData.push_back( colours[ sBaseIndices[ i ] ] );
+        colorData.push_back( colors[ sBaseIndices[ i ] ] );
 }
 
 void TrailManagerRep::Render()

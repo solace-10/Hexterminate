@@ -84,8 +84,8 @@ IntelWindow::IntelWindow()
 
     m_pMainPanel = new Gui::Panel();
     m_pMainPanel->SetSize( panelWidth, panelHeight );
-    m_pMainPanel->SetColour( EVA_COLOUR_BACKGROUND );
-    m_pMainPanel->SetBorderColour( EVA_COLOUR_BORDER );
+    m_pMainPanel->SetColor( EVA_COLOR_BACKGROUND );
+    m_pMainPanel->SetBorderColor( EVA_COLOR_BORDER );
     m_pMainPanel->SetBorderMode( Gui::PANEL_BORDER_NONE );
     m_pMainPanel->SetPosition( ( Configuration::GetScreenWidth() - panelWidth ) / 2.0f, 8.0f );
     m_pMainPanel->SetHiddenForCapture( true );
@@ -95,7 +95,7 @@ IntelWindow::IntelWindow()
     m_pTitle = new Gui::Text();
     m_pTitle->SetSize( panelWidth, panelHeight );
     m_pTitle->SetPosition( 139.0f, 8.0f );
-    m_pTitle->SetColour( EVA_TEXT_COLOUR );
+    m_pTitle->SetColor( EVA_TEXT_COLOR );
     m_pTitle->SetFont( EVA_FONT_BOLD );
     m_pTitle->SetText( "" );
     m_pMainPanel->AddElement( m_pTitle );
@@ -103,7 +103,7 @@ IntelWindow::IntelWindow()
     m_pContent = new Gui::Text();
     m_pContent->SetSize( panelWidth - 144.0f, panelHeight - 48.0f );
     m_pContent->SetPosition( 139.0f, 40.0f );
-    m_pContent->SetColour( EVA_TEXT_COLOUR );
+    m_pContent->SetColor( EVA_TEXT_COLOR );
     m_pContent->SetFont( EVA_FONT );
     m_pContent->SetText( "" );
     m_pMainPanel->AddElement( m_pContent );
@@ -111,7 +111,7 @@ IntelWindow::IntelWindow()
     m_pLoot = new Gui::Text();
     m_pLoot->SetSize( panelWidth, panelHeight );
     m_pLoot->SetPosition( panelWidth / 2.0f, panelHeight / 2.0f );
-    m_pLoot->SetColour( EVA_TEXT_COLOUR );
+    m_pLoot->SetColor( EVA_TEXT_COLOR );
     m_pLoot->SetFont( EVA_FONT );
     m_pLoot->SetText( "" );
     m_pMainPanel->AddElement( m_pLoot );
@@ -120,7 +120,7 @@ IntelWindow::IntelWindow()
     m_pIcon->SetPosition( 4.0f, 4.0f );
     m_pIcon->SetSize( 131.0f, 160.0f );
     m_pIcon->SetTexture( nullptr );
-    m_pIcon->SetColour( 1.0f, 1.0f, 1.0f, 1.0f );
+    m_pIcon->SetColor( 1.0f, 1.0f, 1.0f, 1.0f );
     m_pIcon->SetShader( FrameWork::GetRenderSystem()->GetShaderCache()->Load( "gui_portrait" ) );
     m_pMainPanel->AddElement( m_pIcon );
 
@@ -175,7 +175,7 @@ void IntelWindow::Update( float delta )
             if ( pModuleInfo != nullptr )
             {
                 m_pLoot->SetText( pModuleInfo->GetFullName() );
-                m_pLoot->SetColour( ModuleRarityToColour( pModuleInfo->GetRarity() ) );
+                m_pLoot->SetColor( ModuleRarityToColor( pModuleInfo->GetRarity() ) );
 
                 float halfTextWidth = m_pLoot->GetFont()->GetTextLength( m_pLoot->GetText() ) / 2.0f;
                 float halfTextHeight = m_pLoot->GetFont()->GetLineHeight() / 2.0f;

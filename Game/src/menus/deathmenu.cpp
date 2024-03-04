@@ -54,15 +54,15 @@ DeathMenu::DeathMenu()
 
     m_pText = new Genesis::Gui::Text;
     m_pText->SetFont( EVA_FONT );
-    m_pText->SetColour( EVA_TEXT_COLOUR );
+    m_pText->SetColor( EVA_TEXT_COLOR );
     m_pText->SetSize( Genesis::Configuration::GetScreenWidth(), 64 );
     m_pWindow->GetMainPanel()->AddElement( m_pText );
 
     m_pButtonExit = new ButtonDeathExit();
     m_pButtonExit->SetSize( 128.0f, 32.0f );
-    m_pButtonExit->SetColour( Genesis::Color( 1.0f, 1.0f, 1.0f, 0.05f ) );
-    m_pButtonExit->SetHoverColour( EVA_BUTTON_COLOUR_HOVER );
-    m_pButtonExit->SetBorderColour( EVA_BUTTON_COLOUR_BORDER );
+    m_pButtonExit->SetColor( Genesis::Color( 1.0f, 1.0f, 1.0f, 0.05f ) );
+    m_pButtonExit->SetHoverColor( EVA_BUTTON_COLOR_HOVER );
+    m_pButtonExit->SetBorderColor( EVA_BUTTON_COLOR_BORDER );
     m_pButtonExit->SetBorderMode( Genesis::Gui::PANEL_BORDER_NONE );
     m_pButtonExit->SetFont( EVA_FONT );
     m_pButtonExit->SetText( "Main menu" );
@@ -71,9 +71,9 @@ DeathMenu::DeathMenu()
     m_pButtonRespawn = new ButtonDeathRespawn( this );
     m_pButtonRespawn->SetPosition( centreX + 4.0f, 32.0f );
     m_pButtonRespawn->SetSize( 128.0f, 32.0f );
-    m_pButtonRespawn->SetColour( Genesis::Color( 1.0f, 1.0f, 1.0f, 0.05f ) );
-    m_pButtonRespawn->SetHoverColour( EVA_BUTTON_COLOUR_HOVER );
-    m_pButtonRespawn->SetBorderColour( EVA_BUTTON_COLOUR_BORDER );
+    m_pButtonRespawn->SetColor( Genesis::Color( 1.0f, 1.0f, 1.0f, 0.05f ) );
+    m_pButtonRespawn->SetHoverColor( EVA_BUTTON_COLOR_HOVER );
+    m_pButtonRespawn->SetBorderColor( EVA_BUTTON_COLOR_BORDER );
     m_pButtonRespawn->SetBorderMode( Genesis::Gui::PANEL_BORDER_NONE );
     m_pButtonRespawn->SetFont( EVA_FONT );
     m_pButtonRespawn->SetText( "Respawn" );

@@ -158,8 +158,8 @@ void ShipStatsWindow::UpdateShieldStats()
     shieldCapacity *= bonusMultiplier;
     shieldRecharge *= bonusMultiplier;
 
-    m_ShieldsCapacity.pValue->SetText( ToString( floor( shieldCapacity ) ) + "GW" );
-    m_ShieldsRecharge.pValue->SetText( ToString( floor( shieldRecharge ) ) + "GW/s" );
+    m_ShieldsCapacity.pValue->SetText( ToString( floor( shieldCapacity ) ) + " GW" );
+    m_ShieldsRecharge.pValue->SetText( ToString( floor( shieldRecharge ) ) + " GW/s" );
     m_ShieldsEfficiency.pValue->SetText( ToString( floor( shieldEfficiency * 100.0f ) ) + "%" );
 }
 
@@ -200,77 +200,51 @@ void ShipStatsWindow::UpdateCapacitorStats()
         weaponsEnergyPerSecond += pWeaponInfo->GetActivationCost( pShip ) * pWeaponInfo->GetRateOfFire( pShip );
     }
 
-    m_CapacitorCapacity.pValue->SetText( ToString( floor( capacity ) ) + "GW" );
-    m_CapacitorRecharge.pValue->SetText( ToString( floor( recharge ) ) + "GW/s" );
-    m_CapacitorWeapons.pValue->SetText( ToString( floor( addonsEnergyPerSecond ) ) + "GW/s" );
-    m_CapacitorAddons.pValue->SetText( ToString( floor( weaponsEnergyPerSecond ) ) + "GW/s" );
+    m_CapacitorCapacity.pValue->SetText( ToString( floor( capacity ) ) + " GW" );
+    m_CapacitorRecharge.pValue->SetText( ToString( floor( recharge ) ) + " GW/s" );
+    m_CapacitorWeapons.pValue->SetText( ToString( floor( weaponsEnergyPerSecond ) ) + " GW/s" );
+    m_CapacitorAddons.pValue->SetText( ToString( floor( addonsEnergyPerSecond ) ) + " GW/s" );
 }
 
 void ShipStatsWindow::UpdateEnergyGridStats()
 {
-// float energyCapacity = 0.0f;
-//     float energyRecharge = 0.0f;
+    float gridCapacity = 0.0f;
+    float gridUsed = 0.0f;
 
-//     Ship* pShip = g_pGame->GetPlayer()->GetShip();
-//     const ReactorModuleList& reactorModules = pShip->GetReactorModules();
-//     for ( auto& pReactorModule : reactorModules )
-//     {
-//         ReactorInfo* pReactorInfo = static_cast<ReactorInfo*>( pReactorModule->GetModuleInfo() );
-//         energyCapacity += pReactorInfo->GetCapacitorStorage();
-//         energyRecharge += pReactorInfo->GetCapacitorRechargeRate();
-//     }
+    Ship* pShip = g_pGame->GetPlayer()->GetShip();
 
-//     for ( auto& pModule : pShip->GetReactorModules() )
-//     {
-//         m_PowerGrid += pModule->GetModuleInfo()->GetPowerGrid( pShip );
-//     }
+    for ( auto& pModule : pShip->GetReactorModules() )
+    {
+        gridCapacity += pModule->GetModuleInfo()->GetPowerGrid( pShip );
+    }
 
-//     for ( auto& pModule : pShip->GetShieldModules() )
-//     {
-//         m_PowerGridUsage += -pModule->GetModuleInfo()->GetPowerGrid( pShip );
-//     }
+    for ( auto& pModule : pShip->GetShieldModules() )
+    {
+        gridUsed += -pModule->GetModuleInfo()->GetPowerGrid( pShip );
+    }
 
-//     float addonsEnergyPerSecond = 0.0f;
-//     for ( auto& pModule : pShip->GetAddonModules() )
-//     {
-//         AddonInfo* pAddonInfo = static_cast<AddonInfo*>( pModule->GetModuleInfo() );
-//         m_PowerGridUsage += -pAddonInfo->GetPowerGrid( pShip );
+    for ( auto& pModule : pShip->GetAddonModules() )
+    {
+        AddonInfo* pAddonInfo = static_cast<AddonInfo*>( pModule->GetModuleInfo() );
+        gridUsed += -pAddonInfo->GetPowerGrid( pShip );
+    }
 
-//         if ( pAddonInfo->GetType() == AddonActivationType::Trigger )
-//         {
-//             SDL_assert( pAddonInfo->GetCooldown() > 0.0f );
-//             addonsEnergyPerSecond += pAddonInfo->GetActivationCost() / pAddonInfo->GetCooldown();
-//         }
-//         else if ( pAddonInfo->GetType() == AddonActivationType::Toggle )
-//         {
-//             addonsEnergyPerSecond += pAddonInfo->GetActivationCost();
-//         }
-//     }
+    for ( auto& pModule : pShip->GetWeaponModules() )
+    {
+        WeaponInfo* pWeaponInfo = static_cast<WeaponInfo*>( pModule->GetModuleInfo() );
+        gridUsed += -pWeaponInfo->GetPowerGrid( pShip );
+    }
 
-//     float weaponsEnergyPerSecond = 0.0f;
-//     for ( auto& pModule : pShip->GetWeaponModules() )
-//     {
-//         WeaponInfo* pWeaponInfo = static_cast<WeaponInfo*>( pModule->GetModuleInfo() );
-//         weaponsEnergyPerSecond += pWeaponInfo->GetActivationCost( pShip ) * pWeaponInfo->GetRateOfFire( pShip );
-//     }
+    m_GridUsed.pValue->SetText( ToString( floor( gridUsed ) ) + " GW/s" );
+    m_GridAvailable.pValue->SetText( ToString( floor( gridCapacity - gridUsed ) ) + " GW/s" );
 
-//     m_pEnergyCapacityRow->Set( 1, ToString( floor( energyCapacity ) ) + "u" );
-//     m_pEnergyRechargeRow->Set( 1, ToString( floor( energyRecharge ) ) + "u/s" );
-//     m_pAddonsEnergyUsageRow->Set( 1, ToString( floor( addonsEnergyPerSecond ) ) + "u/s" );
-//     m_pWeaponsEnergyUsageRow->Set( 1, ToString( floor( weaponsEnergyPerSecond ) ) + "u/s" );
-
-//     m_pGridRow->Set( 1, ToString( floor( m_PowerGrid ) ) + "u" );
-//     m_pGridUsedRow->Set( 1, ToString( floor( m_PowerGridUsage ) ) + "u" );
-//     m_pGridAvailableRow->Set( 1, ToString( floor( m_PowerGrid - m_PowerGridUsage ) ) + "u" );
-
-//     Genesis::Color clr = ( m_PowerGrid >= m_PowerGridUsage ) ? Genesis::Color( 1.0f, 1.0f, 1.0f ) : Genesis::Color( 1.0f, 0.0f, 0.0f );
-//     m_pGridUsedRow->SetColour( clr );
-//     m_pGridAvailableRow->SetColour( clr );
+    Genesis::Color entryColor = ( gridUsed >= gridCapacity ) ? Genesis::Color( 1.0f, 1.0f, 1.0f ) : Genesis::Color( 1.0f, 0.0f, 0.0f );
+    SetEntryColor( m_GridUsed, entryColor );
+    SetEntryColor( m_GridAvailable, entryColor );
 }
 
 void ShipStatsWindow::UpdateNavigationStats()
 {
-
 }
 
 float ShipStatsWindow::CalculateBonusMultiplier( TowerBonus towerBonus ) const
@@ -293,6 +267,13 @@ float ShipStatsWindow::CalculateBonusMultiplier( TowerBonus towerBonus ) const
     }
 
     return multiplier;
+}
+
+void ShipStatsWindow::SetEntryColor( Entry& entry, const Genesis::Color& color )
+{
+    entry.pIcon->SetColor( color );
+    entry.pText->SetColor( color );
+    entry.pValue->SetColor( color );
 }
 
 } // namespace Hexterminate

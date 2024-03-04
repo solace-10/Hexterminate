@@ -53,7 +53,7 @@ public:
 
 private:
     int FindIndexForTexture( ParticlePass* pPass, int id );
-    void AddQuad( const Genesis::Gui::Atlas* pAtlas, const Particle* pParticle, Genesis::PositionData& vertices, Genesis::UVData& uvs, Genesis::ColourData& colours );
+    void AddQuad( const Genesis::Gui::Atlas* pAtlas, const Particle* pParticle, Genesis::PositionData& vertices, Genesis::UVData& uvs, Genesis::ColorData& colors );
     void RenderGeometry( ParticlePass* pPass, const ParticleRenderData& particleRenderData, unsigned int startIdx, unsigned int endIdx );
     Genesis::Shader* GetShader( Genesis::BlendMode blendMode, int textureId );
     ParticleManager* m_pParticleManager;

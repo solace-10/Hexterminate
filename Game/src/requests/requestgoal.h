@@ -47,8 +47,8 @@ typedef std::list<RequestGoalSharedPtr> RequestGoalSharedPtrList;
 class RequestGoal
 {
 public:
-    RequestGoal( FleetWeakPtr pFleet, const std::string& description, const Color& colour = Color( 0.0f, 0.6f, 0.6f, 0.6f ) );
-    RequestGoal( SectorInfo* pSectorInfo, const std::string& description, const Color& colour = Color( 0.0f, 0.6f, 0.6f, 0.6f ) );
+    RequestGoal( FleetWeakPtr pFleet, const std::string& description, const Color& color = Color( 0.0f, 0.6f, 0.6f, 0.6f ) );
+    RequestGoal( SectorInfo* pSectorInfo, const std::string& description, const Color& color = Color( 0.0f, 0.6f, 0.6f, 0.6f ) );
 
     FleetWeakPtr GetFleet() const;
     SectorInfo* GetSectorInfo() const;

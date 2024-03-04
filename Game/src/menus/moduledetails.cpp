@@ -126,8 +126,8 @@ void ModuleDetails::CreateElements()
     m_pMainPanel = new Genesis::Gui::Panel();
     m_pMainPanel->SetSize( 320.0f, 68.0f );
     m_pMainPanel->SetPosition( 0.0f, 0.0f );
-    m_pMainPanel->SetColour( 0.0f, 0.0f, 0.0f, 0.8f );
-    m_pMainPanel->SetBorderColour( EVA_COLOUR_BORDER );
+    m_pMainPanel->SetColor( 0.0f, 0.0f, 0.0f, 0.8f );
+    m_pMainPanel->SetBorderColor( EVA_COLOR_BORDER );
     m_pMainPanel->SetBorderMode( Genesis::Gui::PANEL_BORDER_ALL );
     m_pMainPanel->SetDepth( 10 );
     pGuiManager->AddElement( m_pMainPanel );
@@ -135,7 +135,7 @@ void ModuleDetails::CreateElements()
     m_pTitleText = new Genesis::Gui::Text();
     m_pTitleText->SetSize( 256.0f, 16.0f );
     m_pTitleText->SetPosition( 80.0f, 8.0f );
-    m_pTitleText->SetColour( EVA_TEXT_COLOUR );
+    m_pTitleText->SetColor( EVA_TEXT_COLOR );
     m_pTitleText->SetFont( EVA_FONT );
     m_pTitleText->SetMultiLine( false );
     m_pTitleText->SetText( "" );
@@ -144,7 +144,7 @@ void ModuleDetails::CreateElements()
     m_pContentsText = new Genesis::Gui::Text();
     m_pContentsText->SetSize( 256.0f, 32.0f );
     m_pContentsText->SetPosition( 80.0f, 28.0f );
-    m_pContentsText->SetColour( EVA_TEXT_COLOUR );
+    m_pContentsText->SetColor( EVA_TEXT_COLOR );
     m_pContentsText->SetFont( EVA_FONT );
     m_pContentsText->SetText( "" );
     m_pMainPanel->AddElement( m_pContentsText );
@@ -152,13 +152,13 @@ void ModuleDetails::CreateElements()
     m_pIcon = new Genesis::Gui::Image();
     m_pIcon->SetSize( 64.0f, 64.0f );
     m_pIcon->SetPosition( 8.0f, 8.0f );
-    m_pIcon->SetColour( 1.0f, 1.0f, 1.0f, 1.0f );
+    m_pIcon->SetColor( 1.0f, 1.0f, 1.0f, 1.0f );
     m_pMainPanel->AddElement( m_pIcon );
 
     m_pIconOnly = new Genesis::Gui::Image();
     m_pIconOnly->SetSize( 64.0f, 64.0f );
     m_pIconOnly->SetPosition( 8.0f, 8.0f );
-    m_pIconOnly->SetColour( 1.0f, 1.0f, 1.0f, 1.0f );
+    m_pIconOnly->SetColor( 1.0f, 1.0f, 1.0f, 1.0f );
     m_pIconOnly->SetDepth( 10 );
     pGuiManager->AddElement( m_pIconOnly );
 
@@ -169,7 +169,7 @@ void ModuleDetails::CreateElements()
 void ModuleDetails::SetTitle()
 {
     m_pTitleText->SetText( m_pModuleInfo->GetFullName() );
-    m_pTitleText->SetColour( ModuleRarityToColour( m_pModuleInfo->GetRarity() ) );
+    m_pTitleText->SetColor( ModuleRarityToColor( m_pModuleInfo->GetRarity() ) );
 }
 
 void ModuleDetails::SetIcon()

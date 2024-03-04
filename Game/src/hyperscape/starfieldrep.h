@@ -58,7 +58,7 @@ private:
     Genesis::VertexBuffer* m_pStarfieldVB;
     Genesis::PositionData m_PositionData;
     Genesis::UVData m_UVData;
-    Genesis::ColourData m_ColorData;
+    Genesis::ColorData m_ColorData;
 
     Genesis::LayerSharedPtr m_pLayer;
 

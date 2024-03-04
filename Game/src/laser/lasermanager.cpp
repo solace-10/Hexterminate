@@ -36,7 +36,7 @@ LaserManager::LaserManager()
 
     m_pTexture = (Genesis::ResourceImage*)Genesis::FrameWork::GetResourceManager()->GetResource( "data/images/laser.png" );
 
-    m_pVertexBuffer = new VertexBuffer( GeometryType::Triangle, VBO_POSITION | VBO_UV | VBO_COLOUR );
+    m_pVertexBuffer = new VertexBuffer( GeometryType::Triangle, VBO_POSITION | VBO_UV | VBO_COLOR );
     m_pShader = FrameWork::GetRenderSystem()->GetShaderCache()->Load( "laser" );
     ShaderUniform* pSampler = m_pShader->RegisterUniform( "k_sampler0", ShaderUniformType::Texture );
     pSampler->Set( m_pTexture, GL_TEXTURE0 );
@@ -61,11 +61,11 @@ void LaserManager::Update( float delta )
 
     PositionData posData;
     UVData uvData;
-    ColourData colourData;
+    ColorData colorData;
 
     posData.reserve( lasersCount * 6 );
     uvData.reserve( lasersCount * 6 );
-    colourData.reserve( lasersCount * 6 );
+    colorData.reserve( lasersCount * 6 );
 
     for ( auto& laser : m_Lasers )
     {
@@ -89,16 +89,16 @@ void LaserManager::Update( float delta )
         uvData.emplace_back( 0.0f, 1.0f ); // 2
         uvData.emplace_back( 1.0f, 1.0f ); // 3
 
-        const glm::vec4 colour = laser.GetColour().glm();
+        const glm::vec4 color = laser.GetColor().glm();
         for ( int i = 0; i < 6; ++i )
         {
-            colourData.push_back( colour );
+            colorData.push_back( color );
         }
     }
 
     m_pVertexBuffer->CopyPositions( posData );
     m_pVertexBuffer->CopyUVs( uvData );
-    m_pVertexBuffer->CopyColours( colourData );
+    m_pVertexBuffer->CopyColors( colorData );
 }
 
 void LaserManager::Render()

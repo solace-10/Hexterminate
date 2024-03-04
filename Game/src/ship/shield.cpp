@@ -71,7 +71,7 @@ Shield::Shield( Ship* pShip )
     m_pTexture = (ResourceImage*)FrameWork::GetResourceManager()->GetResource( "data/images/shieldgrid.jpg" );
     m_pTexture->EnableMipMapping( false );
 
-    m_pVertexBuffer = new VertexBuffer( GeometryType::Triangle, VBO_POSITION | VBO_UV | VBO_COLOUR );
+    m_pVertexBuffer = new VertexBuffer( GeometryType::Triangle, VBO_POSITION | VBO_UV | VBO_COLOR );
     m_pShader = FrameWork::GetRenderSystem()->GetShaderCache()->Load( "shield" );
 
     ShaderUniform* pSampler = m_pShader->RegisterUniform( "k_sampler0", ShaderUniformType::Texture );
@@ -95,7 +95,7 @@ Shield::Shield( Ship* pShip )
     m_pQuantumShieldScaleUniform = m_pShader->RegisterUniform( "k_quantumScale", ShaderUniformType::Float );
     m_pQuantumShieldTriangleGapUniform = m_pShader->RegisterUniform( "k_quantumGaps", ShaderUniformType::Float );
     m_pQuantumShieldIntensityUniform = m_pShader->RegisterUniform( "k_quantumIntensity", ShaderUniformType::Float );
-    m_pQuantumShieldColourUniform = m_pShader->RegisterUniform( "k_quantumColour", ShaderUniformType::FloatVector3 );
+    m_pQuantumShieldColorUniform = m_pShader->RegisterUniform( "k_quantumColor", ShaderUniformType::FloatVector3 );
 
     m_pCollisionInfo = std::make_unique<ShipCollisionInfo>( pShip, this );
 }
@@ -283,15 +283,15 @@ void Shield::RenderQuantumShield( const glm::mat4& modelTransform )
         m_pQuantumShieldIntensityUniform->Set( ShaderTweaksDebugWindow::GetQuantumShieldIntensity() );
     }
 
-    if ( m_pQuantumShieldColourUniform != nullptr )
+    if ( m_pQuantumShieldColorUniform != nullptr )
     {
         if ( pAlternator->GetQuantumState() == QuantumState::White )
         {
-            m_pQuantumShieldColourUniform->Set( glm::vec3( 1.0f, 1.0f, 1.0f ) );
+            m_pQuantumShieldColorUniform->Set( glm::vec3( 1.0f, 1.0f, 1.0f ) );
         }
         else if ( pAlternator->GetQuantumState() == QuantumState::Black )
         {
-            m_pQuantumShieldColourUniform->Set( glm::vec3( 0.0f, 0.0f, 0.0f ) );
+            m_pQuantumShieldColorUniform->Set( glm::vec3( 0.0f, 0.0f, 0.0f ) );
         }
     }
 
@@ -396,18 +396,18 @@ void Shield::CreateGeometry()
     m_pVertexBuffer->CopyPositions( posData );
     m_pVertexBuffer->CopyUVs( uvData );
 
-    UpdateColour();
+    UpdateColor();
 }
 
-void Shield::UpdateColour()
+void Shield::UpdateColor()
 {
     using namespace Genesis;
 
-    m_ColourData.clear();
-    m_ColourData.reserve( sMaxShieldPoints * 3 * 6 );
+    m_ColorData.clear();
+    m_ColorData.reserve( sMaxShieldPoints * 3 * 6 );
 
     const float alphaMultiplier[ 4 ] = { 0.0f, 1.0f, 1.0f, 0.0f };
-    Genesis::Color shieldColour = m_pOwner->GetFaction()->GetColour( m_pOwner->IsFlagship() ? FactionColourId::GlowFlagship : FactionColourId::Glow );
+    Genesis::Color shieldColor = m_pOwner->GetFaction()->GetColor( m_pOwner->IsFlagship() ? FactionColorId::GlowFlagship : FactionColorId::Glow );
     float activationThreshold = m_ActivationRatio * sMaxShieldPoints;
 
     for ( int k = 0; k < 3; ++k )
@@ -420,25 +420,25 @@ void Shield::UpdateColour()
             const float hitRegistryValue = 0.1f + m_HitRegistry.SampleAt( i ) * 0.9f;
             if ( i <= (int)activationThreshold )
             {
-                m_ColourData.push_back( glm::vec4( shieldColour.r * am1, shieldColour.g * am1, shieldColour.b * am1, hitRegistryValue * am1 ) );
-                m_ColourData.push_back( glm::vec4( shieldColour.r * am2, shieldColour.g * am2, shieldColour.b * am2, hitRegistryValue * am2 ) );
-                m_ColourData.push_back( glm::vec4( shieldColour.r * am1, shieldColour.g * am1, shieldColour.b * am1, hitRegistryValue * am1 ) );
+                m_ColorData.push_back( glm::vec4( shieldColor.r * am1, shieldColor.g * am1, shieldColor.b * am1, hitRegistryValue * am1 ) );
+                m_ColorData.push_back( glm::vec4( shieldColor.r * am2, shieldColor.g * am2, shieldColor.b * am2, hitRegistryValue * am2 ) );
+                m_ColorData.push_back( glm::vec4( shieldColor.r * am1, shieldColor.g * am1, shieldColor.b * am1, hitRegistryValue * am1 ) );
 
-                m_ColourData.push_back( glm::vec4( shieldColour.r * am2, shieldColour.g * am2, shieldColour.b * am2, hitRegistryValue * am2 ) );
-                m_ColourData.push_back( glm::vec4( shieldColour.r * am2, shieldColour.g * am2, shieldColour.b * am2, hitRegistryValue * am2 ) );
-                m_ColourData.push_back( glm::vec4( shieldColour.r * am1, shieldColour.g * am1, shieldColour.b * am1, hitRegistryValue * am1 ) );
+                m_ColorData.push_back( glm::vec4( shieldColor.r * am2, shieldColor.g * am2, shieldColor.b * am2, hitRegistryValue * am2 ) );
+                m_ColorData.push_back( glm::vec4( shieldColor.r * am2, shieldColor.g * am2, shieldColor.b * am2, hitRegistryValue * am2 ) );
+                m_ColorData.push_back( glm::vec4( shieldColor.r * am1, shieldColor.g * am1, shieldColor.b * am1, hitRegistryValue * am1 ) );
             }
             else
             {
                 for ( int j = 0; j < 6; ++j )
                 {
-                    m_ColourData.push_back( glm::vec4( 0.0f, 0.0f, 0.0f, 0.0f ) );
+                    m_ColorData.push_back( glm::vec4( 0.0f, 0.0f, 0.0f, 0.0f ) );
                 }
             }
         }
     }
 
-    m_pVertexBuffer->CopyColours( m_ColourData );
+    m_pVertexBuffer->CopyColors( m_ColorData );
 }
 
 void Shield::InitialisePhysics( const glm::vec3& translation, float radiusX, float radiusY )

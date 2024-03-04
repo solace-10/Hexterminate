@@ -45,7 +45,7 @@ LoadingScreen::LoadingScreen()
     m_pBackground->SetPosition( 0, 0 );
     m_pBackground->SetBorderMode( Gui::PANEL_BORDER_NONE );
     m_pBackground->SetTexture( nullptr );
-    m_pBackground->SetColour( 1.0f, 1.0f, 1.0f, 1.0f );
+    m_pBackground->SetColor( 1.0f, 1.0f, 1.0f, 1.0f );
     m_pBackground->SetShader( FrameWork::GetRenderSystem()->GetShaderCache()->Load( "gui_loading" ) );
     m_pBackground->SetDepth( 101 );
     m_pBackground->Show( false );
@@ -58,15 +58,15 @@ LoadingScreen::LoadingScreen()
     m_pProgressBorderPanel = new Gui::Panel();
     m_pProgressBorderPanel->SetSize( 400, progressHeight );
     m_pProgressBorderPanel->SetPosition( screenHalfWidth - 200, screenHalfHeight + 200 );
-    m_pProgressBorderPanel->SetColour( 0.0f, 0.0f, 0.0f, 1.0f );
+    m_pProgressBorderPanel->SetColor( 0.0f, 0.0f, 0.0f, 1.0f );
     m_pProgressBorderPanel->SetBorderMode( Gui::PANEL_BORDER_ALL );
-    m_pProgressBorderPanel->SetBorderColour( 0.22f, 0.22f, 0.22f, 1.0f );
+    m_pProgressBorderPanel->SetBorderColor( 0.22f, 0.22f, 0.22f, 1.0f );
     m_pBackground->AddElement( m_pProgressBorderPanel );
 
     m_pProgressPanel = new Gui::Panel();
     m_pProgressPanel->SetSize( 0, progressHeight - 4 );
     m_pProgressPanel->SetPosition( 3, 2 );
-    m_pProgressPanel->SetColour( 0.309f, 1.0f, 1.0f, 1.0f );
+    m_pProgressPanel->SetColor( 0.309f, 1.0f, 1.0f, 1.0f );
     m_pProgressPanel->SetBorderMode( Gui::PANEL_BORDER_NONE );
     m_pProgressBorderPanel->AddElement( m_pProgressPanel );
 }

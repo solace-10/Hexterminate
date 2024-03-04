@@ -45,7 +45,7 @@ public:
 
 private:
     void PushBackUVs( Genesis::UVData& uvData );
-    void PushBackColours( Genesis::ColourData& colourData, const Genesis::Color& colour );
+    void PushBackColors( Genesis::ColorData& colorData, const Genesis::Color& color );
 
     MuzzleflashManager* m_pManager;
     Genesis::Shader* m_pShader;

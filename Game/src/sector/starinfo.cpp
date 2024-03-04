@@ -70,8 +70,8 @@ StarInfo::StarInfo( unsigned int seed )
             }
 
             m_StarType = previousInfo.GetStarType();
-            m_CoreColour = glm::mix( previousInfo.GetCoreColour(), currentInfo.GetCoreColour(), ratio );
-            m_CoronaColour = glm::mix( previousInfo.GetCoronaColour(), currentInfo.GetCoronaColour(), ratio );
+            m_CoreColor = glm::mix( previousInfo.GetCoreColor(), currentInfo.GetCoreColor(), ratio );
+            m_CoronaColor = glm::mix( previousInfo.GetCoronaColor(), currentInfo.GetCoronaColor(), ratio );
 
             // Offset in a ring around the centre of the background.
             // We avoid the very centre as that can make projectiles very difficult to see.
@@ -108,8 +108,8 @@ void StarInfo::PrintOut() const
         pLog->LogInfo( "- Main sequence star, class M" );
 
     pLog->LogInfo( "- Surface temperature: %u", m_SurfaceTemperature );
-    pLog->LogInfo( "- Core colour: %.2f %.2f %.2f", m_CoreColour.r, m_CoreColour.g, m_CoreColour.b );
-    pLog->LogInfo( "- Corona colour: %.2f %.2f %.2f", m_CoronaColour.r, m_CoronaColour.g, m_CoronaColour.b );
+    pLog->LogInfo( "- Core color: %.2f %.2f %.2f", m_CoreColor.r, m_CoreColor.g, m_CoreColor.b );
+    pLog->LogInfo( "- Corona color: %.2f %.2f %.2f", m_CoronaColor.r, m_CoronaColor.g, m_CoronaColor.b );
     pLog->LogInfo( "- Distance: %.2f", m_Distance );
 }
 
@@ -117,11 +117,11 @@ void StarInfo::PrintOut() const
 // StarSurfaceTemperatureInfo
 ///////////////////////////////////////////////////////////////////////////////
 
-StarSurfaceTemperatureInfo::StarSurfaceTemperatureInfo( StarType starType, unsigned int surfaceTemperature, const glm::vec3& coreColour, const glm::vec3& coronaColour )
+StarSurfaceTemperatureInfo::StarSurfaceTemperatureInfo( StarType starType, unsigned int surfaceTemperature, const glm::vec3& coreColor, const glm::vec3& coronaColor )
     : m_StarType( starType )
     , m_SurfaceTemperature( surfaceTemperature )
-    , m_CoreColour( coreColour )
-    , m_CoronaColour( coronaColour )
+    , m_CoreColor( coreColor )
+    , m_CoronaColor( coronaColor )
 {
 }
 

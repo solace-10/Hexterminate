@@ -37,8 +37,8 @@ InputArea::InputArea( const std::string& name )
     m_pInputArea = new Gui::InputArea();
     m_pInputArea->SetFont( (ResourceFont*)FrameWork::GetResourceManager()->GetResource( "data/fonts/kimberley18light.fnt" ) );
     m_pInputArea->SetFilter( Gui::InputAreaFilter::ACCEPT_LETTERS | Gui::InputAreaFilter::ACCEPT_SPACES );
-    m_pInputArea->SetColour( 0.0f, 0.0f, 0.0f, 0.5f );
-    m_pInputArea->SetHoverColour( 1.0f, 1.0f, 1.0f, 0.15f );
+    m_pInputArea->SetColor( 0.0f, 0.0f, 0.0f, 0.5f );
+    m_pInputArea->SetHoverColor( 1.0f, 1.0f, 1.0f, 0.15f );
     m_pInputArea->SetBorderMode( Gui::PANEL_BORDER_NONE );
     GetPanel()->AddElement( m_pInputArea );
 }

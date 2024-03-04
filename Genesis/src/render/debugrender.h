@@ -49,11 +49,11 @@ public:
 
 	virtual void Render() override;
 
-	void DrawLine( const glm::vec2& start, const glm::vec2& end, const glm::vec3& colour );
-	void DrawLine( const glm::vec3& start, const glm::vec3& end, const glm::vec3& colour );
-	void DrawCircle( const glm::vec2& origin, float radius, const glm::vec3& colour );
-	void DrawCircle( const glm::vec3& origin, float radius, const glm::vec3& colour );
-	void DrawText( float x, float y, const std::string& text, const glm::vec3& colour ); // Text is top-left aligned
+	void DrawLine( const glm::vec2& start, const glm::vec2& end, const glm::vec3& color );
+	void DrawLine( const glm::vec3& start, const glm::vec3& end, const glm::vec3& color );
+	void DrawCircle( const glm::vec2& origin, float radius, const glm::vec3& color );
+	void DrawCircle( const glm::vec3& origin, float radius, const glm::vec3& color );
+	void DrawText( float x, float y, const std::string& text, const glm::vec3& color ); // Text is top-left aligned
 
 private:
 
@@ -65,13 +65,13 @@ private:
 	{
 		glm::vec3 start;
 		glm::vec3 end;
-		glm::vec3 colour;
+		glm::vec3 color;
 	};
 
 	struct DebugRenderCircle
 	{
 		glm::vec3 origin;
-		glm::vec3 colour;
+		glm::vec3 color;
 		float radius;
 	};
 
@@ -79,7 +79,7 @@ private:
 	{
 		float x;
 		float y;
-		glm::vec3 colour;
+		glm::vec3 color;
 		std::string text;
 	};
 

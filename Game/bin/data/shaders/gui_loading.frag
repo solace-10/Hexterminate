@@ -2,7 +2,7 @@
 
 in vec2 UV;
 
-out vec4 colour;
+out vec4 color;
 
 uniform sampler2D k_sampler0;
 uniform float k_time = 0.0;
@@ -83,9 +83,9 @@ void main()
 	vec2 fragCoord = UV * k_resolution;
 	fragCoord = fragCoord - 0.5 * k_resolution;
 	
-	colour.rgb = 0.25 * (getColor(fragCoord)
+	color.rgb = 0.25 * (getColor(fragCoord)
 				+ getColor(fragCoord + vec2(0.5, 0.0))
 				+ getColor(fragCoord + vec2(0.5, 0.5))
 				+ getColor(fragCoord + vec2(0.0, 0.5)));
-	colour.a = 1.;
+	color.a = 1.;
 }

@@ -47,15 +47,15 @@ Button::Button( const std::string& name, ButtonPressedCallback onPressed, std::a
 {
     using namespace Genesis;
 
-    GetPanel()->SetColour( 0.0f, 0.0f, 0.0f, 0.0f );
-    GetPanel()->SetBorderColour( 0.0f, 0.0f, 0.0f, 0.0f );
+    GetPanel()->SetColor( 0.0f, 0.0f, 0.0f, 0.0f );
+    GetPanel()->SetBorderColor( 0.0f, 0.0f, 0.0f, 0.0f );
     m_pImage = new Genesis::Gui::Image();
     GetPanel()->AddElement( m_pImage );
 
     m_pText = new Genesis::Gui::Text();
     m_pText->SetSize( 256.0f, 16.0f );
     m_pText->SetPosition( 8.0f, 2.0f );
-    m_pText->SetColour( 1.0f, 1.0f, 1.0f, 1.0f );
+    m_pText->SetColor( 1.0f, 1.0f, 1.0f, 1.0f );
     m_pText->SetMultiLine( false );
     m_pText->SetFont( reinterpret_cast<ResourceFont*>( FrameWork::GetResourceManager()->GetResource( "data/fonts/kimberley18.fnt" ) ) );
     m_pText->SetText( m_Label );
@@ -288,7 +288,7 @@ void Button::Toggle( bool state )
     if ( state == true && m_State != State::Selected )
     {
         m_State = State::Selected;
-        m_pText->SetColour( 0.0f, 0.0f, 0.0f, 0.9f );
+        m_pText->SetColor( 0.0f, 0.0f, 0.0f, 0.9f );
         m_pImage->SetTexture( m_pPressed );
 
         if ( m_OnPressed != nullptr )
@@ -299,7 +299,7 @@ void Button::Toggle( bool state )
     else if ( state == false )
     {
         m_State = State::Unselected;
-        m_pText->SetColour( 1.0f, 1.0f, 1.0f, 1.0f );
+        m_pText->SetColor( 1.0f, 1.0f, 1.0f, 1.0f );
         m_pImage->SetTexture( m_pDefault );
     }
 }
@@ -309,12 +309,12 @@ void Button::Enable( bool state )
     if ( state == true && m_State == State::Disabled )
     {
         m_State = State::Unselected;
-        m_pText->SetColour( 1.0f, 1.0f, 1.0f, 1.0f );
+        m_pText->SetColor( 1.0f, 1.0f, 1.0f, 1.0f );
     }
     else if ( state == false && m_State != State::Disabled )
     {
         m_State = State::Disabled;
-        m_pText->SetColour( 0.5f, 0.5f, 0.5f, 1.0f );
+        m_pText->SetColor( 0.5f, 0.5f, 0.5f, 1.0f );
     }
 }
 

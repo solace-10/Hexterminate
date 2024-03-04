@@ -76,9 +76,9 @@ void PanelShipyard::CreateButtonUndock()
     m_pButtonUndock = new ButtonUndock();
     m_pButtonUndock->SetPosition( 8, Genesis::Configuration::GetScreenHeight() - 40 );
     m_pButtonUndock->SetSize( m_pTableWindow->GetMainPanel()->GetWidth(), 32 );
-    m_pButtonUndock->SetColour( EVA_BUTTON_COLOUR_BACKGROUND );
-    m_pButtonUndock->SetHoverColour( EVA_BUTTON_COLOUR_HOVER );
-    m_pButtonUndock->SetBorderColour( EVA_BUTTON_COLOUR_BORDER );
+    m_pButtonUndock->SetColor( EVA_BUTTON_COLOR_BACKGROUND );
+    m_pButtonUndock->SetHoverColor( EVA_BUTTON_COLOR_HOVER );
+    m_pButtonUndock->SetBorderColor( EVA_BUTTON_COLOR_BORDER );
     m_pButtonUndock->SetBorderMode( Genesis::Gui::PANEL_BORDER_ALL );
     m_pButtonUndock->SetFont( EVA_FONT );
     m_pButtonUndock->SetText( "Undock" );
@@ -96,7 +96,7 @@ void PanelShipyard::CreateTableWindow()
     m_pTableTitle = new Gui::Text();
     m_pTableTitle->SetSize( 642, 32 );
     m_pTableTitle->SetPosition( 8, 8 );
-    m_pTableTitle->SetColour( EVA_TEXT_COLOUR );
+    m_pTableTitle->SetColor( EVA_TEXT_COLOR );
     m_pTableTitle->SetFont( EVA_FONT );
     m_pTableTitle->SetText( "Shipyard > Inventory" );
     m_pTableWindow->GetMainPanel()->AddElement( m_pTableTitle );
@@ -122,7 +122,7 @@ void PanelShipyard::CreateTableWindow()
 
         pIcon->SetSize( iconSize, iconSize );
         pIcon->SetPosition( 325.0f - iconBarWidth / 2.0f + i * ( iconSize + iconSpacing ), 32.0f );
-        pIcon->SetColour( 1.0f, 1.0f, 1.0f, 0.4f );
+        pIcon->SetColor( 1.0f, 1.0f, 1.0f, 0.4f );
         pIcon->SetTexture( (ResourceImage*)FrameWork::GetResourceManager()->GetResource( std::string( "data/ui/icons/" ) + iconFile[ i ] ) );
         m_pTableWindow->GetMainPanel()->AddElement( pIcon );
     }
@@ -220,7 +220,7 @@ void PanelShipyard::FillTables()
         for ( auto& pModuleInfo : modulesByRarity[ i ] )
         {
             TableRowInventory* pItemRow = new TableRowInventory( this, pModuleInfo );
-            pItemRow->SetColour( ModuleRarityToColour( pModuleInfo->GetRarity() ) );
+            pItemRow->SetColor( ModuleRarityToColor( pModuleInfo->GetRarity() ) );
             pItemRow->Add( pModuleInfo->GetFullName() );
             pItemRow->Add( ToString( itemMap.find( pModuleInfo->GetName() )->second.quantity ) ); // quantity
 
@@ -315,8 +315,8 @@ void PanelShipyard::SetSelectedGroup( ModuleType moduleType )
     m_pTable[ oldIdx ]->Show( false );
     m_pTable[ newIdx ]->Show( true );
 
-    m_pIcons[ oldIdx ]->SetColour( 1.0f, 1.0f, 1.0f, 0.4f );
-    m_pIcons[ newIdx ]->SetColour( 1.0f, 1.0f, 1.0f, 1.0f );
+    m_pIcons[ oldIdx ]->SetColor( 1.0f, 1.0f, 1.0f, 0.4f );
+    m_pIcons[ newIdx ]->SetColor( 1.0f, 1.0f, 1.0f, 1.0f );
 
     m_SelectedGroup = moduleType;
 

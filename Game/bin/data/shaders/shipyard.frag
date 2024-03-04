@@ -4,7 +4,7 @@ in vec2 UV;
 in vec3 normal;
 in vec3 viewDir;
 
-out vec4 colour;
+out vec4 color;
 
 uniform sampler2D k_sampler0; // diffuse
 uniform sampler2D k_sampler1; // specular
@@ -30,7 +30,7 @@ float Overlay( float target, float blend, float alpha )
 
 void main()
 {
-	colour = vec4( 0, 0, 0, 1 );
+	color = vec4( 0, 0, 0, 1 );
 	vec3 lightDir = normalize( vec3( 1, 0.25, 1 ) );
 
 	// Diffuse component
@@ -52,6 +52,6 @@ void main()
 	// The emissive mask is in the k_sampler2's blue channel.
 	vec4 emissive = texture( k_sampler2 , UV).b * k_e;
 
-	colour = clamp( k_a + specular + paintedDiffuse + emissive, 0, 1 );
-	colour.a = 1;
+	color = clamp( k_a + specular + paintedDiffuse + emissive, 0, 1 );
+	color.a = 1;
 }

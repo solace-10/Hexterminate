@@ -42,7 +42,7 @@ SpriteManager::SpriteManager()
     Genesis::ShaderUniform* pSampler = m_pShader->RegisterUniform( "k_sampler0", ShaderUniformType::Texture );
     pSampler->Set( m_pTexture, GL_TEXTURE0 );
 
-    m_pVertexBuffer = new VertexBuffer( GeometryType::Triangle, VBO_POSITION | VBO_UV | VBO_COLOUR );
+    m_pVertexBuffer = new VertexBuffer( GeometryType::Triangle, VBO_POSITION | VBO_UV | VBO_COLOR );
 };
 
 SpriteManager::~SpriteManager()
@@ -61,12 +61,12 @@ void SpriteManager::Update( float delta )
 
     PositionData posData;
     UVData uvData;
-    ColourData colourData;
+    ColorData colorData;
 
     size_t numVertices = m_Sprites.size() * 6;
     posData.reserve( numVertices );
     uvData.reserve( numVertices );
-    colourData.reserve( numVertices );
+    colorData.reserve( numVertices );
 
     for ( auto& sprite : m_Sprites )
     {
@@ -90,16 +90,16 @@ void SpriteManager::Update( float delta )
         uvData.emplace_back( 0.0f, 1.0f ); // 2
         uvData.emplace_back( 1.0f, 1.0f ); // 3
 
-        const glm::vec4 colour = sprite.GetColour().glm();
+        const glm::vec4 color = sprite.GetColor().glm();
         for ( int i = 0; i < 6; ++i )
         {
-            colourData.push_back( colour );
+            colorData.push_back( color );
         }
     }
 
     m_pVertexBuffer->CopyPositions( posData );
     m_pVertexBuffer->CopyUVs( uvData );
-    m_pVertexBuffer->CopyColours( colourData );
+    m_pVertexBuffer->CopyColors( colorData );
 }
 
 void SpriteManager::Render()

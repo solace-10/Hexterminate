@@ -287,7 +287,7 @@ public:
 
     virtual void ApplyDamage( float amount, DamageType damageType, Ship* pDealtBy ) override;
     virtual void Repair( float amount ) override;
-    const glm::vec4 GetOverlayColour() const;
+    const glm::vec4 GetOverlayColor() const;
 
     virtual void SetOwner( Ship* pShip ) override;
 
@@ -380,7 +380,7 @@ public:
     virtual void Initialise( Ship* pShip ) override;
     virtual void ApplyDamage( float amount, DamageType damageType, Ship* pDealtBy ) override;
 
-    const glm::vec4 GetOverlayColour( Ship* pShip ) const;
+    const glm::vec4 GetOverlayColor( Ship* pShip ) const;
 
 protected:
     virtual void OnDamageEffect() override;

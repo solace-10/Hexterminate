@@ -32,8 +32,8 @@ EvaWindow::EvaWindow( int x, int y, unsigned int width, unsigned int height, boo
     mMain = new Gui::Panel();
     mMain->SetSize( (float)width, (float)height );
     mMain->SetPosition( (float)x, (float)y );
-    mMain->SetColour( EVA_COLOUR_BACKGROUND );
-    mMain->SetBorderColour( EVA_COLOUR_BORDER );
+    mMain->SetColor( EVA_COLOR_BACKGROUND );
+    mMain->SetBorderColor( EVA_COLOR_BORDER );
     mMain->SetBorderMode( Gui::PANEL_BORDER_ALL );
     mMain->SetDepth( depth );
     guiManager->AddElement( mMain );
@@ -45,7 +45,7 @@ EvaWindow::EvaWindow( int x, int y, unsigned int width, unsigned int height, boo
         mScanLine->SetPosition( 0.0f, -64.0f );
         mScanLine->SetSize( (float)width, 64.0f );
         mScanLine->SetTexture( scanLineImage );
-        mScanLine->SetColour( 1.0f, 1.0f, 1.0f, 0.35f );
+        mScanLine->SetColor( 1.0f, 1.0f, 1.0f, 0.35f );
         mMain->AddElement( mScanLine );
     }
 }

@@ -1,9 +1,9 @@
 #version 330 core
 
 in vec2 UV;
-in vec4 vcolour;
+in vec4 vcolor;
 
-out vec4 colour;
+out vec4 color;
 
 uniform float k_time = 0.0;
 uniform sampler2D k_sampler0;
@@ -16,6 +16,6 @@ float rand( vec2 co )
 void main()
 {
 	float r = rand( vec2( UV.x + k_time, UV.y + k_time ) );
-	colour = vcolour * texture( k_sampler0, UV );
-	colour = colour * 0.4 + colour * r * 0.6;
+	color = vcolor * texture( k_sampler0, UV );
+	color = color * 0.4 + color * r * 0.6;
 }

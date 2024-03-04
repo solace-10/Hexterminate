@@ -17,15 +17,15 @@ DetailsWindow::DetailsWindow()
     m_pMainPanel = new Genesis::Gui::Panel();
     m_pMainPanel->SetSize( 256.0f, 16.0f );
     m_pMainPanel->SetPosition( 0.0f, 0.0f );
-    m_pMainPanel->SetColour( 0.0f, 0.0f, 0.0f, 0.75f );
-    m_pMainPanel->SetBorderColour( 1.0f, 1.0f, 1.0f, 1.0f );
+    m_pMainPanel->SetColor( 0.0f, 0.0f, 0.0f, 0.75f );
+    m_pMainPanel->SetBorderColor( 1.0f, 1.0f, 1.0f, 1.0f );
     m_pMainPanel->SetBorderMode( Genesis::Gui::PANEL_BORDER_NONE );
     pGuiManager->AddElement( m_pMainPanel );
 
     m_pText = new Genesis::Gui::Text();
     m_pText->SetSize( 256.0f, 16.0f );
     m_pText->SetPosition( 8.0f, 2.0f );
-    m_pText->SetColour( EVA_TEXT_COLOUR );
+    m_pText->SetColor( EVA_TEXT_COLOR );
     m_pText->SetFont( EVA_FONT );
     m_pText->SetText( "" );
     m_pMainPanel->AddElement( m_pText );

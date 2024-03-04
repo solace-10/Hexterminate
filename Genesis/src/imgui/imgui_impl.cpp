@@ -75,7 +75,7 @@ void ImGuiImpl::Initialise()
 
 	CreateFontsTexture();
 
-	m_pVertexBuffer = new VertexBuffer( GeometryType::Triangle, VBO_POSITION | VBO_UV | VBO_COLOUR | VB_2D );
+	m_pVertexBuffer = new VertexBuffer( GeometryType::Triangle, VBO_POSITION | VBO_UV | VBO_COLOR | VB_2D );
 }
 
 bool ImGuiImpl::IsInitialised()
@@ -280,7 +280,7 @@ void ImGuiImpl::Render()
 
 	std::vector<float> posData;
 	std::vector<float> uvData;
-	std::vector<float> colourData;
+	std::vector<float> colorData;
 
     // Render command lists
     for (int n = 0; n < draw_data->CmdListsCount; n++)
@@ -293,7 +293,7 @@ void ImGuiImpl::Render()
 		int numVertices = cmd_list->IdxBuffer.size();
 		posData.reserve( numVertices * 2 );
 		uvData.reserve( numVertices * 2 );
-		colourData.reserve( numVertices * 4 );
+		colorData.reserve( numVertices * 4 );
 		for (int i = 0; i < numVertices; i++)
 		{
 			const int idx = idx_buffer[i];
@@ -302,21 +302,21 @@ void ImGuiImpl::Render()
 			uvData.push_back( vtx_buffer[idx].uv.x );
 			uvData.push_back( vtx_buffer[idx].uv.y );
 
-			const unsigned int colour = vtx_buffer[idx].col;
-			const float a = static_cast<float>( (colour & 0xFF000000) >> 24 ) / 255.0f;
-			const float b = static_cast<float>( (colour & 0x00FF0000) >> 16 ) / 255.0f;
-			const float g = static_cast<float>( (colour & 0x0000FF00) >> 8 ) / 255.0f;
-            const float r = static_cast<float>( colour & 0x000000FF ) / 255.0f;
+			const unsigned int color = vtx_buffer[idx].col;
+			const float a = static_cast<float>( (color & 0xFF000000) >> 24 ) / 255.0f;
+			const float b = static_cast<float>( (color & 0x00FF0000) >> 16 ) / 255.0f;
+			const float g = static_cast<float>( (color & 0x0000FF00) >> 8 ) / 255.0f;
+            const float r = static_cast<float>( color & 0x000000FF ) / 255.0f;
 			
-			colourData.push_back( r );
-			colourData.push_back( g );
-			colourData.push_back( b );
-			colourData.push_back( a );
+			colorData.push_back( r );
+			colorData.push_back( g );
+			colorData.push_back( b );
+			colorData.push_back( a );
 		}
 
 		m_pVertexBuffer->CopyData( posData.data(), posData.size(), VBO_POSITION );
 		m_pVertexBuffer->CopyData( uvData.data(), uvData.size(), VBO_UV );
-		m_pVertexBuffer->CopyData( colourData.data(), colourData.size(), VBO_COLOUR );
+		m_pVertexBuffer->CopyData( colorData.data(), colorData.size(), VBO_COLOR );
 
 		m_pDiffuseShader->Use();
 
@@ -340,7 +340,7 @@ void ImGuiImpl::Render()
 
 		posData.clear();
 		uvData.clear();
-		colourData.clear();
+		colorData.clear();
     }
 
     glDisable(GL_BLEND);

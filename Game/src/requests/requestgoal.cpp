@@ -21,19 +21,19 @@
 namespace Hexterminate
 {
 
-RequestGoal::RequestGoal( FleetWeakPtr pFleet, const std::string& description, const Color& colour )
+RequestGoal::RequestGoal( FleetWeakPtr pFleet, const std::string& description, const Color& color )
     : m_pFleet( pFleet )
     , m_pSectorInfo( nullptr )
     , m_Description( description )
 {
-    m_pRepresentation = std::make_shared<RequestGoalRep>( this, colour );
+    m_pRepresentation = std::make_shared<RequestGoalRep>( this, color );
 }
 
-RequestGoal::RequestGoal( SectorInfo* pSectorInfo, const std::string& description, const Color& colour )
+RequestGoal::RequestGoal( SectorInfo* pSectorInfo, const std::string& description, const Color& color )
     : m_pSectorInfo( pSectorInfo )
     , m_Description( description )
 {
-    m_pRepresentation = std::make_shared<RequestGoalRep>( this, colour );
+    m_pRepresentation = std::make_shared<RequestGoalRep>( this, color );
 }
 
 } // namespace Hexterminate

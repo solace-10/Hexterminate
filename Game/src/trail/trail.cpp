@@ -20,10 +20,10 @@
 namespace Hexterminate
 {
 
-Trail::Trail( float initialWidth, float decay, const Genesis::Color& colour )
+Trail::Trail( float initialWidth, float decay, const Genesis::Color& color )
     : m_InitialWidth( initialWidth )
     , m_Decay( decay )
-    , m_Colour( colour )
+    , m_Color( color )
     , m_IsOrphan( false )
     , m_ActivePoints( 0 )
 {
