@@ -81,8 +81,8 @@ private:
     Entry m_CapacitorAddons;
 
     Section m_Grid;
+    Entry m_GridCapacity;
     Entry m_GridUsed;
-    Entry m_GridAvailable;
 
     Section m_Navigation;
     Entry m_NavigationLinear;

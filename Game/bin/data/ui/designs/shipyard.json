@@ -358,7 +358,7 @@
                 }
             },
             "Energy grid panel": {
-                "Available icon": {
+                "Capacity icon": {
                     "properties": {
                         "anchor": {
                             "b": false,
@@ -369,7 +369,7 @@
                         "file": "data/ui/icons/weaponry_energy.png",
                         "position": {
                             "x": 4.0,
-                            "y": 56.0
+                            "y": 28.0
                         },
                         "size": {
                             "h": 24.0,
@@ -377,7 +377,7 @@
                         }
                     }
                 },
-                "Available text": {
+                "Capacity text": {
                     "properties": {
                         "anchor": {
                             "b": false,
@@ -392,12 +392,12 @@
                             "r": 1.0
                         },
                         "font": "kimberley18light.fnt",
-                        "label": "Available",
+                        "label": "Capacity",
                         "line_spacing": 1.399999976158142,
                         "multiline": false,
                         "position": {
                             "x": 34.0,
-                            "y": 58.0
+                            "y": 30.0
                         },
                         "size": {
                             "h": 24.0,
@@ -405,7 +405,7 @@
                         }
                     }
                 },
-                "Available value": {
+                "Capacity value": {
                     "properties": {
                         "alignment": "right",
                         "anchor": {
@@ -426,7 +426,7 @@
                         "multiline": false,
                         "position": {
                             "x": 100.0,
-                            "y": 58.0
+                            "y": 30.0
                         },
                         "size": {
                             "h": 24.0,
@@ -473,7 +473,7 @@
                         "file": "data/ui/icons/weaponry_energy.png",
                         "position": {
                             "x": 4.0,
-                            "y": 28.0
+                            "y": 56.0
                         },
                         "size": {
                             "h": 24.0,
@@ -501,7 +501,7 @@
                         "multiline": false,
                         "position": {
                             "x": 34.0,
-                            "y": 30.0
+                            "y": 58.0
                         },
                         "size": {
                             "h": 24.0,
@@ -530,7 +530,7 @@
                         "multiline": false,
                         "position": {
                             "x": 100.0,
-                            "y": 30.0
+                            "y": 58.0
                         },
                         "size": {
                             "h": 24.0,

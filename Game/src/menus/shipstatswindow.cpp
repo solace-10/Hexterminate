@@ -61,8 +61,8 @@ ShipStatsWindow::ShipStatsWindow()
     AddEntry( m_Capacitor, "Addons", m_CapacitorAddons );
 
     AddSection( "Energy grid", m_Grid );
+    AddEntry( m_Grid, "Capacity", m_GridCapacity );
     AddEntry( m_Grid, "Used", m_GridUsed );
-    AddEntry( m_Grid, "Available", m_GridAvailable );
 
     AddSection( "Navigation", m_Navigation );
     AddEntry( m_Navigation, "Linear", m_NavigationLinear );
@@ -235,12 +235,11 @@ void ShipStatsWindow::UpdateEnergyGridStats()
         gridUsed += -pWeaponInfo->GetPowerGrid( pShip );
     }
 
-    m_GridUsed.pValue->SetText( ToString( floor( gridUsed ) ) + " GW/s" );
-    m_GridAvailable.pValue->SetText( ToString( floor( gridCapacity - gridUsed ) ) + " GW/s" );
+    m_GridCapacity.pValue->SetText( ToString( floor( gridCapacity ) ) + " GW" );
+    m_GridUsed.pValue->SetText( ToString( floor( gridUsed ) ) + " GW" );
 
-    Genesis::Color entryColor = ( gridUsed >= gridCapacity ) ? Genesis::Color( 1.0f, 1.0f, 1.0f ) : Genesis::Color( 1.0f, 0.0f, 0.0f );
+    Genesis::Color entryColor = ( gridUsed < gridCapacity ) ? Genesis::Color( 1.0f, 1.0f, 1.0f ) : Genesis::Color( 1.0f, 0.0f, 0.0f );
     SetEntryColor( m_GridUsed, entryColor );
-    SetEntryColor( m_GridAvailable, entryColor );
 }
 
 void ShipStatsWindow::UpdateNavigationStats()
