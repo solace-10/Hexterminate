@@ -21,6 +21,7 @@
 
 #include <configuration.h>
 #include <genesis.h>
+#include <physics/rigidbody.h>
 
 #include "fleet/fleet.h"
 #include "hexterminate.h"
@@ -67,6 +68,7 @@ ShipStatsWindow::ShipStatsWindow()
     AddSection( "Navigation", m_Navigation );
     AddEntry( m_Navigation, "Linear", m_NavigationLinear );
     AddEntry( m_Navigation, "Angular", m_NavigationAngular );
+    AddEntry( m_Navigation, "Mass", m_NavigationMass );
 }
 
 ShipStatsWindow::~ShipStatsWindow()
@@ -244,6 +246,12 @@ void ShipStatsWindow::UpdateEnergyGridStats()
 
 void ShipStatsWindow::UpdateNavigationStats()
 {
+    Ship* pShip = g_pGame->GetPlayer()->GetShip();
+    const NavigationStats& navigationStats = pShip->GetNavigationStats();
+
+    m_NavigationLinear.pValue->SetText( ToString( floor( navigationStats.GetMaximumSpeed() ) ) + " m/s" );
+    m_NavigationAngular.pValue->SetText( ToString( floor( navigationStats.GetMaximumAngularSpeed() ) ) + " deg/s" );
+    m_NavigationMass.pValue->SetText( ToString( floor( navigationStats.GetMass() ) ) + " tons" );
 }
 
 float ShipStatsWindow::CalculateBonusMultiplier( TowerBonus towerBonus ) const

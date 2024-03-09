@@ -15,6 +15,8 @@
 // You should have received a copy of the GNU General Public License
 // along with Hexterminate. If not, see <http://www.gnu.org/licenses/>.
 
+#include <physics/rigidbody.h>
+
 #include "ship/controller/controllerplayer.h"
 #include "hexterminate.h"
 #include "perks.h"

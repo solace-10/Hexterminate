@@ -198,7 +198,7 @@ public:
     virtual ~ArmourInfo(){};
     virtual Module* CreateModule() override;
 
-    float GetMassMultiplier( Ship* pShip ) const;
+    float GetMassMultiplier( const Ship* pShip ) const;
     inline bool IsRammingProw() const { return m_RammingProw; }
     inline bool IsRegenerative() const { return m_Regenerative; }
     inline float GetKineticResistance() const { return m_KineticResistance; }

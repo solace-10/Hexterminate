@@ -87,6 +87,7 @@ private:
     Section m_Navigation;
     Entry m_NavigationLinear;
     Entry m_NavigationAngular;
+    Entry m_NavigationMass;
 };
 
 } // namespace Hexterminate

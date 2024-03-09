@@ -130,7 +130,11 @@ void HyperspaceCore::BeginJump()
     m_pHyperspaceGate->Open( m_JumpDirection );
     m_Jumping = true;
 
-    m_pOwner->GetController()->Suspend( true );
+    Controller* pController = m_pOwner->GetController();
+    if ( pController )
+    {
+        pController->Suspend( true );
+    }
 }
 
 void HyperspaceCore::EndJump()
@@ -138,7 +142,11 @@ void HyperspaceCore::EndJump()
     if ( m_JumpDirection == HyperspaceJumpDirection::JumpIn )
     {
         m_Jumping = false;
-        m_pOwner->GetController()->Suspend( false );
+        Controller* pController = m_pOwner->GetController();
+        if ( pController )
+        {
+            pController->Suspend( false );
+        }
     }
     else
     {

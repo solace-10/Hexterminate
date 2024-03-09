@@ -83,10 +83,13 @@ bool AddonParticleAccelerator::CanUse() const
     if ( canUse && m_pOwner != g_pGame->GetPlayer()->GetShip() )
     {
         ControllerAI* pController = static_cast<ControllerAI*>( m_pOwner->GetController() );
-        Ship* pTargetShip = pController->GetTargetShip();
-        if ( pTargetShip == nullptr || glm::distance( pTargetShip->GetTowerPosition(), m_pOwner->GetTowerPosition() ) > 700.0f )
+        if ( pController )
         {
-            canUse = false;
+            Ship* pTargetShip = pController->GetTargetShip();
+            if ( pTargetShip == nullptr || glm::distance( pTargetShip->GetTowerPosition(), m_pOwner->GetTowerPosition() ) > 700.0f )
+            {
+                canUse = false;
+            }
         }
     }
     return canUse;

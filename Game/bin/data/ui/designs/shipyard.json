@@ -818,6 +818,82 @@
                         }
                     }
                 },
+                "Mass icon": {
+                    "properties": {
+                        "anchor": {
+                            "b": false,
+                            "l": true,
+                            "r": false,
+                            "t": true
+                        },
+                        "file": "data/ui/icons/weaponry_energy.png",
+                        "position": {
+                            "x": 4.0,
+                            "y": 84.0
+                        },
+                        "size": {
+                            "h": 24.0,
+                            "w": 24.0
+                        }
+                    }
+                },
+                "Mass text": {
+                    "properties": {
+                        "anchor": {
+                            "b": false,
+                            "l": true,
+                            "r": false,
+                            "t": true
+                        },
+                        "color": {
+                            "a": 1.0,
+                            "b": 1.0,
+                            "g": 1.0,
+                            "r": 1.0
+                        },
+                        "font": "kimberley18light.fnt",
+                        "label": "Mass",
+                        "line_spacing": 1.399999976158142,
+                        "multiline": false,
+                        "position": {
+                            "x": 34.0,
+                            "y": 86.0
+                        },
+                        "size": {
+                            "h": 24.0,
+                            "w": 128.0
+                        }
+                    }
+                },
+                "Mass value": {
+                    "properties": {
+                        "alignment": "right",
+                        "anchor": {
+                            "b": false,
+                            "l": true,
+                            "r": false,
+                            "t": true
+                        },
+                        "color": {
+                            "a": 1.0,
+                            "b": 1.0,
+                            "g": 1.0,
+                            "r": 1.0
+                        },
+                        "font": "kimberley18light.fnt",
+                        "label": "???",
+                        "line_spacing": 1.399999976158142,
+                        "multiline": false,
+                        "position": {
+                            "x": 100.0,
+                            "y": 86.0
+                        },
+                        "size": {
+                            "h": 24.0,
+                            "w": 160.0
+                        }
+                    }
+                },
                 "Navigation subtitle": {
                     "properties": {
                         "anchor": {
@@ -864,7 +940,7 @@
                         "y": 504.0
                     },
                     "size": {
-                        "h": 88.0,
+                        "h": 116.0,
                         "w": 270.0
                     }
                 }
@@ -1489,7 +1565,7 @@
                     "t": true
                 },
                 "border": {
-                    "bottom": true,
+                    "bottom": false,
                     "left": false,
                     "right": false,
                     "top": true
@@ -1499,7 +1575,7 @@
                     "y": 32.0
                 },
                 "size": {
-                    "h": 600.0,
+                    "h": 628.0,
                     "w": 286.0
                 }
             }
@@ -1592,7 +1668,7 @@
                 "y": 60.0
             },
             "size": {
-                "h": 632.0,
+                "h": 660.0,
                 "w": 286.0
             }
         }

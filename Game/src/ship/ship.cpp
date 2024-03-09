@@ -75,8 +75,7 @@ namespace Hexterminate
 {
 
 Ship::Ship()
-    : m_pController( nullptr )
-    , m_Thrust( ShipThrust::None )
+    : m_Thrust( ShipThrust::None )
     , m_Steer( ShipSteer::None )
     , m_Strafe( ShipStrafe::None )
     , m_Dodge( ShipDodge::None )
@@ -139,9 +138,6 @@ Ship::~Ship()
     delete m_pDestructionSequence;
     m_pDestructionSequence = nullptr;
 
-    delete m_pController;
-    m_pController = nullptr;
-
     delete m_pDamageTracker;
     m_pDamageTracker = nullptr;
 
@@ -203,6 +199,7 @@ void Ship::ModuleEditLock()
     m_EditLock = true;
     delete m_pShield;
     m_pShield = nullptr;
+    RebuildShipyardModules();
 }
 
 void Ship::ModuleEditUnlock()
@@ -227,6 +224,8 @@ void Ship::ModuleEditUnlock()
     {
         pModule->OnAllModulesCreated();
     }
+
+    m_ShipyardModules.clear();
 }
 
 Module* Ship::AddModule( ModuleInfo* pModuleInfo, int x, int y )
@@ -280,6 +279,8 @@ Module* Ship::AddModule( ModuleInfo* pModuleInfo, int x, int y )
                 m_ShieldModules.push_back( static_cast<ShieldModule*>( pModule ) );
             }
 
+            RebuildShipyardModules();
+
             return pModule;
         }
     }
@@ -331,6 +332,9 @@ ModuleInfo* Ship::RemoveModule( int x, int y )
 
         delete pModule;
         m_ModuleHexGrid.Set( x, y, nullptr );
+
+        RebuildShipyardModules();
+
         return pModuleInfo;
     }
     else
@@ -364,7 +368,7 @@ void Ship::Initialize()
     m_pUniforms = new ShipShaderUniforms();
     m_pDamageTracker = new DamageTracker( this );
 
-    CreateController();
+    CreateDefaultController();
 
     // So when the ship appears, it goes through the "coming out of hyperspace" sequence
     if ( m_pHyperspaceCore != nullptr )
@@ -395,7 +399,7 @@ void Ship::InitializeReactors()
         }
     }
 
-    // The ship starts at 50% of its capacity. 
+    // The ship starts at 50% of its capacity.
     // It must start with some energy, as the capacitor takes a substantial amount of time to recharge from empty.
     m_Energy = m_EnergyCapacity * 0.5f;
 }
@@ -403,17 +407,11 @@ void Ship::InitializeReactors()
 // Creates either a ControllerPlayer or an AI controller. The AI controller depends on the weapons the ship uses.
 // NOTE: Docking with a shipyard will delete the current controller and create a ControllerShipyard, which remains
 // in place until the ship undocks. Then CreateController() is called again.
-void Ship::CreateController()
+void Ship::CreateDefaultController()
 {
-    if ( m_pController != nullptr )
-    {
-        delete m_pController;
-        m_pController = nullptr;
-    }
-
     if ( g_pGame->GetPlayer() && g_pGame->GetPlayer()->GetShip() == this )
     {
-        m_pController = new ControllerPlayer( this );
+        SwitchController( std::make_unique<ControllerPlayer>( this ) );
     }
     else
     {
@@ -463,11 +461,11 @@ void Ship::CreateController()
 
         if ( hasFixedWeapons || hasRammingProw )
         {
-            m_pController = new ControllerAssault( this );
+            SwitchController( std::make_unique<ControllerAssault>( this ) );
         }
         else
         {
-            m_pController = new ControllerKiter( this );
+            SwitchController( std::make_unique<ControllerKiter>( this ) );
         }
     }
 }
@@ -521,6 +519,8 @@ void Ship::CreateRigidBody()
             }
         }
     }
+
+    SDL_assert( mass > 0.0f );
 
     // Finish calculating centre of mass
     m_CentreOfMass /= mass;
@@ -612,6 +612,11 @@ void Ship::Update( float delta )
     GetRigidBody()->SetAngularDamping( pShipTweaks->GetAngularDamping() );
     GetRigidBody()->SetLinearDamping( pShipTweaks->GetLinearDamping() );
 
+    if ( m_pNextController )
+    {
+        m_pController = std::move( m_pNextController );
+    }
+
     // If our ship has finished docking, then it can be edited
     if ( GetDockingState() == DockingState::Docked && m_EditLock == false )
     {
@@ -630,8 +635,10 @@ void Ship::Update( float delta )
         // Local space to world space
         m_TowerPosition = glm::vec3( m_pRigidBody->GetWorldTransform() * glm::vec4( moduleLocalPos, 1.0f ) );
 
-        if ( IsDestroyed() == false )
+        if ( IsDestroyed() == false && m_pController )
+        {
             m_pController->Update( delta );
+        }
     }
 
     if ( m_EditLock == false )
@@ -706,9 +713,9 @@ void Ship::ApplyStrafe( float enginePower )
     }
 }
 
-void Ship::UpdateEngines( float delta )
+void Ship::CalculateNavigationStats()
 {
-    float enginePower = 0.0f;
+    float linearThrust = 0.0f;
     float torque = 0.0f;
     int numEngines = 0;
 
@@ -719,35 +726,22 @@ void Ship::UpdateEngines( float delta )
             if ( pEngine->IsDestroyed() == false && pEngine->IsEMPed() == false )
             {
                 const EngineInfo* pEngineInfo = (EngineInfo*)pEngine->GetModuleInfo();
-                enginePower += pEngineInfo->GetThrust();
+                linearThrust += pEngineInfo->GetThrust();
                 torque += pEngineInfo->GetTorque();
                 numEngines++;
-
-                Trail* pTrail = pEngine->GetTrail();
-                if ( pTrail != nullptr )
-                {
-                    glm::vec3 moduleLocalPos = pEngine->GetLocalPosition() + pEngine->GetTrailOffset();
-                    glm::vec3 moduleWorldPos = glm::vec3( GetRigidBody()->GetWorldTransform() * glm::vec4( moduleLocalPos, 1.0f ) );
-                    pTrail->AddPoint( moduleWorldPos );
-                }
             }
         }
     }
 
     if ( numEngines > 0 )
     {
-        enginePower /= numEngines;
-        enginePower += enginePower * 0.2f * ( static_cast<float>( numEngines ) - 1.0f );
+        linearThrust /= numEngines;
+        linearThrust += linearThrust * 0.2f * ( static_cast<float>( numEngines ) - 1.0f );
 
         float enginePowerMultiplier = 1.0f;
         if ( IsRammingSpeedEnabled() )
         {
             enginePowerMultiplier = 3.0f;
-            m_RammingSpeedTimer -= delta;
-        }
-        else if ( m_RammingSpeedCooldown > 0.0f )
-        {
-            m_RammingSpeedCooldown -= delta;
         }
 
         for ( auto& pAddonModule : m_Addons )
@@ -779,37 +773,147 @@ void Ship::UpdateEngines( float delta )
         if ( AreEnginesDisrupted() )
         {
             torque *= 0.5f;
-            enginePower *= 0.25f;
-            m_EngineDisruptionTimer -= delta;
+            linearThrust *= 0.25f;
         }
 
         torque *= cEngineTorqueMultiplier * enginePowerMultiplier;
-        enginePower *= cEngineThrustMultiplier * enginePowerMultiplier;
+        linearThrust *= cEngineThrustMultiplier * enginePowerMultiplier;
 
         ShipTweaks* pShipTweaks = g_pGame->GetCurrentSector()->GetShipTweaks();
         torque *= pShipTweaks->GetEngineTorqueMultiplier();
-        enginePower *= pShipTweaks->GetEngineThrustMultiplier();
+        linearThrust *= pShipTweaks->GetEngineThrustMultiplier();
+    }
+
+    m_NavigationStats = NavigationStats( CalculateMass(), linearThrust, torque, CalculateMaximumLinearSpeed( linearThrust ), CalculateMaximumAngularSpeed( torque ) );
+}
+
+float Ship::CalculateMaximumLinearSpeed( float linearThrust ) const
+{
+    if ( GetRigidBody() == nullptr || GetRigidBody()->GetMass() <= 0 )
+    {
+        return 0.0f;
+    }
+
+    // Assuming no damping, calculate the speed of the ship after one tick of the physics engine.
+    const float mass = static_cast<float>( GetRigidBody()->GetMass() );
+    const float duration = 1.0f / 60.0f;
+    const float acceleration = linearThrust / mass; // F = m * a, so a = F / m
+    const float speed = acceleration * duration;
+
+    // The physics engine applies the rigid body's linear damping factor after each tick.
+    // The damping factor is a fixed multiplier, not a proper counter-force.
+    const float dampingFactor = 0.985f; // TODO: calculate properly.
+
+    // The maximum speed can be calculated by:
+    // - Having a function f(t) which calculates the speed of the ship over time, without the damping factor.
+    //   f(t) = speed * t
+    // - Having another function, g(t), which takes into account the damping factor.
+    //   g(t) = speed * t * dampingFactor
+    // - When the difference between these two is equal or greater than the additional speed the ship can gain in one tick,
+    //   then the ship has reached its maximum speed.
+    //   f(t) - g(t) = speed
+    //   We can solve for t to identify the time point at which this happens, and then calculate the maximum speed with f(t).
+    const float t = 1.0f / ( 1.0f - dampingFactor );
+    const float maximumSpeed = speed * t;
+
+    return maximumSpeed;
+}
+
+float Ship::CalculateMaximumAngularSpeed( float torque ) const
+{
+    return 0.0f;
+}
+
+float Ship::CalculateMass() const
+{
+    if ( IsModuleEditLocked() )
+    {
+        float mass = 0.0f;
+        for ( auto& pModule : GetModules() )
+        {
+            // Armour modifies the base module weight by a multiplier value.
+            float moduleMass = BaseModuleMass;
+            if ( pModule->GetModuleInfo()->GetType() == ModuleType::Armour )
+            {
+                moduleMass *= ( (ArmourInfo*)( pModule->GetModuleInfo() ) )->GetMassMultiplier( this );
+            }
+        }
+        return mass;
+    }
+    else
+    {
+        return static_cast<float>( m_pRigidBody->GetMass() );
+    }
+}
+
+void Ship::SwitchController( ControllerUniquePtr&& pController )
+{
+    m_pNextController = std::move( pController );
+}
+
+void Ship::UpdateEngines( float delta )
+{
+    CalculateNavigationStats();
+
+    int numEngines = 0;
+
+    if ( m_EnergyCapacity > 0.0f ) // For the ship to move at least one reactor must still be operational
+    {
+        for ( auto& pEngine : m_Engines )
+        {
+            if ( pEngine->IsDestroyed() == false && pEngine->IsEMPed() == false )
+            {
+                Trail* pTrail = pEngine->GetTrail();
+                if ( pTrail != nullptr )
+                {
+                    glm::vec3 moduleLocalPos = pEngine->GetLocalPosition() + pEngine->GetTrailOffset();
+                    glm::vec3 moduleWorldPos = glm::vec3( GetRigidBody()->GetWorldTransform() * glm::vec4( moduleLocalPos, 1.0f ) );
+                    pTrail->AddPoint( moduleWorldPos );
+                }
+
+                numEngines++;
+            }
+        }
+    }
+
+    if ( numEngines > 0 )
+    {
+        if ( IsRammingSpeedEnabled() )
+        {
+            m_RammingSpeedTimer -= delta;
+        }
+        else if ( m_RammingSpeedCooldown > 0.0f )
+        {
+            m_RammingSpeedCooldown -= delta;
+        }
+
+        if ( AreEnginesDisrupted() )
+        {
+            m_EngineDisruptionTimer -= delta;
+        }
 
         // Turn the ship as required.
         // Forces are only applied if needed so the body can be asleep if it is in a standstill. Applying a force of 0.0f would wake it up.
+        const float torque = m_NavigationStats.GetTorque();
         if ( m_Steer == ShipSteer::Right )
         {
-            m_pRigidBody->ApplyAngularForce( glm::vec3( 0.0f, 0.0f, -torque * enginePowerMultiplier ) );
+            m_pRigidBody->ApplyAngularForce( glm::vec3( 0.0f, 0.0f, -torque ) );
         }
         else if ( m_Steer == ShipSteer::Left )
         {
-            m_pRigidBody->ApplyAngularForce( glm::vec3( 0.0f, 0.0f, torque * enginePowerMultiplier ) );
+            m_pRigidBody->ApplyAngularForce( glm::vec3( 0.0f, 0.0f, torque ) );
         }
 
+        const float linearThrust = m_NavigationStats.GetLinearThrust();
         if ( HasPerk( Perk::EvasionProtocols ) )
         {
             if ( GetDodge() == ShipDodge::Left && m_DodgeTimer <= 0.0f )
             {
-                ApplyDodge( m_DodgeTimer, -enginePower );
+                ApplyDodge( m_DodgeTimer, -linearThrust );
             }
             else if ( GetDodge() == ShipDodge::Right && m_DodgeTimer <= 0.0f )
             {
-                ApplyDodge( m_DodgeTimer, enginePower );
+                ApplyDodge( m_DodgeTimer, linearThrust );
             }
 
             m_DodgeTimer = std::max( 0.0f, m_DodgeTimer - delta );
@@ -817,7 +921,7 @@ void Ship::UpdateEngines( float delta )
 
         // Advance the ship as required. The ship comes to a stop through its linear and angular damping, there is no explicity way of stopping it.
         // We apply the forces to the center of mass so as to prevent unwanted torque.
-        glm::vec3 forwardForce = glm::vec3( glm::column( m_pRigidBody->GetWorldTransform(), 1 ) ) * enginePower;
+        glm::vec3 forwardForce = glm::vec3( glm::column( m_pRigidBody->GetWorldTransform(), 1 ) ) * linearThrust;
         if ( m_Thrust == ShipThrust::Forward )
         {
             m_pRigidBody->ApplyLinearForce( forwardForce );
@@ -828,7 +932,7 @@ void Ship::UpdateEngines( float delta )
             m_pRigidBody->ApplyLinearForce( reverseForce );
         }
 
-        ApplyStrafe( enginePower );
+        ApplyStrafe( linearThrust );
     }
 }
 
@@ -1097,8 +1201,8 @@ void Ship::SetSharedShaderParameters( Module* pModule, Genesis::Material* pMater
         {
             m_pUniforms->Set( ShipShaderUniform::OverlayColor, glm::vec4( 0.0f ) );
         }
-          
-        if ( moduleType == ModuleType::Reactor)
+
+        if ( moduleType == ModuleType::Reactor )
         {
             ReactorInfo* pReactorInfo = static_cast<ReactorInfo*>( pModule->GetModuleInfo() );
             if ( pReactorInfo->GetVariant() == ReactorVariant::Unstable )
@@ -1360,8 +1464,7 @@ void Ship::Dock( Shipyard* pShipyard )
     // repaired in ticks which are a fraction of the repair value.
     Repair( 4000.0f );
 
-    delete m_pController;
-    m_pController = new ControllerShipyard( this );
+    SwitchController( std::make_unique<ControllerShipyard>( this ) );
 
     g_pGame->SetCursorType( CursorType::Pointer );
 
@@ -1388,9 +1491,7 @@ void Ship::Undock()
     ModuleEditUnlock();
     UpdateModuleLinkState();
 
-    delete m_pController;
-    m_pController = nullptr;
-    CreateController();
+    CreateDefaultController();
 
     // Forces recalculation of the gate's bounding box, so it matches with this ship's new shape
     if ( m_pHyperspaceCore != nullptr && m_pHyperspaceCore->GetHyperspaceGate() != nullptr )
@@ -1846,6 +1947,26 @@ int Ship::GetIntegrity() const
         totalModuleIntegrity += pModule->GetHealth() / pModule->GetModuleInfo()->GetHealth( this );
     }
     return static_cast<int>( totalModuleIntegrity / static_cast<float>( modules.size() ) * 100.0f );
+}
+
+void Ship::RebuildShipyardModules()
+{
+    m_ShipyardModules.clear();
+
+    int x1, y1, x2, y2;
+    m_ModuleHexGrid.GetBoundingBox( x1, y1, x2, y2 );
+
+    for ( int x = x1; x <= x2; ++x )
+    {
+        for ( int y = y1; y <= y2; ++y )
+        {
+            Module* pModule = m_ModuleHexGrid.Get( x, y );
+            if ( pModule != nullptr )
+            {
+                m_ShipyardModules.push_back( pModule );
+            }
+        }
+    }
 }
 
 } // namespace Hexterminate

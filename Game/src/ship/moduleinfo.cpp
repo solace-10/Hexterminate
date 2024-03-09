@@ -351,7 +351,7 @@ Module* ArmourInfo::CreateModule()
     return new ArmourModule( this );
 }
 
-float ArmourInfo::GetMassMultiplier( Ship* pShip ) const
+float ArmourInfo::GetMassMultiplier( const Ship* pShip ) const
 {
     float massMultiplier = m_MassMultiplier;
 

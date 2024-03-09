@@ -30,6 +30,7 @@
 #include "ship/addon/addon.h"
 #include "ship/module.h"
 #include "ship/moduleinfo.h"
+#include "ship/navigationstats.h"
 #include "ship/ship.fwd.h"
 #include "ship/shipcollisioninfo.h"
 #include "ship/weapon.h"
@@ -65,6 +66,8 @@ class ShipInfo;
 class ShipShaderUniforms;
 class Shipyard;
 class Shield;
+
+using ControllerUniquePtr = std::unique_ptr<Controller>;
 
 static const int sNumShipAddons = 6;
 
@@ -174,6 +177,7 @@ public:
     Faction* GetFaction() const;
 
     const AddonModuleList& GetAddonModules() const;
+    const EngineModuleList& GetEngineModules() const;
     const ShieldModuleList& GetShieldModules() const;
     const WeaponModuleList& GetWeaponModules() const;
     WeaponModuleList& GetWeaponModules();
@@ -240,6 +244,7 @@ public:
     float GetRammingSpeedCooldown() const;
     void FlipQuantumState();
     int GetIntegrity() const;
+    const NavigationStats& GetNavigationStats() const;
 
     FleetCommandOrder GetFleetCommandOrder() const;
     void SetFleetCommandOrder( FleetCommandOrder order );
@@ -257,7 +262,7 @@ protected:
     bool DamageShared( WeaponSystem weaponSystem, float baseDamage, int burst, Faction* pDealtByFaction, float delta, float* pFrameDamage, float* pDisplayDamage ) const;
     void ApplyDodge( float& dodgeTimer, float enginePower );
     void ApplyStrafe( float enginePower );
-    void CreateController();
+    void CreateDefaultController();
     void RenderModuleHexGrid( const glm::mat4& modelTransform );
     void RenderModuleHexGridOutline( const glm::mat4& modelTransform );
     void UpdateReactors( float delta );
@@ -265,6 +270,15 @@ protected:
     void UpdateShield( float delta );
     void UpdateEngines( float delta );
     void UpdateSounds( float delta );
+    void CalculateNavigationStats();
+    float CalculateMaximumLinearSpeed( float linearThrust ) const;
+    float CalculateMaximumAngularSpeed( float torque ) const;
+    float CalculateMass() const;
+    void RebuildShipyardModules();
+
+    // Switching a controller isn't instantaneous. The new controller only becomes active the next time the ship is updated.
+    // Without this it was possible for a controller to unintentionally cause itself to be deleted.
+    void SwitchController( ControllerUniquePtr&& pController );
 
     void CreateRigidBody();
     void DestroyRigidBody();
@@ -281,7 +295,8 @@ protected:
     void UpdateModuleLinkState();
     void RecursiveModuleLinkState( Module* pModule );
 
-    Controller* m_pController;
+    ControllerUniquePtr m_pController;
+    ControllerUniquePtr m_pNextController;
 
     ShipThrust m_Thrust;
     ShipSteer m_Steer;
@@ -310,6 +325,7 @@ protected:
     ModuleHexGrid m_ModuleHexGrid;
 
     ModuleVector m_Modules; // Used for collision detection purposes! Do not change type / reorder
+    ModuleVector m_ShipyardModules; // Only used when the ship is docked. 
 
     glm::vec3 m_TowerPosition;
 
@@ -355,6 +371,8 @@ protected:
     DamageTracker* m_pDamageTracker;
     glm::vec3 m_CentreOfMass;
     Genesis::Physics::CollisionCallbackHandle m_CollisionCallbackHandle;
+
+    NavigationStats m_NavigationStats;
 };
 
 inline Genesis::Physics::RigidBody* Ship::GetRigidBody() const
@@ -390,6 +408,11 @@ inline Faction* Ship::GetFaction() const
 inline const AddonModuleList& Ship::GetAddonModules() const
 {
     return m_Addons;
+}
+
+inline const EngineModuleList& Ship::GetEngineModules() const
+{
+    return m_Engines;
 }
 
 inline const ShieldModuleList& Ship::GetShieldModules() const
@@ -489,12 +512,14 @@ inline HyperspaceCore* Ship::GetHyperspaceCore() const
 
 inline Controller* Ship::GetController() const
 {
-    return m_pController;
+    return m_pController.get();
 }
 
 inline const ModuleVector& Ship::GetModules() const
 {
-    return m_Modules;
+    // If the ship is in edit mode, then we must use m_ShipyardModules as m_Modules does not get 
+    // updated until the ship's physics rigid body is rebuilt.
+    return IsModuleEditLocked() ? m_ShipyardModules : m_Modules;
 }
 
 inline bool Ship::IsModuleEditLocked() const
@@ -570,6 +595,11 @@ inline float Ship::GetRammingSpeedCooldown() const
 inline const glm::vec3& Ship::GetCentreOfMass() const
 {
     return m_CentreOfMass;
+}
+
+inline const NavigationStats& Ship::GetNavigationStats() const
+{
+    return m_NavigationStats;
 }
 
 } // namespace Hexterminate
