@@ -66,9 +66,17 @@ PanelShipyard::PanelShipyard()
 PanelShipyard::~PanelShipyard()
 {
     delete m_pTableWindow;
-    Genesis::FrameWork::GetGuiManager()->RemoveElement( m_pButtonUndock );
 
-    g_pGame->SetInputBlocked( false );
+    Genesis::Gui::GuiManager* pGuiManager = Genesis::FrameWork::GetGuiManager();
+    if ( pGuiManager )
+    {
+        pGuiManager->RemoveElement( m_pButtonUndock );
+    }
+
+    if ( g_pGame )
+    {
+        g_pGame->SetInputBlocked( false );
+    }
 }
 
 void PanelShipyard::CreateButtonUndock()

@@ -1579,6 +1579,8 @@ int Main( Genesis::CommandLineParameters* parameters )
     Configuration::Save();
 
     delete g_pGame;
+    g_pGame = nullptr;
+
     delete parameters;
     FrameWork::Shutdown();
 

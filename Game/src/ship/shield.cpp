@@ -104,7 +104,7 @@ Shield::~Shield()
 {
     delete m_pVertexBuffer;
 
-    if ( m_State != ShieldState::Deactivating && m_State != ShieldState::Deactivated )
+    if ( g_pGame && m_State != ShieldState::Deactivating && m_State != ShieldState::Deactivated )
     {
         g_pGame->GetPhysicsSimulation()->Remove( m_pGhost.get() );
     }

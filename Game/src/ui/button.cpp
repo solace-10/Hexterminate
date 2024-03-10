@@ -70,7 +70,10 @@ Button::Button( const std::string& name, ButtonPressedCallback onPressed, std::a
 
 Button::~Button()
 {
-    Genesis::FrameWork::GetInputManager()->RemoveMouseCallback( m_LeftClickPressedToken );
+    if ( Genesis::FrameWork::GetInputManager() )
+    {
+        Genesis::FrameWork::GetInputManager()->RemoveMouseCallback( m_LeftClickPressedToken );
+    }
 }
 
 void Button::Update()

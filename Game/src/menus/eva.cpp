@@ -52,8 +52,11 @@ EvaWindow::EvaWindow( int x, int y, unsigned int width, unsigned int height, boo
 
 EvaWindow::~EvaWindow()
 {
-    Genesis::Gui::GuiManager* guiManager = Genesis::FrameWork::GetGuiManager();
-    guiManager->RemoveElement( mMain );
+    Genesis::Gui::GuiManager* pGuiManager = Genesis::FrameWork::GetGuiManager();
+    if ( pGuiManager )
+    {
+        pGuiManager->RemoveElement( mMain );
+    }
 }
 
 void EvaWindow::Update( float delta )
