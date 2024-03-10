@@ -271,8 +271,8 @@ protected:
     void UpdateEngines( float delta );
     void UpdateSounds( float delta );
     void CalculateNavigationStats();
-    float CalculateMaximumLinearSpeed( float linearThrust ) const;
-    float CalculateMaximumAngularSpeed( float torque ) const;
+    float CalculateMaximumLinearSpeed( float linearThrust, float mass ) const;
+    float CalculateMaximumAngularSpeed( float torque, float mass ) const;
     float CalculateMass() const;
     void RebuildShipyardModules();
 

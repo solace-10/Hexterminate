@@ -280,6 +280,7 @@ Module* Ship::AddModule( ModuleInfo* pModuleInfo, int x, int y )
             }
 
             RebuildShipyardModules();
+            CalculateNavigationStats();
 
             return pModule;
         }
@@ -334,6 +335,7 @@ ModuleInfo* Ship::RemoveModule( int x, int y )
         m_ModuleHexGrid.Set( x, y, nullptr );
 
         RebuildShipyardModules();
+        CalculateNavigationStats();
 
         return pModuleInfo;
     }
@@ -784,18 +786,18 @@ void Ship::CalculateNavigationStats()
         linearThrust *= pShipTweaks->GetEngineThrustMultiplier();
     }
 
-    m_NavigationStats = NavigationStats( CalculateMass(), linearThrust, torque, CalculateMaximumLinearSpeed( linearThrust ), CalculateMaximumAngularSpeed( torque ) );
+    float mass = CalculateMass();
+    m_NavigationStats = NavigationStats( mass, linearThrust, torque, CalculateMaximumLinearSpeed( linearThrust, mass ), CalculateMaximumAngularSpeed( torque, mass ) );
 }
 
-float Ship::CalculateMaximumLinearSpeed( float linearThrust ) const
+float Ship::CalculateMaximumLinearSpeed( float linearThrust, float mass ) const
 {
-    if ( GetRigidBody() == nullptr || GetRigidBody()->GetMass() <= 0 )
+    if ( mass <= 0.0f )
     {
         return 0.0f;
     }
 
     // Assuming no damping, calculate the speed of the ship after one tick of the physics engine.
-    const float mass = static_cast<float>( GetRigidBody()->GetMass() );
     const float duration = 1.0f / 60.0f;
     const float acceleration = linearThrust / mass; // F = m * a, so a = F / m
     const float speed = acceleration * duration;
@@ -816,10 +818,15 @@ float Ship::CalculateMaximumLinearSpeed( float linearThrust ) const
     const float t = 1.0f / ( 1.0f - dampingFactor );
     const float maximumSpeed = speed * t;
 
+    if ( m_EditLock )
+    {
+        Genesis::FrameWork::GetLogger()->LogInfo( "acceleration: %.2f | maximum speed: %.2f | t: %.2f", acceleration, maximumSpeed, t);
+    }
+
     return maximumSpeed;
 }
 
-float Ship::CalculateMaximumAngularSpeed( float torque ) const
+float Ship::CalculateMaximumAngularSpeed( float torque, float mass ) const
 {
     return 0.0f;
 }
@@ -837,6 +844,7 @@ float Ship::CalculateMass() const
             {
                 moduleMass *= ( (ArmourInfo*)( pModule->GetModuleInfo() ) )->GetMassMultiplier( this );
             }
+            mass += moduleMass;
         }
         return mass;
     }
