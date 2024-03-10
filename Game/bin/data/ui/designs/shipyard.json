@@ -674,7 +674,7 @@
                             "r": false,
                             "t": true
                         },
-                        "file": "data/ui/icons/weaponry_energy.png",
+                        "file": "data/ui/icons/navigation_agility.png",
                         "position": {
                             "x": 4.0,
                             "y": 56.0
@@ -700,7 +700,7 @@
                             "r": 1.0
                         },
                         "font": "kimberley18light.fnt",
-                        "label": "Angular rotation",
+                        "label": "Agility",
                         "line_spacing": 1.399999976158142,
                         "multiline": false,
                         "position": {
@@ -750,7 +750,7 @@
                             "r": false,
                             "t": true
                         },
-                        "file": "data/ui/icons/weaponry_energy.png",
+                        "file": "data/ui/icons/navigation_speed.png",
                         "position": {
                             "x": 4.0,
                             "y": 28.0
@@ -826,7 +826,7 @@
                             "r": false,
                             "t": true
                         },
-                        "file": "data/ui/icons/weaponry_energy.png",
+                        "file": "data/ui/icons/navigation_mass.png",
                         "position": {
                             "x": 4.0,
                             "y": 84.0
@@ -1006,7 +1006,7 @@
                             "r": false,
                             "t": true
                         },
-                        "file": "data/ui/icons/weaponry_energy.png",
+                        "file": "data/ui/icons/shields_capacity.png",
                         "position": {
                             "x": 4.0,
                             "y": 28.0
@@ -1082,7 +1082,7 @@
                             "r": false,
                             "t": true
                         },
-                        "file": "data/ui/icons/weaponry_energy.png",
+                        "file": "data/ui/icons/shields_efficiency.png",
                         "position": {
                             "x": 4.0,
                             "y": 84.0
@@ -1158,7 +1158,7 @@
                             "r": false,
                             "t": true
                         },
-                        "file": "data/ui/icons/weaponry_energy.png",
+                        "file": "data/ui/icons/shields_recharge.png",
                         "position": {
                             "x": 4.0,
                             "y": 56.0
