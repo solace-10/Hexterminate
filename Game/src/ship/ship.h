@@ -163,12 +163,10 @@ public:
     void SetInitialisationParameters( Faction* pFaction, FleetWeakPtr pFleetWeakPtr, const ShipCustomisationData& ShipCustomisationData, const ShipSpawnData& shipSpawnData, const ShipInfo* pShipInfo );
     void Initialize();
 
-    void ModuleEditLock(); // ModuleEditLock() needs to be called before any modules are added or removed
-    void ModuleEditUnlock(); // Recreates the ship's rigid body and updates the ship's internal state
-    bool IsModuleEditLocked() const;
-    Module* AddModule( ModuleInfo* pModuleInfo, int x, int y ); // Requires ModuleEditLock()
-    ModuleInfo* RemoveModule( int x, int y ); // Requires ModuleEditLock()
-    void ClearModules(); // Requires ModuleEditLock()
+    Module* AddModule( ModuleInfo* pModuleInfo, int x, int y );
+    ModuleInfo* RemoveModule( int x, int y );
+    void ClearModules();
+    void SetModuleBulkEdit( bool isEnabled );
 
     Genesis::Physics::RigidBody* GetRigidBody() const;
     glm::vec3 GetCentre( TransformSpace transformSpace ) const;
@@ -176,13 +174,15 @@ public:
 
     Faction* GetFaction() const;
 
-    const AddonModuleList& GetAddonModules() const;
-    const EngineModuleList& GetEngineModules() const;
-    const ShieldModuleList& GetShieldModules() const;
-    const WeaponModuleList& GetWeaponModules() const;
-    WeaponModuleList& GetWeaponModules();
-    const ReactorModuleList& GetReactorModules() const;
-    const TowerModuleList& GetTowerModules() const;
+    template<typename T>
+    const std::vector<T*>& GetModules() const
+    {
+        static_assert( T::GetType() != ModuleType::Invalid );
+        static_assert( static_cast<size_t>( T::GetType() ) < static_cast<size_t>( ModuleType::Count ) );
+        return *reinterpret_cast<std::vector<T*> const*>( &m_Modules[ static_cast<size_t>( T::GetType() ) ] );
+    }
+
+    const ModuleVector& GetModules( ModuleType type ) const;
     const ModuleVector& GetModules() const;
 
     Shield* GetShield() const;
@@ -258,6 +258,15 @@ public:
     AddonQuantumStateAlternator* GetQuantumStateAlternator() const;
 
 protected:
+
+    template<typename T>
+    std::vector<T*>& GetModulesInternal()
+    {
+        return const_cast<std::vector<T*>&>( GetModules<T>() );
+    }
+
+    ModuleVector& GetModulesInternal( ModuleType type );
+
     void InitializeReactors();
     bool DamageShared( WeaponSystem weaponSystem, float baseDamage, int burst, Faction* pDealtByFaction, float delta, float* pFrameDamage, float* pDisplayDamage ) const;
     void ApplyDodge( float& dodgeTimer, float enginePower );
@@ -274,7 +283,7 @@ protected:
     float CalculateMaximumLinearSpeed( float linearThrust, float mass ) const;
     float CalculateMaximumAngularSpeed( float torque, float mass ) const;
     float CalculateMass() const;
-    void RebuildShipyardModules();
+    void OnModulesChanged();
 
     // Switching a controller isn't instantaneous. The new controller only becomes active the next time the ship is updated.
     // Without this it was possible for a controller to unintentionally cause itself to be deleted.
@@ -282,6 +291,7 @@ protected:
 
     void CreateRigidBody();
     void DestroyRigidBody();
+    void RebuildShield();
 
     void SetSharedShaderParameters( Module* pModule, Genesis::Material* pMaterial );
     void CalculateBoundingBox();
@@ -307,14 +317,6 @@ protected:
     Genesis::Physics::RigidBody* m_pRigidBody;
     Genesis::Physics::CompoundShapeSharedPtr m_pCompoundShape;
 
-    AddonModuleList m_Addons;
-    EngineModuleList m_Engines;
-    ReactorModuleList m_Reactors;
-    WeaponModuleList m_WeaponModules;
-    ShieldModuleList m_ShieldModules;
-    TowerModuleList m_Towers;
-    AddonQuantumStateAlternatorList m_Alternators;
-
     float m_EnergyCapacity;
     float m_Energy;
 
@@ -324,15 +326,17 @@ protected:
 
     ModuleHexGrid m_ModuleHexGrid;
 
-    ModuleVector m_Modules; // Used for collision detection purposes! Do not change type / reorder
-    ModuleVector m_ShipyardModules; // Only used when the ship is docked. 
+    using ModuleContainer = std::array<ModuleVector, static_cast<size_t>( ModuleType::Count )>;
+    ModuleContainer m_Modules;
+    mutable ModuleVector m_AllModules;
+    mutable bool m_AllModulesDirty;
 
     glm::vec3 m_TowerPosition;
 
     DockingState m_DockingState;
     Shipyard* m_pShipyard;
 
-    bool m_EditLock;
+    bool m_ModuleBulkEdit;
 
     HyperspaceCore* m_pHyperspaceCore;
     Shield* m_pShield;
@@ -405,26 +409,6 @@ inline Faction* Ship::GetFaction() const
     return m_pFaction;
 }
 
-inline const AddonModuleList& Ship::GetAddonModules() const
-{
-    return m_Addons;
-}
-
-inline const EngineModuleList& Ship::GetEngineModules() const
-{
-    return m_Engines;
-}
-
-inline const ShieldModuleList& Ship::GetShieldModules() const
-{
-    return m_ShieldModules;
-}
-
-inline const TowerModuleList& Ship::GetTowerModules() const
-{
-    return m_Towers;
-}
-
 inline void Ship::SetSteer( ShipSteer direction )
 {
     m_Steer = IsRammingSpeedEnabled() ? ShipSteer::None : direction;
@@ -467,27 +451,13 @@ inline ShipDodge Ship::GetDodge() const
 
 inline TowerModule* Ship::GetTowerModule() const
 {
-    return m_Towers.empty() ? nullptr : m_Towers.back();
+    auto& towerModules = GetModules<TowerModule>();
+    return towerModules.empty() ? nullptr : towerModules.front();
 }
 
 inline const glm::vec3& Ship::GetTowerPosition() const
 {
     return m_TowerPosition;
-}
-
-inline const WeaponModuleList& Ship::GetWeaponModules() const
-{
-    return m_WeaponModules;
-}
-
-inline WeaponModuleList& Ship::GetWeaponModules()
-{
-    return m_WeaponModules;
-}
-
-inline const ReactorModuleList& Ship::GetReactorModules() const
-{
-    return m_Reactors;
 }
 
 inline const ShipSpawnData& Ship::GetShipSpawnData() const
@@ -513,18 +483,6 @@ inline HyperspaceCore* Ship::GetHyperspaceCore() const
 inline Controller* Ship::GetController() const
 {
     return m_pController.get();
-}
-
-inline const ModuleVector& Ship::GetModules() const
-{
-    // If the ship is in edit mode, then we must use m_ShipyardModules as m_Modules does not get 
-    // updated until the ship's physics rigid body is rebuilt.
-    return IsModuleEditLocked() ? m_ShipyardModules : m_Modules;
-}
-
-inline bool Ship::IsModuleEditLocked() const
-{
-    return m_EditLock;
 }
 
 inline const ShipInfo* Ship::GetShipInfo() const
@@ -600,6 +558,18 @@ inline const glm::vec3& Ship::GetCentreOfMass() const
 inline const NavigationStats& Ship::GetNavigationStats() const
 {
     return m_NavigationStats;
+}
+
+inline ModuleVector& Ship::GetModulesInternal( ModuleType type )
+{
+    return const_cast<ModuleVector&>( GetModules( type ) );
+}
+
+inline const ModuleVector& Ship::GetModules( ModuleType type ) const
+{
+    SDL_assert( type != ModuleType::Invalid );
+    SDL_assert( static_cast<size_t>( type ) < static_cast<size_t>( ModuleType::Count ) );
+    return m_Modules[ static_cast<size_t>( type ) ];
 }
 
 } // namespace Hexterminate

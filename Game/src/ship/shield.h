@@ -74,7 +74,7 @@ public:
     void ApplyDamage( float displayAmount, float frameAmount, float angle, WeaponSystem weaponSystem, DamageType damageType, Ship* pDealtBy );
     void Deactivate();
 
-    static float CalculateEfficiency( const ShieldModuleList& shieldModules );
+    static float CalculateEfficiency( const std::vector<ShieldModule*>& shieldModules );
 
 private:
     void CreateGeometry();
@@ -110,6 +110,7 @@ private:
 
     Genesis::Physics::GhostUniquePtr m_pGhost;
     ShipCollisionInfoUniquePtr m_pCollisionInfo;
+    bool m_IsGhostAdded;
 };
 
 inline float Shield::GetCurrentHealthPoints() const

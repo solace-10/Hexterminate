@@ -219,9 +219,8 @@ void PanelShipStats::UpdateWeaponryStats()
     float fixedWeaponDPS = 0.0f;
     float turretWeaponDPS = 0.0f;
 
-    Ship* pShip = g_pGame->GetPlayer()->GetShip();
-    const WeaponModuleList& weaponModules = pShip->GetWeaponModules();
-    for ( auto& pWeaponModule : weaponModules )
+    const Ship* pShip = g_pGame->GetPlayer()->GetShip();
+    for ( auto& pWeaponModule : pShip->GetModules<WeaponModule>() )
     {
         WeaponInfo* pWeaponInfo = static_cast<WeaponInfo*>( pWeaponModule->GetModuleInfo() );
         if ( pWeaponInfo->GetBehaviour() == WeaponBehaviour::Fixed )
@@ -247,8 +246,8 @@ void PanelShipStats::UpdateShieldStats()
     float shieldCapacity = 0.0f;
     float shieldRecharge = 0.0f;
 
-    Ship* pShip = g_pGame->GetPlayer()->GetShip();
-    const ShieldModuleList& shieldModules = pShip->GetShieldModules();
+    const Ship* pShip = g_pGame->GetPlayer()->GetShip();
+    auto shieldModules = pShip->GetModules<ShieldModule>();
     float shieldEfficiency = Shield::CalculateEfficiency( shieldModules );
 
     for ( auto& pShieldModule : shieldModules )
@@ -272,27 +271,23 @@ void PanelShipStats::UpdateReactorStats()
     float energyCapacity = 0.0f;
     float energyRecharge = 0.0f;
 
-    Ship* pShip = g_pGame->GetPlayer()->GetShip();
-    const ReactorModuleList& reactorModules = pShip->GetReactorModules();
+    const Ship* pShip = g_pGame->GetPlayer()->GetShip();
+    const auto& reactorModules = pShip->GetModules<ReactorModule>();
     for ( auto& pReactorModule : reactorModules )
     {
         ReactorInfo* pReactorInfo = static_cast<ReactorInfo*>( pReactorModule->GetModuleInfo() );
         energyCapacity += pReactorInfo->GetCapacitorStorage();
         energyRecharge += pReactorInfo->GetCapacitorRechargeRate();
+        m_PowerGrid += pReactorInfo->GetPowerGrid( pShip );
     }
 
-    for ( auto& pModule : pShip->GetReactorModules() )
-    {
-        m_PowerGrid += pModule->GetModuleInfo()->GetPowerGrid( pShip );
-    }
-
-    for ( auto& pModule : pShip->GetShieldModules() )
+    for ( auto& pModule : pShip->GetModules<ShieldModule>() )
     {
         m_PowerGridUsage += -pModule->GetModuleInfo()->GetPowerGrid( pShip );
     }
 
     float addonsEnergyPerSecond = 0.0f;
-    for ( auto& pModule : pShip->GetAddonModules() )
+    for ( auto& pModule : pShip->GetModules<AddonModule>() )
     {
         AddonInfo* pAddonInfo = static_cast<AddonInfo*>( pModule->GetModuleInfo() );
         m_PowerGridUsage += -pAddonInfo->GetPowerGrid( pShip );
@@ -309,7 +304,7 @@ void PanelShipStats::UpdateReactorStats()
     }
 
     float weaponsEnergyPerSecond = 0.0f;
-    for ( auto& pModule : pShip->GetWeaponModules() )
+    for ( auto& pModule : pShip->GetModules<WeaponModule>() )
     {
         WeaponInfo* pWeaponInfo = static_cast<WeaponInfo*>( pModule->GetModuleInfo() );
         weaponsEnergyPerSecond += pWeaponInfo->GetActivationCost( pShip ) * pWeaponInfo->GetRateOfFire( pShip );
@@ -337,9 +332,8 @@ float PanelShipStats::CalculateBonusMultiplier( TowerBonus towerBonus ) const
     // the correct stats.
     float multiplier = 1.0f;
 
-    Ship* pShip = g_pGame->GetPlayer()->GetShip();
-    const TowerModuleList& towerModules = pShip->GetTowerModules();
-    for ( auto& pTowerModule : towerModules )
+    const Ship* pShip = g_pGame->GetPlayer()->GetShip();
+    for ( auto& pTowerModule : pShip->GetModules<TowerModule>() )
     {
         TowerInfo* pTowerInfo = static_cast<TowerInfo*>( pTowerModule->GetModuleInfo() );
         if ( pTowerInfo->GetBonusType() == towerBonus )

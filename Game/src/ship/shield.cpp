@@ -15,7 +15,7 @@
 // You should have received a copy of the GNU General Public License
 // along with Hexterminate. If not, see <http://www.gnu.org/licenses/>.
 
-//#define SHIELD_HIT_REGISTRY_DEBUG
+// #define SHIELD_HIT_REGISTRY_DEBUG
 
 #include "ship/shield.h"
 
@@ -65,6 +65,7 @@ Shield::Shield( Ship* pShip )
     , m_EmergencyCapacitorsCooldown( 0.0f )
     , m_State( ShieldState::Deactivated )
     , m_pCollisionInfo( nullptr )
+    , m_IsGhostAdded( false )
 {
     using namespace Genesis;
 
@@ -104,7 +105,7 @@ Shield::~Shield()
 {
     delete m_pVertexBuffer;
 
-    if ( g_pGame && m_State != ShieldState::Deactivating && m_State != ShieldState::Deactivated )
+    if ( g_pGame && g_pGame->GetPhysicsSimulation() && m_IsGhostAdded )
     {
         g_pGame->GetPhysicsSimulation()->Remove( m_pGhost.get() );
     }
@@ -117,8 +118,7 @@ void Shield::Update( float delta )
     m_MaximumHitPoints = 0.0f;
     m_RechargeRate = 0.0f;
 
-    const ShieldModuleList& shieldModules = m_pOwner->GetShieldModules();
-    for ( auto& pShieldModule : shieldModules )
+    for ( auto& pShieldModule : static_cast<const Ship*>( m_pOwner )->GetModules<ShieldModule>() )
     {
         if ( pShieldModule->IsDestroyed() == false )
         {
@@ -166,9 +166,11 @@ void Shield::Update( float delta )
     {
         if ( m_ActivationRatio >= 1.0f )
         {
+            SDL_assert( !m_IsGhostAdded );
             m_State = ShieldState::Activated;
             m_ActivationRatio = 1.0f;
             g_pGame->GetPhysicsSimulation()->Add( m_pGhost.get() );
+            m_IsGhostAdded = true;
         }
         else
         {
@@ -538,8 +540,7 @@ void Shield::ApplyDamage( float displayAmount, float frameAmount, float angle, W
                 Deactivate();
 
                 // Overtuned shield modules are destroyed if the shield receives enough damage to be taken down
-                const ShieldModuleList& shieldModules = m_pOwner->GetShieldModules();
-                for ( auto& pShieldModule : shieldModules )
+                for ( auto& pShieldModule : static_cast<const Ship*>( m_pOwner )->GetModules<ShieldModule>() )
                 {
                     ShieldInfo* pShieldInfo = static_cast<ShieldInfo*>( pShieldModule->GetModuleInfo() );
                     if ( pShieldInfo->IsOvertuned() )
@@ -556,14 +557,16 @@ void Shield::Deactivate()
 {
     if ( m_State != ShieldState::Deactivating && m_State != ShieldState::Deactivated )
     {
+        SDL_assert( m_IsGhostAdded );
         m_State = ShieldState::Deactivating;
         m_CurrentHitPoints = 0.0f;
         m_DeactivatedTimer = sShieldOfflineDuration;
         g_pGame->GetPhysicsSimulation()->Remove( m_pGhost.get() );
+        m_IsGhostAdded = false;
     }
 }
 
-float Shield::CalculateEfficiency( const ShieldModuleList& shieldModules )
+float Shield::CalculateEfficiency( const std::vector<ShieldModule*>& shieldModules )
 {
     float efficiency = 1.0f;
     const size_t numShieldModules = shieldModules.size();

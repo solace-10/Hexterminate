@@ -81,7 +81,7 @@ void ControllerShipyard::Update( float delta )
             GetShip()->GetRigidBody()->SetWorldTransform( glm::translate( shipPosition ) );
         }
     }
-    else if ( dockingState == DockingState::Docked && GetShip()->IsModuleEditLocked() )
+    else if ( dockingState == DockingState::Docked )
     {
         Genesis::InputManager* pInputManager = Genesis::FrameWork::GetInputManager();
         if ( pInputManager->IsButtonPressed( SDL_SCANCODE_ESCAPE ) )

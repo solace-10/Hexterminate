@@ -104,7 +104,7 @@ void ControllerPlayer::Update( float delta )
     const glm::vec3 raycastResult = Genesis::FrameWork::GetRenderSystem()->Raycast( mousePosition );
     glm::vec3 weaponTarget( raycastResult.x, raycastResult.y, 0.0f );
 
-    for ( auto& pWeaponModule : GetShip()->GetWeaponModules() )
+    for ( auto& pWeaponModule : GetShip()->GetModules<WeaponModule>() )
     {
         Weapon* pWeapon = pWeaponModule->GetWeapon();
         if ( pWeapon == nullptr || pWeaponModule->IsDestroyed() )
@@ -140,21 +140,26 @@ void ControllerPlayer::Update( float delta )
         }
     }
 
-    AddonModuleList addonModules = GetShip()->GetAddonModules();
+    AddonModuleList sortedAddonModules;
+    for ( auto& pModule : GetShip()->GetModules<AddonModule>() )
+    {
+        sortedAddonModules.push_back( pModule );
+    }
+
     SDL_Scancode addonKeys[ sNumShipAddons ] = { SDL_SCANCODE_1, SDL_SCANCODE_2, SDL_SCANCODE_3, SDL_SCANCODE_4, SDL_SCANCODE_5, SDL_SCANCODE_6 };
     static bool addonKeysPressed[ sNumShipAddons ] = { false, false, false, false, false, false };
-    const size_t numAddons = addonModules.size();
+    const size_t numAddons = sortedAddonModules.size();
     SDL_assert( numAddons <= sNumShipAddons );
     int i = 0;
 
-    addonModules.sort( AddonModuleSortPredicate );
+    sortedAddonModules.sort( AddonModuleSortPredicate );
 
-    addonModules.remove_if(
+    sortedAddonModules.remove_if(
         []( const AddonModule* pAddonModule ) {
             return ( (AddonInfo*)( pAddonModule->GetModuleInfo() ) )->GetCategory() == AddonCategory::QuantumStateAlternator;
         } );
 
-    for ( AddonModuleList::const_iterator it = addonModules.begin(); it != addonModules.end(); it++ )
+    for ( AddonModuleList::const_iterator it = sortedAddonModules.begin(); it != sortedAddonModules.end(); it++ )
     {
         AddonModule* pAddonModule = *it;
         if ( pAddonModule->IsDestroyed() )
@@ -285,7 +290,7 @@ void ControllerPlayer::OnPrimaryFirePressedAction()
 
     m_Fire = !m_Fire;
 
-    for ( auto& pWeaponModule : GetShip()->GetWeaponModules() )
+    for ( auto& pWeaponModule : GetShip()->GetModules<WeaponModule>() )
     {
         Weapon* pWeapon = pWeaponModule->GetWeapon();
         if ( pWeapon == nullptr || pWeaponModule->IsDestroyed() )
@@ -323,7 +328,7 @@ void ControllerPlayer::OnPrimaryFireHeldAction()
         return;
     }
 
-    for ( auto& pWeaponModule : GetShip()->GetWeaponModules() )
+    for ( auto& pWeaponModule : GetShip()->GetModules<WeaponModule>() )
     {
         Weapon* pWeapon = pWeaponModule->GetWeapon();
         if ( pWeapon == nullptr || pWeaponModule->IsDestroyed() )
@@ -349,7 +354,7 @@ void ControllerPlayer::OnPrimaryFireReleasedAction()
         return;
     }
 
-    for ( auto& pWeaponModule : GetShip()->GetWeaponModules() )
+    for ( auto& pWeaponModule : GetShip()->GetModules<WeaponModule>() )
     {
         Weapon* pWeapon = pWeaponModule->GetWeapon();
         WeaponBehaviour behaviour = pWeapon->GetInfo()->GetBehaviour();

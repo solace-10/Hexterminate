@@ -109,11 +109,6 @@ void Radar::Update( float delta )
 void Radar::CachePlayerShipPosition()
 {
     Ship* pPlayerShip = g_pGame->GetPlayer()->GetShip();
-    if ( pPlayerShip == nullptr || pPlayerShip->IsModuleEditLocked() )
-    {
-        return;
-    }
-
     if ( pPlayerShip != nullptr && pPlayerShip->GetTowerModule() != nullptr )
     {
         m_CachedPlayerShipPosition = pPlayerShip->GetTowerPosition();

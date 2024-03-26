@@ -171,7 +171,7 @@ void ControllerAI::FireControl()
     m_HasWeapons = false;
 
     // HACK: Handle the particle accelerator's case, as it isn't a real weapon.
-    for ( auto& pAddonModule : GetShip()->GetAddonModules() )
+    for ( auto& pAddonModule : GetShip()->GetModules<AddonModule>() )
     {
         AddonInfo* pAddonInfo = static_cast<AddonInfo*>( pAddonModule->GetModuleInfo() );
         if ( pAddonInfo->GetCategory() == AddonCategory::ParticleAccelerator )
@@ -182,7 +182,7 @@ void ControllerAI::FireControl()
         }
     }
 
-    for ( auto& pWeaponModule : GetShip()->GetWeaponModules() )
+    for ( auto& pWeaponModule : GetShip()->GetModules<WeaponModule>() )
     {
         Weapon* pWeapon = pWeaponModule->GetWeapon();
         if ( pWeapon == nullptr )
@@ -369,8 +369,8 @@ void ControllerAI::ManageAddons( float delta )
         }
     }
 
-    const AddonModuleList& addonModules = GetShip()->GetAddonModules();
-    for ( auto& addonModule : addonModules )
+    const Ship* pShip = GetShip();
+    for ( auto& addonModule : pShip->GetModules<AddonModule>() )
     {
         if ( addonModule->IsDestroyed() )
             continue;

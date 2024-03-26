@@ -37,7 +37,8 @@ public:
     virtual ~Controller(){};
     virtual void Update( float delta ) = 0;
 
-    inline Ship* GetShip() const;
+    inline const Ship* GetShip() const;
+    inline Ship* GetShip();
     void Suspend( bool state );
     bool IsSuspended() const;
 
@@ -46,7 +47,12 @@ private:
     bool m_Suspended;
 };
 
-inline Ship* Controller::GetShip() const
+inline const Ship* Controller::GetShip() const
+{
+    return m_pShip;
+}
+
+inline Ship* Controller::GetShip()
 {
     return m_pShip;
 }

@@ -216,6 +216,8 @@ public:
     virtual void Update( float delta ) override;
     virtual void Render( const glm::mat4& modelTransform, bool drawOutline ) override;
 
+    static constexpr ModuleType GetType() { return ModuleType::Weapon; }
+
     float GetDamage() const { return m_fDamage; }
     Weapon* GetWeapon() const;
 
@@ -243,6 +245,8 @@ public:
     virtual void Update( float delta ) override;
 
     virtual void TriggerEMP() override;
+
+    static constexpr ModuleType GetType() { return ModuleType::Engine; }
 
     Trail* GetTrail() const;
     const glm::vec3& GetTrailOffset() const;
@@ -287,6 +291,9 @@ public:
 
     virtual void ApplyDamage( float amount, DamageType damageType, Ship* pDealtBy ) override;
     virtual void Repair( float amount ) override;
+
+    static constexpr ModuleType GetType() { return ModuleType::Armour; }
+
     const glm::vec4 GetOverlayColor() const;
 
     virtual void SetOwner( Ship* pShip ) override;
@@ -314,6 +321,8 @@ public:
     ShieldModule( ModuleInfo* pInfo );
     virtual ~ShieldModule(){};
 
+    static constexpr ModuleType GetType() { return ModuleType::Shield; }
+
     float GetCapacity() const { return m_fCapacity; }
     float GetPeakRechargeRate() const { return m_fPeakRecharge; }
 
@@ -331,6 +340,8 @@ class ReactorModule : public Module
 public:
     ReactorModule( ModuleInfo* pInfo );
     virtual ~ReactorModule(){};
+
+    static constexpr ModuleType GetType() { return ModuleType::Reactor; }
 
     float GetCapacitorStorage() const;
     float GetCapacitorRechargeRate() const;
@@ -354,6 +365,8 @@ public:
 
     virtual void Update( float delta ) override;
     virtual void Render( const glm::mat4& modelTransform, bool drawOutline ) override;
+
+    static constexpr ModuleType GetType() { return ModuleType::Addon; }
 
     virtual void SetOwner( Ship* pShip ) override;
     Addon* GetAddon() const;
@@ -379,6 +392,8 @@ public:
     virtual ~TowerModule() override{};
     virtual void Initialise( Ship* pShip ) override;
     virtual void ApplyDamage( float amount, DamageType damageType, Ship* pDealtBy ) override;
+
+    static constexpr ModuleType GetType() { return ModuleType::Tower; }
 
     const glm::vec4 GetOverlayColor( Ship* pShip ) const;
 

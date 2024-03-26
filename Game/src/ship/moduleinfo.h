@@ -277,19 +277,19 @@ public:
     virtual ~WeaponInfo(){};
     virtual Module* CreateModule() override;
 
-    float GetActivationCost( Ship* pShip ) const;
+    float GetActivationCost( const Ship* pShip ) const;
     WeaponBehaviour GetBehaviour() const { return m_Behaviour; }
     WeaponSystem GetSystem() const { return m_System; }
     const std::string& GetWeaponModel() const { return m_WeaponModel; }
     DamageType GetDamageType() const { return m_DamageType; }
 
-    float GetRateOfFire( Ship* pShip ) const;
+    float GetRateOfFire( const Ship* pShip ) const;
     float GetDamage() const { return m_Damage; }
-    float GetDPS( Ship* pShip ) const { return GetDamage() * GetRateOfFire( pShip ); }
+    float GetDPS( const Ship* pShip ) const { return GetDamage() * GetRateOfFire( pShip ); }
     int GetBurst() const { return m_Burst; }
     float GetRayLength() const { return m_RayLength; }
     float GetSpeed() const { return m_Speed; }
-    float GetRange( Ship* pShip ) const;
+    float GetRange( const Ship* pShip ) const;
     float GetTracking() const { return m_Tracking; }
     bool GetIsSwarm() const { return m_IsSwarm; }
     float GetBeamWidth() const { return m_BeamWidth; }

@@ -550,7 +550,7 @@ Module* WeaponInfo::CreateModule()
     return new WeaponModule( this );
 }
 
-float WeaponInfo::GetRateOfFire( Ship* pShip ) const
+float WeaponInfo::GetRateOfFire( const Ship* pShip ) const
 {
     float rateOfFire = m_Rof;
 
@@ -569,7 +569,7 @@ float WeaponInfo::GetRateOfFire( Ship* pShip ) const
     return rateOfFire;
 }
 
-float WeaponInfo::GetRange( Ship* pShip ) const
+float WeaponInfo::GetRange( const Ship* pShip ) const
 {
     float range = m_Range;
 
@@ -581,7 +581,7 @@ float WeaponInfo::GetRange( Ship* pShip ) const
     return range;
 }
 
-float WeaponInfo::GetActivationCost( Ship* pShip ) const
+float WeaponInfo::GetActivationCost( const Ship* pShip ) const
 {
     float activationCost = m_ActivationCost;
 

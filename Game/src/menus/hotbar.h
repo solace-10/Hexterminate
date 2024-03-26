@@ -38,9 +38,9 @@ public:
     void Update( float delta );
 
 private:
-    void UpdatePhaseBar( Ship* pPlayerShip );
-    void UpdateShieldBar( Ship* pPlayerShip );
-    void UpdateAbilities( Ship* pPlayerShip );
+    void UpdatePhaseBar( const Ship* pPlayerShip );
+    void UpdateShieldBar( const Ship* pPlayerShip );
+    void UpdateAbilities( const Ship* pPlayerShip );
     void ResizeBar( Genesis::Gui::Panel* pBar, float ratio, float originalY );
 
     Genesis::Gui::GuiElement* m_pRoot;

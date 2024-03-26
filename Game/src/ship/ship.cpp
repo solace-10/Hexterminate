@@ -82,9 +82,11 @@ Ship::Ship()
     , m_pRigidBody( nullptr )
     , m_Energy( 0.0f )
     , m_EnergyCapacity( 0.0f )
+    , m_pFaction( nullptr )
+    , m_AllModulesDirty( false )
     , m_DockingState( DockingState::Undocked )
     , m_pShipyard( nullptr )
-    , m_EditLock( false )
+    , m_ModuleBulkEdit( false )
     , m_pHyperspaceCore( nullptr )
     , m_pShield( nullptr )
     , m_pDestructionSequence( nullptr )
@@ -113,6 +115,8 @@ Ship::Ship()
 
 Ship::~Ship()
 {
+    DestroyRigidBody();
+
     int x1, y1, x2, y2;
     m_ModuleHexGrid.GetBoundingBox( x1, y1, x2, y2 );
     for ( int x = x1; x <= x2; ++x )
@@ -126,8 +130,6 @@ Ship::~Ship()
             }
         }
     }
-
-    DestroyRigidBody();
 
     delete m_pHyperspaceCore;
     m_pHyperspaceCore = nullptr;
@@ -169,7 +171,7 @@ void Ship::SetInitialisationParameters( Faction* pFaction, FleetWeakPtr pFleetWe
     m_ShipSpawnData = shipSpawnData;
     m_pShipInfo = pShipInfo;
 
-    ModuleEditLock();
+    SetModuleBulkEdit( true );
 
     int x1, y1, x2, y2;
     shipCustomisationData.m_pModuleInfoHexGrid->GetBoundingBox( x1, y1, x2, y2 );
@@ -185,34 +187,18 @@ void Ship::SetInitialisationParameters( Faction* pFaction, FleetWeakPtr pFleetWe
         }
     }
 
-    ModuleEditUnlock();
+    SetModuleBulkEdit( false );
 
-    if ( m_Engines.empty() == false )
+    if ( GetModules<EngineModule>().empty() == false )
     {
         m_pHyperspaceCore = new HyperspaceCore( this );
     }
 }
 
-void Ship::ModuleEditLock()
+void Ship::OnModulesChanged()
 {
-    SDL_assert( !m_EditLock );
-    m_EditLock = true;
-    delete m_pShield;
-    m_pShield = nullptr;
-    RebuildShipyardModules();
-}
-
-void Ship::ModuleEditUnlock()
-{
-    SDL_assert( m_EditLock );
-    m_EditLock = false;
-
-    if ( m_ShieldModules.empty() == false )
-    {
-        m_pShield = new Shield( this );
-    }
-
     CreateRigidBody();
+    CalculateNavigationStats();
 
     // Forces recalculation of the gate's bounding box, so it matches with this ship's new shape
     if ( m_pHyperspaceCore != nullptr && m_pHyperspaceCore->GetHyperspaceGate() != nullptr )
@@ -220,18 +206,29 @@ void Ship::ModuleEditUnlock()
         m_pHyperspaceCore->GetHyperspaceGate()->Initialise();
     }
 
-    for ( auto& pModule : m_Modules )
+    for ( auto& pModule : GetModules() )
     {
         pModule->OnAllModulesCreated();
     }
+}
 
-    m_ShipyardModules.clear();
+void Ship::SetModuleBulkEdit( bool isEnabled )
+{
+    if ( isEnabled )
+    {
+        delete m_pShield;
+        m_pShield = nullptr;
+    }
+    else
+    {
+        OnModulesChanged();
+    }
+
+    m_ModuleBulkEdit = isEnabled;
 }
 
 Module* Ship::AddModule( ModuleInfo* pModuleInfo, int x, int y )
 {
-    SDL_assert( m_EditLock );
-
     if ( pModuleInfo != nullptr )
     {
         SDL_assert( m_ModuleHexGrid.Get( x, y ) == nullptr ); // Don't try to add a module to a slot that's already being used
@@ -244,43 +241,13 @@ Module* Ship::AddModule( ModuleInfo* pModuleInfo, int x, int y )
             pModule->SetOwner( this );
             pModule->Initialise( this );
 
-            ModuleType type = pModule->GetModuleInfo()->GetType();
-            if ( type == ModuleType::Engine )
-            {
-                m_Engines.push_back( static_cast<EngineModule*>( pModule ) );
-            }
-            else if ( type == ModuleType::Weapon )
-            {
-                WeaponModule* pWeaponModule = static_cast<WeaponModule*>( pModule );
-                pWeaponModule->Initialise( this );
-                m_WeaponModules.push_back( pWeaponModule );
-            }
-            else if ( type == ModuleType::Reactor )
-            {
-                m_Reactors.push_back( static_cast<ReactorModule*>( pModule ) );
-            }
-            else if ( type == ModuleType::Tower )
-            {
-                m_Towers.push_back( static_cast<TowerModule*>( pModule ) );
-            }
-            else if ( type == ModuleType::Addon )
-            {
-                AddonModule* pAddonModule = static_cast<AddonModule*>( pModule );
+            m_Modules[ static_cast<size_t>( pModuleInfo->GetType() ) ].push_back( pModule );
+            m_AllModulesDirty = true;
 
-                m_Addons.push_back( pAddonModule );
-
-                if ( pAddonModule->GetAddon()->GetInfo()->GetCategory() == AddonCategory::QuantumStateAlternator )
-                {
-                    m_Alternators.push_back( static_cast<AddonQuantumStateAlternator*>( pAddonModule->GetAddon() ) );
-                }
-            }
-            else if ( type == ModuleType::Shield )
+            if ( !m_ModuleBulkEdit )
             {
-                m_ShieldModules.push_back( static_cast<ShieldModule*>( pModule ) );
+                OnModulesChanged();
             }
-
-            RebuildShipyardModules();
-            CalculateNavigationStats();
 
             return pModule;
         }
@@ -291,53 +258,22 @@ Module* Ship::AddModule( ModuleInfo* pModuleInfo, int x, int y )
 
 ModuleInfo* Ship::RemoveModule( int x, int y )
 {
-    assert( m_EditLock );
-
     Module* pModule = m_ModuleHexGrid.Get( x, y );
     if ( pModule != nullptr )
     {
-        ModuleInfo* pModuleInfo = pModule->GetModuleInfo();
-        ModuleType type = pModule->GetModuleInfo()->GetType();
-
-        if ( type == ModuleType::Engine )
-        {
-            m_Engines.remove( static_cast<EngineModule*>( pModule ) );
-        }
-        else if ( type == ModuleType::Weapon )
-        {
-            m_WeaponModules.remove( static_cast<WeaponModule*>( pModule ) );
-        }
-        else if ( type == ModuleType::Reactor )
-        {
-            m_Reactors.remove( static_cast<ReactorModule*>( pModule ) );
-        }
-        else if ( type == ModuleType::Addon )
-        {
-            AddonModule* pAddonModule = static_cast<AddonModule*>( pModule );
-
-            m_Addons.remove( static_cast<AddonModule*>( pModule ) );
-
-            if ( pAddonModule->GetAddon()->GetInfo()->GetCategory() == AddonCategory::QuantumStateAlternator )
-            {
-                m_Alternators.remove( static_cast<AddonQuantumStateAlternator*>( pAddonModule->GetAddon() ) );
-            }
-        }
-        else if ( type == ModuleType::Shield )
-        {
-            m_ShieldModules.remove( static_cast<ShieldModule*>( pModule ) );
-        }
-        else if ( type == ModuleType::Tower )
-        {
-            m_Towers.remove( static_cast<TowerModule*>( pModule ) );
-        }
+        ModuleVector& moduleByType = GetModulesInternal( pModule->GetModuleInfo()->GetType() );
+        moduleByType.erase( std::remove( moduleByType.begin(), moduleByType.end(), pModule ), moduleByType.end() );
+        m_AllModulesDirty = true;
 
         delete pModule;
         m_ModuleHexGrid.Set( x, y, nullptr );
 
-        RebuildShipyardModules();
-        CalculateNavigationStats();
+        if ( !m_ModuleBulkEdit )
+        {
+            OnModulesChanged();
+        }
 
-        return pModuleInfo;
+        return pModule->GetModuleInfo();
     }
     else
     {
@@ -347,7 +283,7 @@ ModuleInfo* Ship::RemoveModule( int x, int y )
 
 void Ship::ClearModules()
 {
-    SDL_assert( m_EditLock );
+    SetModuleBulkEdit( true );
 
     int x1, y1, x2, y2;
     GetModuleHexGrid().GetBoundingBox( x1, y1, x2, y2 );
@@ -361,6 +297,8 @@ void Ship::ClearModules()
             }
         }
     }
+
+    SetModuleBulkEdit( false );
 }
 
 void Ship::Initialize()
@@ -393,7 +331,7 @@ void Ship::Initialize()
 void Ship::InitializeReactors()
 {
     m_EnergyCapacity = 0.0f;
-    for ( auto& pReactor : m_Reactors )
+    for ( auto& pReactor : GetModules<ReactorModule>() )
     {
         if ( pReactor->IsDestroyed() == false && pReactor->IsEMPed() == false )
         {
@@ -421,7 +359,7 @@ void Ship::CreateDefaultController()
         // The kiter controller only makes sense for turrets, otherwise it is impossible to line up a shot.
         bool hasFixedWeapons = false;
 
-        for ( auto& pWeaponModule : m_WeaponModules )
+        for ( auto& pWeaponModule : GetModules<WeaponModule>() )
         {
             if ( pWeaponModule->GetWeapon()->GetInfo()->GetBehaviour() == WeaponBehaviour::Fixed )
             {
@@ -433,7 +371,7 @@ void Ship::CreateDefaultController()
         // If a ship has particle accelerators we'll want the fixed controller as well, otherwise the PA won't hit anything.
         if ( hasFixedWeapons == false )
         {
-            for ( auto& pAddonModule : m_Addons )
+            for ( auto& pAddonModule : GetModules<AddonModule>() )
             {
                 AddonInfo* pAddonInfo = static_cast<AddonInfo*>( pAddonModule->GetModuleInfo() );
                 if ( pAddonInfo->GetCategory() == AddonCategory::ParticleAccelerator )
@@ -447,16 +385,13 @@ void Ship::CreateDefaultController()
         bool hasRammingProw = false;
         if ( hasFixedWeapons == false ) // No need to do this check if we would already be using a ControllerAssault anyway.
         {
-            for ( auto& pModule : m_Modules )
+            for ( auto& pArmorModule : GetModules<ArmourModule>() )
             {
-                if ( pModule->GetModuleInfo()->GetType() == ModuleType::Armour )
+                ArmourInfo* pArmourInfo = static_cast<ArmourInfo*>( pArmorModule->GetModuleInfo() );
+                if ( pArmourInfo->IsRammingProw() )
                 {
-                    ArmourInfo* pArmourInfo = static_cast<ArmourInfo*>( pModule->GetModuleInfo() );
-                    if ( pArmourInfo->IsRammingProw() )
-                    {
-                        hasRammingProw = true;
-                        break;
-                    }
+                    hasRammingProw = true;
+                    break;
                 }
             }
         }
@@ -528,28 +463,24 @@ void Ship::CreateRigidBody()
     m_CentreOfMass /= mass;
 
     // Create the actual physics shapes, as they have to be offset by the centre of mass.
-    for ( int x = x1; x <= x2; ++x )
+    for ( auto& pModule : GetModules() )
     {
-        for ( int y = y1; y <= y2; ++y )
-        {
-            Module* pModule = m_ModuleHexGrid.Get( x, y );
-            if ( pModule != nullptr )
-            {
-                CylinderShapeSharedPtr pShape = std::make_shared<CylinderShape>( CylinderShapeAxis::Z, sModuleWidth, sModuleWidth, 40.0f );
-                pShape->SetUserData( pModule->GetCollisionInfo() );
+        CylinderShapeSharedPtr pShape = std::make_shared<CylinderShape>( CylinderShapeAxis::Z, sModuleWidth, sModuleWidth, 40.0f );
+        pShape->SetUserData( pModule->GetCollisionInfo() );
 
-                glm::vec3 modulePos = pModule->GetLocalPosition();
-                m_pCompoundShape->AddChildShape( pShape, glm::translate( modulePos - m_CentreOfMass ) );
-                pModule->SetPhysicsShape( pShape );
-
-                m_Modules.push_back( pModule );
-            }
-        }
+        glm::vec3 modulePos = pModule->GetLocalPosition();
+        m_pCompoundShape->AddChildShape( pShape, glm::translate( modulePos - m_CentreOfMass ) );
+        pModule->SetPhysicsShape( pShape );
     }
 
     CalculateBoundingBox();
 
     // If we have a shield, we want an additional shape. The shield needs to know the shape index for damage handling purposes.
+    if ( GetModules<ShieldModule>().empty() == false )
+    {
+        m_pShield = new Shield( this );
+    }
+
     if ( m_pShield != nullptr )
     {
         glm::vec3 bbCentre(
@@ -582,19 +513,26 @@ void Ship::CreateRigidBody()
 
 void Ship::DestroyRigidBody()
 {
-    if ( m_pRigidBody == nullptr )
+    if ( g_pGame && g_pGame->GetPhysicsSimulation() )
     {
-        return;
-    }
+        if ( m_pShield )
+        {
+            delete m_pShield;
+            m_pShield = nullptr;
+        }
 
-    if ( g_pGame != nullptr )
-    {
-        g_pGame->GetPhysicsSimulation()->Remove( m_pRigidBody );
-        delete m_pRigidBody;
-        m_pRigidBody = nullptr;
-    }
+        if ( m_pRigidBody )
+        {
+            g_pGame->GetPhysicsSimulation()->Remove( m_pRigidBody );
+            delete m_pRigidBody;
+            m_pRigidBody = nullptr;
 
-    m_Modules.clear();
+            for ( auto& pModule : GetModules() )
+            {
+                pModule->SetPhysicsShape( nullptr );
+            }
+        }
+    }
 }
 
 void Ship::Update( float delta )
@@ -619,12 +557,6 @@ void Ship::Update( float delta )
         m_pController = std::move( m_pNextController );
     }
 
-    // If our ship has finished docking, then it can be edited
-    if ( GetDockingState() == DockingState::Docked && m_EditLock == false )
-    {
-        ModuleEditLock();
-    }
-
     // The tower, being the most important part of a Ship, is what actually has to be targeted by other ships or
     // navigated towards - the theoretical centre of the ship or even its centre of mass won't actually match the
     // tower's position, so we need to calculate it explicitly.
@@ -643,28 +575,15 @@ void Ship::Update( float delta )
         }
     }
 
-    if ( m_EditLock == false )
+    for ( auto& pModule : GetModules() )
     {
-        for ( auto& pModule : m_Modules )
+        if ( GetDockingState() == DockingState::Docked )
+        {
+            pModule->UpdateShipyard( delta );
+        }
+        else
         {
             pModule->Update( delta );
-        }
-    }
-    else
-    {
-        int x1, y1, x2, y2;
-        m_ModuleHexGrid.GetBoundingBox( x1, y1, x2, y2 );
-
-        for ( int x = x1; x <= x2; ++x )
-        {
-            for ( int y = y1; y <= y2; ++y )
-            {
-                Module* pModule = m_ModuleHexGrid.Get( x, y );
-                if ( pModule != nullptr )
-                {
-                    pModule->UpdateShipyard( delta );
-                }
-            }
         }
     }
 
@@ -723,7 +642,7 @@ void Ship::CalculateNavigationStats()
 
     if ( m_EnergyCapacity > 0.0f ) // For the ship to move at least one reactor must still be operational
     {
-        for ( auto& pEngine : m_Engines )
+        for ( auto& pEngine : GetModules<EngineModule>() )
         {
             if ( pEngine->IsDestroyed() == false && pEngine->IsEMPed() == false )
             {
@@ -746,7 +665,7 @@ void Ship::CalculateNavigationStats()
             enginePowerMultiplier = 3.0f;
         }
 
-        for ( auto& pAddonModule : m_Addons )
+        for ( auto& pAddonModule : GetModules<AddonModule>() )
         {
             AddonInfo* pAddonInfo = static_cast<AddonInfo*>( pAddonModule->GetModuleInfo() );
             if ( pAddonInfo->GetCategory() == AddonCategory::FuelInjector && pAddonModule->GetAddon()->IsActive() )
@@ -818,40 +737,39 @@ float Ship::CalculateMaximumLinearSpeed( float linearThrust, float mass ) const
     const float t = 1.0f / ( 1.0f - dampingFactor );
     const float maximumSpeed = speed * t;
 
-    if ( m_EditLock )
-    {
-        Genesis::FrameWork::GetLogger()->LogInfo( "acceleration: %.2f | maximum speed: %.2f | t: %.2f", acceleration, maximumSpeed, t);
-    }
-
     return maximumSpeed;
 }
 
 float Ship::CalculateMaximumAngularSpeed( float torque, float mass ) const
 {
-    return 0.0f;
+    const float duration = 1.0f / 60.0f;
+    const float speed = torque * duration;
+    const float dampingFactor = 0.985f; // TODO: calculate properly.
+
+    //   if ( m_EditLock )
+    //{
+    //    Genesis::FrameWork::GetLogger()->LogInfo( "acceleration: %.2f | maximum speed: %.2f | t: %.2f", acceleration, maximumSpeed, t);
+    //}
+
+    const float t = 1.0f / ( 1.0f - dampingFactor );
+    const float maximumSpeed = speed * t;
+
+    if ( this == g_pGame->GetPlayer()->GetShip() )
+    {
+        if ( GetDockingState() != DockingState::Docked )
+        {
+            glm::vec3 av = GetRigidBody()->GetAngularVelocity();
+            Genesis::FrameWork::GetLogger()->LogInfo( "rb av: %.2f %.2f %.2f", av.x, av.y, av.z );
+        }
+        Genesis::FrameWork::GetLogger()->LogInfo( "calculated max av: %.2f", maximumSpeed );
+    }
+
+    return maximumSpeed;
 }
 
 float Ship::CalculateMass() const
 {
-    if ( IsModuleEditLocked() )
-    {
-        float mass = 0.0f;
-        for ( auto& pModule : GetModules() )
-        {
-            // Armour modifies the base module weight by a multiplier value.
-            float moduleMass = BaseModuleMass;
-            if ( pModule->GetModuleInfo()->GetType() == ModuleType::Armour )
-            {
-                moduleMass *= ( (ArmourInfo*)( pModule->GetModuleInfo() ) )->GetMassMultiplier( this );
-            }
-            mass += moduleMass;
-        }
-        return mass;
-    }
-    else
-    {
-        return static_cast<float>( m_pRigidBody->GetMass() );
-    }
+    return static_cast<float>( m_pRigidBody->GetMass() );
 }
 
 void Ship::SwitchController( ControllerUniquePtr&& pController )
@@ -867,7 +785,7 @@ void Ship::UpdateEngines( float delta )
 
     if ( m_EnergyCapacity > 0.0f ) // For the ship to move at least one reactor must still be operational
     {
-        for ( auto& pEngine : m_Engines )
+        for ( auto& pEngine : GetModules<EngineModule>() )
         {
             if ( pEngine->IsDestroyed() == false && pEngine->IsEMPed() == false )
             {
@@ -946,8 +864,8 @@ void Ship::UpdateEngines( float delta )
 
 void Ship::UpdateReactors( float delta )
 {
-    // Consider all reactors disabled while editing
-    if ( m_EditLock )
+    // Consider all reactors disabled while docked.
+    if ( GetDockingState() == DockingState::Docked )
     {
         m_Energy = 0.0f;
         return;
@@ -955,7 +873,7 @@ void Ship::UpdateReactors( float delta )
 
     float capacitorStorage = 0.0f;
     float capacitorRechargeRate = 0.0f;
-    for ( auto& pReactor : m_Reactors )
+    for ( auto& pReactor : GetModules<ReactorModule>() )
     {
         if ( pReactor->IsDestroyed() == false )
         {
@@ -994,14 +912,16 @@ void Ship::UpdateReactors( float delta )
 
 void Ship::UpdateRepair( float delta )
 {
-    if ( m_AmountToRepair <= 0.0f || m_EditLock )
+    if ( m_AmountToRepair <= 0.0f || GetDockingState() == DockingState::Docked )
+    {
         return;
+    }
 
     float amount = m_RepairStep * delta;
     if ( m_AmountToRepair - amount < 0.0f ) // Prevent over-repairing
         amount = m_AmountToRepair;
 
-    for ( auto& pModule : m_Modules )
+    for ( auto& pModule : GetModules() )
     {
         // If a module has already been destroyed, it shouldn't be affected by repairs unless
         // the ship is docked. Repairing a destroyed module does not restore the collision but
@@ -1069,54 +989,30 @@ void Ship::Render()
 
 void Ship::RenderModuleHexGrid( const glm::mat4& modelTransform )
 {
-    if ( m_EditLock )
+    glEnable( GL_STENCIL_TEST );
+    glStencilOp( GL_KEEP, GL_KEEP, GL_REPLACE );
+    glStencilFunc( GL_ALWAYS, 1, 0xFF );
+    glStencilMask( 0xFF );
+
+    glm::vec3 moduleLocalPos;
+    for ( auto& pModule : GetModules() )
     {
-        int x1, y1, x2, y2;
-        m_ModuleHexGrid.GetBoundingBox( x1, y1, x2, y2 );
-
-        glm::vec3 moduleLocalPos;
-        for ( int x = x1; x <= x2; ++x )
+        if ( pModule->ShouldRender() )
         {
-            for ( int y = y1; y <= y2; ++y )
+            for ( Genesis::Material* pMaterial : pModule->GetModel()->GetMaterials() )
             {
-                Module* pModule = m_ModuleHexGrid.Get( x, y );
-                if ( pModule != nullptr && pModule->ShouldRender() )
-                {
-                    for ( Genesis::Material* pMaterial : pModule->GetModel()->GetMaterials() )
-                        SetSharedShaderParameters( pModule, pMaterial );
-
-                    moduleLocalPos = Module::GetLocalPosition( this, x, y );
-                    glm::mat4 worldTransform = modelTransform * glm::translate( moduleLocalPos );
-                    pModule->Render( worldTransform, false );
-                }
+                SetSharedShaderParameters( pModule, pMaterial );
             }
+
+            moduleLocalPos = pModule->GetLocalPosition();
+            glm::mat4 worldTransform = modelTransform * glm::translate( moduleLocalPos );
+            pModule->Render( worldTransform, false );
         }
     }
-    else
-    {
-        glEnable( GL_STENCIL_TEST );
-        glStencilOp( GL_KEEP, GL_KEEP, GL_REPLACE );
-        glStencilFunc( GL_ALWAYS, 1, 0xFF );
-        glStencilMask( 0xFF );
 
-        glm::vec3 moduleLocalPos;
-        for ( auto& pModule : m_Modules )
-        {
-            if ( pModule->ShouldRender() )
-            {
-                for ( Genesis::Material* pMaterial : pModule->GetModel()->GetMaterials() )
-                    SetSharedShaderParameters( pModule, pMaterial );
+    RenderModuleHexGridOutline( modelTransform );
 
-                moduleLocalPos = pModule->GetLocalPosition();
-                glm::mat4 worldTransform = modelTransform * glm::translate( moduleLocalPos );
-                pModule->Render( worldTransform, false );
-            }
-        }
-
-        RenderModuleHexGridOutline( modelTransform );
-
-        glDisable( GL_STENCIL_TEST );
-    }
+    glDisable( GL_STENCIL_TEST );
 }
 
 void Ship::RenderModuleHexGridOutline( const glm::mat4& modelTransform )
@@ -1132,7 +1028,7 @@ void Ship::RenderModuleHexGridOutline( const glm::mat4& modelTransform )
     glStencilFunc( GL_NOTEQUAL, 1, 0xFF );
     glStencilMask( 0x00 );
 
-    for ( auto& pModule : m_Modules )
+    for ( auto& pModule : GetModules() )
     {
         if ( pModule->ShouldRender() )
         {
@@ -1283,8 +1179,8 @@ bool Ship::DamageShared( WeaponSystem weaponSystem, float baseDamage, int burst,
 {
     SDL_assert( burst > 0 );
 
-    // If we are in Edit mode, we must not be damaged until the lock is lifted and the physics object recreated.
-    if ( m_EditLock )
+    // If we are docked, we must not be damaged until the ship undocks.
+    if ( GetDockingState() == DockingState::Docked )
     {
         return false;
     }
@@ -1394,7 +1290,7 @@ void Ship::OnCollision(
     }
 
     // We receive no collision damage if we are in the shipyard
-    if ( IsModuleEditLocked() )
+    if ( GetDockingState() != DockingState::Undocked )
     {
         return;
     }
@@ -1478,7 +1374,7 @@ void Ship::Dock( Shipyard* pShipyard )
 
     // Prevents the trail for stretching to the new position due to the ship being
     // teleported when docking.
-    for ( auto& pEngine : m_Engines )
+    for ( auto& pEngine : GetModules<EngineModule>() )
     {
         pEngine->Disable();
     }
@@ -1496,7 +1392,8 @@ void Ship::Undock()
     m_pShipyard = nullptr;
     m_DockingState = DockingState::Undocked;
 
-    ModuleEditUnlock();
+    CreateRigidBody();
+    CalculateNavigationStats();
     UpdateModuleLinkState();
 
     CreateDefaultController();
@@ -1510,7 +1407,7 @@ void Ship::Undock()
     g_pGame->SetCursorType( CursorType::Crosshair );
 
     // Restore engine functionality previously disabled by Dock()
-    for ( auto& pEngine : m_Engines )
+    for ( auto& pEngine : GetModules<EngineModule>() )
     {
         pEngine->Enable();
     }
@@ -1657,14 +1554,14 @@ void Ship::UpdateModuleLinkState()
 {
     m_UpdatingLinks = true;
 
-    for ( auto& pModule : m_Modules )
+    for ( auto& pModule : GetModules() )
     {
         pModule->SetLinked( false );
     }
 
     RecursiveModuleLinkState( GetTowerModule() );
 
-    for ( auto& pModule : m_Modules )
+    for ( auto& pModule : GetModules() )
     {
         if ( pModule->IsLinked() == false && pModule->IsDestroyed() == false )
         {
@@ -1806,8 +1703,6 @@ bool Ship::IsVisible() const
 
 void Ship::CalculateBoundingBox()
 {
-    SDL_assert( IsModuleEditLocked() == false );
-
     glm::vec3 localSpaceBoundingBox( 0.0f );
 
     // Calculate the basic bounding box, but Module::GetLocalPosition() returns the center point of the module,
@@ -1892,7 +1787,14 @@ void Ship::RammingSpeed()
 
 AddonQuantumStateAlternator* Ship::GetQuantumStateAlternator() const
 {
-    return m_Alternators.empty() ? nullptr : m_Alternators.front();
+    for ( auto& pAddonModule : GetModules<AddonModule>() )
+    {
+        if ( pAddonModule->GetAddon()->GetInfo()->GetCategory() == AddonCategory::QuantumStateAlternator )
+        {
+            return reinterpret_cast<AddonQuantumStateAlternator*>( pAddonModule );
+        }
+    }
+    return nullptr;
 }
 
 void Ship::FlipQuantumState()
@@ -1957,24 +1859,24 @@ int Ship::GetIntegrity() const
     return static_cast<int>( totalModuleIntegrity / static_cast<float>( modules.size() ) * 100.0f );
 }
 
-void Ship::RebuildShipyardModules()
+const ModuleVector& Ship::GetModules() const
 {
-    m_ShipyardModules.clear();
-
-    int x1, y1, x2, y2;
-    m_ModuleHexGrid.GetBoundingBox( x1, y1, x2, y2 );
-
-    for ( int x = x1; x <= x2; ++x )
+    if ( m_AllModulesDirty )
     {
-        for ( int y = y1; y <= y2; ++y )
+        m_AllModules.clear();
+
+        for ( int i = 0; i < static_cast<size_t>( ModuleType::Count ); i++ )
         {
-            Module* pModule = m_ModuleHexGrid.Get( x, y );
-            if ( pModule != nullptr )
+            for ( Module* pModule : m_Modules[ i ] )
             {
-                m_ShipyardModules.push_back( pModule );
+                m_AllModules.push_back( pModule );
             }
         }
+
+        m_AllModulesDirty = false;
     }
+
+    return m_AllModules;
 }
 
 } // namespace Hexterminate

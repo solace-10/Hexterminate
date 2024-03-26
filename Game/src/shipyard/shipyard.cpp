@@ -210,7 +210,7 @@ void Shipyard::Update( float delta )
     UpdateSelection();
     UpdateInput();
 
-    if ( m_pDockedShip != nullptr && m_pDockedShip->GetDockingState() == DockingState::Docked && m_pDockedShip->IsModuleEditLocked() )
+    if ( m_pDockedShip != nullptr && m_pDockedShip->GetDockingState() == DockingState::Docked )
     {
         m_BaseModelShowTimer += delta;
         if ( m_BaseModelShowTimer > 0.1f && m_MaxY < m_MaxConstructionY )
@@ -239,8 +239,10 @@ void Shipyard::UpdateSelection()
 {
     m_SelectedX = m_SelectedY = -1;
 
-    if ( m_pDockedShip == nullptr || m_pDockedShip->GetDockingState() != DockingState::Docked || m_pDockedShip->IsModuleEditLocked() == false )
+    if ( m_pDockedShip == nullptr || m_pDockedShip->GetDockingState() != DockingState::Docked )
+    {
         return;
+    }
 
     const float sphereRadius = sModuleWidth / 2.0f;
 
@@ -267,8 +269,10 @@ void Shipyard::UpdateSelection()
 
 void Shipyard::UpdateInput()
 {
-    if ( m_pDockedShip == nullptr || m_pDockedShip->GetDockingState() != DockingState::Docked || m_pDockedShip->IsModuleEditLocked() == false )
+    if ( m_pDockedShip == nullptr || m_pDockedShip->GetDockingState() != DockingState::Docked )
+    {
         return;
+    }
 
     bool pressed = Genesis::FrameWork::GetInputManager()->IsMouseButtonPressed( Genesis::MouseButton::Left );
     bool pressedRight = Genesis::FrameWork::GetInputManager()->IsMouseButtonPressed( Genesis::MouseButton::Right );

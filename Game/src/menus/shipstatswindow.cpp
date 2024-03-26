@@ -113,9 +113,8 @@ void ShipStatsWindow::UpdateWeaponryStats()
     float energy = 0.0f;
     float exotic = 0.0f;
 
-    Ship* pShip = g_pGame->GetPlayer()->GetShip();
-    const WeaponModuleList& weaponModules = pShip->GetWeaponModules();
-    for ( auto& pWeaponModule : weaponModules )
+    const Ship* pShip = g_pGame->GetPlayer()->GetShip();
+    for ( auto& pWeaponModule : pShip->GetModules<WeaponModule>() )
     {
         const WeaponInfo* pWeaponInfo = static_cast<WeaponInfo*>( pWeaponModule->GetModuleInfo() );
         const DamageType type = pWeaponInfo->GetDamageType();
@@ -145,8 +144,8 @@ void ShipStatsWindow::UpdateShieldStats()
     float shieldCapacity = 0.0f;
     float shieldRecharge = 0.0f;
 
-    Ship* pShip = g_pGame->GetPlayer()->GetShip();
-    const ShieldModuleList& shieldModules = pShip->GetShieldModules();
+    const Ship* pShip = g_pGame->GetPlayer()->GetShip();
+    const auto& shieldModules = pShip->GetModules<ShieldModule>();
     float shieldEfficiency = Shield::CalculateEfficiency( shieldModules );
 
     for ( auto& pShieldModule : shieldModules )
@@ -170,9 +169,8 @@ void ShipStatsWindow::UpdateCapacitorStats()
     float capacity = 0.0f;
     float recharge = 0.0f;
 
-    Ship* pShip = g_pGame->GetPlayer()->GetShip();
-    const ReactorModuleList& reactorModules = pShip->GetReactorModules();
-    for ( auto& pReactorModule : reactorModules )
+    const Ship* pShip = g_pGame->GetPlayer()->GetShip();
+    for ( auto& pReactorModule : pShip->GetModules<ReactorModule>() )
     {
         ReactorInfo* pReactorInfo = static_cast<ReactorInfo*>( pReactorModule->GetModuleInfo() );
         capacity += pReactorInfo->GetCapacitorStorage();
@@ -180,7 +178,7 @@ void ShipStatsWindow::UpdateCapacitorStats()
     }
 
     float addonsEnergyPerSecond = 0.0f;
-    for ( auto& pModule : pShip->GetAddonModules() )
+    for ( auto& pModule : pShip->GetModules<AddonModule>() )
     {
         AddonInfo* pAddonInfo = static_cast<AddonInfo*>( pModule->GetModuleInfo() );
 
@@ -196,7 +194,7 @@ void ShipStatsWindow::UpdateCapacitorStats()
     }
 
     float weaponsEnergyPerSecond = 0.0f;
-    for ( auto& pModule : pShip->GetWeaponModules() )
+    for ( auto& pModule : pShip->GetModules<WeaponModule>() )
     {
         WeaponInfo* pWeaponInfo = static_cast<WeaponInfo*>( pModule->GetModuleInfo() );
         weaponsEnergyPerSecond += pWeaponInfo->GetActivationCost( pShip ) * pWeaponInfo->GetRateOfFire( pShip );
@@ -213,25 +211,25 @@ void ShipStatsWindow::UpdateEnergyGridStats()
     float gridCapacity = 0.0f;
     float gridUsed = 0.0f;
 
-    Ship* pShip = g_pGame->GetPlayer()->GetShip();
+    const Ship* pShip = g_pGame->GetPlayer()->GetShip();
 
-    for ( auto& pModule : pShip->GetReactorModules() )
+    for ( auto& pModule : pShip->GetModules<ReactorModule>() )
     {
         gridCapacity += pModule->GetModuleInfo()->GetPowerGrid( pShip );
     }
 
-    for ( auto& pModule : pShip->GetShieldModules() )
+    for ( auto& pModule : pShip->GetModules<ShieldModule>() )
     {
         gridUsed += -pModule->GetModuleInfo()->GetPowerGrid( pShip );
     }
 
-    for ( auto& pModule : pShip->GetAddonModules() )
+    for ( auto& pModule : pShip->GetModules<AddonModule>() )
     {
         AddonInfo* pAddonInfo = static_cast<AddonInfo*>( pModule->GetModuleInfo() );
         gridUsed += -pAddonInfo->GetPowerGrid( pShip );
     }
 
-    for ( auto& pModule : pShip->GetWeaponModules() )
+    for ( auto& pModule : pShip->GetModules<WeaponModule>() )
     {
         WeaponInfo* pWeaponInfo = static_cast<WeaponInfo*>( pModule->GetModuleInfo() );
         gridUsed += -pWeaponInfo->GetPowerGrid( pShip );
@@ -262,9 +260,8 @@ float ShipStatsWindow::CalculateBonusMultiplier( TowerBonus towerBonus ) const
     // the correct stats.
     float multiplier = 1.0f;
 
-    Ship* pShip = g_pGame->GetPlayer()->GetShip();
-    const TowerModuleList& towerModules = pShip->GetTowerModules();
-    for ( auto& pTowerModule : towerModules )
+    const Ship* pShip = g_pGame->GetPlayer()->GetShip();
+    for ( auto& pTowerModule : pShip->GetModules<TowerModule>() )
     {
         TowerInfo* pTowerInfo = static_cast<TowerInfo*>( pTowerModule->GetModuleInfo() );
         if ( pTowerInfo->GetBonusType() == towerBonus )

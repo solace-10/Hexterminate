@@ -139,11 +139,10 @@ Hotbar::~Hotbar()
     Genesis::FrameWork::GetGuiManager()->RemoveElement( m_pRoot );
 }
 
-void Hotbar::UpdatePhaseBar( Ship* pPlayerShip )
+void Hotbar::UpdatePhaseBar( const Ship* pPlayerShip )
 {
     AddonPhaseBarrier* pPhaseBarrierAddon = nullptr;
-    const AddonModuleList& addonModules = pPlayerShip->GetAddonModules();
-    for ( const auto& pAddonModule : addonModules )
+    for ( const AddonModule* pAddonModule : pPlayerShip->GetModules<AddonModule>() )
     {
         if ( pAddonModule->GetAddon()->GetInfo()->GetCategory() == AddonCategory::PhaseBarrier )
         {
@@ -168,7 +167,7 @@ void Hotbar::UpdatePhaseBar( Ship* pPlayerShip )
     }
 }
 
-void Hotbar::UpdateShieldBar( Ship* pPlayerShip )
+void Hotbar::UpdateShieldBar( const Ship* pPlayerShip )
 {
     Shield* pShield = pPlayerShip->GetShield();
     if ( pShield == nullptr )
@@ -227,19 +226,24 @@ void Hotbar::Update( float fDelta )
     }
 }
 
-void Hotbar::UpdateAbilities( Ship* pPlayerShip )
+void Hotbar::UpdateAbilities( const Ship* pPlayerShip )
 {
     using namespace Genesis;
 
-    AddonModuleList addonModules = pPlayerShip->GetAddonModules();
-    addonModules.sort( AddonModuleSortPredicate );
+    AddonModuleList sortedAddonModules;
+    for ( auto& pAddonModule : pPlayerShip->GetModules<AddonModule>() )
+    {
+        sortedAddonModules.push_back( pAddonModule );
+    }
 
-    addonModules.remove_if(
+    sortedAddonModules.sort( AddonModuleSortPredicate );
+
+    sortedAddonModules.remove_if(
         []( const AddonModule* pAddonModule ) {
             return ( (AddonInfo*)( pAddonModule->GetModuleInfo() ) )->GetCategory() == AddonCategory::QuantumStateAlternator;
         } );
 
-    const size_t addonsCount = addonModules.size();
+    const size_t addonsCount = sortedAddonModules.size();
     int abilityCount = static_cast<int>( addonsCount );
     if ( abilityCount > sNumShipAddons )
         abilityCount = sNumShipAddons;
@@ -266,7 +270,7 @@ void Hotbar::UpdateAbilities( Ship* pPlayerShip )
     }
 
     int keyNameIndex = 0;
-    AddonModuleList::const_iterator it = addonModules.begin();
+    AddonModuleList::const_iterator it = sortedAddonModules.begin();
     for ( int i = 0; i < static_cast<int>( abilityCount ); ++i )
     {
         AbilityData& ability = m_Abilities[ i ];
