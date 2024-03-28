@@ -740,30 +740,15 @@ float Ship::CalculateMaximumLinearSpeed( float linearThrust, float mass ) const
     return maximumSpeed;
 }
 
+// Returns maximum angular speed in degrees per second.
 float Ship::CalculateMaximumAngularSpeed( float torque, float mass ) const
 {
     const float duration = 1.0f / 60.0f;
-    const float speed = torque * duration;
+    const glm::vec3 angularVelocities = GetRigidBody()->GetInvInertiaTensorWorld() * glm::vec3( 1.0f );
+    const float speed = angularVelocities.z * torque * duration;
     const float dampingFactor = 0.985f; // TODO: calculate properly.
-
-    //   if ( m_EditLock )
-    //{
-    //    Genesis::FrameWork::GetLogger()->LogInfo( "acceleration: %.2f | maximum speed: %.2f | t: %.2f", acceleration, maximumSpeed, t);
-    //}
-
     const float t = 1.0f / ( 1.0f - dampingFactor );
-    const float maximumSpeed = speed * t;
-
-    if ( this == g_pGame->GetPlayer()->GetShip() )
-    {
-        if ( GetDockingState() != DockingState::Docked )
-        {
-            glm::vec3 av = GetRigidBody()->GetAngularVelocity();
-            Genesis::FrameWork::GetLogger()->LogInfo( "rb av: %.2f %.2f %.2f", av.x, av.y, av.z );
-        }
-        Genesis::FrameWork::GetLogger()->LogInfo( "calculated max av: %.2f", maximumSpeed );
-    }
-
+    const float maximumSpeed = speed * t * Genesis::kRadToDeg;
     return maximumSpeed;
 }
 
@@ -779,6 +764,12 @@ void Ship::SwitchController( ControllerUniquePtr&& pController )
 
 void Ship::UpdateEngines( float delta )
 {
+    // Don't allow the ship to move under its own power while it is jumping in or out.
+    if ( m_pHyperspaceCore && m_pHyperspaceCore->IsJumping() )
+    {
+        return;
+    }
+
     CalculateNavigationStats();
 
     int numEngines = 0;

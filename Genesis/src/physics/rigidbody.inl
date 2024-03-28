@@ -19,156 +19,155 @@
 
 #include <SDL.h>
 
-namespace Genesis
+namespace Genesis::Physics
 {
-namespace Physics
-{
+    /////////////////////////////////////////////////////////////////////
+    // RigidBodyConstructionInfo
+    /////////////////////////////////////////////////////////////////////
 
-/////////////////////////////////////////////////////////////////////
-// RigidBodyConstructionInfo
-/////////////////////////////////////////////////////////////////////
+    inline RigidBodyConstructionInfo::RigidBodyConstructionInfo()
+        : m_Mass( 0 )
+        , m_MotionType( MotionType::Dynamic )
+        , m_WorldTransform( 1.0f )
+        , m_pShape( nullptr )
+        , m_LinearDamping( 0.0f )
+        , m_AngularDamping( 0.0f )
+        , m_Friction( 0.0f )
+        , m_CentreOfMass( 0.0f )
+    {
+    }
 
-inline RigidBodyConstructionInfo::RigidBodyConstructionInfo() :
-m_Mass( 0 ),
-m_MotionType( MotionType::Dynamic ),
-m_WorldTransform( 1.0f ),
-m_pShape( nullptr ),
-m_LinearDamping( 0.0f ),
-m_AngularDamping( 0.0f ),
-m_Friction( 0.0f ),
-m_CentreOfMass( 0.0f )
-{
+    inline void RigidBodyConstructionInfo::SetMass( int value )
+    {
+        SDL_assert( value >= 0 );
+        m_Mass = value;
+    }
 
-}
+    inline int RigidBodyConstructionInfo::GetMass() const
+    {
+        return m_Mass;
+    }
 
-inline void RigidBodyConstructionInfo::SetMass( int value )
-{
-	SDL_assert( value >= 0 );
-	m_Mass = value;
-}
+    inline void RigidBodyConstructionInfo::SetMotionType( MotionType motionType )
+    {
+        m_MotionType = motionType;
+    }
 
-inline int RigidBodyConstructionInfo::GetMass() const
-{
-	return m_Mass;
-}
+    inline MotionType RigidBodyConstructionInfo::GetMotionType() const
+    {
+        return m_MotionType;
+    }
 
-inline void RigidBodyConstructionInfo::SetMotionType( MotionType motionType )
-{
-	m_MotionType = motionType;
-}
+    inline void RigidBodyConstructionInfo::SetWorldTransform( const glm::mat4x4& worldTransform )
+    {
+        m_WorldTransform = worldTransform;
+    }
 
-inline MotionType RigidBodyConstructionInfo::GetMotionType() const
-{
-	return m_MotionType;
-}
+    inline const glm::mat4x4& RigidBodyConstructionInfo::GetWorldTransform() const
+    {
+        return m_WorldTransform;
+    }
 
-inline void RigidBodyConstructionInfo::SetWorldTransform( const glm::mat4x4& worldTransform )
-{
-	m_WorldTransform = worldTransform;
-}
+    inline void RigidBodyConstructionInfo::SetShape( ShapeSharedPtr pShape )
+    {
+        m_pShape = pShape;
+    }
 
-inline const glm::mat4x4& RigidBodyConstructionInfo::GetWorldTransform() const
-{
-	return m_WorldTransform;
-}
+    inline ShapeSharedPtr RigidBodyConstructionInfo::GetShape() const
+    {
+        return m_pShape;
+    }
 
-inline void RigidBodyConstructionInfo::SetShape( ShapeSharedPtr pShape )
-{
-	m_pShape = pShape;
-}
+    inline void RigidBodyConstructionInfo::SetLinearDamping( float value )
+    {
+        SDL_assert( value >= 0.0f );
+        m_LinearDamping = value;
+    }
 
-inline ShapeSharedPtr RigidBodyConstructionInfo::GetShape() const
-{
-	return m_pShape;
-}
+    inline float RigidBodyConstructionInfo::GetLinearDamping() const
+    {
+        return m_LinearDamping;
+    }
 
-inline void RigidBodyConstructionInfo::SetLinearDamping( float value )
-{
-	SDL_assert( value >= 0.0f );
-	m_LinearDamping = value;
-}
+    inline void RigidBodyConstructionInfo::SetAngularDamping( float value )
+    {
+        SDL_assert( value >= 0.0f );
+        m_AngularDamping = value;
+    }
 
-inline float RigidBodyConstructionInfo::GetLinearDamping() const
-{
-	return m_LinearDamping;
-}
+    inline float RigidBodyConstructionInfo::GetAngularDamping() const
+    {
+        return m_AngularDamping;
+    }
 
-inline void RigidBodyConstructionInfo::SetAngularDamping( float value )
-{
-	SDL_assert( value >= 0.0f );
-	m_AngularDamping = value;
-}
+    inline void RigidBodyConstructionInfo::SetFriction( float value )
+    {
+        SDL_assert( value >= 0.0f );
+        m_Friction = value;
+    }
 
-inline float RigidBodyConstructionInfo::GetAngularDamping() const
-{
-	return m_AngularDamping;
-}
+    inline float RigidBodyConstructionInfo::GetFriction() const
+    {
+        return m_Friction;
+    }
 
-inline void RigidBodyConstructionInfo::SetFriction( float value )
-{
-	SDL_assert( value >= 0.0f );
-	m_Friction = value;
-}
+    inline void RigidBodyConstructionInfo::SetCentreOfMass( const glm::vec3& centreOfMass )
+    {
+        m_CentreOfMass = centreOfMass;
+    }
 
-inline float RigidBodyConstructionInfo::GetFriction() const
-{
-	return m_Friction;
-}
+    inline const glm::vec3& RigidBodyConstructionInfo::GetCentreOfMass() const
+    {
+        return m_CentreOfMass;
+    }
 
-inline void RigidBodyConstructionInfo::SetCentreOfMass( const glm::vec3& centreOfMass )
-{
-	m_CentreOfMass = centreOfMass;
-}
+    /////////////////////////////////////////////////////////////////////
+    // RigidBody
+    /////////////////////////////////////////////////////////////////////
 
-inline const glm::vec3& RigidBodyConstructionInfo::GetCentreOfMass() const
-{
-	return m_CentreOfMass;
-}
+    inline CollisionObject::Type RigidBody::GetType() const
+    {
+        return CollisionObject::Type::RigidBody;
+    }
 
+    inline const glm::mat3x3& RigidBody::GetInvInertiaTensorWorld() const
+    {
+        return m_InvInertiaTensorWorld;
+    }
 
-/////////////////////////////////////////////////////////////////////
-// RigidBody
-/////////////////////////////////////////////////////////////////////
+    inline MotionType RigidBody::GetMotionType() const
+    {
+        return m_MotionType;
+    }
 
-inline CollisionObject::Type RigidBody::GetType() const
-{
-	return CollisionObject::Type::RigidBody;
-}
+    inline int RigidBody::GetMass() const
+    {
+        return m_Mass;
+    }
 
-inline MotionType RigidBody::GetMotionType() const
-{
-	return m_MotionType;
-}
+    inline const glm::vec3& RigidBody::GetCentreOfMass() const
+    {
+        return m_CentreOfMass;
+    }
 
-inline int RigidBody::GetMass() const
-{
-	return m_Mass;
-}
+    inline float RigidBody::GetAngularDamping() const
+    {
+        return m_AngularDamping;
+    }
 
-inline const glm::vec3& RigidBody::GetCentreOfMass() const 
-{
-	return m_CentreOfMass;
-}
+    inline float RigidBody::GetLinearDamping() const
+    {
+        return m_LinearDamping;
+    }
 
-inline float RigidBody::GetAngularDamping() const
-{
-	return m_AngularDamping;
-}
+    inline const glm::vec3& RigidBody::GetLinearFactor() const
+    {
+        return m_LinearFactor;
+    }
 
-inline float RigidBody::GetLinearDamping() const
-{
-	return m_LinearDamping;
-}
+    inline const glm::vec3& RigidBody::GetAngularFactor() const
+    {
+        return m_AngularFactor;
+    }
 
-inline const glm::vec3& RigidBody::GetLinearFactor() const
-{
-	return m_LinearFactor;
-}
-
-inline const glm::vec3& RigidBody::GetAngularFactor() const
-{
-	return m_AngularFactor;
-}
-
-} // namespace Physics
-} // namespace Genesis
+} // namespace Genesis::Physics

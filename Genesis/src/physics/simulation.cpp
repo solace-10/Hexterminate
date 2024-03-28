@@ -163,28 +163,24 @@ TaskStatus Simulation::Update( float delta )
 
 void Simulation::Add( RigidBody* pRigidBody )
 {
-	FrameWork::GetLogger()->LogInfo("RB: Adding %p [rigid body]", pRigidBody);
 	m_pWorld->addRigidBody( pRigidBody->m_pRigidBody.get() );
 	m_RigidBodies.push_back( pRigidBody );
 }
 
 void Simulation::Add( Ghost* pGhost )
 {
-	FrameWork::GetLogger()->LogInfo("RB: Adding %p [ghost]", pGhost);
 	m_pWorld->addCollisionObject( pGhost->m_pRigidBody.get() );
 	m_Ghosts.push_back( pGhost );
 }
 
 void Simulation::Remove( RigidBody* pRigidBody )
 {
-	FrameWork::GetLogger()->LogInfo("RB: Removing %p [rigid body]", pRigidBody);
 	m_pWorld->removeRigidBody( pRigidBody->m_pRigidBody.get() );
 	m_RigidBodies.remove( pRigidBody );
 }
 
 void Simulation::Remove( Ghost* pGhost )
 {
-	FrameWork::GetLogger()->LogInfo("RB: Removing %p [ghost]", pGhost);
 	m_pWorld->removeRigidBody( pGhost->m_pRigidBody.get() );
 	m_Ghosts.remove( pGhost );
 }
