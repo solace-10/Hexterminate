@@ -498,8 +498,8 @@ void Ship::CreateRigidBody()
     RigidBodyConstructionInfo ci;
     ci.SetShape( m_pCompoundShape );
     ci.SetWorldTransform( glm::translate( startPosition ) );
-    ci.SetLinearDamping( 1.25f );
-    ci.SetAngularDamping( 2.0f );
+    ci.SetLinearDamping( 0.6f );
+    ci.SetAngularDamping( 0.6f );
     ci.SetMass( static_cast<int>( mass ) );
     ci.SetCentreOfMass( m_CentreOfMass );
     m_pRigidBody = new RigidBody( ci );
@@ -547,10 +547,6 @@ void Ship::Update( float delta )
     {
         return;
     }
-
-    ShipTweaks* pShipTweaks = g_pGame->GetCurrentSector()->GetShipTweaks();
-    GetRigidBody()->SetAngularDamping( pShipTweaks->GetAngularDamping() );
-    GetRigidBody()->SetLinearDamping( pShipTweaks->GetLinearDamping() );
 
     if ( m_pNextController )
     {
@@ -717,13 +713,14 @@ float Ship::CalculateMaximumLinearSpeed( float linearThrust, float mass ) const
     }
 
     // Assuming no damping, calculate the speed of the ship after one tick of the physics engine.
-    const float duration = 1.0f / 60.0f;
+    const Genesis::Physics::Simulation* pPhysicsSimulation = g_pGame->GetPhysicsSimulation();
+    const float duration = pPhysicsSimulation->GetFixedTimeStep();
     const float acceleration = linearThrust / mass; // F = m * a, so a = F / m
     const float speed = acceleration * duration;
 
     // The physics engine applies the rigid body's linear damping factor after each tick.
-    // The damping factor is a fixed multiplier, not a proper counter-force.
-    const float dampingFactor = 0.985f; // TODO: calculate properly.
+    // The damping effect is a fixed multiplier, not a proper counter-force.
+    const float dampingEffect = pPhysicsSimulation->GetDampingEffect( m_pRigidBody->GetLinearDamping() );
 
     // The maximum speed can be calculated by:
     // - Having a function f(t) which calculates the speed of the ship over time, without the damping factor.
@@ -734,7 +731,7 @@ float Ship::CalculateMaximumLinearSpeed( float linearThrust, float mass ) const
     //   then the ship has reached its maximum speed.
     //   f(t) - g(t) = speed
     //   We can solve for t to identify the time point at which this happens, and then calculate the maximum speed with f(t).
-    const float t = 1.0f / ( 1.0f - dampingFactor );
+    const float t = 1.0f / ( 1.0f - dampingEffect );
     const float maximumSpeed = speed * t;
 
     return maximumSpeed;
@@ -743,11 +740,12 @@ float Ship::CalculateMaximumLinearSpeed( float linearThrust, float mass ) const
 // Returns maximum angular speed in degrees per second.
 float Ship::CalculateMaximumAngularSpeed( float torque, float mass ) const
 {
-    const float duration = 1.0f / 60.0f;
+    const Genesis::Physics::Simulation* pPhysicsSimulation = g_pGame->GetPhysicsSimulation();
+    const float duration = pPhysicsSimulation->GetFixedTimeStep();
     const glm::vec3 angularVelocities = GetRigidBody()->GetInvInertiaTensorWorld() * glm::vec3( 1.0f );
     const float speed = angularVelocities.z * torque * duration;
-    const float dampingFactor = 0.985f; // TODO: calculate properly.
-    const float t = 1.0f / ( 1.0f - dampingFactor );
+    const float dampingEffect = pPhysicsSimulation->GetDampingEffect( m_pRigidBody->GetAngularDamping() );
+    const float t = 1.0f / ( 1.0f - dampingEffect );
     const float maximumSpeed = speed * t * Genesis::kRadToDeg;
     return maximumSpeed;
 }

@@ -19,8 +19,10 @@
 #include <glm/gtc/type_ptr.hpp>
 #include <glm/mat4x4.hpp>
 
-#include "rigidbody.h"
-#include "shape.h"
+#include "physics/rigidbody.h"
+#include "physics/shape.h"
+#include "physics/simulation.h"
+#include "genesis.h"
 
 class btRigidBody;
 
