@@ -10,7 +10,7 @@
                             "r": false,
                             "t": true
                         },
-                        "file": "data/ui/icons/weaponry_kinetic.png",
+                        "file": "data/ui/icons/capacitor_addons.png",
                         "position": {
                             "x": 4.0,
                             "y": 112.0
@@ -114,7 +114,7 @@
                             "r": false,
                             "t": true
                         },
-                        "file": "data/ui/icons/weaponry_kinetic.png",
+                        "file": "data/ui/icons/capacitor_storage.png",
                         "position": {
                             "x": 4.0,
                             "y": 28.0
@@ -190,7 +190,7 @@
                             "r": false,
                             "t": true
                         },
-                        "file": "data/ui/icons/weaponry_kinetic.png",
+                        "file": "data/ui/icons/capacitor_recharge.png",
                         "position": {
                             "x": 4.0,
                             "y": 56.0
@@ -366,7 +366,7 @@
                             "r": false,
                             "t": true
                         },
-                        "file": "data/ui/icons/weaponry_energy.png",
+                        "file": "data/ui/icons/grid_capacity.png",
                         "position": {
                             "x": 4.0,
                             "y": 28.0
@@ -470,7 +470,7 @@
                             "r": false,
                             "t": true
                         },
-                        "file": "data/ui/icons/weaponry_energy.png",
+                        "file": "data/ui/icons/grid_usage.png",
                         "position": {
                             "x": 4.0,
                             "y": 56.0
