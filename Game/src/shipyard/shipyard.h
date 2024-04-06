@@ -101,6 +101,7 @@ private:
     PanelShipyard* m_pPanel;
     ShipStatsWindowSharedPtr m_pShipStatsWindow;
     ModuleDetails* m_pModuleDetails;
+    glm::vec3 m_ShipyardFocusPoint;
 
     ModuleInfo* m_pGrabbedModule;
 

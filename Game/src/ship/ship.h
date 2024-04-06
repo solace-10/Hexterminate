@@ -332,6 +332,7 @@ protected:
     mutable bool m_AllModulesDirty;
 
     glm::vec3 m_TowerPosition;
+    glm::vec3 m_ShipyardFocusPoint;
 
     DockingState m_DockingState;
     Shipyard* m_pShipyard;

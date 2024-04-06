@@ -412,6 +412,8 @@ void Ship::CreateRigidBody()
     using namespace Genesis::Physics;
 
     glm::vec3 startPosition;
+    glm::vec3 oldCentreOfMass;
+    bool usingOldCentreOfMass = false;
 
     // We only want to use the spawn data if the ship didn't exist before.
     // Otherwise, we'll reuse its transform and just recreate the physics object
@@ -422,6 +424,8 @@ void Ship::CreateRigidBody()
     else
     {
         startPosition = m_pRigidBody->GetPosition();
+        oldCentreOfMass = m_pRigidBody->GetCentreOfMass();
+        usingOldCentreOfMass = true;
         DestroyRigidBody();
     }
 
@@ -493,6 +497,12 @@ void Ship::CreateRigidBody()
         const float radiusY = abs( ( m_BoundingBoxBottomRight.y - m_BoundingBoxTopLeft.y ) ) / 2.0f + extraRadius;
 
         m_pShield->InitialisePhysics( bbCentre, radiusX, radiusY );
+    }
+
+    // This is needed so the ship's rigid body doesn't shift back and forth while it is being edited in the shipyard.
+    if ( usingOldCentreOfMass )
+    {
+        startPosition = startPosition + ( m_CentreOfMass - oldCentreOfMass );
     }
 
     RigidBodyConstructionInfo ci;

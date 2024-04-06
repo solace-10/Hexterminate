@@ -127,8 +127,14 @@ void SectorCamera::Update( float delta )
     }
     else if ( pShip->GetShipyard() != nullptr )
     {
+        // The ship's centre of mass can change while the ship is docked as modules are added or removed.
+        if ( pShip->GetDockingState() != DockingState::Docked )
+        {
+            m_ShipyardFocusPoint = pShip->GetCentreOfMass();
+        }
+
         const glm::vec3& shipyardPosition = pShip->GetShipyard()->GetPosition();
-        glm::vec3 cameraPosition = shipyardPosition - glm::vec3( 0.0f, -70.0f, 0.0f ) - pShip->GetCentreOfMass();
+        const glm::vec3 cameraPosition = shipyardPosition - glm::vec3( 0.0f, -70.0f, 0.0f ) - m_ShipyardFocusPoint;
 
         pScene->GetCamera()->SetPosition( cameraPosition.x, cameraPosition.y, 220.0f * m_ZoomMult );
         pScene->GetCamera()->SetTargetPosition( cameraPosition.x, cameraPosition.y, 0.0f );

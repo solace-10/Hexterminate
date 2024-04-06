@@ -224,6 +224,12 @@ void Shipyard::Update( float delta )
         m_BaseModelShowTimer = 0.0f;
     }
 
+    // The ship's centre of mass can change while the ship is docked as modules are added or removed.
+    if ( m_pDockedShip && m_pDockedShip->GetDockingState() != DockingState::Docked )
+    {
+        m_ShipyardFocusPoint = m_pDockedShip->GetCentreOfMass();
+    }
+
     // The IsShipCaptureModeActive() is here to make sure that the docking text isn't visible even if the shipyard can be used,
     // so that screenshots can be taken immediately after leaving the shipyard without having to move.
     m_pPanelDocking->Show( CanBeUsed() && !g_pGame->IsShipCaptureModeActive() );
@@ -389,7 +395,7 @@ void Shipyard::Render()
                 offsetX += sModuleHorizontalSpacing / 2.0f;
             }
 
-            glm::vec3 translation = glm::vec3( offsetX, static_cast<float>( y * sModuleHalfHeight ), 0.0f ) - m_pDockedShip->GetCentreOfMass();
+            glm::vec3 translation = glm::vec3( offsetX, static_cast<float>( y * sModuleHalfHeight ), 0.0f ) - m_ShipyardFocusPoint;
             const glm::mat4 modelMatrix = glm::translate( translation );
             m_pBaseModel->Render( modelMatrix );
             if ( x == static_cast<unsigned int>( m_SelectedX ) && y == static_cast<unsigned int>( m_SelectedY ) )

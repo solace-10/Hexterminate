@@ -18,6 +18,7 @@
 #pragma once
 
 #include <glm/vec2.hpp>
+#include <glm/vec3.hpp>
 
 namespace Hexterminate
 {
@@ -42,6 +43,7 @@ private:
     Genesis::InputCallbackToken m_MouseWheelEventToken;
     glm::vec2 m_BorderTopLeft;
     glm::vec2 m_BorderBottomRight;
+    glm::vec3 m_ShipyardFocusPoint;
 };
 
 } // namespace Hexterminate
