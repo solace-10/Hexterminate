@@ -183,7 +183,11 @@ void ParticleManagerRep::AddQuad( const Genesis::Gui::Atlas* pAtlas, const Parti
 
 void ParticleManagerRep::Render()
 {
-    Genesis::SceneObject::Render();
+    using namespace Genesis;
+
+    SceneObject::Render();
+
+    RenderSystem* pRenderSystem = FrameWork::GetRenderSystem();
 
     for ( int i = 0; i < sNumParticlePasses; ++i )
     {
@@ -196,23 +200,25 @@ void ParticleManagerRep::Render()
             const uint32_t numParticles = static_cast<uint32_t>( particleRenderData.particles.size() );
             if ( numParticles > 0 )
             {
-                Genesis::FrameWork::GetRenderSystem()->SetBlendMode( pPass->m_BlendMode );
+                pRenderSystem->SetBlendMode( pPass->m_BlendMode );
 
                 endIdx += numParticles * 6;
 
                 if ( pPass->m_GlowEnabled )
                 {
-                    Genesis::FrameWork::GetRenderSystem()->SetRenderTarget( Genesis::RenderTargetId::Glow );
+                    pRenderSystem->SetRenderTarget( Genesis::RenderTargetId::Glow );
                     RenderGeometry( pPass, particleRenderData, startIdx, endIdx );
                 }
 
-                Genesis::FrameWork::GetRenderSystem()->SetRenderTarget( Genesis::RenderTargetId::Default );
+                pRenderSystem->SetRenderTarget( Genesis::RenderTargetId::Default );
                 RenderGeometry( pPass, particleRenderData, startIdx, endIdx );
 
                 startIdx += numParticles * 6;
             }
         }
     }
+
+    pRenderSystem->SetBlendMode( BlendMode::Disabled );
 }
 
 void ParticleManagerRep::RenderGeometry( ParticlePass* pPass, const ParticleRenderData& particleRenderData, unsigned int startIdx, unsigned int endIdx )
