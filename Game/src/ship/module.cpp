@@ -635,8 +635,9 @@ void EngineModule::Update( float delta )
     if ( IsDestroyed() == false && m_pOwner != nullptr )
     {
         const bool tryingToMove = m_pOwner->GetThrust() != ShipThrust::None || m_pOwner->GetSteer() != ShipSteer::None || m_pOwner->GetStrafe() != ShipStrafe::None;
+        const bool isJumping = m_pOwner->GetHyperspaceCore() && m_pOwner->GetHyperspaceCore()->IsJumping();
 
-        if ( tryingToMove && IsEMPed() == false )
+        if ( tryingToMove && !isJumping && !IsEMPed() )
         {
             m_Output = gMin( m_Output + delta / 4.0f, 1.0f );
 
