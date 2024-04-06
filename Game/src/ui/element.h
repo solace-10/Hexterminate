@@ -62,6 +62,7 @@ public:
     bool IsVisible() const;
 
     void Add( ElementSharedPtr pElement );
+    void Remove( ElementSharedPtr pElement );
     const ElementList& GetChildren() const;
     const std::string& GetName() const;
     virtual void Show( bool state );
@@ -90,6 +91,7 @@ private:
     Genesis::Gui::Panel* m_pPanel;
     Design* m_pDesign;
     ElementList m_Children;
+    ElementList m_ChildrenToRemove;
 
     bool m_IsPopupElement;
     bool m_IsEditable;

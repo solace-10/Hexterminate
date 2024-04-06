@@ -101,6 +101,8 @@ Shipyard::~Shipyard()
     }
 #endif
 
+    g_pGame->GetUIRoot( UIDesignId::Shipyard )->Remove( m_pShipStatsWindow );
+
     delete m_pPanel;
     delete m_pModuleDetails;
 }

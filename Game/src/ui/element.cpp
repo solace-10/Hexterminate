@@ -64,6 +64,12 @@ Element::~Element()
 
 void Element::Update()
 {
+    for ( auto& pChildrenToRemove : m_ChildrenToRemove )
+    {
+        m_Children.remove( pChildrenToRemove );
+    }
+    m_ChildrenToRemove.clear();
+
     for ( auto& pChild : m_Children )
     {
         pChild->Update();
@@ -87,6 +93,12 @@ void Element::Add( ElementSharedPtr pElement )
     m_pPanel->AddElement( pElement->GetPanel() );
     pElement->ResolvePath( this );
     pElement->LoadFromDesign( m_pDesign );
+}
+
+void Element::Remove( ElementSharedPtr pElement )
+{
+    m_ChildrenToRemove.push_back( pElement );
+    m_pPanel->RemoveElement( pElement->GetPanel() );
 }
 
 bool Element::IsHovered() const
