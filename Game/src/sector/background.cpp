@@ -135,6 +135,12 @@ void Background::CreateGeometry()
         uvScale.y *= uvScale.x;
     }
 
+    // Scale the image up when it is shorter than the screen height.
+    if ( screenSize.y > imageSize.y )
+    {
+        uvScale *= imageSize.y / screenSize.y;
+    }
+
     m_pVertexBuffer->CreateUntexturedQuad( 0.0f, 0.0f, screenSize.x, screenSize.y );
 
     const float uvs[] = {
