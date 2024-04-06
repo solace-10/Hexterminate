@@ -1790,7 +1790,7 @@ AddonQuantumStateAlternator* Ship::GetQuantumStateAlternator() const
     {
         if ( pAddonModule->GetAddon()->GetInfo()->GetCategory() == AddonCategory::QuantumStateAlternator )
         {
-            return reinterpret_cast<AddonQuantumStateAlternator*>( pAddonModule );
+            return reinterpret_cast<AddonQuantumStateAlternator*>( pAddonModule->GetAddon() );
         }
     }
     return nullptr;
