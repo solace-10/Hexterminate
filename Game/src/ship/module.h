@@ -24,6 +24,8 @@
 #include <physics/shape.fwd.h>
 #include <scene/sceneobject.h>
 
+#include <glm/fwd.hpp>
+
 #include <list>
 
 namespace Genesis

@@ -45,6 +45,8 @@ typedef std::unique_ptr<PanelDocking> PanelDockingUniquePtr;
 class PanelShipyardDebug;
 #endif
 
+GENESIS_DECLARE_SMART_PTR( ShipyardRaycastCache );
+
 class Shipyard : public Genesis::SceneObject
 {
 public:
@@ -119,6 +121,8 @@ private:
     PanelShipyardDebug* m_pPanelDebug;
     Genesis::InputCallbackToken m_DebugKeyPressedToken;
 #endif
+
+    ShipyardRaycastCacheUniquePtr m_pRaycastCache;
 };
 
 inline const glm::vec3& Shipyard::GetPosition() const

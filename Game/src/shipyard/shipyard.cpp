@@ -40,6 +40,7 @@
 #include "ship/ship.h"
 #include "ship/shipinfo.h"
 #include "shipyard/shipyard.h"
+#include "shipyard/shipyardraycastcache.h"
 #include "ui/rootelement.h"
 
 #ifdef _DEBUG
@@ -261,7 +262,7 @@ void Shipyard::UpdateSelection()
             if ( y % 2 && x == m_MaxConstructionX - 1 )
                 continue;
 
-            glm::vec3 modulePos = Module::GetLocalPosition( m_pDockedShip, x, y ) + m_Position;
+            const glm::vec3& modulePos = m_pRaycastCache->Get( x, y );
             if ( glm::distance( selectedPosition, modulePos ) < sphereRadius )
             {
                 m_SelectedX = x;
@@ -406,10 +407,13 @@ void Shipyard::Render()
 bool Shipyard::Dock( Ship* pShip )
 {
     if ( CanBeUsed() == false )
+    {
         return false;
+    }
 
     m_pDockedShip = pShip;
     pShip->Dock( this );
+    m_pRaycastCache = std::make_unique<ShipyardRaycastCache>( pShip, m_Position );
 
     if ( m_pPanel == nullptr )
     {
