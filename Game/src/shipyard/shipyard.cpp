@@ -209,7 +209,7 @@ void Shipyard::Update( float delta )
     UpdateSelection();
     UpdateInput();
 
-    if ( m_pDockedShip != nullptr && m_pDockedShip->GetDockingState() == DockingState::Docked )
+    if ( m_pDockedShip != nullptr && m_pDockedShip->GetDockingState() != DockingState::Undocked )
     {
         m_BaseModelShowTimer += delta;
         if ( m_BaseModelShowTimer > 0.1f && m_MaxY < m_MaxConstructionY )
@@ -380,11 +380,6 @@ void Shipyard::Render()
         for ( unsigned int x = m_MinConstructionX; x < m_MaxConstructionX; ++x )
         {
             if ( y % 2 && x == m_MaxConstructionX - 1 )
-            {
-                continue;
-            }
-
-            if ( m_pDockedShip && m_pDockedShip->GetModuleHexGrid().Get( x, y ) )
             {
                 continue;
             }
