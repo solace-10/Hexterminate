@@ -143,7 +143,8 @@ void Shield::Update( float delta )
     }
 
     HyperspaceCore* pHyperspaceCore = m_pOwner->GetHyperspaceCore();
-    const bool jumping = ( pHyperspaceCore != nullptr && pHyperspaceCore->IsJumping() );
+    const bool isJumping = ( pHyperspaceCore && pHyperspaceCore->IsJumping() );
+    const bool isDocked = ( m_pOwner->GetDockingState() != DockingState::Undocked );
     if ( m_State == ShieldState::Deactivated )
     {
         if ( m_RechargeRate > 0.0f )
@@ -151,7 +152,7 @@ void Shield::Update( float delta )
             m_DeactivatedTimer -= delta;
         }
 
-        if ( m_DeactivatedTimer <= 0.0f && jumping == false && m_pOwner->IsDestroyed() == false )
+        if ( m_DeactivatedTimer <= 0.0f && !isJumping && !isDocked && !m_pOwner->IsDestroyed() )
         {
             m_State = ShieldState::Activating;
 
@@ -187,8 +188,7 @@ void Shield::Update( float delta )
         m_HitRegistry.DebugDraw( position( 0 ), position( 1 ) );
 #endif
 
-        bool destroyed = m_pOwner->IsDestroyed();
-        if ( jumping || destroyed )
+        if ( isJumping || isDocked || m_pOwner->IsDestroyed() )
         {
             Deactivate();
         }
