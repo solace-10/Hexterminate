@@ -56,6 +56,7 @@ private:
     void AddSection( const std::string& baseName, Section& section );
     void AddEntry( Section& section, const std::string& baseName, Entry& entry );
 
+    void UpdatePosition();
     void UpdateWeaponryStats();
     void UpdateShieldStats();
     void UpdateCapacitorStats();

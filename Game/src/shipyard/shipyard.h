@@ -34,7 +34,6 @@ class Ship;
 class ModuleInfo;
 class ModuleDetails;
 class PanelDocking;
-class PanelShipStats;
 class PanelShipyard;
 
 class ShipStatsWindow;
@@ -100,7 +99,6 @@ private:
     float m_BaseModelShowTimer;
     PanelDockingUniquePtr m_pPanelDocking;
     PanelShipyard* m_pPanel;
-    PanelShipStats* m_pPanelShipStats;
     ShipStatsWindowSharedPtr m_pShipStatsWindow;
     ModuleDetails* m_pModuleDetails;
 

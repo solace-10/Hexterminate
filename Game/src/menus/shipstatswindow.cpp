@@ -78,6 +78,8 @@ ShipStatsWindow::~ShipStatsWindow()
 void ShipStatsWindow::Show( bool state )
 {
     UI::Window::Show( state );
+
+    UpdatePosition();
 }
 
 void ShipStatsWindow::OnShipConfigurationChanged()
@@ -105,6 +107,12 @@ void ShipStatsWindow::AddEntry( Section& section, const std::string& baseName, E
     section.pPanel->Add( entry.pText );
     entry.pValue = std::make_shared<UI::Text>( baseName + " value" );
     section.pPanel->Add( entry.pValue );
+}
+
+void ShipStatsWindow::UpdatePosition()
+{
+    const int screenWidth = static_cast<int>( Genesis::Configuration::GetScreenWidth() );
+    SetPosition( screenWidth - GetWidth() - 8, 8 );
 }
 
 void ShipStatsWindow::UpdateWeaponryStats()

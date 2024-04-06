@@ -28,7 +28,6 @@
 #include "menus/eva.h"
 #include "menus/moduledetails.h"
 #include "menus/paneldocking.h"
-#include "menus/panelshipstats.h"
 #include "menus/panelshipyard.h"
 #include "menus/shipstatswindow.h"
 #include "perks.h"
@@ -59,7 +58,6 @@ Shipyard::Shipyard( const glm::vec3& spawnPosition )
     , m_BaseModelShowTimer( 0.0f )
     , m_pPanelDocking( new PanelDocking() )
     , m_pPanel( nullptr )
-    , m_pPanelShipStats( nullptr )
     , m_pModuleDetails( nullptr )
     , m_pGrabbedModule( nullptr )
     , m_DockingRange( 200.0f )
@@ -104,7 +102,6 @@ Shipyard::~Shipyard()
 #endif
 
     delete m_pPanel;
-    delete m_pPanelShipStats;
     delete m_pModuleDetails;
 }
 
@@ -416,11 +413,6 @@ bool Shipyard::Dock( Ship* pShip )
         m_pPanel = new PanelShipyard();
     }
 
-    if ( m_pPanelShipStats == nullptr )
-    {
-        m_pPanelShipStats = new PanelShipStats();
-    }
-
     m_pShipStatsWindow->Show( true );
 
     OnShipConfigurationChanged();
@@ -456,9 +448,6 @@ bool Shipyard::Undock()
 
         delete m_pPanel;
         m_pPanel = nullptr;
-
-        delete m_pPanelShipStats;
-        m_pPanelShipStats = nullptr;
 
 #ifdef _DEBUG
         delete m_pPanelDebug;
@@ -625,7 +614,6 @@ void Shipyard::SetModuleDetails( ModuleInfo* pModuleInfo )
 
 void Shipyard::OnShipConfigurationChanged()
 {
-    m_pPanelShipStats->OnShipConfigurationChanged();
     m_pShipStatsWindow->OnShipConfigurationChanged();
 }
 
