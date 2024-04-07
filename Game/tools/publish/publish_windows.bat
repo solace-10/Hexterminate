@@ -56,7 +56,7 @@ if exist %INTERMEDIATES_DIR% rmdir %INTERMEDIATES_DIR% /q /s
 mkdir %INTERMEDIATES_DIR%
 mkdir %INTERMEDIATES_BACKTRACE_DIR%
 mkdir %INTERMEDIATES_GAME_DIR%
-mkdir %INTERMEDIATES_GAME_DIR%/crashhandler
+mkdir %INTERMEDIATES_GAME_DIR%\crashhandler
 
 copy %HEXTERMINATE_DIR%\Hexterminate.exe %INTERMEDIATES_GAME_DIR%
 copy %HEXTERMINATE_DIR%\crashhandler\crashpad_handler.exe %INTERMEDIATES_GAME_DIR%\crashhandler\crashpad_handler.exe
@@ -75,7 +75,7 @@ if "%1"=="standalone" (
     set "HEXTERMINATE_SYMBOLS_ARCHIVE=%OUTPUT_DIR%\Hexterminate-win64-%VERSION%-standalone-symbols.zip"
     del !HEXTERMINATE_SYMBOLS_ARCHIVE! 2>NUL
 
-    powershell.exe -nologo -noprofile -command "& { Compress-Archive -Path %INTERMEDIATES_GAME_DIR% -DestinationPath !HEXTERMINATE_ARCHIVE! }"
+    powershell.exe -nologo -noprofile -command "& { Compress-Archive -Path %INTERMEDIATES_GAME_DIR%\* -DestinationPath !HEXTERMINATE_ARCHIVE! }"
     echo Archive created in '!HEXTERMINATE_ARCHIVE!'. 
 )
 
@@ -88,34 +88,34 @@ if "%1"=="steam" (
     set "HEXTERMINATE_SYMBOLS_ARCHIVE=%OUTPUT_DIR%\Hexterminate-win64-%VERSION%-steam-symbols.zip"
     del !HEXTERMINATE_SYMBOLS_ARCHIVE! 2>NUL
 
-    powershell.exe -nologo -noprofile -command "& { Compress-Archive -Path %INTERMEDIATES_GAME_DIR% -DestinationPath !HEXTERMINATE_ARCHIVE! }"
+    powershell.exe -nologo -noprofile -command "& { Compress-Archive -Path %INTERMEDIATES_GAME_DIR%\* -DestinationPath !HEXTERMINATE_ARCHIVE! }"
     echo Archive created in '!HEXTERMINATE_ARCHIVE!'. 
 
     choice /C:YN /M "Run SteamPipe?"
-    if "%ERRORLEVEL%"=="1" ( 
+    if "!ERRORLEVEL!"=="1" ( 
         echo === Running SteamPipe ===
 
         if not defined HEXTERMINATE_STEAM_USERNAME (
             echo Environment variable HEXTERMINATE_STEAM_USERNAME must be set.
             cd ~%dp0
-            exit /b %ERRORLEVEL%
+            exit /b !ERRORLEVEL!
         )
 
         if not defined HEXTERMINATE_STEAM_PASSWORD (
             echo Environment variable HEXTERMINATE_STEAM_PASSWORD must be set.
             cd ~%dp0
-            exit /b %ERRORLEVEL%
+            exit /b !ERRORLEVEL!
         )
 
         echo SteamPipe depot:
         echo 1. Experimental
         echo 2. Main
         choice /C:12
-        if "%ERRORLEVEL%"=="1" (
+        if "!ERRORLEVEL"=="1" (
             %PROJECT_ROOT%\Genesis\libs\steamworks\sdk\tools\ContentBuilder\builder\steamcmd.exe +login %HEXTERMINATE_STEAM_USERNAME% %HEXTERMINATE_STEAM_PASSWORD% +run_app_build %~dp0\steampipe\windows_experimental.vdf +quit
         )
 
-        if "%ERRORLEVEL%"=="2" (
+        if "!ERRORLEVEL!"=="2" (
             %PROJECT_ROOT%\Genesis\libs\steamworks\sdk\tools\ContentBuilder\builder\steamcmd.exe +login %HEXTERMINATE_STEAM_USERNAME% %HEXTERMINATE_STEAM_PASSWORD% +run_app_build %~dp0\steampipe\windows_main.vdf +quit
         )
     )
