@@ -194,10 +194,12 @@ void NewGameWindow::StartNewGame()
         m_GalaxyCreationInfo = GalaxyCreationInfo( GalaxyCreationInfo::CreationMode::InfiniteWar );
         g_pGame->StartNewLegacyGame( m_ShipCustomisationData, m_CompanionShipTemplate, m_pTipsCheckbox->IsChecked(), m_GalaxyCreationInfo );
     }
+#ifdef _DEBUG
     else if ( gameMode == GameMode::Hyperscape )
     {
         g_pGame->StartNewHyperscapeGame( m_ShipCustomisationData, m_pTipsCheckbox->IsChecked() );
     }
+#endif
     else
     {
         Genesis::FrameWork::GetLogger()->LogError( "Not implemented." );
@@ -237,11 +239,7 @@ void NewGameWindow::CreateGameModeSelectionPage()
     m_Pages[ static_cast<size_t>( PageId::GameMode ) ] = pPage;
     pButtonCampaign->Toggle( true );
 
-#ifdef _DEBUG
     pButtonHyperscape->Enable( false );
-#else
-    pButtonHyperscape->Enable( true );
-#endif
 }
 
 void NewGameWindow::CreateShipSelectionPage()
