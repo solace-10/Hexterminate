@@ -325,9 +325,4 @@ void Simulation::ProcessCollisionCallbacks()
     m_ProcessingCallbacks = false;
 }
 
-constexpr float Simulation::GetFixedTimeStep() const
-{
-    return 1.0f / 60.0f;
-}
-
 } // namespace Genesis::Physics

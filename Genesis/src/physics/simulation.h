@@ -117,7 +117,7 @@ public:
     CollisionCallbackHandle RegisterCollisionCallback( const CollisionCallback& callbackFn );
     void UnregisterCollisionCallback( CollisionCallbackHandle handle );
 
-    constexpr float GetFixedTimeStep() const;
+    constexpr float GetFixedTimeStep() const { return 1.0f / 60.0f; }
     float GetDampingEffect( float damping ) const;
 
 private:
