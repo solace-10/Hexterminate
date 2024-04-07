@@ -92,7 +92,7 @@ if "%1"=="steam" (
     echo Archive created in '!HEXTERMINATE_ARCHIVE!'. 
 
     choice /C:YN /M "Run SteamPipe?"
-    if "%ERRORLEVEL%"=="Y" ( 
+    if "%ERRORLEVEL%"=="1" ( 
         echo === Running SteamPipe ===
 
         if not defined HEXTERMINATE_STEAM_USERNAME (
@@ -111,13 +111,12 @@ if "%1"=="steam" (
         echo 1. Experimental
         echo 2. Main
         choice /C:12
-        set "STEAMCMD=%PROJECT_ROOT%\Genesis\libs\steamworks\sdk\tools\ContentBuilder\builder\steamcmd.exe"
         if "%ERRORLEVEL%"=="1" (
-            %STEAMCMD% +login %HEXTERMINATE_STEAM_USERNAME% %HEXTERMINATE_STEAM_PASSWORD% +run_app_build %~dp0\steampipe\windows_experimental.vdf +quit
+            %PROJECT_ROOT%\Genesis\libs\steamworks\sdk\tools\ContentBuilder\builder\steamcmd.exe +login %HEXTERMINATE_STEAM_USERNAME% %HEXTERMINATE_STEAM_PASSWORD% +run_app_build %~dp0\steampipe\windows_experimental.vdf +quit
         )
 
         if "%ERRORLEVEL%"=="2" (
-            %STEAMCMD% +login %HEXTERMINATE_STEAM_USERNAME% %HEXTERMINATE_STEAM_PASSWORD% +run_app_build %~dp0\steampipe\windows_main.vdf +quit
+            %PROJECT_ROOT%\Genesis\libs\steamworks\sdk\tools\ContentBuilder\builder\steamcmd.exe +login %HEXTERMINATE_STEAM_USERNAME% %HEXTERMINATE_STEAM_PASSWORD% +run_app_build %~dp0\steampipe\windows_main.vdf +quit
         )
     )
 )
@@ -134,7 +133,7 @@ set "BACKTRACE_SYMBOLS_ARCHIVE=%INTERMEDIATES_BACKTRACE_DIR%\symbols.zip"
 del %BACKTRACE_SYMBOLS_ARCHIVE% 2>NUL
 powershell.exe -nologo -noprofile -command "& { Compress-Archive -Path %HEXTERMINATE_DIR%\Hexterminate.exe,%HEXTERMINATE_DIR%\Hexterminate.pdb -DestinationPath %BACKTRACE_SYMBOLS_ARCHIVE% }"
 
-echo Uploading to backtrace.io...
+rem echo Uploading to backtrace.io...
 curl --data-binary @%BACKTRACE_SYMBOLS_ARCHIVE% -X POST -H "Expect: gzip" "https://submit.backtrace.io/solace10/%HEXTERMINATE_BACKTRACE_TOKEN%/symbols"
 
 rem We also keep a local copy of the symbols, as we can't download them from backtrace.
