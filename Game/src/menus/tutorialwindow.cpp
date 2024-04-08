@@ -138,7 +138,10 @@ TutorialWindow::TutorialWindow()
 TutorialWindow::~TutorialWindow()
 {
     Genesis::Gui::GuiManager* pGuiManager = Genesis::FrameWork::GetGuiManager();
-    pGuiManager->RemoveElement( m_pMainPanel );
+    if ( pGuiManager )
+    {
+        pGuiManager->RemoveElement( m_pMainPanel );
+    }
 }
 
 void TutorialWindow::Update( float delta )
