@@ -102,7 +102,10 @@ Shipyard::~Shipyard()
     }
 #endif
 
-    g_pGame->GetUIRoot( UIDesignId::Shipyard )->Remove( m_pShipStatsWindow );
+    if ( g_pGame && g_pGame->GetUIRoot( UIDesignId::Shipyard ) )
+    {
+        g_pGame->GetUIRoot( UIDesignId::Shipyard )->Remove( m_pShipStatsWindow );
+    }
 
     delete m_pPanel;
     delete m_pModuleDetails;
