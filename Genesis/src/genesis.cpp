@@ -15,15 +15,15 @@
 // You should have received a copy of the GNU General Public License
 // along with Genesis. If not, see <http://www.gnu.org/licenses/>.
 
-#include <imgui/imgui.h>
 #include <SDL_image.h>
+#include <imgui/imgui.h>
 
-#include "crashhandler/crashhandler.h"
-#include "imgui/imgui_impl.h"
 #include "configuration.h"
-#include "genesis.h"
+#include "crashhandler/crashhandler.h"
 #include "eventhandler.h"
+#include "genesis.h"
 #include "gui/gui.h"
+#include "imgui/imgui_impl.h"
 #include "inputmanager.h"
 #include "memory.h"
 #include "render/debugrender.h"
@@ -89,6 +89,10 @@ bool FrameWork::Initialize()
         gLogger->LogWarning( "Failed to initialize crash handler." );
     }
 
+    // Tell the OS we'll do our own scaling. Without this, the OS will resize the window by the scaling factor,
+    // resulting in some extremely poor upsclaing and broken UI.
+    SDL_SetHint( SDL_HINT_WINDOWS_DPI_SCALING, "1" );
+
     // Initialize SDL
     // Needs to be done before InputManager() is created,
     // otherwise key repetition won't work.
@@ -107,7 +111,7 @@ bool FrameWork::Initialize()
     int imgResult = IMG_Init( flags );
     if ( ( imgResult & flags ) != flags )
     {
-        gLogger->LogError("IMG_Init failed: %s", IMG_GetError());
+        gLogger->LogError( "IMG_Init failed: %s", IMG_GetError() );
     }
     else
     {
@@ -141,7 +145,7 @@ bool FrameWork::Initialize()
 
 void FrameWork::Shutdown()
 {
-	delete gDebugRender;
+    delete gDebugRender;
     gDebugRender = nullptr;
 
     delete gGuiManager;
@@ -181,13 +185,13 @@ void FrameWork::Shutdown()
 bool FrameWork::CreateWindowGL( const std::string& name, uint32_t width, uint32_t height, uint32_t multiSampleSamples /* = 0 */ )
 {
     // Set OpenGL version to 3.3.
-	SDL_GL_SetAttribute( SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE ); // OpenGL core profile
-	SDL_GL_SetAttribute( SDL_GL_CONTEXT_MAJOR_VERSION, 3 ); // OpenGL 3+
-	SDL_GL_SetAttribute( SDL_GL_CONTEXT_MINOR_VERSION, 3 ); // OpenGL 3.3
+    SDL_GL_SetAttribute( SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE ); // OpenGL core profile
+    SDL_GL_SetAttribute( SDL_GL_CONTEXT_MAJOR_VERSION, 3 ); // OpenGL 3+
+    SDL_GL_SetAttribute( SDL_GL_CONTEXT_MINOR_VERSION, 3 ); // OpenGL 3.3
 
     SDL_GL_SetAttribute( SDL_GL_DOUBLEBUFFER, 1 );
     SDL_GL_SetAttribute( SDL_GL_DEPTH_SIZE, 24 );
-	SDL_GL_SetAttribute( SDL_GL_STENCIL_SIZE, 8 );
+    SDL_GL_SetAttribute( SDL_GL_STENCIL_SIZE, 8 );
 
     if ( multiSampleSamples > 0 )
     {
@@ -195,17 +199,17 @@ bool FrameWork::CreateWindowGL( const std::string& name, uint32_t width, uint32_
         SDL_GL_SetAttribute( SDL_GL_MULTISAMPLESAMPLES, multiSampleSamples );
     }
 
-	gWindow = new Window( name, width, height, Configuration::IsFullscreen() );
+    gWindow = new Window( name, width, height, Configuration::IsFullscreen() );
 
     GetRenderSystem()->Initialize( width, height );
 
     GetGuiManager()->Initialize();
-	ImGuiImpl::Initialise();
+    ImGuiImpl::Initialise();
 
     gVideoPlayer = new VideoPlayer();
     gTaskManager->AddTask( "VideoPlayer", gVideoPlayer, (TaskFunc)&VideoPlayer::Update, TaskPriority::System );
 
-	gDebugRender = new Render::DebugRender();
+    gDebugRender = new Render::DebugRender();
 
     return true;
 }
@@ -279,7 +283,7 @@ VideoPlayer* FrameWork::GetVideoPlayer()
 
 Render::DebugRender* FrameWork::GetDebugRender()
 {
-	return gDebugRender;
+    return gDebugRender;
 }
 
 //---------------------------------------------------------------
@@ -335,4 +339,4 @@ bool CommandLineParameters::HasParameter( const std::string& name ) const
 
     return false;
 }
-}
+} // namespace Genesis
