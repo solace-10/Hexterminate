@@ -89,6 +89,10 @@ bool FrameWork::Initialize()
         gLogger->LogWarning( "Failed to initialize crash handler." );
     }
 
+    // Tell the OS we'll do our own scaling. Without this, the OS will resize the window by the scaling factor,
+    // resulting in some extremely poor upsclaing and broken UI.
+    SDL_SetHint( SDL_HINT_WINDOWS_DPI_SCALING, "1" );
+
     // Initialize SDL
     // Needs to be done before InputManager() is created,
     // otherwise key repetition won't work.

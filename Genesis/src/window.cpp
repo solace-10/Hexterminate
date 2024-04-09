@@ -34,7 +34,7 @@ Window::Window( const std::string& title, unsigned int width, unsigned int heigh
     }
     else
     {
-        flags |= SDL_WINDOW_BORDERLESS;
+        flags |= SDL_WINDOW_FULLSCREEN_DESKTOP;
     }
 
     m_pWindow = SDL_CreateWindow(
