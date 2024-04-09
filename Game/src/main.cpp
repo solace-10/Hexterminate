@@ -588,6 +588,7 @@ void Game::EndGameAux()
     SaveGame();
 
     delete m_pTutorialWindow;
+    m_pTutorialWindow = nullptr;
 
     if ( m_pIntelWindow != nullptr )
     {

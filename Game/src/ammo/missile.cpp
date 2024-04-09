@@ -49,7 +49,7 @@ Missile::~Missile()
     // If the current sector is null then it has been destroyed, and with it the
     // trail manager and any associated trails, so this trail would no longer be
     // valid.
-    if ( m_pTrail != nullptr && g_pGame->GetCurrentSector() != nullptr )
+    if ( m_pTrail && g_pGame && g_pGame->GetCurrentSector() )
     {
         g_pGame->GetCurrentSector()->GetTrailManager()->Remove( m_pTrail );
         delete m_pTrail;

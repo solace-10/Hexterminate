@@ -66,7 +66,7 @@ SoundManager::SoundManager()
 
 SoundManager::~SoundManager()
 {
-    if ( m_Initialized )
+    if ( m_Initialized && g_pSoloud )
     {
         g_pSoloud->deinit();
     }
