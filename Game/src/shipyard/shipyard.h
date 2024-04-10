@@ -70,6 +70,8 @@ public:
 
     bool CanBeUsed() const;
 
+    glm::vec3 GetDockingHexPosition( int x, int y ) const;
+
 #ifdef _DEBUG
     void LoadFromFile( const std::string& filename );
     void SaveToFile( const std::string& filename );
