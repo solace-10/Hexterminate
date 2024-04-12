@@ -58,7 +58,7 @@ Weapon::Weapon( Ship* pOwner, Module* pModule, WeaponInfo* pInfo, const WeaponHa
     , m_BurstTimer( 0.0f )
     , m_FiringMode( WeaponFiringMode::SingleShot )
     , m_IsFiring( false )
-    , m_pCurrentAmmo( nullptr )
+    , m_CurrentAmmoHandle( InvalidAmmoHandle )
     , m_RateOfFire( 1.0f )
     , m_ContinuousFireTimer( 0.0f )
     , m_SiegebreakerStacks( 0 )
@@ -252,9 +252,9 @@ void Weapon::FireSwarm( float delta )
 
 void Weapon::FireContinuous( float delta )
 {
-    if ( m_pCurrentAmmo == nullptr )
+    if ( m_CurrentAmmoHandle == InvalidAmmoHandle )
     {
-        m_pCurrentAmmo = g_pGame->GetCurrentSector()->GetAmmoManager()->Create( this );
+        m_CurrentAmmoHandle = g_pGame->GetCurrentSector()->GetAmmoManager()->Create( this );
         m_pContinuousSFX = PlayFireSFX();
     }
 
@@ -329,17 +329,22 @@ void Weapon::StopFiring()
 
     m_IsFiring = false;
 
-    if ( m_pCurrentAmmo != nullptr )
+    if ( m_CurrentAmmoHandle != InvalidAmmoHandle )
     {
         if ( m_FiringMode == WeaponFiringMode::Continuous )
         {
-            m_pCurrentAmmo->Kill();
+            Ammo* pAmmo = g_pGame->GetCurrentSector()->GetAmmoManager()->Get( m_CurrentAmmoHandle );
+            if ( pAmmo )
+            {
+                pAmmo->Kill();
+            }
+
             m_ReloadTimer = 1.0f;
             m_BulletsToFire = 0;
             m_ContinuousFireTimer = 0.0f;
         }
 
-        m_pCurrentAmmo = nullptr;
+        m_CurrentAmmoHandle = InvalidAmmoHandle;
     }
 
     if ( m_pContinuousSFX != nullptr )

@@ -16,6 +16,7 @@
 // along with Hexterminate. If not, see <http://www.gnu.org/licenses/>.
 
 #include <genesis.h>
+#include <logger.h>
 #include <physics/raytestresult.h>
 #include <physics/rigidbody.h>
 #include <physics/shape.h>
@@ -46,9 +47,11 @@ namespace Hexterminate
 AmmoManager::AmmoManager()
     : m_Idx( 0 )
 {
-    for ( int i = 0; i < AmmoManagerCapacity; ++i )
+    const size_t sInitialCapacity = 1024u;
+    m_Ammo.resize( sInitialCapacity );
+    for ( int i = 0; i < sInitialCapacity; ++i )
     {
-        m_pAmmo[ i ] = nullptr;
+        m_Ammo[ i ] = nullptr;
     }
 
     m_RayTestResults.reserve( 64 );
@@ -56,96 +59,89 @@ AmmoManager::AmmoManager()
 
 AmmoManager::~AmmoManager()
 {
-    for ( int i = 0; i < AmmoManagerCapacity; ++i )
+    for ( int i = 0; i < m_Ammo.size(); ++i )
     {
-        delete m_pAmmo[ i ];
+        delete m_Ammo[ i ];
     }
 }
 
-Ammo** AmmoManager::GetFreeAmmo()
+AmmoHandle AmmoManager::GetFreeAmmo()
 {
-    Ammo** ppAmmo = &m_pAmmo[ m_Idx ];
+    AmmoHandle handle = InvalidAmmoHandle;
 
-    // Has ammo already been created into this slot?
-    if ( *ppAmmo != nullptr )
+    const AmmoSizeType bufferSize = static_cast<AmmoSizeType>( m_Ammo.size() );
+    const AmmoSizeType minIdx = m_Idx;
+    const AmmoSizeType maxIdx = m_Idx + bufferSize;
+    for ( AmmoHandle i = minIdx; i < maxIdx; i++ )
     {
-        // A weapon is actually still using this one, search our buffer for a free slot
-        // If the buffer is completely full with active ammo, then we'll return a nullptr
-        if ( ( *ppAmmo )->IsAlive() )
+        const AmmoHandle idx = i % bufferSize;
+        if ( m_Ammo[ idx ] == nullptr || !m_Ammo[ idx ]->IsAlive() )
         {
-            ppAmmo = nullptr;
-
-            for ( int i = 1; i < AmmoManagerCapacity; ++i )
+            if ( m_Ammo[ idx ] && !m_Ammo[ idx ]->IsAlive() )
             {
-                if ( ++m_Idx == AmmoManagerCapacity )
-                    m_Idx = 0;
-
-                if ( m_pAmmo[ m_Idx ] == nullptr || m_pAmmo[ m_Idx ]->IsAlive() == false )
-                {
-                    ppAmmo = &m_pAmmo[ m_Idx ];
-                    break;
-                }
+                delete m_Ammo[ idx ];
+                m_Ammo[ idx ] = nullptr;
             }
-        }
 
-        // If there was a dead ammo in our slot we can now remove it
-        if ( ppAmmo != nullptr && *ppAmmo != nullptr )
-        {
-            delete *ppAmmo;
-
-            if ( ++m_Idx == AmmoManagerCapacity )
-                m_Idx = 0;
+            m_Idx = idx;
+            return idx;
         }
     }
 
-    return ppAmmo;
+    // If we get here, we've been through the full buffer and failed to find an empty slot.
+    AmmoSizeType newBufferSize = bufferSize * 2;
+    Genesis::FrameWork::GetLogger()->LogInfo( "AmmoManager buffer full, extended from %d to %d.", bufferSize, newBufferSize );
+    m_Ammo.resize( newBufferSize );
+
+    for ( AmmoSizeType idx = bufferSize; idx < newBufferSize; idx++ )
+    {
+        m_Ammo[ idx ] = nullptr;
+    }
+
+    m_Idx = bufferSize;
+    return static_cast<AmmoHandle>( bufferSize );
 }
 
-Ammo* AmmoManager::Create( Weapon* pWeapon, float additionalRotation /* = 0.0f */ )
+AmmoHandle AmmoManager::Create( Weapon* pWeapon, float additionalRotation /* = 0.0f */ )
 {
-    Ammo** ppAmmo = GetFreeAmmo();
-    if ( ppAmmo == nullptr )
-    {
-        Genesis::FrameWork::GetLogger()->LogError( "AmmoManager capacity exceeded!" );
-        return nullptr;
-    }
+    AmmoHandle handle = GetFreeAmmo();
 
     WeaponSystem weaponSystem = pWeapon->GetInfo()->GetSystem();
     if ( weaponSystem == WeaponSystem::Projectile )
     {
-        *ppAmmo = new Projectile();
+        m_Ammo[ handle ] = new Projectile();
     }
     else if ( weaponSystem == WeaponSystem::Missile )
     {
-        *ppAmmo = new Missile();
+        m_Ammo[ handle ] = new Missile();
     }
     else if ( weaponSystem == WeaponSystem::Rocket )
     {
-        *ppAmmo = new Rocket();
+        m_Ammo[ handle ] = new Rocket();
     }
     else if ( weaponSystem == WeaponSystem::Torpedo )
     {
-        *ppAmmo = new Torpedo();
+        m_Ammo[ handle ] = new Torpedo();
     }
     else if ( weaponSystem == WeaponSystem::Ion )
     {
-        *ppAmmo = new Beam();
+        m_Ammo[ handle ] = new Beam();
     }
     else if ( weaponSystem == WeaponSystem::Lance )
     {
-        *ppAmmo = new Lance();
+        m_Ammo[ handle ] = new Lance();
     }
     else if ( weaponSystem == WeaponSystem::Antiproton )
     {
-        *ppAmmo = new Antiproton();
+        m_Ammo[ handle ] = new Antiproton();
     }
     else
     {
         SDL_assert_release( false ); // Not implemented!
     }
 
-    ( *ppAmmo )->Create( pWeapon, additionalRotation );
-    return *ppAmmo;
+    m_Ammo[ handle ]->Create( pWeapon, additionalRotation );
+    return handle;
 }
 
 void AmmoManager::Update( float delta )
@@ -155,16 +151,17 @@ void AmmoManager::Update( float delta )
         return;
     }
 
-    for ( int i = 0; i < AmmoManagerCapacity; ++i )
+    for ( Ammo* pAmmo : m_Ammo )
     {
-        if ( m_pAmmo[ i ] != nullptr && m_pAmmo[ i ]->IsAlive() )
-            m_pAmmo[ i ]->Update( delta );
+        if ( pAmmo && pAmmo->IsAlive() )
+        {
+            pAmmo->Update( delta );
+        }
     }
 
     Genesis::Physics::Simulation* pPhysicsSimulation = g_pGame->GetPhysicsSimulation();
-    for ( int i = 0; i < AmmoManagerCapacity; ++i )
+    for ( Ammo* pAmmo : m_Ammo )
     {
-        Ammo* pAmmo = m_pAmmo[ i ];
         if ( pAmmo != nullptr && pAmmo->IsAlive() )
         {
             if ( pAmmo->WasIntercepted() )
@@ -265,17 +262,21 @@ void AmmoManager::Update( float delta )
 void AmmoManager::Render()
 {
     Genesis::FrameWork::GetRenderSystem()->SetRenderTarget( Genesis::RenderTargetId::Glow );
-    for ( auto& pAmmo : m_pAmmo )
+    for ( Ammo* pAmmo : m_Ammo )
     {
         if ( pAmmo && pAmmo->IsAlive() && pAmmo->IsGlowSource() )
+        {
             pAmmo->Render();
+        }
     }
 
     Genesis::FrameWork::GetRenderSystem()->SetRenderTarget( Genesis::RenderTargetId::Default );
-    for ( auto& pAmmo : m_pAmmo )
+    for ( Ammo* pAmmo : m_Ammo )
     {
         if ( pAmmo && pAmmo->IsAlive() )
+        {
             pAmmo->Render();
+        }
     }
 }
 
@@ -337,9 +338,8 @@ void AmmoManager::PlayHitSFX( const glm::vec3& position, Weapon* pWeapon )
 
 void AmmoManager::GetInterceptables( AmmoVector& vec ) const
 {
-    for ( int i = 0; i < AmmoManagerCapacity; ++i )
+    for ( Ammo* pAmmo : m_Ammo )
     {
-        Ammo* pAmmo = m_pAmmo[ i ];
         if ( pAmmo != nullptr && pAmmo->IsAlive() && pAmmo->CanBeIntercepted() && pAmmo->WasIntercepted() == false )
         {
             vec.push_back( pAmmo );

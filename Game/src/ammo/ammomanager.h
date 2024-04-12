@@ -35,7 +35,9 @@ namespace Hexterminate
 class Ammo;
 class Weapon;
 
-typedef std::vector<Ammo*> AmmoVector;
+using AmmoVector = std::vector<Ammo*>;
+using AmmoHandle = int32_t;
+static const AmmoHandle InvalidAmmoHandle = -1;
 
 ///////////////////////////////////////////////////////////////////////////////
 // AmmoManager
@@ -43,28 +45,39 @@ typedef std::vector<Ammo*> AmmoVector;
 // in space.
 ///////////////////////////////////////////////////////////////////////////////
 
-static const unsigned int AmmoManagerCapacity = 1024;
-
 class AmmoManager : public Genesis::SceneObject
 {
 public:
     AmmoManager();
     virtual ~AmmoManager() override;
 
-    Ammo* Create( Weapon* pWeapon, float additionalRotation = 0.0f );
+    AmmoHandle Create( Weapon* pWeapon, float additionalRotation = 0.0f );
     virtual void Update( float delta ) override;
     virtual void Render() override;
 
     void GetInterceptables( AmmoVector& vec ) const;
 
+    // Do not hold on to this pointer as it is owned by the AmmoManager and can be invalidated.
+    Ammo* Get( AmmoHandle handle ) const;
+
 private:
-    Ammo** GetFreeAmmo();
+    using AmmoSizeType = AmmoHandle;
+
+    AmmoHandle GetFreeAmmo();
     void CreateHitEffect( const glm::vec3& position, const glm::vec3& hitNormal, Weapon* pWeapon );
     void PlayHitSFX( const glm::vec3& position, Weapon* pWeapon );
 
-    int m_Idx;
-    Ammo* m_pAmmo[ AmmoManagerCapacity ];
+    AmmoSizeType m_Idx;
+    AmmoVector m_Ammo;
     Genesis::Physics::RayTestResultVector m_RayTestResults;
 };
+
+inline Ammo* AmmoManager::Get( AmmoHandle handle ) const
+{
+    SDL_assert( handle != InvalidAmmoHandle );
+    SDL_assert( handle >= 0 );
+    SDL_assert( handle < m_Ammo.size() );
+    return m_Ammo[ handle ];
+}
 
 } // namespace Hexterminate
