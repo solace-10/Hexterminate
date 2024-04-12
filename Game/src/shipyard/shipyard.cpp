@@ -388,13 +388,7 @@ void Shipyard::Render()
                 continue;
             }
 
-            float offsetX = static_cast<float>( x ) * sModuleHorizontalSpacing;
-            if ( y % 2 == 1 )
-            {
-                offsetX += sModuleHorizontalSpacing / 2.0f;
-            }
-
-            glm::vec3 translation = glm::vec3( offsetX, static_cast<float>( y * sModuleHalfHeight ), 0.0f ) - m_ShipyardFocusPoint;
+            const glm::vec3 translation = GetDockingHexPosition( x, y );
             const glm::mat4 modelMatrix = glm::translate( translation );
             m_pBaseModel->Render( modelMatrix );
             if ( x == static_cast<unsigned int>( m_SelectedX ) && y == static_cast<unsigned int>( m_SelectedY ) )
@@ -405,6 +399,17 @@ void Shipyard::Render()
     }
 
     pRenderSystem->SetBlendMode( BlendMode::Disabled );
+}
+
+glm::vec3 Shipyard::GetDockingHexPosition( int x, int y ) const
+{
+    float offsetX = static_cast<float>( x ) * sModuleHorizontalSpacing;
+    if ( y % 2 == 1 )
+    {
+        offsetX += sModuleHorizontalSpacing / 2.0f;
+    }
+
+    return glm::vec3( offsetX, static_cast<float>( y * sModuleHalfHeight ), 0.0f ) - m_ShipyardFocusPoint;
 }
 
 bool Shipyard::Dock( Ship* pShip )

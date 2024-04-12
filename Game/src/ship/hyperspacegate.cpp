@@ -150,7 +150,7 @@ void HyperspaceGate::Update( float delta )
 {
     Genesis::SceneObject::Update( delta );
 
-    if ( m_State == HyperspaceGateState::Invalid )
+    if ( m_State == HyperspaceGateState::Invalid || !m_pOwner->GetRigidBody() )
     {
         return;
     }

@@ -316,6 +316,7 @@ protected:
 
     Genesis::Physics::RigidBody* m_pRigidBody;
     Genesis::Physics::CompoundShapeSharedPtr m_pCompoundShape;
+    glm::vec3 m_StartPosition;
 
     float m_EnergyCapacity;
     float m_Energy;
