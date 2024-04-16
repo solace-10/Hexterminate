@@ -58,6 +58,9 @@ mkdir $INTERMEDIATES_GAME_DIR/crashhandler
 cp $HEXTERMINATE_DIR/Hexterminate $INTERMEDIATES_GAME_DIR
 cp $HEXTERMINATE_DIR/crashhandler/crashpad_handler $INTERMEDIATES_GAME_DIR/crashhandler/crashpad_handler
 cp -r $HEXTERMINATE_DIR/data $INTERMEDIATES_GAME_DIR/data
+if [ $1 == "steam" ]; then
+    cp $PROJECT_ROOT/Genesis/libs/steamworks/sdk/redistributable_bin/linux64/libsteam_api.so $INTERMEDIATES_GAME_DIR
+fi
 
 OUTPUT_DIR=$PROJECT_ROOT/Game/tools/publish/output
 mkdir $OUTPUT_DIR 2>/dev/null
