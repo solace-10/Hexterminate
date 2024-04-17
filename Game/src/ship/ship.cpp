@@ -416,11 +416,23 @@ void Ship::CreateRigidBody()
     bool usingOldCentreOfMass = false;
 
     // We only want to use the spawn data if the ship didn't exist before.
-    // Otherwise, we'll reuse its transform and just recreate the physics object
-    if ( m_pRigidBody == nullptr )
+    if ( m_pRigidBody == nullptr && m_pShipyard == nullptr )
     {
         startPosition = glm::vec3( m_ShipSpawnData.m_PositionX, m_ShipSpawnData.m_PositionY, 0.0f );
     }
+    // We'll use the shipyard's hex position if the ship has no rigid body - this can happen if the user removed all modules.
+    else if ( m_pRigidBody == nullptr && m_pShipyard != nullptr )
+    {
+        const ModuleVector& modules = GetModules();
+        SDL_assert( modules.size() > 0 );
+        int slotX, slotY;
+        modules[ 0 ]->GetHexGridSlot( slotX, slotY );
+
+        m_pShipyard->GetDockingHexPosition( slotX, slotY );
+
+        startPosition = m_pShipyard->GetDockingHexPosition( slotX, slotY );
+    }
+    // Otherwise, we just re-use the rigid body's position.
     else
     {
         startPosition = m_pRigidBody->GetPosition();
@@ -461,7 +473,11 @@ void Ship::CreateRigidBody()
         }
     }
 
-    SDL_assert( mass > 0.0f );
+    // Don't create a rigid body if we have no mass (presumably because this ship has no modules).
+    if ( mass <= 0.0f )
+    {
+        return;
+    }
 
     // Finish calculating centre of mass
     m_CentreOfMass /= mass;
@@ -504,6 +520,8 @@ void Ship::CreateRigidBody()
     {
         startPosition = startPosition + ( m_CentreOfMass - oldCentreOfMass );
     }
+
+    m_StartPosition = startPosition;
 
     RigidBodyConstructionInfo ci;
     ci.SetShape( m_pCompoundShape );
@@ -711,8 +729,16 @@ void Ship::CalculateNavigationStats()
         linearThrust *= pShipTweaks->GetEngineThrustMultiplier();
     }
 
-    float mass = CalculateMass();
-    m_NavigationStats = NavigationStats( mass, linearThrust, torque, CalculateMaximumLinearSpeed( linearThrust, mass ), CalculateMaximumAngularSpeed( torque, mass ) );
+    const float mass = CalculateMass();
+    if ( mass > 0.0f )
+    {
+        m_NavigationStats = NavigationStats( mass, linearThrust, torque, CalculateMaximumLinearSpeed( linearThrust, mass ), CalculateMaximumAngularSpeed( torque, mass ) );
+    }
+    else
+    {
+        // This can happen if the ship is in the shipyard and has no modules.
+        m_NavigationStats = NavigationStats( mass, linearThrust, torque, 0.0f, 0.0f );
+    }
 }
 
 float Ship::CalculateMaximumLinearSpeed( float linearThrust, float mass ) const
@@ -762,7 +788,7 @@ float Ship::CalculateMaximumAngularSpeed( float torque, float mass ) const
 
 float Ship::CalculateMass() const
 {
-    return static_cast<float>( m_pRigidBody->GetMass() );
+    return m_pRigidBody ? static_cast<float>( m_pRigidBody->GetMass() ) : 0.0f;
 }
 
 void Ship::SwitchController( ControllerUniquePtr&& pController )
@@ -963,7 +989,7 @@ void Ship::UpdateSounds( float delta )
 
 void Ship::Render()
 {
-    if ( IsVisible() == false )
+    if ( !IsVisible() || !GetRigidBody() )
     {
         return;
     }

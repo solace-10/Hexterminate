@@ -2,6 +2,7 @@
 #include "genesis.h"
 #include "gui/gui.h"
 #include "memory.h"
+#include "window.h"
 
 namespace Genesis
 {
@@ -22,8 +23,27 @@ TaskStatus InputManager::Update( float delta )
     m_MouseDelta.x = m_MouseDelta.y = 0.0f;
     int x, y;
     SDL_GetMouseState( &x, &y );
+
     m_MousePosition.x = static_cast<float>( x );
     m_MousePosition.y = static_cast<float>( y );
+
+    // Adjust for window scaling.
+    if ( FrameWork::GetWindow() )
+    {
+        SDL_Window* pWindow = FrameWork::GetWindow()->GetSDLWindow();
+        if ( pWindow )
+        {
+            int windowWidth, windowHeight;
+            SDL_GetWindowSize( pWindow, &windowWidth, &windowHeight );
+
+            int drawableWidth, drawableHeight;
+            SDL_GL_GetDrawableSize( pWindow, &drawableWidth, &drawableHeight );
+
+            const float scaleX = static_cast<float>( drawableWidth ) / static_cast<float>( windowWidth );
+            const float scaleY = static_cast<float>( drawableHeight ) / static_cast<float>( windowHeight );
+            m_MousePosition *= glm::vec2( scaleX, scaleY );
+        }
+    }
 
     // Notifies any callbacks which are listening to ButtonState::Held
     for ( auto& callbackInfo : m_KeyboardCallbacks )
@@ -119,21 +139,15 @@ void InputManager::HandleKeyboardEvent( const SDL_KeyboardEvent& event, ButtonSt
     {
         if ( callbackInfo.button == event.keysym.scancode )
         {
-            if ( event.state == SDL_PRESSED && 
-                 state == ButtonState::Pressed && 
-                 callbackInfo.buttonState == ButtonState::Pressed &&
-                 m_ButtonPressed[ event.keysym.scancode ] == SDL_RELEASED )
+            if ( event.state == SDL_PRESSED && state == ButtonState::Pressed && callbackInfo.buttonState == ButtonState::Pressed && m_ButtonPressed[ event.keysym.scancode ] == SDL_RELEASED )
             {
                 callbackInfo.callback();
             }
-            else if ( event.state == SDL_RELEASED && 
-                 state == ButtonState::Released && 
-                 callbackInfo.buttonState == ButtonState::Released &&
-                 m_ButtonPressed[ event.keysym.scancode ] == SDL_PRESSED )
-			{
-				callbackInfo.callback();
-			}
-		}
+            else if ( event.state == SDL_RELEASED && state == ButtonState::Released && callbackInfo.buttonState == ButtonState::Released && m_ButtonPressed[ event.keysym.scancode ] == SDL_PRESSED )
+            {
+                callbackInfo.callback();
+            }
+        }
     }
 
     m_ButtonPressed[ event.keysym.scancode ] = ( event.state == SDL_PRESSED );
@@ -187,16 +201,16 @@ InputCallbackToken InputManager::AddMouseWheelCallback( InputCallbackMouseWheelF
 
 void InputManager::RemoveKeyboardCallback( InputCallbackToken token )
 {
-    m_KeyboardCallbacks.remove_if( [token]( const InputCallbackKeyboardInfo& callbackInfo ) { return token == callbackInfo.token; } );
+    m_KeyboardCallbacks.remove_if( [ token ]( const InputCallbackKeyboardInfo& callbackInfo ) { return token == callbackInfo.token; } );
 }
 
 void InputManager::RemoveMouseCallback( InputCallbackToken token )
 {
-    m_MouseCallbacks.remove_if( [token]( const InputCallbackMouseInfo& callbackInfo ) { return token == callbackInfo.token; } );
+    m_MouseCallbacks.remove_if( [ token ]( const InputCallbackMouseInfo& callbackInfo ) { return token == callbackInfo.token; } );
 }
 
 void InputManager::RemoveMouseWheelCallback( InputCallbackToken token )
 {
-    m_MouseWheelCallbacks.remove_if( [token]( const InputCallbackMouseWheelInfo& callbackInfo ) { return token == callbackInfo.token; } );
+    m_MouseWheelCallbacks.remove_if( [ token ]( const InputCallbackMouseWheelInfo& callbackInfo ) { return token == callbackInfo.token; } );
 }
-}
+} // namespace Genesis

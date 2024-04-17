@@ -17,9 +17,12 @@
 
 #pragma once
 
+#include "ammo/ammomanager.h"
 #include "moduleinfo.h"
+
 #include <resources/resourcemodel.h>
 #include <sound/soundmanager.h>
+
 #include <vector>
 
 namespace Hexterminate
@@ -109,7 +112,7 @@ protected:
     WeaponFiringMode m_FiringMode;
 
     bool m_IsFiring;
-    Ammo* m_pCurrentAmmo;
+    AmmoHandle m_CurrentAmmoHandle;
     float m_RateOfFire;
     float m_ContinuousFireTimer;
     Genesis::Sound::SoundInstanceSharedPtr m_pContinuousSFX;
