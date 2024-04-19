@@ -25,7 +25,7 @@
 namespace Genesis
 {
 
-class CrashHandler;
+class ProgramOptions;
 class TaskManager;
 class Timer;
 class InputManager;
@@ -54,7 +54,7 @@ namespace Sound
 class FrameWork
 {
 public:
-    static bool Initialize();
+    static bool Initialize( int argc, char* argv[] );
     static void Shutdown();
     static bool CreateWindowGL( const std::string& name, uint32_t width, uint32_t height, uint32_t multiSampleSamples = 0 );
 
@@ -62,7 +62,7 @@ public:
     static CommandLineParameters* CreateCommandLineParameters( const char** parameters, uint32_t numParameters );
     static CommandLineParameters* GetCommandLineParameters();
 
-    static CrashHandler* GetCrashHandler();
+    static ProgramOptions* GetProgramOptions();
     static TaskManager* GetTaskManager();
     static Logger* GetLogger();
     static InputManager* GetInputManager();

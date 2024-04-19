@@ -19,6 +19,7 @@
 #include <imgui/imgui.h>
 
 #include "configuration.h"
+#include "core/programoptions.h"
 #include "crashhandler/crashhandler.h"
 #include "eventhandler.h"
 #include "genesis.h"
@@ -44,6 +45,7 @@ namespace Genesis
 //---------------------------------------------------------------
 
 std::unique_ptr<CrashHandler> gCrashHandler;
+std::unique_ptr<ProgramOptions> gProgramOptions;
 TaskManager* gTaskManager = nullptr;
 Logger* gLogger = nullptr;
 InputManager* gInputManager = nullptr;
@@ -63,7 +65,7 @@ CommandLineParameters* FrameWork::m_pCommandLineParameters = nullptr;
 // FrameWork
 //-------------------------------------------------------------------
 
-bool FrameWork::Initialize()
+bool FrameWork::Initialize( int argc, char* argv[] )
 {
     // Initialize the Logger
     // We also create a FileLogger to start logging to "log.txt" and
@@ -88,6 +90,8 @@ bool FrameWork::Initialize()
     {
         gLogger->LogWarning( "Failed to initialize crash handler." );
     }
+
+    gProgramOptions = std::make_unique<ProgramOptions>( argc, argv );
 
     // Tell the OS we'll do our own scaling. Without this, the OS will resize the window by the scaling factor,
     // resulting in some extremely poor upsclaing and broken UI.
@@ -234,6 +238,11 @@ CommandLineParameters* FrameWork::GetCommandLineParameters()
 Logger* FrameWork::GetLogger()
 {
     return gLogger;
+}
+
+ProgramOptions* FrameWork::GetProgramOptions()
+{
+    return gProgramOptions.get();
 }
 
 TaskManager* FrameWork::GetTaskManager()

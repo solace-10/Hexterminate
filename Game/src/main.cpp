@@ -1556,10 +1556,10 @@ void Game::LoadUIDesign( UIDesignId id, const std::filesystem::path& designPath 
 // Main
 //-------------------------------------------------------------------
 
-int Main( Genesis::CommandLineParameters* parameters )
+int Main( int argc, char* argv[] )
 {
     using namespace Genesis;
-    FrameWork::Initialize();
+    FrameWork::Initialize( argc, argv );
 
     FrameWork::CreateWindowGL(
         "HEXTERMINATE",
@@ -1582,7 +1582,6 @@ int Main( Genesis::CommandLineParameters* parameters )
     delete g_pGame;
     g_pGame = nullptr;
 
-    delete parameters;
     FrameWork::Shutdown();
 
     return 0;
@@ -1596,5 +1595,5 @@ int Main( Genesis::CommandLineParameters* parameters )
 
 int main( int argc, char* argv[] )
 {
-    return Hexterminate::Main( Genesis::FrameWork::CreateCommandLineParameters( (const char**)argv, (int)argc ) );
+    return Hexterminate::Main( argc, argv );
 }
