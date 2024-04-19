@@ -23,6 +23,7 @@
 #include <filesystem>
 #include <sstream>
 
+#include <core/programoptions.h>
 #include <configuration.h>
 #include <genesis.h>
 #include <imgui/imgui.h>
@@ -52,7 +53,7 @@ SaveGameStorage::SaveGameStorage()
     m_pSteamRemoteStorage = SteamRemoteStorage();
     m_CloudStorageActive = m_pSteamRemoteStorage && m_pSteamRemoteStorage->IsCloudEnabledForApp() && m_pSteamRemoteStorage->IsCloudEnabledForAccount();
 
-    if ( Genesis::FrameWork::GetCommandLineParameters()->HasParameter( "--use-local-saves" ) )
+    if ( Genesis::FrameWork::GetProgramOptions()->GetBool( "--use-local-saves" ).value_or( false ) )
     {
         Genesis::FrameWork::GetLogger()->LogInfo("%s", "SaveGameStorage using local saves due to presence of --use-local-saves.");
         m_CloudStorageActive = false;

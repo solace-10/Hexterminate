@@ -18,6 +18,8 @@
 #include <functional>
 #include <sstream>
 
+#include <core/programoptions.h>
+
 #include "hexterminate.h"
 #include "menus/newgamewindow.h"
 #include "menus/popup.h"
@@ -91,7 +93,7 @@ void NewGameWindow::Update()
     }
 
 #ifdef _DEBUG
-    if ( Genesis::FrameWork::GetCommandLineParameters()->HasParameter( "--new-hyperscape" ) )
+    if ( Genesis::FrameWork::GetProgramOptions()->GetBool( "--new-hyperscape" ).value_or( false ) )
     {
         static bool sStartHyperscape = true;
         if ( sStartHyperscape == true )

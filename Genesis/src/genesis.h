@@ -32,7 +32,6 @@ class InputManager;
 class RenderSystem;
 class ResourceManager;
 class Scene;
-class CommandLineParameters;
 class VideoPlayer;
 class Window;
 
@@ -43,7 +42,7 @@ namespace Gui
 
 namespace Render
 {
-	class DebugRender;
+    class DebugRender;
 }
 
 namespace Sound
@@ -58,10 +57,6 @@ public:
     static void Shutdown();
     static bool CreateWindowGL( const std::string& name, uint32_t width, uint32_t height, uint32_t multiSampleSamples = 0 );
 
-    static CommandLineParameters* CreateCommandLineParameters( const char* parameterStr );
-    static CommandLineParameters* CreateCommandLineParameters( const char** parameters, uint32_t numParameters );
-    static CommandLineParameters* GetCommandLineParameters();
-
     static ProgramOptions* GetProgramOptions();
     static TaskManager* GetTaskManager();
     static Logger* GetLogger();
@@ -73,34 +68,7 @@ public:
     static Gui::GuiManager* GetGuiManager();
     static Sound::SoundManager* GetSoundManager();
     static VideoPlayer* GetVideoPlayer();
-	static Render::DebugRender* GetDebugRender();
-
-private:
-    static CommandLineParameters* m_pCommandLineParameters;
+    static Render::DebugRender* GetDebugRender();
 };
 
-class CommandLineParameters
-{
-public:
-    CommandLineParameters( const char* parameterStr );
-    CommandLineParameters( const char** parameters, uint32_t numParameters );
-    uint32_t Size() const;
-    const std::string& GetParameter( uint32_t n ) const;
-    bool HasParameter( const std::string& name ) const;
-
-private:
-    typedef std::vector<std::string> CommandLineParameter;
-    CommandLineParameter mParameters;
-};
-
-inline uint32_t CommandLineParameters::Size() const
-{
-    return static_cast<uint32_t>(mParameters.size());
-}
-
-inline const std::string& CommandLineParameters::GetParameter( uint32_t n ) const
-{
-    return mParameters.at( n );
-}
-
-}
+} // namespace Genesis

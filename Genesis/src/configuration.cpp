@@ -21,18 +21,19 @@
 #include <ShlObj.h>
 #include <windows.h>
 #else
-#include <unistd.h>
-#include <sys/types.h>
 #include <pwd.h>
+#include <sys/types.h>
+#include <unistd.h>
 #endif
 
 #include <SDL.h>
 
 #include "beginexternalheaders.h"
-#include "tinyxml2.h"
 #include "endexternalheaders.h"
+#include "tinyxml2.h"
 
 #include "configuration.h"
+#include "core/programoptions.h"
 #include "genesis.h"
 #include "logger.h"
 #include "xml.h"
@@ -57,8 +58,8 @@ void WriteXmlElement( tinyxml2::XMLDocument& xmlDoc, tinyxml2::XMLElement& paren
 {
     using namespace tinyxml2;
 
-	XMLElement* pElement = xmlDoc.NewElement( name.c_str() );
-	pElement->SetText( content.c_str() );
+    XMLElement* pElement = xmlDoc.NewElement( name.c_str() );
+    pElement->SetText( content.c_str() );
     parentElement.InsertEndChild( pElement );
 }
 
@@ -75,12 +76,12 @@ void WriteXmlElement( tinyxml2::XMLDocument& xmlDoc, tinyxml2::XMLElement& paren
 {
     using namespace tinyxml2;
 
-	XMLElement* pElement = xmlDoc.NewElement( name.c_str() );
+    XMLElement* pElement = xmlDoc.NewElement( name.c_str() );
 
-	std::stringstream ss;
-	ss << content;
+    std::stringstream ss;
+    ss << content;
 
-	pElement->SetText( ss.str().c_str() );
+    pElement->SetText( ss.str().c_str() );
     parentElement.InsertEndChild( pElement );
 }
 
@@ -99,15 +100,15 @@ void Configuration::Load()
         XMLElement* pElemConfiguration = doc.FirstChildElement();
         for ( XMLElement* pElemEntry = pElemConfiguration->FirstChildElement(); pElemEntry; pElemEntry = pElemEntry->NextSiblingElement() )
         {
-			Xml::Serialise( pElemEntry, "Fullscreen", m_Fullscreen );
-			Xml::Serialise( pElemEntry, "PostProcessBleachBypass", bleachBypass );
+            Xml::Serialise( pElemEntry, "Fullscreen", m_Fullscreen );
+            Xml::Serialise( pElemEntry, "PostProcessBleachBypass", bleachBypass );
             Xml::Serialise( pElemEntry, "PostProcessGlow", glow );
             Xml::Serialise( pElemEntry, "PostProcessVignette", vignette );
-			Xml::Serialise( pElemEntry, "MasterVolume", (int&)m_MasterVolume );
-			Xml::Serialise( pElemEntry, "MusicVolume", (int&)m_MusicVolume );
-			Xml::Serialise( pElemEntry, "SFXVolume", (int&)m_SFXVolume );
-			Xml::Serialise( pElemEntry, "Outlines", m_Outlines );
-			Xml::Serialise( pElemEntry, "FireToggle", m_FireToggle );
+            Xml::Serialise( pElemEntry, "MasterVolume", (int&)m_MasterVolume );
+            Xml::Serialise( pElemEntry, "MusicVolume", (int&)m_MusicVolume );
+            Xml::Serialise( pElemEntry, "SFXVolume", (int&)m_SFXVolume );
+            Xml::Serialise( pElemEntry, "Outlines", m_Outlines );
+            Xml::Serialise( pElemEntry, "FireToggle", m_FireToggle );
         }
 
         EnablePostProcessEffect( Genesis::RenderSystem::PostProcessEffect::BleachBypass, bleachBypass );
@@ -130,15 +131,15 @@ void Configuration::Save()
     XMLElement* pRoot = xmlDoc.NewElement( "Configuration" );
     xmlDoc.InsertFirstChild( pRoot );
 
-	WriteXmlElement( xmlDoc, *pRoot, "Fullscreen", IsFullscreen() );
-	WriteXmlElement( xmlDoc, *pRoot, "PostProcessBleachBypass", IsPostProcessingEffectEnabled( Genesis::RenderSystem::PostProcessEffect::BleachBypass ) );
+    WriteXmlElement( xmlDoc, *pRoot, "Fullscreen", IsFullscreen() );
+    WriteXmlElement( xmlDoc, *pRoot, "PostProcessBleachBypass", IsPostProcessingEffectEnabled( Genesis::RenderSystem::PostProcessEffect::BleachBypass ) );
     WriteXmlElement( xmlDoc, *pRoot, "PostProcessGlow", IsPostProcessingEffectEnabled( Genesis::RenderSystem::PostProcessEffect::Glow ) );
     WriteXmlElement( xmlDoc, *pRoot, "PostProcessVignette", IsPostProcessingEffectEnabled( Genesis::RenderSystem::PostProcessEffect::Vignette ) );
-	WriteXmlElement( xmlDoc, *pRoot, "MasterVolume", GetMasterVolume() );
-	WriteXmlElement( xmlDoc, *pRoot, "MusicVolume", GetMusicVolume() );
-	WriteXmlElement( xmlDoc, *pRoot, "SFXVolume", GetSFXVolume() );
-	WriteXmlElement( xmlDoc, *pRoot, "Outlines", GetOutlines() );
-	WriteXmlElement( xmlDoc, *pRoot, "FireToggle", GetFireToggle() );
+    WriteXmlElement( xmlDoc, *pRoot, "MasterVolume", GetMasterVolume() );
+    WriteXmlElement( xmlDoc, *pRoot, "MusicVolume", GetMusicVolume() );
+    WriteXmlElement( xmlDoc, *pRoot, "SFXVolume", GetSFXVolume() );
+    WriteXmlElement( xmlDoc, *pRoot, "Outlines", GetOutlines() );
+    WriteXmlElement( xmlDoc, *pRoot, "FireToggle", GetFireToggle() );
 
     xmlDoc.SaveFile( CONFIG_FILENAME );
 }
@@ -154,7 +155,7 @@ void Configuration::SetDefaultValues()
 {
     EnsureValidResolution();
 
-    m_Fullscreen = false;
+    m_Fullscreen = true;
 
     for ( size_t i = 0; i < static_cast<size_t>( Genesis::RenderSystem::PostProcessEffect::Count ); ++i )
     {
@@ -163,32 +164,48 @@ void Configuration::SetDefaultValues()
 
     m_MultiSampleSamples = 4u;
 
-	m_MasterVolume = 100u;
-	m_MusicVolume = 50u;
-	m_SFXVolume = 100u;
+    m_MasterVolume = 100u;
+    m_MusicVolume = 50u;
+    m_SFXVolume = 100u;
 
-	m_Outlines = true;
-	m_FireToggle = false;
+    m_Outlines = true;
+    m_FireToggle = false;
 }
 
 void Configuration::EnsureValidResolution()
 {
-    SDL_DisplayMode dm;
-    if ( SDL_GetDesktopDisplayMode( 0, &dm ) != 0 )
+    std::optional<int> widthOverride = FrameWork::GetProgramOptions()->GetInt( "--width" );
+    std::optional<int> heightOverride = FrameWork::GetProgramOptions()->GetInt( "--height" );
+    if ( widthOverride.has_value() && heightOverride.has_value() )
     {
-        FrameWork::GetLogger()->LogError( "SDL_GetDesktopDisplayMode failed: %s", SDL_GetError() );
+        SDL_assert( widthOverride.value() > 0 );
+        SDL_assert( heightOverride.value() > 0 );
+        m_ScreenWidth = widthOverride.value();
+        m_ScreenHeight = heightOverride.value();
+        m_Fullscreen = false;
+        FrameWork::GetLogger()->LogInfo( "Resolution [overridden through program options]: %dx%d [windowed]", m_ScreenWidth, m_ScreenHeight );
     }
-    else if ( dm.w <= 0 )
+    else
     {
-        FrameWork::GetLogger()->LogError( "Invalid screen width: %d.", dm.w );
-    }
-    else if ( dm.h <= 0 )
-    {
-        FrameWork::GetLogger()->LogError( "Invalid screen height: %d.", dm.h );
-    }
+        SDL_DisplayMode dm;
+        if ( SDL_GetDesktopDisplayMode( 0, &dm ) != 0 )
+        {
+            FrameWork::GetLogger()->LogError( "SDL_GetDesktopDisplayMode failed: %s", SDL_GetError() );
+        }
+        else if ( dm.w <= 0 )
+        {
+            FrameWork::GetLogger()->LogError( "Invalid screen width: %d.", dm.w );
+        }
+        else if ( dm.h <= 0 )
+        {
+            FrameWork::GetLogger()->LogError( "Invalid screen height: %d.", dm.h );
+        }
 
-    m_ScreenWidth = static_cast<unsigned int>( dm.w );
-    m_ScreenHeight = static_cast<unsigned int>( dm.h );
+        m_ScreenWidth = static_cast<unsigned int>( dm.w );
+        m_ScreenHeight = static_cast<unsigned int>( dm.h );
+        m_Fullscreen = true;
+        FrameWork::GetLogger()->LogInfo( "Resolution: %dx%d [fullscreen]", m_ScreenWidth, m_ScreenHeight );
+    }
 }
 
 std::filesystem::path Configuration::GetSystemSaveGameFolder()
@@ -203,11 +220,11 @@ std::filesystem::path Configuration::GetSystemSaveGameFolder()
     CoTaskMemFree( pKnownFolderPath );
     return folder;
 #else
-    struct passwd *pw = getpwuid( getuid() );
+    struct passwd* pw = getpwuid( getuid() );
     const char* pHomeDir = pw->pw_dir;
     std::filesystem::path folder = std::filesystem::path( pHomeDir ) / ".local" / "share";
     return folder;
 #endif
 }
 
-}
+} // namespace Genesis

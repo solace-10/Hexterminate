@@ -59,8 +59,6 @@ Sound::SoundManager* gSoundManager = nullptr;
 VideoPlayer* gVideoPlayer = nullptr;
 Render::DebugRender* gDebugRender = nullptr;
 
-CommandLineParameters* FrameWork::m_pCommandLineParameters = nullptr;
-
 //-------------------------------------------------------------------
 // FrameWork
 //-------------------------------------------------------------------
@@ -218,23 +216,6 @@ bool FrameWork::CreateWindowGL( const std::string& name, uint32_t width, uint32_
     return true;
 }
 
-CommandLineParameters* FrameWork::CreateCommandLineParameters( const char* parameterStr )
-{
-    m_pCommandLineParameters = new CommandLineParameters( parameterStr );
-    return m_pCommandLineParameters;
-}
-
-CommandLineParameters* FrameWork::CreateCommandLineParameters( const char** parameters, uint32_t numParameters )
-{
-    m_pCommandLineParameters = new CommandLineParameters( parameters, numParameters );
-    return m_pCommandLineParameters;
-}
-
-CommandLineParameters* FrameWork::GetCommandLineParameters()
-{
-    return m_pCommandLineParameters;
-}
-
 Logger* FrameWork::GetLogger()
 {
     return gLogger;
@@ -295,57 +276,4 @@ Render::DebugRender* FrameWork::GetDebugRender()
     return gDebugRender;
 }
 
-//---------------------------------------------------------------
-// CommandLineParameters
-//---------------------------------------------------------------
-
-CommandLineParameters::CommandLineParameters( const char* parameterStr )
-{
-    // Do we even have any parameters?
-    if ( parameterStr != nullptr )
-    {
-        std::string tmpStr( parameterStr );
-
-        size_t previousPos = 0;
-        size_t currentPos = tmpStr.find_first_of( " ", 0 );
-        // If there is no whitespace, then there's only one parameter
-        if ( currentPos == std::string::npos )
-        {
-            mParameters.push_back( parameterStr );
-        }
-        // Otherwise, process every parameter
-        else
-        {
-            do
-            {
-                mParameters.push_back( tmpStr.substr( previousPos, currentPos - previousPos ) );
-                previousPos = currentPos + 1;
-                currentPos = tmpStr.find_first_of( " ", previousPos );
-            } while ( currentPos != std::string::npos );
-
-            mParameters.push_back( tmpStr.substr( previousPos, tmpStr.size() - previousPos ) );
-        }
-    }
-}
-
-CommandLineParameters::CommandLineParameters( const char** parameters, uint32_t numParameters )
-{
-    for ( uint32_t i = 0; i < numParameters; i++ )
-    {
-        mParameters.push_back( parameters[ i ] );
-    }
-}
-
-bool CommandLineParameters::HasParameter( const std::string& name ) const
-{
-    for ( auto& parameter : mParameters )
-    {
-        if ( parameter == name )
-        {
-            return true;
-        }
-    }
-
-    return false;
-}
 } // namespace Genesis

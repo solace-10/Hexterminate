@@ -30,10 +30,6 @@ Window::Window( const std::string& title, unsigned int width, unsigned int heigh
 
     if ( fullscreen )
     {
-        flags |= SDL_WINDOW_FULLSCREEN;
-    }
-    else
-    {
         flags |= SDL_WINDOW_FULLSCREEN_DESKTOP;
     }
 
