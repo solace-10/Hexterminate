@@ -37,7 +37,10 @@ public:
 
 private:
     bool IsFinished() const;
-    void GenerateHomeworlds( Galaxy* pGalaxy, const GalaxyCreationInfo& creationInfo );
+    SectorInfo* GenerateEmpireHomeworld( Galaxy* pGalaxy, const GalaxyCreationInfo& creationInfo );
+    void GenerateOtherHomeworlds( Galaxy* pGalaxy, const GalaxyCreationInfo& creationInfo, SectorInfo* pEmpireHomeworld );
+    int DistanceBetweenSectors( SectorInfo* pSectorA, SectorInfo* pSectorB ) const;
+
     void GenerateSectors( Galaxy* pGalaxy, const GalaxyCreationInfo& creationInfo );
     void GenerateNames( Galaxy* pGalaxy, const GalaxyCreationInfo& creationInfo );
     std::vector<std::string> LoadNames() const;

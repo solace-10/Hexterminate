@@ -47,7 +47,8 @@ void GalaxyGenerator::Run( Galaxy* pGalaxy, const GalaxyCreationInfo& creationIn
         }
     }
 
-    GenerateHomeworlds( pGalaxy, creationInfo );
+    SectorInfo* pEmpireHomeworld = GenerateEmpireHomeworld( pGalaxy, creationInfo );
+    GenerateOtherHomeworlds( pGalaxy, creationInfo, pEmpireHomeworld );
     GenerateSectors( pGalaxy, creationInfo );
     GenerateNames( pGalaxy, creationInfo );
 }
@@ -79,10 +80,49 @@ int GalaxyGenerator::CalculateNecessarySectors( FactionPresence presence ) const
         return 0;
 }
 
-void GalaxyGenerator::GenerateHomeworlds( Galaxy* pGalaxy, const GalaxyCreationInfo& creationInfo )
+SectorInfo* GalaxyGenerator::GenerateEmpireHomeworld( Galaxy* pGalaxy, const GalaxyCreationInfo& creationInfo )
 {
     for ( Data& data : m_Data )
     {
+        if ( data.pFaction->GetFactionId() != FactionId::Empire )
+        {
+            continue;
+        }
+
+        SDL_assert( creationInfo.HasHomeworld( data.pFaction->GetFactionId() ) );
+
+        while ( true )
+        {
+            int x = rand() % NumSectorsX;
+            int y = rand() % NumSectorsY;
+            SectorInfo* pSectorInfo = pGalaxy->GetSectorInfo( x, y );
+            if ( pSectorInfo->GetFaction()->GetFactionId() == FactionId::Neutral )
+            {
+                data.pHomeworldSector = pSectorInfo;
+                data.pHomeworldSector->SetShipyard( true );
+                data.pHomeworldSector->SetHomeworld( true );
+                data.pHomeworldSector->SetFaction( data.pFaction, true, false );
+                data.pHomeworldSector->SetStarfort( true ); // For the Empire, give the homeworld sector a starfort.
+                data.pFaction->SetHomeworld( data.pHomeworldSector );
+                return data.pHomeworldSector;
+            }
+        }
+    }
+
+    SDL_assert( false );
+    return nullptr;
+}
+
+void GalaxyGenerator::GenerateOtherHomeworlds( Galaxy* pGalaxy, const GalaxyCreationInfo& creationInfo, SectorInfo* pEmpireHomeworld )
+{
+    for ( Data& data : m_Data )
+    {
+        // Empire homeworld is handled in GenerateEmpireHomeworld()
+        if ( data.pFaction->GetFactionId() == FactionId::Empire )
+        {
+            continue;
+        }
+
         if ( creationInfo.HasHomeworld( data.pFaction->GetFactionId() ) )
         {
             while ( true )
@@ -90,32 +130,39 @@ void GalaxyGenerator::GenerateHomeworlds( Galaxy* pGalaxy, const GalaxyCreationI
                 int x = rand() % NumSectorsX;
                 int y = rand() % NumSectorsY;
                 SectorInfo* pSectorInfo = pGalaxy->GetSectorInfo( x, y );
+
+                // Ensure no homeworlds spawn near the Empire's Homeworld, as the player certainly can't fight
+                // the harder factions at the start of the game.
+                if ( DistanceBetweenSectors( pSectorInfo, pEmpireHomeworld ) < 4 )
+                {
+                    continue;
+                }
+
                 if ( pSectorInfo->GetFaction()->GetFactionId() == FactionId::Neutral )
                 {
                     data.pHomeworldSector = pSectorInfo;
                     data.pHomeworldSector->SetShipyard( true );
                     data.pHomeworldSector->SetHomeworld( true );
                     data.pHomeworldSector->SetFaction( data.pFaction, true, false );
-                    data.pFaction->SetHomeworld( data.pHomeworldSector );
 
                     // All homeworld sectors (except the player's) are Personal, so the AI won't capture them.
                     // Also give them the HomeworldComponent, so they will spawn special encounters.
-                    if ( data.pFaction->GetFactionId() != FactionId::Empire )
-                    {
-                        data.pHomeworldSector->SetPersonal( true );
-                        data.pHomeworldSector->AddComponentName( "HomeworldComponent" );
-                    }
-                    // For the Empire, give the homeworld sector a starfort.
-                    else
-                    {
-                        data.pHomeworldSector->SetStarfort( true );
-                    }
+                    data.pHomeworldSector->SetPersonal( true );
+                    data.pHomeworldSector->AddComponentName( "HomeworldComponent" );
 
+                    data.pFaction->SetHomeworld( data.pHomeworldSector );
                     break;
                 }
             }
         }
     }
+}
+
+// Rounded-down integer distance between sectors.
+int GalaxyGenerator::DistanceBetweenSectors( SectorInfo* pSectorA, SectorInfo* pSectorB ) const
+{
+    const float distance = glm::distance( glm::vec2( pSectorA->GetCoordinates() ), glm::vec2( pSectorB->GetCoordinates() ) );
+    return static_cast<int>( distance );
 }
 
 void GalaxyGenerator::GenerateSectors( Galaxy* pGalaxy, const GalaxyCreationInfo& creationInfo )
