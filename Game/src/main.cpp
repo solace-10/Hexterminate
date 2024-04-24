@@ -1149,7 +1149,7 @@ void Game::SetupFactions()
     infoHegemon.m_BaseFleetPoints = 1600;
     infoHegemon.m_SectorToShipyardRatio = 0.1f;
     infoHegemon.m_Doctrine = FleetDoctrine( FleetBehaviourType::Expansionist, 0.0f, 0.5f, 1.0f );
-    infoHegemon.m_LootProbability = LootProbability( 0.00f, 0.00f, 0.45f, 0.30f, 0.20f );
+    infoHegemon.m_LootProbability = LootProbability( 0.00f, 0.00f, 0.45f, 0.35f, 0.20f );
     infoHegemon.m_LootProbabilityFlagship = LootProbability( 0.00f, 0.00f, 0.00f, 0.00f, 1.00f );
     infoHegemon.m_LootProbabilityFlagshipHc = LootProbability( 0.00f, 0.00f, 0.00f, 0.00f, 1.00f );
     infoHegemon.m_ThreatValueMultiplier = 7.5f;
