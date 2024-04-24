@@ -33,6 +33,7 @@
 namespace Hexterminate::UI
 {
 
+static const char* sElementPropertyFlags = "flags";
 static const char* sElementPropertyPosition = "position";
 static const char* sElementPropertySize = "size";
 static const char* sElementPropertyAnchor = "anchor";
@@ -50,6 +51,7 @@ Element::Element( const std::string& name )
     , m_AnchorRight( false )
     , m_PaddingRight( false )
     , m_PaddingBottom( false )
+    , m_Flags( ElementFlags_None )
 {
     m_pPanel = new Genesis::Gui::Panel();
     m_pPanel->SetSize( 128.0f, 128.0f );
@@ -118,7 +120,7 @@ void Element::LoadFromDesign( Design* pDesign )
         m_pDesign = pDesign;
     }
 
-    if ( IsPathResolved() == false || IsDynamic() || m_pDesign == nullptr )
+    if ( IsPathResolved() == false || HasFlag( ElementFlags_NoSerialize ) || m_pDesign == nullptr )
     {
         return;
     }
@@ -185,7 +187,7 @@ void Element::ResolvePath( Element* pParentElement )
 
 void Element::SaveInternal( json& data, bool saveProperties /* = true */ )
 {
-    if ( IsDynamic() )
+    if ( HasFlag( ElementFlags_NoSerialize ) )
     {
         return;
     }
@@ -207,6 +209,11 @@ void Element::SaveInternal( json& data, bool saveProperties /* = true */ )
 
 void Element::SaveProperties( json& properties )
 {
+    if ( GetFlags() != ElementFlags_None )
+    {
+        properties[ sElementPropertyFlags ] = GetFlags();
+    }
+
     glm::vec2 pos = m_pPanel->GetPosition();
     properties[ sElementPropertyPosition ] = {
         { "x", pos.x },

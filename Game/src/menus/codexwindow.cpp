@@ -167,7 +167,7 @@ CodexCategory::CodexCategory()
 CodexCategory::CodexCategory( const std::string& name, UI::Element* pParent )
 {
     m_pButton = std::make_shared<UI::Button>( name, nullptr );
-    m_pButton->SetDynamic( true );
+    m_pButton->SetFlags( UI::ElementFlags_NoSerialize );
     m_pButton->SetDefaultImage( "data/ui/widgets/togglebutton.png" );
     m_pButton->SetHoveredImage( "data/ui/widgets/togglebutton_hover.png" );
     m_pButton->SetPressedImage( "data/ui/widgets/togglebutton_selected.png" );
@@ -211,7 +211,7 @@ CodexEntry::CodexEntry( const std::string& name, const std::string& content, UI:
 {
     m_pButton = std::make_shared<UI::Button>(
         name, [ this ]( std::any userData ) { OnButtonPressed(); }, nullptr, pEntryToggleGroup );
-    m_pButton->SetDynamic( true );
+    m_pButton->SetFlags( UI::ElementFlags_NoSerialize );
     m_pButton->SetDefaultImage( "data/ui/widgets/stackbutton.png" );
     m_pButton->SetHoveredImage( "data/ui/widgets/stackbutton_hover.png" );
     m_pButton->SetPressedImage( "data/ui/widgets/stackbutton_selected.png" );

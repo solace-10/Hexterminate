@@ -36,6 +36,16 @@ namespace Hexterminate::UI
 
 using ElementList = std::list<ElementSharedPtr>;
 
+// clang-format off
+enum ElementFlags : uint32_t
+{
+    ElementFlags_None            = 0,
+    ElementFlags_DynamicPosition = 1,
+    ElementFlags_DynamicSize     = 1 << 1,
+    ElementFlags_NoSerialize     = 1 << 2
+};
+// clang-format on
+
 class Element
 {
 public:
@@ -59,6 +69,9 @@ public:
     void SetEditable( bool isEditable );
     bool IsDynamic() const;
     void SetDynamic( bool isDynamic );
+    uint32_t GetFlags() const;
+    bool HasFlag( ElementFlags flag ) const;
+    void SetFlags( uint32_t flags );
     bool IsVisible() const;
 
     void Add( ElementSharedPtr pElement );
@@ -102,6 +115,7 @@ private:
     bool m_AnchorRight;
     int m_PaddingRight;
     int m_PaddingBottom;
+    uint32_t m_Flags;
 };
 
 inline bool Element::IsResizeable() const
@@ -162,6 +176,21 @@ inline bool Element::IsDynamic() const
 inline void Element::SetDynamic( bool state )
 {
     m_IsDynamic = state;
+}
+
+inline uint32_t Element::GetFlags() const
+{
+    return m_Flags;
+}
+
+inline bool Element::HasFlag( ElementFlags flag ) const 
+{
+    return ( m_Flags & flag ) == flag;
+}
+
+inline void Element::SetFlags( uint32_t flags )
+{
+    m_Flags = flags;
 }
 
 inline Design* Element::GetDesign() const
