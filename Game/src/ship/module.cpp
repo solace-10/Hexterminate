@@ -83,7 +83,7 @@ Module::Module( ModuleInfo* pInfo )
 
 Module::~Module()
 {
-    if ( m_pDamageParticleEmitter != nullptr && g_pGame->GetCurrentSector() != nullptr && g_pGame->GetCurrentSector()->GetParticleManager() != nullptr )
+    if ( m_pDamageParticleEmitter != nullptr && g_pGame != nullptr && g_pGame->GetCurrentSector() != nullptr && g_pGame->GetCurrentSector()->GetParticleManager() != nullptr )
     {
         m_pDamageParticleEmitter->Stop();
         m_pDamageParticleEmitter = nullptr;
