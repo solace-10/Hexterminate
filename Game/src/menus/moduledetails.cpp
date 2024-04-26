@@ -41,7 +41,7 @@ ModuleDetails::ModuleDetails()
     , m_pContentsText( nullptr )
     , m_pIconOnly( nullptr )
     , m_InIconOnlyMode( false )
-    , m_HideNextFrame( false )
+    , m_HideNextFrame( 0 )
 {
     CreateElements();
 }
@@ -64,6 +64,10 @@ void ModuleDetails::Update( float delta )
     {
         m_pMainPanel->Show( false );
         m_pIconOnly->Show( false );
+    }
+    else if ( m_pModuleInfo == nullptr )
+    {
+        m_HideNextFrame++;
     }
 }
 
@@ -96,11 +100,6 @@ void ModuleDetails::SetModuleInfo( ModuleInfo* pModuleInfo, bool iconOnly /* = f
 
             m_HideNextFrame = 0;
         }
-    }
-
-    if ( m_pModuleInfo == nullptr )
-    {
-        m_HideNextFrame++;
     }
 }
 
