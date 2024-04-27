@@ -27,6 +27,8 @@
 #include "ui/togglegroup.h"
 #include "ui/window.h"
 
+#include "ui/types.fwd.h"
+
 namespace Hexterminate
 {
 
@@ -59,6 +61,7 @@ private:
     UI::PanelSharedPtr m_pMenu;
     UI::ElementSharedPtr m_pTitle2;
     UI::ToggleGroupSharedPtr m_pToggleGroup;
+    UI::ContainerSharedPtr m_pCharacterContainer;
     UI::ImageSharedPtr m_pCharacterImage;
 
     EvaWindow* m_pTitle;

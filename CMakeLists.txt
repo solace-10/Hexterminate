@@ -25,6 +25,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED True)
 find_package(Bullet CONFIG REQUIRED)
 find_package(GLEW REQUIRED)
 find_package(glm CONFIG REQUIRED)
+find_package(magic_enum CONFIG REQUIRED)
 find_package(SDL2 CONFIG REQUIRED)
 find_package(sdl2-image CONFIG REQUIRED)
 

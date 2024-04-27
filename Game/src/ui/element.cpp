@@ -52,6 +52,7 @@ Element::Element( const std::string& name )
     , m_PaddingRight( false )
     , m_PaddingBottom( false )
     , m_Flags( ElementFlags_None )
+    , m_pParent( nullptr )
 {
     m_pPanel = new Genesis::Gui::Panel();
     m_pPanel->SetSize( 128.0f, 128.0f );
@@ -95,12 +96,14 @@ void Element::Add( ElementSharedPtr pElement )
     m_pPanel->AddElement( pElement->GetPanel() );
     pElement->ResolvePath( this );
     pElement->LoadFromDesign( m_pDesign );
+    pElement->SetParent( this );
 }
 
 void Element::Remove( ElementSharedPtr pElement )
 {
     m_ChildrenToRemove.push_back( pElement );
     m_pPanel->RemoveElement( pElement->GetPanel() );
+    pElement->SetParent( nullptr );
 }
 
 bool Element::IsHovered() const
@@ -307,10 +310,11 @@ void Element::RenderProperties()
         }
         ImGui::PopStyleVar();
 
+        const bool isPositionReadOnly = HasFlag( ElementFlags_DynamicPosition );
         glm::vec2 gpos = m_pPanel->GetPosition();
         int ipos[ 2 ] = { static_cast<int>( gpos.x ), static_cast<int>( gpos.y ) };
-        InputIntExt( "X", &ipos[ 0 ], !m_AnchorLeft );
-        InputIntExt( "Y", &ipos[ 1 ], !m_AnchorTop );
+        InputIntExt( "X", &ipos[ 0 ], !m_AnchorLeft || isPositionReadOnly );
+        InputIntExt( "Y", &ipos[ 1 ], !m_AnchorTop || isPositionReadOnly );
         SetPosition( ipos[ 0 ], ipos[ 1 ] );
 
         InputIntExt( "Padding right", &m_PaddingRight, !m_AnchorRight );
@@ -318,13 +322,17 @@ void Element::RenderProperties()
 
         glm::vec2 gsize = m_pPanel->GetSize();
         int isize[ 2 ] = { static_cast<int>( gsize.x ), static_cast<int>( gsize.y ) };
-        const bool isWidthReadOnly = !IsResizeable() || ( m_AnchorLeft && m_AnchorRight );
+        const bool isWidthReadOnly = !IsResizeable() || ( m_AnchorLeft && m_AnchorRight ) || HasFlag( ElementFlags_DynamicSize );
         InputIntExt( "Width", &isize[ 0 ], isWidthReadOnly );
-        const bool isHeightReadOnly = !IsResizeable() || ( m_AnchorTop && m_AnchorBottom );
+        const bool isHeightReadOnly = !IsResizeable() || ( m_AnchorTop && m_AnchorBottom ) || HasFlag( ElementFlags_DynamicSize );
         InputIntExt( "Height", &isize[ 1 ], isHeightReadOnly );
-
         SetSize( isize[ 0 ], isize[ 1 ] );
     }
+}
+
+void Element::SetSize( const glm::ivec2& size )
+{
+    SetSize( size.x, size.y );
 }
 
 void Element::SetSize( int width, int height )
@@ -349,6 +357,11 @@ void Element::SetPosition( int x, int y )
     m_pPanel->SetPosition( x, y );
 }
 
+void Element::SetPosition( const glm::ivec2& position )
+{
+    m_pPanel->SetPosition( position.x, position.y );
+}
+
 int Element::GetWidth() const
 {
     return m_pPanel->GetWidth();
@@ -364,6 +377,17 @@ void Element::GetPosition( int& x, int& y )
     const glm::vec2 pos = m_pPanel->GetPosition();
     x = static_cast<int>( pos.x );
     y = static_cast<int>( pos.y );
+}
+
+glm::ivec2 Element::GetSize() const
+{
+    return glm::ivec2( GetWidth(), GetHeight() );
+}
+
+glm::ivec2 Element::GetPosition() const
+{
+    const glm::vec2 pos = m_pPanel->GetPosition();
+    return glm::ivec2( static_cast<int>( pos.x, static_cast<int>( pos.y ) ) );
 }
 
 bool Element::IsAcceptingInput() const

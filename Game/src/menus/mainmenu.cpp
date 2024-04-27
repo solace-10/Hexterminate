@@ -27,6 +27,7 @@
 #include "menus/popup.h"
 #include "menus/settingswindow.h"
 #include "misc/gui.h"
+#include "ui/container.h"
 #include "ui/fonts.h"
 #include "ui/image.h"
 #include "ui/rootelement.h"
@@ -107,18 +108,19 @@ MainMenu::~MainMenu()
 
 void MainMenu::CreateCharacterImage()
 {
+    m_pCharacterContainer = std::make_shared<UI::Container>( "Character container" );
+    g_pGame->GetUIRoot( UIDesignId::MainMenu )->Add( m_pCharacterContainer );
+
     m_pCharacterImage = std::make_shared<UI::Image>( "Character image", "data/ui/portraits/Chrysamere_large.jpg" );
+    m_pCharacterImage->SetFlags( UI::ElementFlags_NoSerialize | UI::ElementFlags_DynamicSize );
     m_pCharacterImage->SetAutoSize( false );
     m_pCharacterImage->SetBlendMode( UI::Image::BlendMode::Add );
     m_pCharacterImage->SetShader( "gui_portrait_menu" );
     const float ratio = static_cast<float>( m_pCharacterImage->GetWidth() ) / static_cast<float>( m_pCharacterImage->GetHeight() );
     const int h = static_cast<int>( Genesis::Configuration::GetScreenHeight() );
     const int w = static_cast<int>( static_cast<float>( h ) * ratio );
-    const int offset = static_cast<int>( static_cast<float>( h ) * ratio * 0.66f );
-    const int x = static_cast<int>( Genesis::Configuration::GetScreenWidth() ) - offset;
-    m_pCharacterImage->SetPosition( x, 0 );
-    g_pGame->GetUIRoot( UIDesignId::MainMenu )->Add( m_pCharacterImage );
     m_pCharacterImage->SetSize( w, h );
+    m_pCharacterContainer->Add( m_pCharacterImage );
 }
 
 void MainMenu::CreateVersionText()

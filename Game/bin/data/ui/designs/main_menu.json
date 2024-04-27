@@ -1,4 +1,44 @@
 {
+    "Character container": {
+        "Character image": {
+            "properties": {
+                "anchor": {
+                    "b": false,
+                    "l": true,
+                    "r": false,
+                    "t": true
+                },
+                "file": "data/ui/portraits/Chrysamere_large.jpg",
+                "flags": 1,
+                "position": {
+                    "x": 0.0,
+                    "y": 0.0
+                },
+                "size": {
+                    "h": 900.0,
+                    "w": 736.0
+                }
+            }
+        },
+        "properties": {
+            "anchor": {
+                "b": false,
+                "l": true,
+                "r": false,
+                "t": true
+            },
+            "direction": "RowReverse",
+            "flags": 2,
+            "position": {
+                "x": 0.0,
+                "y": 0.0
+            },
+            "size": {
+                "h": 900.0,
+                "w": 1440.0
+            }
+        }
+    },
     "Character image": {
         "properties": {
             "anchor": {
@@ -5435,8 +5475,8 @@
             "center_h": true,
             "center_v": true,
             "position": {
-                "x": 778.0,
-                "y": 420.0
+                "x": 218.0,
+                "y": 150.0
             },
             "size": {
                 "h": 600.0,
@@ -5699,7 +5739,7 @@
             },
             "size": {
                 "h": 60.0,
-                "w": 2560.0
+                "w": 1440.0
             }
         }
     },
@@ -6080,7 +6120,7 @@
             "show": true,
             "size": {
                 "h": 38.0,
-                "w": 2560.0
+                "w": 1440.0
             }
         }
     },

@@ -51,6 +51,7 @@ else()
 endif()
 
 target_link_libraries(Game PRIVATE GLEW::GLEW)
+target_link_libraries(Game PRIVATE magic_enum::magic_enum)
 target_link_libraries(Game PRIVATE SDL2::SDL2 SDL2::SDL2main SDL2::SDL2-static)
 target_link_libraries(Game PRIVATE SDL2::SDL2_image)
 target_link_libraries(Game PRIVATE LinearMath Bullet3Common BulletDynamics BulletCollision)

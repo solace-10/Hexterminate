@@ -29,6 +29,9 @@ using ButtonSharedPtr = std::shared_ptr<Button>;
 class Checkbox;
 using CheckboxSharedPtr = std::shared_ptr<Checkbox>;
 
+class Container;
+using ContainerSharedPtr = std::shared_ptr<Container>;
+
 class Design;
 using DesignUniquePtr = std::unique_ptr<Design>;
 

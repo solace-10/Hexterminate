@@ -21,6 +21,8 @@
 #include <memory>
 #include <string>
 
+#include <glm/vec2.hpp>
+
 #include "json.hpp"
 #include "ui/types.fwd.h"
 
@@ -56,10 +58,14 @@ public:
     virtual void RenderProperties();
 
     virtual bool IsResizeable() const;
+    virtual void SetSize( const glm::ivec2& size );
     virtual void SetSize( int width, int height );
+    virtual void SetPosition( const glm::ivec2& position );
     virtual void SetPosition( int x, int y );
     int GetWidth() const;
     int GetHeight() const;
+    glm::ivec2 GetSize() const;
+    glm::ivec2 GetPosition() const;
     void GetPosition( int& x, int& y );
     bool IsHovered() const;
     bool IsAcceptingInput() const;
@@ -74,8 +80,11 @@ public:
     void SetFlags( uint32_t flags );
     bool IsVisible() const;
 
-    void Add( ElementSharedPtr pElement );
-    void Remove( ElementSharedPtr pElement );
+    void SetParent( Element* pParentElement );
+    Element* GetParent() const;
+
+    virtual void Add( ElementSharedPtr pElement );
+    virtual void Remove( ElementSharedPtr pElement );
     const ElementList& GetChildren() const;
     const std::string& GetName() const;
     virtual void Show( bool state );
@@ -103,6 +112,7 @@ private:
     std::string m_Path;
     Genesis::Gui::Panel* m_pPanel;
     Design* m_pDesign;
+    Element* m_pParent;
     ElementList m_Children;
     ElementList m_ChildrenToRemove;
 
@@ -196,6 +206,16 @@ inline void Element::SetFlags( uint32_t flags )
 inline Design* Element::GetDesign() const
 {
     return m_pDesign;
+}
+
+inline void Element::SetParent( Element* pParentElement )
+{
+    m_pParent = pParentElement;
+}
+
+inline Element* Element::GetParent() const
+{
+    return m_pParent;
 }
 
 } // namespace Hexterminate::UI

@@ -8,6 +8,7 @@
     { "name": "freetype" },
     { "name": "glew" },
     { "name": "glm" },
+    { "name": "magic-enum" },
     { "name": "nlohmann-json" },
     {
       "name": "rpclib",

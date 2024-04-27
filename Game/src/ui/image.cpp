@@ -105,13 +105,22 @@ void Image::SaveProperties( json& properties )
 {
     Element::SaveProperties( properties );
     properties[ sImagePropertyFile ] = m_Path;
+
+    if ( !HasFlag( ElementFlags_DynamicSize ) )
+    {
+        properties[ sImagePropertyAutoSize ] = m_AutoSize;
+    }
 }
 
 void Image::LoadProperties( const json& properties )
 {
     Element::LoadProperties( properties );
 
-    if ( properties.contains( sImagePropertyAutoSize ) )
+    if ( HasFlag( ElementFlags_DynamicSize ) )
+    {
+        m_AutoSize = false;
+    }
+    else if ( properties.contains( sImagePropertyAutoSize ) )
     {
         m_AutoSize = properties[ sImagePropertyAutoSize ].get<bool>();
     }
