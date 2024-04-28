@@ -8,12 +8,11 @@
                     "r": false,
                     "t": true
                 },
-                "auto_size": false,
                 "file": "data/ui/portraits/Chrysamere_large.jpg",
                 "flags": 1,
                 "size": {
-                    "h": 900.0,
-                    "w": 736.0
+                    "h": 1080.0,
+                    "w": 883.0
                 }
             }
         },
@@ -4997,8 +4996,8 @@
             "center_h": true,
             "center_v": true,
             "position": {
-                "x": 218.0,
-                "y": 150.0
+                "x": 1218.0,
+                "y": 240.0
             },
             "size": {
                 "h": 600.0,
@@ -5252,7 +5251,7 @@
             },
             "size": {
                 "h": 60.0,
-                "w": 1440.0
+                "w": 3440.0
             }
         }
     },
@@ -5620,7 +5619,7 @@
             },
             "size": {
                 "h": 38.0,
-                "w": 1440.0
+                "w": 3440.0
             }
         }
     },

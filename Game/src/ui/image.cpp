@@ -36,9 +36,10 @@ Image::Image( const std::string& name, const std::string& path /* = "" */ )
     , m_pImage( nullptr )
     , m_pResource( nullptr )
     , m_Path( path )
-    , m_AutoSize( true )
 {
     using namespace Genesis;
+
+    SetFlags( ElementFlags_DynamicSize );
 
     GetPanel()->SetColor( 0.0f, 0.0f, 0.0f, 0.0f );
     GetPanel()->SetBorderColor( 0.0f, 0.0f, 0.0f, 0.0f );
@@ -92,7 +93,7 @@ void Image::LoadResources()
         else
         {
             m_pImage->SetTexture( m_pResource );
-            SetAutoSize( m_AutoSize );
+            SetSize( static_cast<int>( m_pResource->GetWidth() ), static_cast<int>( m_pResource->GetHeight() ) );
         }
     }
 }
@@ -101,27 +102,11 @@ void Image::SaveProperties( json& properties )
 {
     Element::SaveProperties( properties );
     properties[ sImagePropertyFile ] = m_Path;
-
-    // Only add the auto size flag if this isn't a dynamic element and not the default value.
-    // No point in bloating the design.
-    if ( !HasFlag( ElementFlags_DynamicSize ) && !m_AutoSize )
-    {
-        properties[ sImagePropertyAutoSize ] = false;
-    }
 }
 
 void Image::LoadProperties( const json& properties )
 {
     Element::LoadProperties( properties );
-
-    if ( HasFlag( ElementFlags_DynamicSize ) )
-    {
-        SetAutoSize( false );
-    }
-    else if ( properties.contains( sImagePropertyAutoSize ) )
-    {
-        SetAutoSize( properties[ sImagePropertyAutoSize ].get<bool>() );
-    }
 
     if ( properties.contains( sImagePropertyFile ) )
     {
@@ -136,12 +121,6 @@ void Image::RenderProperties()
 
     if ( ImGui::CollapsingHeader( "Image", ImGuiTreeNodeFlags_DefaultOpen ) )
     {
-        bool autoSize = m_AutoSize;
-        if ( ImGui::Checkbox( "Auto size", &autoSize ) )
-        {
-            SetAutoSize( autoSize );
-        }
-
         ImGui::InputText( "Image", &m_Path );
         if ( ImGui::Button( "Reload images" ) )
         {
@@ -154,21 +133,6 @@ void Image::SetSize( int width, int height )
 {
     Element::SetSize( width, height );
     m_pImage->SetSize( width, height );
-}
-
-void Image::SetAutoSize( bool state )
-{
-    m_AutoSize = state;
-
-    if ( m_AutoSize )
-    {
-        SetFlags( ElementFlags_DynamicSize );
-
-        if ( m_pResource )
-        {
-            SetSize( static_cast<int>( m_pResource->GetWidth() ), static_cast<int>( m_pResource->GetHeight() ) );
-        }
-    }
 }
 
 } // namespace Hexterminate::UI

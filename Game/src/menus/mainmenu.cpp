@@ -113,7 +113,6 @@ void MainMenu::CreateCharacterImage()
 
     m_pCharacterImage = std::make_shared<UI::Image>( "Character image", "data/ui/portraits/Chrysamere_large.jpg" );
     m_pCharacterImage->SetFlags( UI::ElementFlags_NoSerialize | UI::ElementFlags_DynamicSize );
-    m_pCharacterImage->SetAutoSize( false );
     m_pCharacterImage->SetBlendMode( UI::Image::BlendMode::Add );
     m_pCharacterImage->SetShader( "gui_portrait_menu" );
     const float ratio = static_cast<float>( m_pCharacterImage->GetWidth() ) / static_cast<float>( m_pCharacterImage->GetHeight() );

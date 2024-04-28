@@ -55,7 +55,6 @@ public:
     virtual bool IsResizeable() const override;
     virtual void SetSize( int width, int height ) override;
 
-    void SetAutoSize( bool autoSize );
     void SetBlendMode( BlendMode blendMode );
     void SetColor( const Genesis::Color& color );
     void SetColor( float r, float g, float b, float a );
@@ -70,7 +69,6 @@ protected:
     Genesis::Gui::Image* m_pImage;
     Genesis::ResourceImage* m_pResource;
     std::string m_Path;
-    bool m_AutoSize;
 };
 
 inline bool Image::IsResizeable() const
