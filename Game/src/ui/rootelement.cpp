@@ -49,6 +49,11 @@ RootElement::~RootElement()
 
 void RootElement::Save()
 {
+    if ( GetChildren().size() > 0 )
+    {
+        m_pDesign->Clear();
+    }
+
     json& rootData = m_pDesign->Get( "" );
     SaveInternal( rootData, false );
     m_pDesign->Save();

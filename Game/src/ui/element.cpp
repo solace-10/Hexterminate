@@ -217,17 +217,23 @@ void Element::SaveProperties( json& properties )
         properties[ sElementPropertyFlags ] = GetFlags();
     }
 
-    glm::vec2 pos = m_pPanel->GetPosition();
-    properties[ sElementPropertyPosition ] = {
-        { "x", pos.x },
-        { "y", pos.y }
-    };
+    if ( !HasFlag( ElementFlags_DynamicPosition ) )
+    {
+        glm::vec2 pos = m_pPanel->GetPosition();
+        properties[ sElementPropertyPosition ] = {
+            { "x", pos.x },
+            { "y", pos.y }
+        };
+    }
 
-    glm::vec2 size = m_pPanel->GetSize();
-    properties[ sElementPropertySize ] = {
-        { "w", size.x },
-        { "h", size.y }
-    };
+    if ( !HasFlag( ElementFlags_DynamicSize ) )
+    {
+        glm::vec2 size = m_pPanel->GetSize();
+        properties[ sElementPropertySize ] = {
+            { "w", size.x },
+            { "h", size.y }
+        };
+    }
 
     properties[ sElementPropertyAnchor ] = {
         { "t", m_AnchorTop },
@@ -239,8 +245,21 @@ void Element::SaveProperties( json& properties )
 
 void Element::LoadProperties( const json& properties )
 {
-    const json& position = properties[ sElementPropertyPosition ];
-    SetPosition( position[ "x" ].get<int>(), position[ "y" ].get<int>() );
+    auto flagsIt = properties.find( sElementPropertyFlags );
+    if ( flagsIt != properties.end() && flagsIt->is_number_integer() )
+    {
+        m_Flags = flagsIt->get<int>();
+    }
+
+    if ( !HasFlag( ElementFlags_DynamicPosition ) )
+    {
+        auto positionIt = properties.find( sElementPropertyPosition );
+        if ( positionIt != properties.end() )
+        {
+            const json& position = *positionIt;
+            SetPosition( position[ "x" ].get<int>(), position[ "y" ].get<int>() );
+        }
+    }
 
     const json& anchor = properties[ sElementPropertyAnchor ];
     m_AnchorTop = anchor[ "t" ].get<bool>();
@@ -248,10 +267,17 @@ void Element::LoadProperties( const json& properties )
     m_AnchorBottom = anchor[ "b" ].get<bool>();
     m_AnchorRight = anchor[ "r" ].get<bool>();
 
-    const json& size = properties[ sElementPropertySize ];
-    const int w = size[ "w" ].get<int>();
-    const int h = size[ "h" ].get<int>();
-    SetSize( w, h );
+    if ( !HasFlag( ElementFlags_DynamicSize ) )
+    {
+        auto sizeIt = properties.find( sElementPropertySize );
+        if ( sizeIt != properties.end() )
+        {
+            const json& size = *sizeIt;
+            const int w = size[ "w" ].get<int>();
+            const int h = size[ "h" ].get<int>();
+            SetSize( w, h );
+        }
+    }
 }
 
 void Element::InputIntExt( const char* label, int* v, bool isReadOnly /* = false */ )

@@ -41,6 +41,8 @@ public:
     json& Get( const std::string& path );
     const std::string& GetName() const;
 
+    void Clear();
+
 private:
     std::string m_Name;
     std::filesystem::path m_Path;

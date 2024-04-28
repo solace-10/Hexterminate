@@ -8,12 +8,9 @@
                     "r": false,
                     "t": true
                 },
+                "auto_size": false,
                 "file": "data/ui/portraits/Chrysamere_large.jpg",
                 "flags": 1,
-                "position": {
-                    "x": 0.0,
-                    "y": 0.0
-                },
                 "size": {
                     "h": 900.0,
                     "w": 736.0
@@ -32,29 +29,6 @@
             "position": {
                 "x": 0.0,
                 "y": 0.0
-            },
-            "size": {
-                "h": 900.0,
-                "w": 1440.0
-            }
-        }
-    },
-    "Character image": {
-        "properties": {
-            "anchor": {
-                "b": false,
-                "l": true,
-                "r": false,
-                "t": true
-            },
-            "file": "data/ui/portraits/Chrysamere_large.jpg",
-            "position": {
-                "x": 1338.0,
-                "y": 0.0
-            },
-            "size": {
-                "h": 1440.0,
-                "w": 1177.0
             }
         }
     },
@@ -72,13 +46,10 @@
                                     "t": true
                                 },
                                 "file": "data/ui/icons/arrowdown.png",
+                                "flags": 2,
                                 "position": {
                                     "x": 0.0,
                                     "y": 656.0
-                                },
-                                "size": {
-                                    "h": 16.0,
-                                    "w": 16.0
                                 }
                             }
                         },
@@ -91,13 +62,10 @@
                                     "t": true
                                 },
                                 "file": "data/ui/icons/arrowup.png",
+                                "flags": 2,
                                 "position": {
                                     "x": 0.0,
                                     "y": 0.0
-                                },
-                                "size": {
-                                    "h": 16.0,
-                                    "w": 16.0
                                 }
                             }
                         },
@@ -158,9 +126,7 @@
                         "Autocannons": null,
                         "Bridge": null,
                         "CORE MODULES": null,
-                        "Codex": null,
                         "Covariant shield array": null,
-                        "Covariant shield arrays": null,
                         "Deflector shields": null,
                         "Empire": null,
                         "Engine disruptors": null,
@@ -176,9 +142,7 @@
                         "Module repairers": null,
                         "Null point generators": null,
                         "Particle accelerator": null,
-                        "Particle accelerators": null,
                         "Phase barrier": null,
-                        "Phase barriers": null,
                         "Pirates": null,
                         "Powered armour": null,
                         "Ramming prows": null,
@@ -187,7 +151,6 @@
                         "Regenerative armour": null,
                         "Rocket launchers": null,
                         "SHIELDS": null,
-                        "SYSTEM": null,
                         "Shield batteries": null,
                         "Torpedo launchers": null,
                         "Unaligned Sectors": null,
@@ -250,114 +213,6 @@
                 }
             },
             "Content panel": {
-                "Content area": {
-                    "Scrollbar background": {
-                        "Scroll down image": {
-                            "properties": {
-                                "file": "data/ui/icons/arrowdown.png",
-                                "position": {
-                                    "x": 0,
-                                    "y": 656
-                                },
-                                "size": {
-                                    "h": 16,
-                                    "w": 16
-                                }
-                            }
-                        },
-                        "Scroll up image": {
-                            "properties": {
-                                "file": "data/ui/icons/arrowup.png",
-                                "position": {
-                                    "x": 0,
-                                    "y": 0
-                                },
-                                "size": {
-                                    "h": 16,
-                                    "w": 16
-                                }
-                            }
-                        },
-                        "Scrollbar": {
-                            "properties": {
-                                "border": {
-                                    "bottom": false,
-                                    "left": false,
-                                    "right": false,
-                                    "top": false
-                                },
-                                "position": {
-                                    "x": 0,
-                                    "y": 16
-                                },
-                                "size": {
-                                    "h": 64,
-                                    "w": 16
-                                }
-                            }
-                        },
-                        "properties": {
-                            "border": {
-                                "bottom": false,
-                                "left": false,
-                                "right": false,
-                                "top": false
-                            },
-                            "position": {
-                                "x": 562,
-                                "y": 0
-                            },
-                            "size": {
-                                "h": 672,
-                                "w": 16
-                            }
-                        }
-                    },
-                    "Scrolling area": {
-                        "Content text": {
-                            "properties": {
-                                "color": {
-                                    "a": 1,
-                                    "b": 1,
-                                    "g": 1,
-                                    "r": 1
-                                },
-                                "font": "kimberley18light.fnt",
-                                "label": "",
-                                "line_spacing": 1.399999976158142,
-                                "multiline": true,
-                                "position": {
-                                    "x": 8,
-                                    "y": 8
-                                },
-                                "size": {
-                                    "h": 672,
-                                    "w": 548
-                                }
-                            }
-                        },
-                        "properties": {
-                            "position": {
-                                "x": 0,
-                                "y": -2
-                            },
-                            "size": {
-                                "h": 680,
-                                "w": 562
-                            }
-                        }
-                    },
-                    "properties": {
-                        "position": {
-                            "x": 0,
-                            "y": 1
-                        },
-                        "size": {
-                            "h": 672,
-                            "w": 578
-                        }
-                    }
-                },
                 "Content text": {
                     "properties": {
                         "anchor": {
@@ -395,13 +250,10 @@
                             "t": true
                         },
                         "file": "data/codex/modulewireframe.png",
+                        "flags": 2,
                         "position": {
                             "x": 50.0,
                             "y": 60.0
-                        },
-                        "size": {
-                            "h": 527.0,
-                            "w": 473.0
                         }
                     }
                 },
@@ -765,13 +617,10 @@
                                 "t": true
                             },
                             "file": "",
+                            "flags": 2,
                             "position": {
                                 "x": 0.0,
                                 "y": 0.0
-                            },
-                            "size": {
-                                "h": 128.0,
-                                "w": 128.0
                             }
                         }
                     },
@@ -810,20 +659,11 @@
                             "r": false,
                             "t": true
                         },
-                        "border": {
-                            "bottom": false,
-                            "left": false,
-                            "right": false,
-                            "top": false
-                        },
                         "file": "data/ui/widgets/fleetbg.png",
+                        "flags": 2,
                         "position": {
                             "x": 4.0,
                             "y": 32.0
-                        },
-                        "size": {
-                            "h": 101.0,
-                            "w": 192.0
                         }
                     }
                 },
@@ -915,13 +755,10 @@
                                 "t": true
                             },
                             "file": "",
+                            "flags": 2,
                             "position": {
                                 "x": 0.0,
                                 "y": 0.0
-                            },
-                            "size": {
-                                "h": 128.0,
-                                "w": 128.0
                             }
                         }
                     },
@@ -960,20 +797,11 @@
                             "r": false,
                             "t": true
                         },
-                        "border": {
-                            "bottom": false,
-                            "left": false,
-                            "right": false,
-                            "top": false
-                        },
                         "file": "data/ui/widgets/fleetbg.png",
+                        "flags": 2,
                         "position": {
                             "x": 4.0,
                             "y": 137.0
-                        },
-                        "size": {
-                            "h": 101.0,
-                            "w": 192.0
                         }
                     }
                 },
@@ -1065,13 +893,10 @@
                                 "t": true
                             },
                             "file": "",
+                            "flags": 2,
                             "position": {
                                 "x": 0.0,
                                 "y": 0.0
-                            },
-                            "size": {
-                                "h": 128.0,
-                                "w": 128.0
                             }
                         }
                     },
@@ -1110,20 +935,11 @@
                             "r": false,
                             "t": true
                         },
-                        "border": {
-                            "bottom": false,
-                            "left": false,
-                            "right": false,
-                            "top": false
-                        },
                         "file": "data/ui/widgets/fleetbg.png",
+                        "flags": 2,
                         "position": {
                             "x": 4.0,
                             "y": 242.0
-                        },
-                        "size": {
-                            "h": 101.0,
-                            "w": 192.0
                         }
                     }
                 },
@@ -1215,13 +1031,10 @@
                                 "t": true
                             },
                             "file": "data/ui/icons/perks_large.png",
+                            "flags": 2,
                             "position": {
                                 "x": 76.0,
                                 "y": 14.0
-                            },
-                            "size": {
-                                "h": 48.0,
-                                "w": 48.0
                             }
                         }
                     },
@@ -1260,20 +1073,11 @@
                             "r": false,
                             "t": true
                         },
-                        "border": {
-                            "bottom": false,
-                            "left": false,
-                            "right": false,
-                            "top": false
-                        },
                         "file": "data/ui/widgets/fleetbg.png",
+                        "flags": 2,
                         "position": {
                             "x": 4.0,
                             "y": 347.0
-                        },
-                        "size": {
-                            "h": 101.0,
-                            "w": 192.0
                         }
                     }
                 },
@@ -1365,13 +1169,10 @@
                                 "t": true
                             },
                             "file": "data/ui/icons/perks_large.png",
+                            "flags": 2,
                             "position": {
                                 "x": 76.0,
                                 "y": 14.0
-                            },
-                            "size": {
-                                "h": 48.0,
-                                "w": 48.0
                             }
                         }
                     },
@@ -1410,20 +1211,11 @@
                             "r": false,
                             "t": true
                         },
-                        "border": {
-                            "bottom": false,
-                            "left": false,
-                            "right": false,
-                            "top": false
-                        },
                         "file": "data/ui/widgets/fleetbg.png",
+                        "flags": 2,
                         "position": {
                             "x": 4.0,
                             "y": 452.0
-                        },
-                        "size": {
-                            "h": 101.0,
-                            "w": 192.0
                         }
                     }
                 },
@@ -1450,68 +1242,6 @@
                     }
                 }
             },
-            "Fleet subtitle": {
-                "properties": {
-                    "color": {
-                        "a": 1,
-                        "b": 0.6901960968971252,
-                        "g": 0.6392157077789307,
-                        "r": 0.30980393290519714
-                    },
-                    "font": "kimberley22.fnt",
-                    "label": "Fleet",
-                    "line_spacing": 1.399999976158142,
-                    "multiline": false,
-                    "position": {
-                        "x": 4,
-                        "y": 4
-                    },
-                    "size": {
-                        "h": 128,
-                        "w": 128
-                    }
-                }
-            },
-            "Requisition ships panel": {
-                "Requisition ships subtitle": {
-                    "properties": {
-                        "color": {
-                            "a": 1,
-                            "b": 0.6901960968971252,
-                            "g": 0.6392157077789307,
-                            "r": 0.30980393290519714
-                        },
-                        "font": "kimberley22.fnt",
-                        "label": "> Requisition ships",
-                        "line_spacing": 1.399999976158142,
-                        "multiline": false,
-                        "position": {
-                            "x": 4,
-                            "y": 4
-                        },
-                        "size": {
-                            "h": 128,
-                            "w": 256
-                        }
-                    }
-                },
-                "properties": {
-                    "border": {
-                        "bottom": false,
-                        "left": false,
-                        "right": false,
-                        "top": false
-                    },
-                    "position": {
-                        "x": 208,
-                        "y": 4
-                    },
-                    "size": {
-                        "h": 560,
-                        "w": 788
-                    }
-                }
-            },
             "Requisition ships panel ": {
                 "Requisition ships area": {
                     "Scrollbar background": {
@@ -1524,13 +1254,10 @@
                                     "t": true
                                 },
                                 "file": "data/ui/icons/arrowdown.png",
+                                "flags": 2,
                                 "position": {
                                     "x": 0.0,
                                     "y": 510.0
-                                },
-                                "size": {
-                                    "h": 16.0,
-                                    "w": 16.0
                                 }
                             }
                         },
@@ -1543,13 +1270,10 @@
                                     "t": true
                                 },
                                 "file": "data/ui/icons/arrowup.png",
+                                "flags": 2,
                                 "position": {
                                     "x": 0.0,
                                     "y": 0.0
-                                },
-                                "size": {
-                                    "h": 16.0,
-                                    "w": 16.0
                                 }
                             }
                         },
@@ -1569,7 +1293,7 @@
                                 },
                                 "position": {
                                     "x": 0.0,
-                                    "y": 190.0
+                                    "y": 16.0
                                 },
                                 "size": {
                                     "h": 64.0,
@@ -1635,13 +1359,10 @@
                                                 "t": true
                                             },
                                             "file": "data/ui/icons/defense.png",
+                                            "flags": 2,
                                             "position": {
                                                 "x": 8.0,
                                                 "y": 36.0
-                                            },
-                                            "size": {
-                                                "h": 24.0,
-                                                "w": 24.0
                                             }
                                         }
                                     },
@@ -1682,13 +1403,10 @@
                                                 "t": true
                                             },
                                             "file": "data/ui/icons/galaxy_influence.png",
+                                            "flags": 2,
                                             "position": {
                                                 "x": 9.0,
                                                 "y": 69.0
-                                            },
-                                            "size": {
-                                                "h": 24.0,
-                                                "w": 24.0
                                             }
                                         }
                                     },
@@ -1729,13 +1447,10 @@
                                                 "t": true
                                             },
                                             "file": "data/ui/icons/galaxy_perks.png",
+                                            "flags": 2,
                                             "position": {
                                                 "x": 9.0,
                                                 "y": 101.0
-                                            },
-                                            "size": {
-                                                "h": 24.0,
-                                                "w": 24.0
                                             }
                                         }
                                     },
@@ -1776,13 +1491,10 @@
                                                 "t": true
                                             },
                                             "file": "data/ui/icons/attack.png",
+                                            "flags": 2,
                                             "position": {
                                                 "x": 8.0,
                                                 "y": 4.0
-                                            },
-                                            "size": {
-                                                "h": 26.0,
-                                                "w": 26.0
                                             }
                                         }
                                     },
@@ -1873,13 +1585,10 @@
                                         "t": true
                                     },
                                     "file": "data/ui/ships/ironclad.png",
+                                    "flags": 2,
                                     "position": {
                                         "x": 1.0,
                                         "y": 1.0
-                                    },
-                                    "size": {
-                                        "h": 200.0,
-                                        "w": 763.0
                                     }
                                 }
                             },
@@ -1940,13 +1649,10 @@
                                                 "t": true
                                             },
                                             "file": "data/ui/icons/defense.png",
+                                            "flags": 2,
                                             "position": {
                                                 "x": 8.0,
                                                 "y": 36.0
-                                            },
-                                            "size": {
-                                                "h": 24.0,
-                                                "w": 24.0
                                             }
                                         }
                                     },
@@ -1987,13 +1693,10 @@
                                                 "t": true
                                             },
                                             "file": "data/ui/icons/galaxy_influence.png",
+                                            "flags": 2,
                                             "position": {
                                                 "x": 9.0,
                                                 "y": 69.0
-                                            },
-                                            "size": {
-                                                "h": 24.0,
-                                                "w": 24.0
                                             }
                                         }
                                     },
@@ -2034,13 +1737,10 @@
                                                 "t": true
                                             },
                                             "file": "data/ui/icons/galaxy_perks.png",
+                                            "flags": 2,
                                             "position": {
                                                 "x": 9.0,
                                                 "y": 101.0
-                                            },
-                                            "size": {
-                                                "h": 24.0,
-                                                "w": 24.0
                                             }
                                         }
                                     },
@@ -2081,13 +1781,10 @@
                                                 "t": true
                                             },
                                             "file": "data/ui/icons/attack.png",
+                                            "flags": 2,
                                             "position": {
                                                 "x": 8.0,
                                                 "y": 4.0
-                                            },
-                                            "size": {
-                                                "h": 26.0,
-                                                "w": 26.0
                                             }
                                         }
                                     },
@@ -2178,13 +1875,10 @@
                                         "t": true
                                     },
                                     "file": "data/ui/ships/lancer.png",
+                                    "flags": 2,
                                     "position": {
                                         "x": 1.0,
                                         "y": 1.0
-                                    },
-                                    "size": {
-                                        "h": 200.0,
-                                        "w": 763.0
                                     }
                                 }
                             },
@@ -2245,13 +1939,10 @@
                                                 "t": true
                                             },
                                             "file": "data/ui/icons/defense.png",
+                                            "flags": 2,
                                             "position": {
                                                 "x": 8.0,
                                                 "y": 36.0
-                                            },
-                                            "size": {
-                                                "h": 24.0,
-                                                "w": 24.0
                                             }
                                         }
                                     },
@@ -2292,13 +1983,10 @@
                                                 "t": true
                                             },
                                             "file": "data/ui/icons/galaxy_influence.png",
+                                            "flags": 2,
                                             "position": {
                                                 "x": 9.0,
                                                 "y": 69.0
-                                            },
-                                            "size": {
-                                                "h": 24.0,
-                                                "w": 24.0
                                             }
                                         }
                                     },
@@ -2339,13 +2027,10 @@
                                                 "t": true
                                             },
                                             "file": "data/ui/icons/galaxy_perks.png",
+                                            "flags": 2,
                                             "position": {
                                                 "x": 9.0,
                                                 "y": 101.0
-                                            },
-                                            "size": {
-                                                "h": 24.0,
-                                                "w": 24.0
                                             }
                                         }
                                     },
@@ -2386,13 +2071,10 @@
                                                 "t": true
                                             },
                                             "file": "data/ui/icons/attack.png",
+                                            "flags": 2,
                                             "position": {
                                                 "x": 8.0,
                                                 "y": 4.0
-                                            },
-                                            "size": {
-                                                "h": 26.0,
-                                                "w": 26.0
                                             }
                                         }
                                     },
@@ -2483,13 +2165,10 @@
                                         "t": true
                                     },
                                     "file": "data/ui/ships/phalanx.png",
+                                    "flags": 2,
                                     "position": {
                                         "x": 1.0,
                                         "y": 1.0
-                                    },
-                                    "size": {
-                                        "h": 200.0,
-                                        "w": 763.0
                                     }
                                 }
                             },
@@ -2525,7 +2204,7 @@
                             },
                             "position": {
                                 "x": 0.0,
-                                "y": -788.0
+                                "y": 0.0
                             },
                             "size": {
                                 "h": 2466.0,
@@ -2566,13 +2245,10 @@
                                                 "t": true
                                             },
                                             "file": "data/ui/icons/defense.png",
+                                            "flags": 2,
                                             "position": {
                                                 "x": 8.0,
                                                 "y": 36.0
-                                            },
-                                            "size": {
-                                                "h": 24.0,
-                                                "w": 24.0
                                             }
                                         }
                                     },
@@ -2613,13 +2289,10 @@
                                                 "t": true
                                             },
                                             "file": "data/ui/icons/galaxy_influence.png",
+                                            "flags": 2,
                                             "position": {
                                                 "x": 9.0,
                                                 "y": 69.0
-                                            },
-                                            "size": {
-                                                "h": 24.0,
-                                                "w": 24.0
                                             }
                                         }
                                     },
@@ -2660,13 +2333,10 @@
                                                 "t": true
                                             },
                                             "file": "data/ui/icons/galaxy_perks.png",
+                                            "flags": 2,
                                             "position": {
                                                 "x": 9.0,
                                                 "y": 101.0
-                                            },
-                                            "size": {
-                                                "h": 24.0,
-                                                "w": 24.0
                                             }
                                         }
                                     },
@@ -2707,13 +2377,10 @@
                                                 "t": true
                                             },
                                             "file": "data/ui/icons/attack.png",
+                                            "flags": 2,
                                             "position": {
                                                 "x": 8.0,
                                                 "y": 4.0
-                                            },
-                                            "size": {
-                                                "h": 26.0,
-                                                "w": 26.0
                                             }
                                         }
                                     },
@@ -2804,13 +2471,10 @@
                                         "t": true
                                     },
                                     "file": "data/ui/ships/glory.png",
+                                    "flags": 2,
                                     "position": {
                                         "x": 1.0,
                                         "y": 1.0
-                                    },
-                                    "size": {
-                                        "h": 200.0,
-                                        "w": 763.0
                                     }
                                 }
                             },
@@ -2871,13 +2535,10 @@
                                                 "t": true
                                             },
                                             "file": "data/ui/icons/defense.png",
+                                            "flags": 2,
                                             "position": {
                                                 "x": 8.0,
                                                 "y": 36.0
-                                            },
-                                            "size": {
-                                                "h": 24.0,
-                                                "w": 24.0
                                             }
                                         }
                                     },
@@ -2918,13 +2579,10 @@
                                                 "t": true
                                             },
                                             "file": "data/ui/icons/galaxy_influence.png",
+                                            "flags": 2,
                                             "position": {
                                                 "x": 9.0,
                                                 "y": 69.0
-                                            },
-                                            "size": {
-                                                "h": 24.0,
-                                                "w": 24.0
                                             }
                                         }
                                     },
@@ -2965,13 +2623,10 @@
                                                 "t": true
                                             },
                                             "file": "data/ui/icons/galaxy_perks.png",
+                                            "flags": 2,
                                             "position": {
                                                 "x": 9.0,
                                                 "y": 101.0
-                                            },
-                                            "size": {
-                                                "h": 24.0,
-                                                "w": 24.0
                                             }
                                         }
                                     },
@@ -3012,13 +2667,10 @@
                                                 "t": true
                                             },
                                             "file": "data/ui/icons/attack.png",
+                                            "flags": 2,
                                             "position": {
                                                 "x": 8.0,
                                                 "y": 4.0
-                                            },
-                                            "size": {
-                                                "h": 26.0,
-                                                "w": 26.0
                                             }
                                         }
                                     },
@@ -3109,13 +2761,10 @@
                                         "t": true
                                     },
                                     "file": "data/ui/ships/keeper.png",
+                                    "flags": 2,
                                     "position": {
                                         "x": 1.0,
                                         "y": 1.0
-                                    },
-                                    "size": {
-                                        "h": 200.0,
-                                        "w": 763.0
                                     }
                                 }
                             },
@@ -3176,13 +2825,10 @@
                                                 "t": true
                                             },
                                             "file": "data/ui/icons/defense.png",
+                                            "flags": 2,
                                             "position": {
                                                 "x": 8.0,
                                                 "y": 36.0
-                                            },
-                                            "size": {
-                                                "h": 24.0,
-                                                "w": 24.0
                                             }
                                         }
                                     },
@@ -3223,13 +2869,10 @@
                                                 "t": true
                                             },
                                             "file": "data/ui/icons/galaxy_influence.png",
+                                            "flags": 2,
                                             "position": {
                                                 "x": 9.0,
                                                 "y": 69.0
-                                            },
-                                            "size": {
-                                                "h": 24.0,
-                                                "w": 24.0
                                             }
                                         }
                                     },
@@ -3270,13 +2913,10 @@
                                                 "t": true
                                             },
                                             "file": "data/ui/icons/galaxy_perks.png",
+                                            "flags": 2,
                                             "position": {
                                                 "x": 9.0,
                                                 "y": 101.0
-                                            },
-                                            "size": {
-                                                "h": 24.0,
-                                                "w": 24.0
                                             }
                                         }
                                     },
@@ -3317,13 +2957,10 @@
                                                 "t": true
                                             },
                                             "file": "data/ui/icons/attack.png",
+                                            "flags": 2,
                                             "position": {
                                                 "x": 8.0,
                                                 "y": 4.0
-                                            },
-                                            "size": {
-                                                "h": 26.0,
-                                                "w": 26.0
                                             }
                                         }
                                     },
@@ -3414,13 +3051,10 @@
                                         "t": true
                                     },
                                     "file": "data/ui/ships/wyvern.png",
+                                    "flags": 2,
                                     "position": {
                                         "x": 1.0,
                                         "y": 1.0
-                                    },
-                                    "size": {
-                                        "h": 200.0,
-                                        "w": 763.0
                                     }
                                 }
                             },
@@ -3481,13 +3115,10 @@
                                                 "t": true
                                             },
                                             "file": "data/ui/icons/defense.png",
+                                            "flags": 2,
                                             "position": {
                                                 "x": 8.0,
                                                 "y": 36.0
-                                            },
-                                            "size": {
-                                                "h": 24.0,
-                                                "w": 24.0
                                             }
                                         }
                                     },
@@ -3528,13 +3159,10 @@
                                                 "t": true
                                             },
                                             "file": "data/ui/icons/galaxy_influence.png",
+                                            "flags": 2,
                                             "position": {
                                                 "x": 9.0,
                                                 "y": 69.0
-                                            },
-                                            "size": {
-                                                "h": 24.0,
-                                                "w": 24.0
                                             }
                                         }
                                     },
@@ -3575,13 +3203,10 @@
                                                 "t": true
                                             },
                                             "file": "data/ui/icons/galaxy_perks.png",
+                                            "flags": 2,
                                             "position": {
                                                 "x": 9.0,
                                                 "y": 101.0
-                                            },
-                                            "size": {
-                                                "h": 24.0,
-                                                "w": 24.0
                                             }
                                         }
                                     },
@@ -3622,13 +3247,10 @@
                                                 "t": true
                                             },
                                             "file": "data/ui/icons/attack.png",
+                                            "flags": 2,
                                             "position": {
                                                 "x": 8.0,
                                                 "y": 4.0
-                                            },
-                                            "size": {
-                                                "h": 26.0,
-                                                "w": 26.0
                                             }
                                         }
                                     },
@@ -3719,13 +3341,10 @@
                                         "t": true
                                     },
                                     "file": "data/ui/ships/lancer2.png",
+                                    "flags": 2,
                                     "position": {
                                         "x": 1.0,
                                         "y": 1.0
-                                    },
-                                    "size": {
-                                        "h": 200.0,
-                                        "w": 763.0
                                     }
                                 }
                             },
@@ -3786,13 +3405,10 @@
                                                 "t": true
                                             },
                                             "file": "data/ui/icons/defense.png",
+                                            "flags": 2,
                                             "position": {
                                                 "x": 8.0,
                                                 "y": 36.0
-                                            },
-                                            "size": {
-                                                "h": 24.0,
-                                                "w": 24.0
                                             }
                                         }
                                     },
@@ -3833,13 +3449,10 @@
                                                 "t": true
                                             },
                                             "file": "data/ui/icons/galaxy_influence.png",
+                                            "flags": 2,
                                             "position": {
                                                 "x": 9.0,
                                                 "y": 69.0
-                                            },
-                                            "size": {
-                                                "h": 24.0,
-                                                "w": 24.0
                                             }
                                         }
                                     },
@@ -3853,8 +3466,8 @@
                                             },
                                             "color": {
                                                 "a": 1.0,
-                                                "b": 0.0,
-                                                "g": 0.0,
+                                                "b": 1.0,
+                                                "g": 1.0,
                                                 "r": 1.0
                                             },
                                             "font": "kimberley18light.fnt",
@@ -3880,13 +3493,10 @@
                                                 "t": true
                                             },
                                             "file": "data/ui/icons/galaxy_perks.png",
+                                            "flags": 2,
                                             "position": {
                                                 "x": 9.0,
                                                 "y": 101.0
-                                            },
-                                            "size": {
-                                                "h": 24.0,
-                                                "w": 24.0
                                             }
                                         }
                                     },
@@ -3927,13 +3537,10 @@
                                                 "t": true
                                             },
                                             "file": "data/ui/icons/attack.png",
+                                            "flags": 2,
                                             "position": {
                                                 "x": 8.0,
                                                 "y": 4.0
-                                            },
-                                            "size": {
-                                                "h": 26.0,
-                                                "w": 26.0
                                             }
                                         }
                                     },
@@ -4024,13 +3631,10 @@
                                         "t": true
                                     },
                                     "file": "data/ui/ships/dies_irae.png",
+                                    "flags": 2,
                                     "position": {
                                         "x": 1.0,
                                         "y": 1.0
-                                    },
-                                    "size": {
-                                        "h": 200.0,
-                                        "w": 763.0
                                     }
                                 }
                             },
@@ -4091,13 +3695,10 @@
                                                 "t": true
                                             },
                                             "file": "data/ui/icons/defense.png",
+                                            "flags": 2,
                                             "position": {
                                                 "x": 8.0,
                                                 "y": 36.0
-                                            },
-                                            "size": {
-                                                "h": 24.0,
-                                                "w": 24.0
                                             }
                                         }
                                     },
@@ -4138,13 +3739,10 @@
                                                 "t": true
                                             },
                                             "file": "data/ui/icons/galaxy_influence.png",
+                                            "flags": 2,
                                             "position": {
                                                 "x": 9.0,
                                                 "y": 69.0
-                                            },
-                                            "size": {
-                                                "h": 24.0,
-                                                "w": 24.0
                                             }
                                         }
                                     },
@@ -4158,8 +3756,8 @@
                                             },
                                             "color": {
                                                 "a": 1.0,
-                                                "b": 0.0,
-                                                "g": 0.0,
+                                                "b": 1.0,
+                                                "g": 1.0,
                                                 "r": 1.0
                                             },
                                             "font": "kimberley18light.fnt",
@@ -4185,13 +3783,10 @@
                                                 "t": true
                                             },
                                             "file": "data/ui/icons/galaxy_perks.png",
+                                            "flags": 2,
                                             "position": {
                                                 "x": 9.0,
                                                 "y": 101.0
-                                            },
-                                            "size": {
-                                                "h": 24.0,
-                                                "w": 24.0
                                             }
                                         }
                                     },
@@ -4232,13 +3827,10 @@
                                                 "t": true
                                             },
                                             "file": "data/ui/icons/attack.png",
+                                            "flags": 2,
                                             "position": {
                                                 "x": 8.0,
                                                 "y": 4.0
-                                            },
-                                            "size": {
-                                                "h": 26.0,
-                                                "w": 26.0
                                             }
                                         }
                                     },
@@ -4329,13 +3921,10 @@
                                         "t": true
                                     },
                                     "file": "data/ui/ships/tyrant.png",
+                                    "flags": 2,
                                     "position": {
                                         "x": 1.0,
                                         "y": 1.0
-                                    },
-                                    "size": {
-                                        "h": 200.0,
-                                        "w": 763.0
                                     }
                                 }
                             },
@@ -4396,13 +3985,10 @@
                                                 "t": true
                                             },
                                             "file": "data/ui/icons/defense.png",
+                                            "flags": 2,
                                             "position": {
                                                 "x": 8.0,
                                                 "y": 36.0
-                                            },
-                                            "size": {
-                                                "h": 24.0,
-                                                "w": 24.0
                                             }
                                         }
                                     },
@@ -4443,13 +4029,10 @@
                                                 "t": true
                                             },
                                             "file": "data/ui/icons/galaxy_influence.png",
+                                            "flags": 2,
                                             "position": {
                                                 "x": 9.0,
                                                 "y": 69.0
-                                            },
-                                            "size": {
-                                                "h": 24.0,
-                                                "w": 24.0
                                             }
                                         }
                                     },
@@ -4463,8 +4046,8 @@
                                             },
                                             "color": {
                                                 "a": 1.0,
-                                                "b": 0.0,
-                                                "g": 0.0,
+                                                "b": 1.0,
+                                                "g": 1.0,
                                                 "r": 1.0
                                             },
                                             "font": "kimberley18light.fnt",
@@ -4490,13 +4073,10 @@
                                                 "t": true
                                             },
                                             "file": "data/ui/icons/galaxy_perks.png",
+                                            "flags": 2,
                                             "position": {
                                                 "x": 9.0,
                                                 "y": 101.0
-                                            },
-                                            "size": {
-                                                "h": 24.0,
-                                                "w": 24.0
                                             }
                                         }
                                     },
@@ -4537,13 +4117,10 @@
                                                 "t": true
                                             },
                                             "file": "data/ui/icons/attack.png",
+                                            "flags": 2,
                                             "position": {
                                                 "x": 8.0,
                                                 "y": 4.0
-                                            },
-                                            "size": {
-                                                "h": 26.0,
-                                                "w": 26.0
                                             }
                                         }
                                     },
@@ -4634,13 +4211,10 @@
                                         "t": true
                                     },
                                     "file": "data/ui/ships/arbellatris.png",
+                                    "flags": 2,
                                     "position": {
                                         "x": 1.0,
                                         "y": 1.0
-                                    },
-                                    "size": {
-                                        "h": 200.0,
-                                        "w": 763.0
                                     }
                                 }
                             },
@@ -4701,13 +4275,10 @@
                                                 "t": true
                                             },
                                             "file": "data/ui/icons/defense.png",
+                                            "flags": 2,
                                             "position": {
                                                 "x": 8.0,
                                                 "y": 36.0
-                                            },
-                                            "size": {
-                                                "h": 24.0,
-                                                "w": 24.0
                                             }
                                         }
                                     },
@@ -4748,13 +4319,10 @@
                                                 "t": true
                                             },
                                             "file": "data/ui/icons/galaxy_influence.png",
+                                            "flags": 2,
                                             "position": {
                                                 "x": 9.0,
                                                 "y": 69.0
-                                            },
-                                            "size": {
-                                                "h": 24.0,
-                                                "w": 24.0
                                             }
                                         }
                                     },
@@ -4795,13 +4363,10 @@
                                                 "t": true
                                             },
                                             "file": "data/ui/icons/galaxy_perks.png",
+                                            "flags": 2,
                                             "position": {
                                                 "x": 9.0,
                                                 "y": 101.0
-                                            },
-                                            "size": {
-                                                "h": 24.0,
-                                                "w": 24.0
                                             }
                                         }
                                     },
@@ -4842,13 +4407,10 @@
                                                 "t": true
                                             },
                                             "file": "data/ui/icons/attack.png",
+                                            "flags": 2,
                                             "position": {
                                                 "x": 8.0,
                                                 "y": 4.0
-                                            },
-                                            "size": {
-                                                "h": 26.0,
-                                                "w": 26.0
                                             }
                                         }
                                     },
@@ -4939,13 +4501,10 @@
                                         "t": true
                                     },
                                     "file": "data/ui/ships/luna.png",
+                                    "flags": 2,
                                     "position": {
                                         "x": 1.0,
                                         "y": 1.0
-                                    },
-                                    "size": {
-                                        "h": 200.0,
-                                        "w": 763.0
                                     }
                                 }
                             },
@@ -5006,13 +4565,10 @@
                                                 "t": true
                                             },
                                             "file": "data/ui/icons/defense.png",
+                                            "flags": 2,
                                             "position": {
                                                 "x": 8.0,
                                                 "y": 36.0
-                                            },
-                                            "size": {
-                                                "h": 24.0,
-                                                "w": 24.0
                                             }
                                         }
                                     },
@@ -5053,13 +4609,10 @@
                                                 "t": true
                                             },
                                             "file": "data/ui/icons/galaxy_influence.png",
+                                            "flags": 2,
                                             "position": {
                                                 "x": 9.0,
                                                 "y": 69.0
-                                            },
-                                            "size": {
-                                                "h": 24.0,
-                                                "w": 24.0
                                             }
                                         }
                                     },
@@ -5100,13 +4653,10 @@
                                                 "t": true
                                             },
                                             "file": "data/ui/icons/galaxy_perks.png",
+                                            "flags": 2,
                                             "position": {
                                                 "x": 9.0,
                                                 "y": 101.0
-                                            },
-                                            "size": {
-                                                "h": 24.0,
-                                                "w": 24.0
                                             }
                                         }
                                     },
@@ -5147,13 +4697,10 @@
                                                 "t": true
                                             },
                                             "file": "data/ui/icons/attack.png",
+                                            "flags": 2,
                                             "position": {
                                                 "x": 8.0,
                                                 "y": 4.0
-                                            },
-                                            "size": {
-                                                "h": 26.0,
-                                                "w": 26.0
                                             }
                                         }
                                     },
@@ -5244,13 +4791,10 @@
                                         "t": true
                                     },
                                     "file": "data/ui/ships/dominion.png",
+                                    "flags": 2,
                                     "position": {
                                         "x": 1.0,
                                         "y": 1.0
-                                    },
-                                    "size": {
-                                        "h": 200.0,
-                                        "w": 763.0
                                     }
                                 }
                             },
@@ -5343,28 +4887,6 @@
                     "size": {
                         "h": 560.0,
                         "w": 792.0
-                    }
-                }
-            },
-            "Requisition ships subtitle": {
-                "properties": {
-                    "color": {
-                        "a": 1,
-                        "b": 0.6901960968971252,
-                        "g": 0.6392157077789307,
-                        "r": 0.30980393290519714
-                    },
-                    "font": "kimberley22.fnt",
-                    "label": "Requisition ships",
-                    "line_spacing": 1.399999976158142,
-                    "multiline": false,
-                    "position": {
-                        "x": 256,
-                        "y": 4
-                    },
-                    "size": {
-                        "h": 128,
-                        "w": 256
                     }
                 }
             },
@@ -5517,13 +5039,10 @@
                         "t": true
                     },
                     "file": "data\\ui\\icons\\galaxy_influence.png",
+                    "flags": 2,
                     "position": {
                         "x": 256.0,
                         "y": 2.0
-                    },
-                    "size": {
-                        "h": 24.0,
-                        "w": 24.0
                     }
                 }
             },
@@ -5564,13 +5083,10 @@
                         "t": true
                     },
                     "file": "data\\ui\\icons\\galaxy_perks.png",
+                    "flags": 2,
                     "position": {
                         "x": 512.0,
                         "y": 2.0
-                    },
-                    "size": {
-                        "h": 24.0,
-                        "w": 24.0
                     }
                 }
             },
@@ -5611,13 +5127,10 @@
                         "t": true
                     },
                     "file": "data\\ui\\icons\\galaxy_clock.png",
+                    "flags": 2,
                     "position": {
                         "x": 4.0,
                         "y": 2.0
-                    },
-                    "size": {
-                        "h": 24.0,
-                        "w": 24.0
                     }
                 }
             },
@@ -5668,7 +5181,7 @@
                 },
                 "size": {
                     "h": 28.0,
-                    "w": 2560.0
+                    "w": 1440.0
                 }
             }
         },
@@ -5697,7 +5210,7 @@
                     },
                     "size": {
                         "h": 32.0,
-                        "w": 2560.0
+                        "w": 1440.0
                     }
                 }
             },
@@ -5720,7 +5233,7 @@
                 },
                 "size": {
                     "h": 32.0,
-                    "w": 2560.0
+                    "w": 1440.0
                 }
             }
         },
@@ -5756,13 +5269,10 @@
                                 "t": true
                             },
                             "file": "data/ui/icons/arrowdown.png",
+                            "flags": 2,
                             "position": {
                                 "x": 0.0,
                                 "y": 672.0
-                            },
-                            "size": {
-                                "h": 16.0,
-                                "w": 16.0
                             }
                         }
                     },
@@ -5775,13 +5285,10 @@
                                 "t": true
                             },
                             "file": "data/ui/icons/arrowup.png",
+                            "flags": 2,
                             "position": {
                                 "x": 0.0,
                                 "y": 0.0
-                            },
-                            "size": {
-                                "h": 16.0,
-                                "w": 16.0
                             }
                         }
                     },
@@ -5978,7 +5485,6 @@
                     "y": 4.0
                 },
                 "pressed_image": "data/ui/widgets/togglebutton_selected.png",
-                "show": true,
                 "size": {
                     "h": 30.0,
                     "w": 170.0
@@ -6001,7 +5507,6 @@
                     "y": 4.0
                 },
                 "pressed_image": "data/ui/widgets/togglebutton_selected.png",
-                "show": true,
                 "size": {
                     "h": 30.0,
                     "w": 170.0
@@ -6024,7 +5529,6 @@
                     "y": 4.0
                 },
                 "pressed_image": "data/ui/widgets/togglebutton_selected.png",
-                "show": true,
                 "size": {
                     "h": 30.0,
                     "w": 170.0
@@ -6047,7 +5551,6 @@
                     "y": 4.0
                 },
                 "pressed_image": "data/ui/widgets/togglebutton_selected.png",
-                "show": true,
                 "size": {
                     "h": 30.0,
                     "w": 170.0
@@ -6070,7 +5573,6 @@
                     "y": 4.0
                 },
                 "pressed_image": "data/ui/widgets/togglebutton_selected.png",
-                "show": true,
                 "size": {
                     "h": 30.0,
                     "w": 170.0
@@ -6093,7 +5595,6 @@
                     "y": 4.0
                 },
                 "pressed_image": "data/ui/widgets/togglebutton_selected.png",
-                "show": true,
                 "size": {
                     "h": 30.0,
                     "w": 170.0
@@ -6117,22 +5618,9 @@
                 "x": 0.0,
                 "y": 860.0
             },
-            "show": true,
             "size": {
                 "h": 38.0,
                 "w": 1440.0
-            }
-        }
-    },
-    "Main menu window": {
-        "properties": {
-            "position": {
-                "x": 0,
-                "y": 0
-            },
-            "size": {
-                "h": 128,
-                "w": 128
             }
         }
     },
@@ -6588,8 +6076,7 @@
                             "size": {
                                 "h": 20.0,
                                 "w": 128.0
-                            },
-                            "text": "Tips"
+                            }
                         }
                     },
                     "Title": {
@@ -6818,13 +6305,10 @@
                                     "t": true
                                 },
                                 "file": "data/ui/presence/ascent.png",
+                                "flags": 2,
                                 "position": {
                                     "x": 2.0,
                                     "y": 1.0
-                                },
-                                "size": {
-                                    "h": 94.0,
-                                    "w": 613.0
                                 }
                             }
                         },
@@ -7075,13 +6559,10 @@
                                     "t": true
                                 },
                                 "file": "data/ui/presence/empire.png",
+                                "flags": 2,
                                 "position": {
                                     "x": 2.0,
                                     "y": 1.0
-                                },
-                                "size": {
-                                    "h": 94.0,
-                                    "w": 613.0
                                 }
                             }
                         },
@@ -7332,13 +6813,10 @@
                                     "t": true
                                 },
                                 "file": "data/ui/presence/hegemon.png",
+                                "flags": 2,
                                 "position": {
                                     "x": 2.0,
                                     "y": 1.0
-                                },
-                                "size": {
-                                    "h": 94.0,
-                                    "w": 613.0
                                 }
                             }
                         },
@@ -7589,13 +7067,10 @@
                                     "t": true
                                 },
                                 "file": "data/ui/presence/iriani.png",
+                                "flags": 2,
                                 "position": {
                                     "x": 2.0,
                                     "y": 1.0
-                                },
-                                "size": {
-                                    "h": 94.0,
-                                    "w": 613.0
                                 }
                             }
                         },
@@ -7846,13 +7321,10 @@
                                     "t": true
                                 },
                                 "file": "data/ui/presence/marauders.png",
+                                "flags": 2,
                                 "position": {
                                     "x": 2.0,
                                     "y": 1.0
-                                },
-                                "size": {
-                                    "h": 94.0,
-                                    "w": 613.0
                                 }
                             }
                         },
@@ -8103,13 +7575,10 @@
                                     "t": true
                                 },
                                 "file": "data/ui/presence/pirate.png",
+                                "flags": 2,
                                 "position": {
                                     "x": 2.0,
                                     "y": 1.0
-                                },
-                                "size": {
-                                    "h": 94.0,
-                                    "w": 613.0
                                 }
                             }
                         },
@@ -8383,7 +7852,6 @@
                             "y": 8.0
                         },
                         "pressed_image": "data/ui/widgets/togglebutton_selected.png",
-                        "show": false,
                         "size": {
                             "h": 30.0,
                             "w": 170.0
@@ -8413,7 +7881,6 @@
                                 "x": 4.0,
                                 "y": 4.0
                             },
-                            "show": false,
                             "size": {
                                 "h": 128.0,
                                 "w": 596.0
@@ -8437,7 +7904,6 @@
                             "x": 188.0,
                             "y": 8.0
                         },
-                        "show": false,
                         "size": {
                             "h": 128.0,
                             "w": 604.0
@@ -8460,7 +7926,6 @@
                             "y": 282.0
                         },
                         "pressed_image": "data/ui/widgets/togglebutton_selected.png",
-                        "show": false,
                         "size": {
                             "h": 30.0,
                             "w": 170.0
@@ -8490,7 +7955,6 @@
                                 "x": 4.0,
                                 "y": 4.0
                             },
-                            "show": false,
                             "size": {
                                 "h": 128.0,
                                 "w": 596.0
@@ -8514,7 +7978,6 @@
                             "x": 188.0,
                             "y": 282.0
                         },
-                        "show": false,
                         "size": {
                             "h": 128.0,
                             "w": 604.0
@@ -8537,7 +8000,6 @@
                             "y": 146.0
                         },
                         "pressed_image": "data/ui/widgets/togglebutton_selected.png",
-                        "show": false,
                         "size": {
                             "h": 30.0,
                             "w": 170.0
@@ -8567,7 +8029,6 @@
                                 "x": 4.0,
                                 "y": 4.0
                             },
-                            "show": false,
                             "size": {
                                 "h": 128.0,
                                 "w": 596.0
@@ -8591,7 +8052,6 @@
                             "x": 188.0,
                             "y": 146.0
                         },
-                        "show": false,
                         "size": {
                             "h": 128.0,
                             "w": 604.0
@@ -8609,7 +8069,6 @@
                         "x": 0.0,
                         "y": 0.0
                     },
-                    "show": false,
                     "size": {
                         "h": 688.0,
                         "w": 800.0
@@ -8632,7 +8091,6 @@
                         "y": 650.0
                     },
                     "pressed_image": "data/ui/widgets/togglebutton_selected.png",
-                    "show": true,
                     "size": {
                         "h": 30.0,
                         "w": 170.0
@@ -8655,7 +8113,6 @@
                         "y": 650.0
                     },
                     "pressed_image": "data/ui/widgets/togglebutton_selected.png",
-                    "show": true,
                     "size": {
                         "h": 30.0,
                         "w": 170.0
@@ -8679,7 +8136,6 @@
                             "y": 368.0
                         },
                         "pressed_image": "data/ui/widgets/togglebutton_selected.png",
-                        "show": true,
                         "size": {
                             "h": 30.0,
                             "w": 170.0
@@ -8696,13 +8152,10 @@
                                 "t": true
                             },
                             "file": "data/ui/icons/attack.png",
+                            "flags": 2,
                             "position": {
                                 "x": 220.0,
                                 "y": 135.0
-                            },
-                            "size": {
-                                "h": 26.0,
-                                "w": 26.0
                             }
                         }
                     },
@@ -8734,13 +8187,10 @@
                                 "t": true
                             },
                             "file": "data/ui/icons/defense.png",
+                            "flags": 2,
                             "position": {
                                 "x": 30.0,
                                 "y": 136.0
-                            },
-                            "size": {
-                                "h": 24.0,
-                                "w": 24.0
                             }
                         }
                     },
@@ -8785,7 +8235,6 @@
                                 "x": 4.0,
                                 "y": 4.0
                             },
-                            "show": true,
                             "size": {
                                 "h": 128.0,
                                 "w": 596.0
@@ -8801,13 +8250,10 @@
                                 "t": true
                             },
                             "file": "data/ui/icons/speed.png",
+                            "flags": 2,
                             "position": {
                                 "x": 430.0,
                                 "y": 136.0
-                            },
-                            "size": {
-                                "h": 24.0,
-                                "w": 24.0
                             }
                         }
                     },
@@ -8847,7 +8293,6 @@
                             "x": 188.0,
                             "y": 368.0
                         },
-                        "show": true,
                         "size": {
                             "h": 172.0,
                             "w": 604.0
@@ -8870,7 +8315,6 @@
                             "y": 8.0
                         },
                         "pressed_image": "data/ui/widgets/togglebutton_selected.png",
-                        "show": true,
                         "size": {
                             "h": 30.0,
                             "w": 170.0
@@ -8887,13 +8331,10 @@
                                 "t": true
                             },
                             "file": "data/ui/icons/attack.png",
+                            "flags": 2,
                             "position": {
                                 "x": 220.0,
                                 "y": 135.0
-                            },
-                            "size": {
-                                "h": 26.0,
-                                "w": 26.0
                             }
                         }
                     },
@@ -8925,13 +8366,10 @@
                                 "t": true
                             },
                             "file": "data/ui/icons/defense.png",
+                            "flags": 2,
                             "position": {
                                 "x": 30.0,
                                 "y": 136.0
-                            },
-                            "size": {
-                                "h": 24.0,
-                                "w": 24.0
                             }
                         }
                     },
@@ -8976,7 +8414,6 @@
                                 "x": 4.0,
                                 "y": 4.0
                             },
-                            "show": true,
                             "size": {
                                 "h": 128.0,
                                 "w": 596.0
@@ -8992,13 +8429,10 @@
                                 "t": true
                             },
                             "file": "data/ui/icons/speed.png",
+                            "flags": 2,
                             "position": {
                                 "x": 430.0,
                                 "y": 136.0
-                            },
-                            "size": {
-                                "h": 24.0,
-                                "w": 24.0
                             }
                         }
                     },
@@ -9038,7 +8472,6 @@
                             "x": 188.0,
                             "y": 8.0
                         },
-                        "show": true,
                         "size": {
                             "h": 172.0,
                             "w": 604.0
@@ -9061,7 +8494,6 @@
                             "y": 188.0
                         },
                         "pressed_image": "data/ui/widgets/togglebutton_selected.png",
-                        "show": true,
                         "size": {
                             "h": 30.0,
                             "w": 170.0
@@ -9078,13 +8510,10 @@
                                 "t": true
                             },
                             "file": "data/ui/icons/attack.png",
+                            "flags": 2,
                             "position": {
                                 "x": 220.0,
                                 "y": 135.0
-                            },
-                            "size": {
-                                "h": 26.0,
-                                "w": 26.0
                             }
                         }
                     },
@@ -9116,13 +8545,10 @@
                                 "t": true
                             },
                             "file": "data/ui/icons/defense.png",
+                            "flags": 2,
                             "position": {
                                 "x": 30.0,
                                 "y": 136.0
-                            },
-                            "size": {
-                                "h": 24.0,
-                                "w": 24.0
                             }
                         }
                     },
@@ -9167,7 +8593,6 @@
                                 "x": 4.0,
                                 "y": 4.0
                             },
-                            "show": true,
                             "size": {
                                 "h": 128.0,
                                 "w": 596.0
@@ -9183,13 +8608,10 @@
                                 "t": true
                             },
                             "file": "data/ui/icons/speed.png",
+                            "flags": 2,
                             "position": {
                                 "x": 430.0,
                                 "y": 136.0
-                            },
-                            "size": {
-                                "h": 24.0,
-                                "w": 24.0
                             }
                         }
                     },
@@ -9229,7 +8651,6 @@
                             "x": 188.0,
                             "y": 188.0
                         },
-                        "show": true,
                         "size": {
                             "h": 172.0,
                             "w": 604.0
@@ -9247,7 +8668,6 @@
                         "x": 0.0,
                         "y": 0.0
                     },
-                    "show": true,
                     "size": {
                         "h": 688.0,
                         "w": 800.0
@@ -9271,7 +8691,6 @@
                     "x": 0.0,
                     "y": 32.0
                 },
-                "show": true,
                 "size": {
                     "h": 688.0,
                     "w": 800.0
@@ -9301,7 +8720,6 @@
                         "x": 8.0,
                         "y": 6.0
                     },
-                    "show": true,
                     "size": {
                         "h": 32.0,
                         "w": 800.0
@@ -9325,28 +8743,9 @@
                     "x": 0.0,
                     "y": 0.0
                 },
-                "show": true,
                 "size": {
                     "h": 32.0,
                     "w": 800.0
-                }
-            }
-        },
-        "content": {
-            "properties": {
-                "border": {
-                    "bottom": true,
-                    "left": false,
-                    "right": false,
-                    "top": true
-                },
-                "position": {
-                    "x": 0,
-                    "y": 32
-                },
-                "size": {
-                    "h": 688,
-                    "w": 800
                 }
             }
         },
@@ -9363,41 +8762,9 @@
                 "x": 16.0,
                 "y": 128.0
             },
-            "show": true,
             "size": {
                 "h": 720.0,
                 "w": 800.0
-            }
-        },
-        "title": {
-            "properties": {
-                "border": {
-                    "bottom": false,
-                    "left": false,
-                    "right": false,
-                    "top": true
-                },
-                "position": {
-                    "x": 0,
-                    "y": 0
-                },
-                "size": {
-                    "h": 32,
-                    "w": 800
-                }
-            },
-            "title text": {
-                "properties": {
-                    "label": "test",
-                    "position": {
-                        "x": 0,
-                        "y": 0
-                    },
-                    "size": {
-                        "h": 128,
-                        "w": 128
-                    }
-                }
             }
         }
     },
@@ -9436,13 +8803,10 @@
                                 "t": true
                             },
                             "file": "data/ui/icons/arrowdown.png",
+                            "flags": 2,
                             "position": {
                                 "x": 0.0,
                                 "y": 672.0
-                            },
-                            "size": {
-                                "h": 16.0,
-                                "w": 16.0
                             }
                         }
                     },
@@ -9455,13 +8819,10 @@
                                 "t": true
                             },
                             "file": "data/ui/icons/arrowup.png",
+                            "flags": 2,
                             "position": {
                                 "x": 0.0,
                                 "y": 0.0
-                            },
-                            "size": {
-                                "h": 16.0,
-                                "w": 16.0
                             }
                         }
                     },
@@ -10239,41 +9600,6 @@
                                 }
                             }
                         },
-                        "Post processing checkbox": {
-                            "Text": {
-                                "properties": {
-                                    "color": {
-                                        "a": 1,
-                                        "b": 1,
-                                        "g": 1,
-                                        "r": 1
-                                    },
-                                    "font": "kimberley18.fnt",
-                                    "label": "Post processing",
-                                    "line_spacing": 1.399999976158142,
-                                    "multiline": false,
-                                    "position": {
-                                        "x": 24,
-                                        "y": 2
-                                    },
-                                    "size": {
-                                        "h": 128,
-                                        "w": 128
-                                    }
-                                }
-                            },
-                            "properties": {
-                                "checked": true,
-                                "position": {
-                                    "x": 8,
-                                    "y": 40
-                                },
-                                "size": {
-                                    "h": 24,
-                                    "w": 160
-                                }
-                            }
-                        },
                         "Post processing description panel": {
                             "Text": {
                                 "properties": {
@@ -10517,7 +9843,6 @@
                 "x": 0.0,
                 "y": 0.0
             },
-            "show": true,
             "size": {
                 "h": 128.0,
                 "w": 128.0

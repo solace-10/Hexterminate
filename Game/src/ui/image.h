@@ -73,11 +73,6 @@ protected:
     bool m_AutoSize;
 };
 
-inline void Image::SetAutoSize( bool autoSize )
-{
-    m_AutoSize = autoSize;
-}
-
 inline bool Image::IsResizeable() const
 {
     return false;

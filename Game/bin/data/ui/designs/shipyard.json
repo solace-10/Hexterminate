@@ -11,13 +11,10 @@
                             "t": true
                         },
                         "file": "data/ui/icons/capacitor_addons.png",
+                        "flags": 2,
                         "position": {
                             "x": 4.0,
                             "y": 112.0
-                        },
-                        "size": {
-                            "h": 24.0,
-                            "w": 24.0
                         }
                     }
                 },
@@ -115,13 +112,10 @@
                             "t": true
                         },
                         "file": "data/ui/icons/capacitor_storage.png",
+                        "flags": 2,
                         "position": {
                             "x": 4.0,
                             "y": 28.0
-                        },
-                        "size": {
-                            "h": 24.0,
-                            "w": 24.0
                         }
                     }
                 },
@@ -191,13 +185,10 @@
                             "t": true
                         },
                         "file": "data/ui/icons/capacitor_recharge.png",
+                        "flags": 2,
                         "position": {
                             "x": 4.0,
                             "y": 56.0
-                        },
-                        "size": {
-                            "h": 24.0,
-                            "w": 24.0
                         }
                     }
                 },
@@ -267,13 +258,10 @@
                             "t": true
                         },
                         "file": "data/ui/icons/weaponry_kinetic.png",
+                        "flags": 2,
                         "position": {
                             "x": 4.0,
                             "y": 84.0
-                        },
-                        "size": {
-                            "h": 24.0,
-                            "w": 24.0
                         }
                     }
                 },
@@ -367,13 +355,10 @@
                             "t": true
                         },
                         "file": "data/ui/icons/grid_capacity.png",
+                        "flags": 2,
                         "position": {
                             "x": 4.0,
                             "y": 28.0
-                        },
-                        "size": {
-                            "h": 24.0,
-                            "w": 24.0
                         }
                     }
                 },
@@ -471,13 +456,10 @@
                             "t": true
                         },
                         "file": "data/ui/icons/grid_usage.png",
+                        "flags": 2,
                         "position": {
                             "x": 4.0,
                             "y": 56.0
-                        },
-                        "size": {
-                            "h": 24.0,
-                            "w": 24.0
                         }
                     }
                 },
@@ -561,110 +543,6 @@
                     }
                 }
             },
-            "Energy panel": {
-                "Energy subtitle": {
-                    "properties": {
-                        "anchor": {
-                            "b": false,
-                            "l": true,
-                            "r": false,
-                            "t": true
-                        },
-                        "color": {
-                            "a": 1.0,
-                            "b": 1.0,
-                            "g": 1.0,
-                            "r": 1.0
-                        },
-                        "font": "kimberley18light.fnt",
-                        "label": "???",
-                        "line_spacing": 1.399999976158142,
-                        "multiline": false,
-                        "position": {
-                            "x": 0.0,
-                            "y": 0.0
-                        },
-                        "size": {
-                            "h": 128.0,
-                            "w": 128.0
-                        }
-                    }
-                },
-                "properties": {
-                    "anchor": {
-                        "b": false,
-                        "l": true,
-                        "r": false,
-                        "t": true
-                    },
-                    "border": {
-                        "bottom": false,
-                        "left": false,
-                        "right": false,
-                        "top": false
-                    },
-                    "position": {
-                        "x": 0.0,
-                        "y": 0.0
-                    },
-                    "size": {
-                        "h": 128.0,
-                        "w": 128.0
-                    }
-                }
-            },
-            "Fleet panel": {
-                "Fleet subtitle": {
-                    "properties": {
-                        "anchor": {
-                            "b": false,
-                            "l": true,
-                            "r": false,
-                            "t": true
-                        },
-                        "color": {
-                            "a": 1.0,
-                            "b": 1.0,
-                            "g": 1.0,
-                            "r": 1.0
-                        },
-                        "font": "kimberley18light.fnt",
-                        "label": "???",
-                        "line_spacing": 1.399999976158142,
-                        "multiline": false,
-                        "position": {
-                            "x": 0.0,
-                            "y": 0.0
-                        },
-                        "size": {
-                            "h": 128.0,
-                            "w": 128.0
-                        }
-                    }
-                },
-                "properties": {
-                    "anchor": {
-                        "b": false,
-                        "l": true,
-                        "r": false,
-                        "t": true
-                    },
-                    "border": {
-                        "bottom": false,
-                        "left": false,
-                        "right": false,
-                        "top": false
-                    },
-                    "position": {
-                        "x": 0.0,
-                        "y": 0.0
-                    },
-                    "size": {
-                        "h": 128.0,
-                        "w": 128.0
-                    }
-                }
-            },
             "Navigation panel": {
                 "Angular icon": {
                     "properties": {
@@ -675,13 +553,10 @@
                             "t": true
                         },
                         "file": "data/ui/icons/navigation_agility.png",
+                        "flags": 2,
                         "position": {
                             "x": 4.0,
                             "y": 56.0
-                        },
-                        "size": {
-                            "h": 24.0,
-                            "w": 24.0
                         }
                     }
                 },
@@ -751,13 +626,10 @@
                             "t": true
                         },
                         "file": "data/ui/icons/navigation_speed.png",
+                        "flags": 2,
                         "position": {
                             "x": 4.0,
                             "y": 28.0
-                        },
-                        "size": {
-                            "h": 24.0,
-                            "w": 24.0
                         }
                     }
                 },
@@ -827,13 +699,10 @@
                             "t": true
                         },
                         "file": "data/ui/icons/navigation_mass.png",
+                        "flags": 2,
                         "position": {
                             "x": 4.0,
                             "y": 84.0
-                        },
-                        "size": {
-                            "h": 24.0,
-                            "w": 24.0
                         }
                     }
                 },
@@ -945,58 +814,6 @@
                     }
                 }
             },
-            "Requisition ships panel ": {
-                "Requisition ships subtitle": {
-                    "properties": {
-                        "anchor": {
-                            "b": false,
-                            "l": true,
-                            "r": false,
-                            "t": true
-                        },
-                        "color": {
-                            "a": 1.0,
-                            "b": 1.0,
-                            "g": 1.0,
-                            "r": 1.0
-                        },
-                        "font": "kimberley18light.fnt",
-                        "label": "???",
-                        "line_spacing": 1.399999976158142,
-                        "multiline": false,
-                        "position": {
-                            "x": 0.0,
-                            "y": 0.0
-                        },
-                        "size": {
-                            "h": 128.0,
-                            "w": 128.0
-                        }
-                    }
-                },
-                "properties": {
-                    "anchor": {
-                        "b": false,
-                        "l": true,
-                        "r": false,
-                        "t": true
-                    },
-                    "border": {
-                        "bottom": false,
-                        "left": false,
-                        "right": false,
-                        "top": false
-                    },
-                    "position": {
-                        "x": 0.0,
-                        "y": 0.0
-                    },
-                    "size": {
-                        "h": 128.0,
-                        "w": 128.0
-                    }
-                }
-            },
             "Shields panel": {
                 "Capacity icon": {
                     "properties": {
@@ -1007,13 +824,10 @@
                             "t": true
                         },
                         "file": "data/ui/icons/shields_capacity.png",
+                        "flags": 2,
                         "position": {
                             "x": 4.0,
                             "y": 28.0
-                        },
-                        "size": {
-                            "h": 24.0,
-                            "w": 24.0
                         }
                     }
                 },
@@ -1083,13 +897,10 @@
                             "t": true
                         },
                         "file": "data/ui/icons/shields_efficiency.png",
+                        "flags": 2,
                         "position": {
                             "x": 4.0,
                             "y": 84.0
-                        },
-                        "size": {
-                            "h": 24.0,
-                            "w": 24.0
                         }
                     }
                 },
@@ -1159,13 +970,10 @@
                             "t": true
                         },
                         "file": "data/ui/icons/shields_recharge.png",
+                        "flags": 2,
                         "position": {
                             "x": 4.0,
                             "y": 56.0
-                        },
-                        "size": {
-                            "h": 24.0,
-                            "w": 24.0
                         }
                     }
                 },
@@ -1287,13 +1095,10 @@
                             "t": true
                         },
                         "file": "data/ui/icons/weaponry_energy.png",
+                        "flags": 2,
                         "position": {
                             "x": 4.0,
                             "y": 56.0
-                        },
-                        "size": {
-                            "h": 24.0,
-                            "w": 24.0
                         }
                     }
                 },
@@ -1363,13 +1168,10 @@
                             "t": true
                         },
                         "file": "data/ui/icons/weaponry_exotic.png",
+                        "flags": 2,
                         "position": {
                             "x": 4.0,
                             "y": 84.0
-                        },
-                        "size": {
-                            "h": 24.0,
-                            "w": 24.0
                         }
                     }
                 },
@@ -1439,13 +1241,10 @@
                             "t": true
                         },
                         "file": "data/ui/icons/weaponry_kinetic.png",
+                        "flags": 2,
                         "position": {
                             "x": 4.0,
                             "y": 28.0
-                        },
-                        "size": {
-                            "h": 24.0,
-                            "w": 24.0
                         }
                     }
                 },
@@ -1664,8 +1463,8 @@
             "center_h": false,
             "center_v": false,
             "position": {
-                "x": 800.0,
-                "y": 60.0
+                "x": 1146.0,
+                "y": 8.0
             },
             "size": {
                 "h": 660.0,

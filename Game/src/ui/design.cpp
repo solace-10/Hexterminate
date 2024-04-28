@@ -65,4 +65,9 @@ json& Design::Get( const std::string& path )
     return m_Data[ nlohmann::json_pointer<json>( path ) ];
 }
 
+void Design::Clear()
+{
+    m_Data = {};
+}
+
 } // namespace Hexterminate::UI
