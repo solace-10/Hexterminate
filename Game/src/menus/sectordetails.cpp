@@ -206,6 +206,10 @@ void SectorDetails::SetSectorInfo( SectorInfo* pSectorInfo )
         {
             Faction* pFaction = g_pGame->GetFaction( (FactionId)i );
             const FleetList& factionFleets = pFaction->GetFleets();
+
+            bool mainFleetPresent = false;
+            int standardFleets = 0;
+
             for ( auto& pFleet : factionFleets )
             {
                 if ( pFleet->GetCurrentSector() == pSectorInfo )
@@ -217,8 +221,29 @@ void SectorDetails::SetSectorInfo( SectorInfo* pSectorInfo )
                     }
                     else
                     {
-                        contents << "\n- " << pFaction->GetName() << ( pFleet->HasFlagship() ? " main fleet" : " fleet" );
+                        if ( pFleet->HasFlagship() )
+                        {
+                            mainFleetPresent = true;
+                        }
+                        else
+                        {
+                            standardFleets++;
+                        }
                     }
+                }
+            }
+
+            if ( mainFleetPresent )
+            {
+                contents << "\n- " << pFaction->GetName() << " main fleet";
+            }
+
+            if ( standardFleets > 0 )
+            {
+                contents << "\n- " << pFaction->GetName() << " fleet";
+                if ( standardFleets > 1 )
+                {
+                    contents << " [x" << standardFleets << "]";
                 }
             }
         }
