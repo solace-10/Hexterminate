@@ -62,6 +62,7 @@
 #include "sector/boundary.h"
 #include "sector/dust.h"
 #include "sector/sectorcamera.h"
+#include "sector/sectorspawner.h"
 #include "sector/starinfo.h"
 #include "ship/collisionmasks.h"
 #include "ship/damagetracker.h"
@@ -132,6 +133,7 @@ Sector::Sector( SectorInfo* pSectorInfo )
     g_pGame->SetCursorType( CursorType::Crosshair );
 
     m_pShipTweaks = std::make_unique<ShipTweaks>();
+    m_pSectorSpawner = std::make_unique<SectorSpawner>();
 }
 
 Sector::~Sector()
@@ -445,6 +447,7 @@ void Sector::Update( float delta )
     m_pMuzzleflashManager->Update( delta );
     m_pCamera->Update( delta );
     m_pLootWindow->Update( delta );
+    m_pSectorSpawner->Update();
 
     if ( m_pHotbar != nullptr )
     {

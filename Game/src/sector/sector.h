@@ -36,6 +36,8 @@ class Layer;
 namespace Hexterminate
 {
 
+GENESIS_DECLARE_SMART_PTR( SectorSpawner );
+
 class Background;
 class AmmoManager;
 class MuzzleflashManager;
@@ -186,6 +188,8 @@ protected:
 
     Genesis::ComponentContainer m_Components;
     ShipTweaksUniquePtr m_pShipTweaks;
+
+    SectorSpawnerUniquePtr m_pSectorSpawner;
 };
 
 inline AmmoManager* Sector::GetAmmoManager() const
