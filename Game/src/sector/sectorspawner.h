@@ -36,14 +36,13 @@ public:
 
     void Update();
 
-    glm::vec3 SpawnFleet( Faction* pFleetFaction );
+    glm::vec3 ClaimFleetSpawnPosition( Faction* pFleetFaction );
 
 private:
     static constexpr int sNumSpawnPointsSide = 10;
     static constexpr float sCellWorldSize = 1000.0f;
 
     void DrawDebugUI();
-    bool m_DebugWindowOpen;
 
     void SetCellReservation( const glm::ivec2& cellPosition, bool isReserved );
     void SetCellReservation( int cellX, int cellY, bool isReserved );
@@ -60,6 +59,7 @@ private:
 
     using Reservation = std::bitset<sNumSpawnPointsSide * sNumSpawnPointsSide>;
     Reservation m_Reservation;
+    bool m_DebugWindowOpen;
 };
 
 inline void SectorSpawner::SetCellReservation( const glm::ivec2& cellPosition, bool isReserved )

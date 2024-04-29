@@ -41,12 +41,13 @@ SectorSpawner::~SectorSpawner()
 
 void SectorSpawner::Update()
 {
-    Evaluate();
     DrawDebugUI();
 }
 
-glm::vec3 SectorSpawner::SpawnFleet( Faction* pFleetFaction )
+glm::vec3 SectorSpawner::ClaimFleetSpawnPosition( Faction* pFleetFaction )
 {
+    Evaluate();
+
     SectorInfo* pSectorInfo = g_pGame->GetCurrentSector()->GetSectorInfo();
 
     // If the player's fleet is spawning and we are in an allied sector with a shipyard, then spawn next to it.
@@ -97,7 +98,7 @@ glm::vec3 SectorSpawner::SpawnFleet( Faction* pFleetFaction )
     else
     {
         size_t cellIndex = gRand( 0, static_cast<int>( freeCells.size() ) );
-        cell = freeCells[cellIndex ];
+        cell = freeCells[ cellIndex ];
     }
 
     SetCellReservation( cell, true );
@@ -113,6 +114,9 @@ void SectorSpawner::DrawDebugUI()
     ImGui::SetNextWindowSize( ImVec2( sWindowWidth, sWindowHeight ) );
     if ( ImGui::Begin( "Sector spawner", &m_DebugWindowOpen, ImGuiWindowFlags_AlwaysAutoResize ) )
     {
+        // Forcibly evaluate the grid while we're debugging.
+        Evaluate();
+
         const ImVec2 windowPosition = ImGui::GetCursorScreenPos();
         ImDrawList* pDrawList = ImGui::GetWindowDrawList();
 
@@ -124,6 +128,16 @@ void SectorSpawner::DrawDebugUI()
                 const ImVec2 p1 = ImVec2( p0.x + sDebugWindowGridSize, p0.y + sDebugWindowGridSize );
                 pDrawList->AddRectFilled( p0, p1, IsCellReserved( x, y ) ? IM_COL32( 255, 0, 0, 255 ) : IM_COL32( 0, 255, 0, 255 ) );
                 pDrawList->AddRect( p0, p1, IM_COL32( 255, 255, 255, 255 ) );
+
+                const ImVec2 mousePos = ImGui::GetIO().MousePos;
+                if ( mousePos.x >= p0.x && mousePos.x < p1.x && mousePos.y >= p0.y && mousePos.y < p1.y )
+                {
+                    ImGui::BeginTooltip();
+                    ImGui::Text( "Cell %d/%d", x, y );
+                    const glm::vec3 worldPosition = ToWorldPosition( glm::ivec2( x, y ) );
+                    ImGui::Text( "World position: %.2f %.2f", worldPosition.x, worldPosition.y );
+                    ImGui::EndTooltip();
+                }
             }
         }
 
@@ -192,7 +206,16 @@ std::optional<glm::ivec2> SectorSpawner::ToCellPosition( const glm::vec3 worldPo
 
 glm::vec3 SectorSpawner::ToWorldPosition( const glm::ivec2& cellPosition ) const
 {
-    return glm::vec3( 0.0f );
+    glm::vec3 worldPosition(
+        static_cast<float>( cellPosition.x ) * sCellWorldSize,
+        static_cast<float>( cellPosition.y ) * sCellWorldSize,
+        0.0f );
+
+    worldPosition -= glm::vec3( sCellWorldSize * static_cast<float>( sNumSpawnPointsSide ) / 2.0f, sCellWorldSize * static_cast<float>( sNumSpawnPointsSide ) / 2.0f, 0.0f );
+    worldPosition += glm::vec3( sCellWorldSize * 0.5f, sCellWorldSize * 0.5f, 0.0f );
+    worldPosition.y = -worldPosition.y;
+
+    return worldPosition;
 }
 
 glm::ivec2 SectorSpawner::GetRandomCell() const
