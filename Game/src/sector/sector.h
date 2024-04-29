@@ -125,8 +125,6 @@ protected:
     void SpawnStarfort();
     void DeleteRemovedShips();
     bool GetFleetSpawnPosition( Faction* pFaction, float& x, float& y );
-    void GetFleetSpawnPositionAtPoint( int idx, float& x, float& y );
-    void DebugDrawFleetSpawnPositions();
     void IntelStart();
     bool SelectFixedEvent();
     void SelectRandomEvent();
@@ -164,7 +162,6 @@ protected:
     FleetStatusUniquePtr m_pFleetStatus;
 
     FleetSharedPtr m_pRegionalFleet;
-    IntVector m_AvailableSpawnPoints;
 
     ShipSpawnDataVector m_DebugShipSpawnData;
 

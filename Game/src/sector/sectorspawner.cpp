@@ -102,7 +102,9 @@ glm::vec3 SectorSpawner::ClaimFleetSpawnPosition( Faction* pFleetFaction )
     }
 
     SetCellReservation( cell, true );
-    return ToWorldPosition( cell );
+    const glm::vec3 spawnPosition = ToWorldPosition( cell );
+    Genesis::FrameWork::GetLogger()->LogInfo( "Spawning %s fleet at cell %d %d, world coordinates %.2f %.2f", pFleetFaction->GetName().c_str(), cell.x, cell.y, spawnPosition.x, spawnPosition.y );
+    return spawnPosition;
 }
 
 void SectorSpawner::DrawDebugUI()
@@ -181,6 +183,11 @@ void SectorSpawner::Evaluate()
     const ShipList& ships = g_pGame->GetCurrentSector()->GetShipList();
     for ( Ship* pShip : ships )
     {
+        if ( pShip->IsDestroyed() )
+        {
+            continue;
+        }
+
         const glm::vec3 shipPosition = pShip->GetTowerPosition();
         std::optional<glm::ivec2> cellPosition = ToCellPosition( shipPosition );
         if ( cellPosition.has_value() )

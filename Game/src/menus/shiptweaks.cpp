@@ -34,7 +34,6 @@ ShipTweaks::ShipTweaks()
     , m_EngineTorqueMultiplier( 28.0f )
     , m_DrawNavigation( false )
     , m_DrawTurrets( false )
-    , m_DrawFleetSpawnPositions( false )
     , m_DrawTrails( false )
     , m_DrawPhaseBarrier( false )
     , m_DrawEngineDisruptor( false )
@@ -76,7 +75,6 @@ void ShipTweaks::Update( float delta )
 
         if ( ImGui::CollapsingHeader( "Debug render" ) )
         {
-            ImGui::Checkbox( "Fleet spawn positions", &m_DrawFleetSpawnPositions );
             ImGui::Checkbox( "Navigation", &m_DrawNavigation );
             ImGui::Checkbox( "Phase barrier", &m_DrawPhaseBarrier );
             ImGui::Checkbox( "Trails", &m_DrawTrails );

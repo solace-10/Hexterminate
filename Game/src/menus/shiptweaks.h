@@ -51,9 +51,6 @@ public:
     // Turret tracking logic, aim vectors, targets...
     inline bool GetDrawTurrets() { return m_DrawTurrets; }
 
-    // Sector spawning positions and exclusive areas
-    inline bool GetDrawFleetSpawnPositions() { return m_DrawFleetSpawnPositions; }
-
     // Draw trail geometry
     inline bool GetDrawTrails() { return m_DrawTrails; }
 
@@ -84,7 +81,6 @@ private:
     float m_EngineTorqueMultiplier;
     bool m_DrawNavigation;
     bool m_DrawTurrets;
-    bool m_DrawFleetSpawnPositions;
     bool m_DrawTrails;
     bool m_DrawPhaseBarrier;
     bool m_DrawEngineDisruptor;
