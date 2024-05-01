@@ -18,6 +18,7 @@
 #pragma once
 
 #include <bitset>
+#include <chrono>
 #include <optional>
 #include <vector>
 
@@ -61,6 +62,9 @@ private:
     using Reservation = std::bitset<sNumSpawnPointsSide * sNumSpawnPointsSide>;
     Reservation m_Reservation;
     bool m_DebugUIOpen;
+    
+    using EvaluationTimePoint = std::chrono::time_point<std::chrono::system_clock>;
+    EvaluationTimePoint m_LastEvaluation;
 };
 
 inline void SectorSpawner::SetCellReservation( const glm::ivec2& cellPosition, bool isReserved )

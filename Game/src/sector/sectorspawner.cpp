@@ -34,6 +34,9 @@ namespace Hexterminate
 SectorSpawner::SectorSpawner()
     : m_DebugUIOpen( false )
 {
+    using namespace std::literals;
+    m_LastEvaluation = std::chrono::system_clock::now() - 24h;
+
     m_Reservation.reset();
 
     Genesis::ImGuiImpl::RegisterMenu( "Game", "Sector spawner", &m_DebugUIOpen );
@@ -183,6 +186,12 @@ std::vector<glm::ivec2> SectorSpawner::GetFreeCellsNear( const glm::ivec2& origi
 
 void SectorSpawner::Evaluate()
 {
+    using namespace std::literals;
+    if ( m_LastEvaluation > std::chrono::system_clock::now() - 1s )
+    {
+        return;
+    }
+
     m_Reservation.reset();
 
     const ShipList& ships = g_pGame->GetCurrentSector()->GetShipList();
@@ -200,6 +209,8 @@ void SectorSpawner::Evaluate()
             SetCellReservation( cellPosition.value(), true );
         }
     }
+
+    m_LastEvaluation = std::chrono::system_clock::now();
 }
 
 std::optional<glm::ivec2> SectorSpawner::ToCellPosition( const glm::vec3 worldPosition ) const
