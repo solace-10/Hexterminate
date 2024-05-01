@@ -29,9 +29,11 @@
 #include <sound/soundmanager.h>
 #include <sstream>
 
+// clang-format off
 #include <beginexternalheaders.h>
-#include <endexternalheaders.h>
 #include <tinyxml2.h>
+#include <endexternalheaders.h>
+// clang-format on
 
 #include "achievements.h"
 #include "ammo/ammomanager.h"
@@ -62,6 +64,7 @@
 #include "sector/boundary.h"
 #include "sector/dust.h"
 #include "sector/sectorcamera.h"
+#include "sector/sectorspawner.h"
 #include "sector/starinfo.h"
 #include "ship/collisionmasks.h"
 #include "ship/damagetracker.h"
@@ -132,6 +135,7 @@ Sector::Sector( SectorInfo* pSectorInfo )
     g_pGame->SetCursorType( CursorType::Crosshair );
 
     m_pShipTweaks = std::make_unique<ShipTweaks>();
+    m_pSectorSpawner = std::make_unique<SectorSpawner>();
 }
 
 Sector::~Sector()
@@ -184,17 +188,6 @@ Sector::~Sector()
 
 bool Sector::Initialise()
 {
-    // Setup the spawn points
-    // This is effectively a 3x3 grid
-    // We will ignore index 4 (central spawn point) as that is used for shipyards and other events
-    for ( int i = 0; i < sSectorSpawnPoints; ++i )
-    {
-        if ( i != 4 )
-        {
-            m_AvailableSpawnPoints.push_back( i );
-        }
-    }
-
     SelectBackground();
 
     m_pTrailManager = new TrailManager();
@@ -261,6 +254,11 @@ bool Sector::Initialise()
                 AddShip( pTurret );
             }
         }
+    }
+
+    if ( GetSectorInfo()->HasStarfort() )
+    {
+        SpawnStarfort();
     }
 
     m_pRadar = new Radar();
@@ -340,14 +338,9 @@ bool Sector::Initialise()
     }
     else
     {
-        SpawnContestingFleets();
         SelectPlaylist();
         SelectFixedEvent();
-    }
-
-    if ( GetSectorInfo()->HasStarfort() )
-    {
-        SpawnStarfort();
+        SpawnContestingFleets();
     }
 
     DamageTrackerDebugWindow::Register();
@@ -445,6 +438,7 @@ void Sector::Update( float delta )
     m_pMuzzleflashManager->Update( delta );
     m_pCamera->Update( delta );
     m_pLootWindow->Update( delta );
+    m_pSectorSpawner->Update();
 
     if ( m_pHotbar != nullptr )
     {
@@ -457,11 +451,6 @@ void Sector::Update( float delta )
     }
 
     DeleteRemovedShips();
-
-    if ( m_pShipTweaks->GetDrawFleetSpawnPositions() )
-    {
-        DebugDrawFleetSpawnPositions();
-    }
 
     Ship* pPlayerShip = g_pGame->GetPlayer()->GetShip();
     if ( pPlayerShip != nullptr && pPlayerShip->GetDockingState() == DockingState::Undocked && !pPlayerShip->GetHyperspaceCore()->IsCharging() && !pPlayerShip->GetHyperspaceCore()->IsJumping() )
@@ -768,55 +757,11 @@ void Sector::RemoveShip( Ship* pShip )
 
 bool Sector::GetFleetSpawnPosition( Faction* pFleetFaction, float& x, float& y )
 {
-    // If the player's fleet is spawning and we are in an allied sector with a shipyard, then spawn next to it.
-    if ( GetSectorInfo()->HasShipyard() && GetSectorInfo()->GetFaction()->GetFactionId() == FactionId::Empire && pFleetFaction->GetFactionId() == FactionId::Player )
-    {
-        x = 0.0f;
-        y = -200.0f;
-        return true;
-    }
-    else if ( m_AvailableSpawnPoints.empty() )
-    {
-        return false;
-    }
-    else
-    {
-        int idx = rand() % m_AvailableSpawnPoints.size();
-        int selectedSpawnPoint = m_AvailableSpawnPoints[ idx ];
-        m_AvailableSpawnPoints.erase( m_AvailableSpawnPoints.begin() + idx );
 
-        GetFleetSpawnPositionAtPoint( selectedSpawnPoint, x, y );
-
-        return true;
-    }
-}
-
-// Returns the center point of a tile in a square containing sSectorSpawnPoints tiles.
-void Sector::GetFleetSpawnPositionAtPoint( int idx, float& x, float& y )
-{
-    static const int sSide = static_cast<int>( sqrt( sSectorSpawnPoints ) );
-    x = static_cast<float>( idx % sSide ) * sSpawnPointSize + sSpawnPointSize * 0.5f - sSide / 2.0f * sSpawnPointSize;
-    y = floor( static_cast<float>( idx ) / sSide ) * sSpawnPointSize + sSpawnPointSize * 0.5f - sSide / 2.0f * sSpawnPointSize;
-}
-
-void Sector::DebugDrawFleetSpawnPositions()
-{
-    float x, y;
-    float spawnPointRadius = sSpawnPointSize * 0.5f;
-    spawnPointRadius *= 0.99f; // Just so the circles don't touch each other while drawing
-    for ( int i = 0; i < sSectorSpawnPoints; ++i )
-    {
-        GetFleetSpawnPositionAtPoint( i, x, y );
-        Genesis::FrameWork::GetDebugRender()->DrawCircle( glm::vec2( x, y ), 100.0f, glm::vec3( 0.3f, 0.3f, 1.0f ) );
-        Genesis::FrameWork::GetDebugRender()->DrawCircle( glm::vec2( x, y ), spawnPointRadius, glm::vec3( 0.0f, 0.0f, 1.0f ) );
-    }
-
-    for ( ShipList::const_iterator it = m_ShipList.cbegin(), itEnd = m_ShipList.cend(); it != itEnd; ++it )
-    {
-        const ShipSpawnData& spawnData = ( *it )->GetShipSpawnData();
-        glm::vec2 origin( spawnData.m_PositionX, spawnData.m_PositionY );
-        Genesis::FrameWork::GetDebugRender()->DrawCircle( origin, 25.0f, glm::vec3( 1.0f, 0.0f, 0.0f ) );
-    }
+    glm::vec3 position = m_pSectorSpawner->ClaimFleetSpawnPosition( pFleetFaction );
+    x = position.x;
+    y = position.y;
+    return true;
 }
 
 void Sector::IntelStart()

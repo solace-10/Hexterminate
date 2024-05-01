@@ -36,6 +36,8 @@ class Layer;
 namespace Hexterminate
 {
 
+GENESIS_DECLARE_SMART_PTR( SectorSpawner );
+
 class Background;
 class AmmoManager;
 class MuzzleflashManager;
@@ -123,8 +125,6 @@ protected:
     void SpawnStarfort();
     void DeleteRemovedShips();
     bool GetFleetSpawnPosition( Faction* pFaction, float& x, float& y );
-    void GetFleetSpawnPositionAtPoint( int idx, float& x, float& y );
-    void DebugDrawFleetSpawnPositions();
     void IntelStart();
     bool SelectFixedEvent();
     void SelectRandomEvent();
@@ -162,7 +162,6 @@ protected:
     FleetStatusUniquePtr m_pFleetStatus;
 
     FleetSharedPtr m_pRegionalFleet;
-    IntVector m_AvailableSpawnPoints;
 
     ShipSpawnDataVector m_DebugShipSpawnData;
 
@@ -186,6 +185,8 @@ protected:
 
     Genesis::ComponentContainer m_Components;
     ShipTweaksUniquePtr m_pShipTweaks;
+
+    SectorSpawnerUniquePtr m_pSectorSpawner;
 };
 
 inline AmmoManager* Sector::GetAmmoManager() const
