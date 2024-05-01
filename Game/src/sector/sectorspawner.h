@@ -60,7 +60,7 @@ private:
 
     using Reservation = std::bitset<sNumSpawnPointsSide * sNumSpawnPointsSide>;
     Reservation m_Reservation;
-    bool m_DebugWindowOpen;
+    bool m_DebugUIOpen;
 };
 
 inline void SectorSpawner::SetCellReservation( const glm::ivec2& cellPosition, bool isReserved )

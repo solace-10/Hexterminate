@@ -15,6 +15,8 @@
 // You should have received a copy of the GNU General Public License
 // along with Hexterminate. If not, see <http://www.gnu.org/licenses/>.
 
+#include <genesis.h>
+#include <imgui/imgui_impl.h>
 #include <imgui/imgui.h>
 #include <logger.h>
 #include <math/misc.h>
@@ -30,13 +32,16 @@ namespace Hexterminate
 {
 
 SectorSpawner::SectorSpawner()
-    : m_DebugWindowOpen( true )
+    : m_DebugUIOpen( false )
 {
     m_Reservation.reset();
+
+    Genesis::ImGuiImpl::RegisterMenu( "Game", "Sector spawner", &m_DebugUIOpen );
 }
 
 SectorSpawner::~SectorSpawner()
 {
+    Genesis::ImGuiImpl::UnregisterMenu( "Game", "Sector spawner" );
 }
 
 void SectorSpawner::Update()
@@ -114,7 +119,7 @@ void SectorSpawner::DrawDebugUI()
     static const float sWindowHeight = sDebugWindowGridSize * static_cast<float>( sNumSpawnPointsSide ) + 36.0f;
 
     ImGui::SetNextWindowSize( ImVec2( sWindowWidth, sWindowHeight ) );
-    if ( ImGui::Begin( "Sector spawner", &m_DebugWindowOpen, ImGuiWindowFlags_AlwaysAutoResize ) )
+    if ( m_DebugUIOpen && ImGui::Begin( "Sector spawner", &m_DebugUIOpen, ImGuiWindowFlags_AlwaysAutoResize ) )
     {
         // Forcibly evaluate the grid while we're debugging.
         Evaluate();
