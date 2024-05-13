@@ -49,34 +49,46 @@ void ReinforcementsComponent::LoadReinforcements()
 {
     SectorInfo* pSectorInfo = g_pGame->GetCurrentSector()->GetSectorInfo();
     m_pReinforcementsFaction = pSectorInfo->GetFaction();
+
+    // Nothing to do if this component is in an Imperial sector.
+    if ( m_pReinforcementsFaction == g_pGame->GetFaction( FactionId::Empire ) )
+    {
+        return;
+    }
+
     std::string factionName = m_pReinforcementsFaction->GetName();
     std::transform( factionName.begin(), factionName.end(), factionName.begin(), []( char c ) -> char { return static_cast<char>( std::tolower( c ) ); } );
 
-    int numReinforcements = 0;
+    int wantedReinforcements = 0;
     SectorInfoVector borderingSectors;
     pSectorInfo->GetBorderingSectors( borderingSectors );
     for ( auto& pBorderingSector : borderingSectors )
     {
         if ( pBorderingSector->GetFaction() == pSectorInfo->GetFaction() )
         {
-            numReinforcements++;
+            wantedReinforcements++;
         }
     }
-    m_Reinforcements.resize( numReinforcements );
+    m_Reinforcements.resize( wantedReinforcements );
 
-    for ( int i = 0; i < numReinforcements; ++i )
+    int incomingReinforcements = 0;
+    for ( int i = 0; i < wantedReinforcements; ++i )
     {
         std::stringstream filename;
         filename << "data/xml/reinforcements/" << factionName << "_" << i + 1 << ".sl";
         ShipInfoVector shipInfos = LoadShipListFile( m_pReinforcementsFaction, filename.str() );
-        m_Reinforcements[ i ].reserve( shipInfos.size() );
-        for ( const ShipInfo* pShipInfo : shipInfos )
+        if ( !shipInfos.empty() )
         {
-            m_Reinforcements[ i ].push_back( pShipInfo );
+            incomingReinforcements++;
+            m_Reinforcements[ i ].reserve( shipInfos.size() );
+            for ( const ShipInfo* pShipInfo : shipInfos )
+            {
+                m_Reinforcements[ i ].push_back( pShipInfo );
+            }
         }
     }
 
-    if ( numReinforcements >= 4 )
+    if ( incomingReinforcements >= 4 )
     {
         g_pGame->AddIntel(
             GameCharacter::FleetIntelligence,
