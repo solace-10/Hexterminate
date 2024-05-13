@@ -311,6 +311,8 @@ bool Galaxy::Write( tinyxml2::XMLDocument& xmlDoc, tinyxml2::XMLElement* pRootEl
     tinyxml2::XMLElement* pGalaxyElement = xmlDoc.NewElement( "Galaxy" );
     pRootElement->LinkEndChild( pGalaxyElement );
 
+    Xml::Write( xmlDoc, pGalaxyElement, "Version", GetVersion() );
+
     for ( int x = 0; x < NumSectorsX; ++x )
     {
         for ( int y = 0; y < NumSectorsY; ++y )
@@ -425,49 +427,53 @@ void Galaxy::UpgradeFromVersion( int version )
 {
     Genesis::FrameWork::GetLogger()->LogInfo( "Galaxy::UpgradeFromVersion(): %d -> %d", version, GetVersion() );
 
-    // In 0.11.4 new components were added to two sectors.
-    if ( version == 1 )
+    if ( g_pGame->GetGameMode() == GameMode::Campaign )
     {
-        SectorInfo* pSolarisSecundusSector = m_Sectors[ 15 ][ 2 ];
-        pSolarisSecundusSector->AddComponentName( "AnchorComponent" );
-        pSolarisSecundusSector->AddComponentName( "ReinforcementsComponent" );
-
-        SectorInfo* pIrianiPrimeSector = m_Sectors[ 20 ][ 16 ];
-        pIrianiPrimeSector->AddComponentName( "ReinforcementsComponent" );
-
-        version++;
-    }
-
-    if ( version == 2 )
-    {
-        SectorInfo* pIrianiPrimeSector = m_Sectors[ 20 ][ 16 ];
-        pIrianiPrimeSector->AddComponentName( "ArbiterReinforcementComponent" );
-        version++;
-    }
-
-    if ( version == 3 )
-    {
-        // This was due to a mismatched enum, where an Iriani invasion would get tagged.
-        // The invasion has no backing data files and was preventing the campaign from
-        // progressing. The num has been fixed, but the tag needs to be removed so no
-        // events are accidentally spawned.
-        if ( g_pGame->GetBlackboard()->Exists( "#invasion_iriani" ) )
+        if ( version == 1 )
         {
-            g_pGame->GetBlackboard()->Add( "#invasion_iriani", 0 );
-        }
-        version++;
-    }
+            // In 0.11.4 new components were added to two sectors.
+            SectorInfo* pSolarisSecundusSector = m_Sectors[ 15 ][ 2 ];
+            pSolarisSecundusSector->AddComponentName( "AnchorComponent" );
+            pSolarisSecundusSector->AddComponentName( "ReinforcementsComponent" );
 
-    if ( version == 4 )
-    {
-        // It is possible for the Cradle to be conquered by anothe faction, and for that
-        // faction to then establish a shipyard. If this happens and then the player
-        // progresses sufficiently in the campaign as for the Cradle to be claimed by
-        // the Chrysamere (Special) faction, the game will crash to desktop when the
-        // player attempts to enter the sector as that faction has no turret prototype
-        // to defend the shipyard with.
-        SectorInfo* pSectorCradle = g_pGame->GetGalaxy()->GetSectorInfo( 21, 6 );
-        pSectorCradle->SetShipyard( false );
+            SectorInfo* pIrianiPrimeSector = m_Sectors[ 20 ][ 16 ];
+            pIrianiPrimeSector->AddComponentName( "ReinforcementsComponent" );
+
+            version++;
+        }
+
+        if ( version == 2 )
+        {
+            SectorInfo* pIrianiPrimeSector = m_Sectors[ 20 ][ 16 ];
+            pIrianiPrimeSector->AddComponentName( "ArbiterReinforcementComponent" );
+            version++;
+        }
+
+        if ( version == 3 )
+        {
+            // This was due to a mismatched enum, where an Iriani invasion would get tagged.
+            // The invasion has no backing data files and was preventing the campaign from
+            // progressing. The num has been fixed, but the tag needs to be removed so no
+            // events are accidentally spawned.
+            if ( g_pGame->GetBlackboard()->Exists( "#invasion_iriani" ) )
+            {
+                g_pGame->GetBlackboard()->Add( "#invasion_iriani", 0 );
+            }
+            version++;
+        }
+
+        if ( version == 4 )
+        {
+            // It is possible for the Cradle to be conquered by another faction, and for that
+            // faction to then establish a shipyard. If this happens and then the player
+            // progresses sufficiently in the campaign as for the Cradle to be claimed by
+            // the Chrysamere (Special) faction, the game will crash to desktop when the
+            // player attempts to enter the sector as that faction has no turret prototype
+            // to defend the shipyard with.
+            SectorInfo* pSectorCradle = g_pGame->GetGalaxy()->GetSectorInfo( 21, 6 );
+            pSectorCradle->SetShipyard( false );
+            version++;
+        }
     }
 }
 
