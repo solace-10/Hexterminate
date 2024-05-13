@@ -134,7 +134,7 @@ protected:
     void InitialiseComponents();
     void UpdateComponents( float delta );
     void UpdateReinforcements( float delta );
-    void ReinforceImmediate( FleetSharedPtr pFleet, ShipVector* pSpawnedShips = nullptr );
+    void ReinforceImmediate( FleetSharedPtr pFleet, ShipVector* pSpawnedShips = nullptr, bool showNotification = true );
 
     SectorInfo* m_pSectorInfo;
 

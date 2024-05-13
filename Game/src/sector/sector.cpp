@@ -765,13 +765,14 @@ void Sector::UpdateReinforcements( float delta )
         if ( pFleetToSpawn )
         {
             Genesis::Logger* pLogger = Genesis::FrameWork::GetLogger();
-            pLogger->LogInfo("Reinforcing sector, current state: " );
-            pLogger->LogInfo("- Imperial fleet commands: %d", imperialFleetCommands );
-            pLogger->LogInfo("- Hostile fleet commands: %d", hostileFleetCommands );
-            pLogger->LogInfo("- Imperial ships: %d", imperialShips );
-            pLogger->LogInfo("- Hostile ships: %d", hostileShips );
+            pLogger->LogInfo( "Reinforcing sector, current state: " );
+            pLogger->LogInfo( "- Imperial fleet commands: %d", imperialFleetCommands );
+            pLogger->LogInfo( "- Hostile fleet commands: %d", hostileFleetCommands );
+            pLogger->LogInfo( "- Imperial ships: %d", imperialShips );
+            pLogger->LogInfo( "- Hostile ships: %d", hostileShips );
             m_TimeToNextReinforcements = gRand( 10.0f, 15.0f );
-            ReinforceImmediate( pFleetToSpawn );
+            bool showNotification = ( delta > 0.0f ); // don't show reinforcement notifications when entering the sector.
+            ReinforceImmediate( pFleetToSpawn, nullptr, showNotification );
         }
         else
         {
@@ -780,18 +781,21 @@ void Sector::UpdateReinforcements( float delta )
     }
 }
 
-void Sector::ReinforceImmediate( FleetSharedPtr pFleet, ShipVector* pSpawnedShips /* = nullptr */ )
+void Sector::ReinforceImmediate( FleetSharedPtr pFleet, ShipVector* pSpawnedShips /* = nullptr */, bool showNotification /* = true */ )
 {
     const glm::vec2 spawnPosition = GetFleetSpawnPosition( pFleet->GetFaction() );
     FleetSpawner::Spawn( pFleet, this, pSpawnedShips, spawnPosition );
 
-    if ( Faction::sIsEnemyOf( pFleet->GetFaction(), g_pGame->GetPlayerFaction() ) )
+    if ( showNotification )
     {
-        g_pGame->AddFleetCommandIntel( "Detected waveform collapse, an enemy fleet is entering the sector." );
-    }
-    else
-    {
-        g_pGame->AddFleetCommandIntel( "Captain, reinforcements have arrived." );
+        if ( Faction::sIsEnemyOf( pFleet->GetFaction(), g_pGame->GetPlayerFaction() ) )
+        {
+            g_pGame->AddFleetCommandIntel( "Detected waveform collapse, an enemy fleet is entering the sector." );
+        }
+        else
+        {
+            g_pGame->AddFleetCommandIntel( "Captain, reinforcements have arrived." );
+        }
     }
 }
 
