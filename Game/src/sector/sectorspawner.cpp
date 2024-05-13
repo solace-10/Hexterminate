@@ -52,7 +52,7 @@ void SectorSpawner::Update()
     DrawDebugUI();
 }
 
-glm::vec3 SectorSpawner::ClaimFleetSpawnPosition( Faction* pFleetFaction )
+glm::vec2 SectorSpawner::ClaimFleetSpawnPosition( Faction* pFleetFaction )
 {
     Evaluate();
 
@@ -110,7 +110,7 @@ glm::vec3 SectorSpawner::ClaimFleetSpawnPosition( Faction* pFleetFaction )
     }
 
     SetCellReservation( cell, true );
-    const glm::vec3 spawnPosition = ToWorldPosition( cell );
+    const glm::vec2 spawnPosition = ToWorldPosition( cell );
     Genesis::FrameWork::GetLogger()->LogInfo( "Spawning %s fleet at cell %d %d, world coordinates %.2f %.2f", pFleetFaction->GetName().c_str(), cell.x, cell.y, spawnPosition.x, spawnPosition.y );
     return spawnPosition;
 }
@@ -144,7 +144,7 @@ void SectorSpawner::DrawDebugUI()
                 {
                     ImGui::BeginTooltip();
                     ImGui::Text( "Cell %d/%d", x, y );
-                    const glm::vec3 worldPosition = ToWorldPosition( glm::ivec2( x, y ) );
+                    const glm::vec2 worldPosition = ToWorldPosition( glm::ivec2( x, y ) );
                     ImGui::Text( "World position: %.2f %.2f", worldPosition.x, worldPosition.y );
                     ImGui::EndTooltip();
                 }
@@ -213,9 +213,9 @@ void SectorSpawner::Evaluate()
     m_LastEvaluation = std::chrono::system_clock::now();
 }
 
-std::optional<glm::ivec2> SectorSpawner::ToCellPosition( const glm::vec3 worldPosition ) const
+std::optional<glm::ivec2> SectorSpawner::ToCellPosition( const glm::vec2 worldPosition ) const
 {
-    const glm::vec3 positionInCellSpace = glm::vec3( worldPosition.x, -worldPosition.y, 0.0f ) / sCellWorldSize + glm::vec3( sNumSpawnPointsSide / 2.0f, sNumSpawnPointsSide / 2.0f, 0.0f );
+    const glm::vec2 positionInCellSpace = glm::vec2( worldPosition.x, -worldPosition.y ) / sCellWorldSize + glm::vec2( sNumSpawnPointsSide / 2.0f, sNumSpawnPointsSide / 2.0f );
     const glm::ivec2 cellPosition( static_cast<int>( positionInCellSpace.x ), static_cast<int>( positionInCellSpace.y ) );
     if ( cellPosition.x < 0 || cellPosition.y < 0 || cellPosition.x >= sNumSpawnPointsSide || cellPosition.y >= sNumSpawnPointsSide )
     {
@@ -227,7 +227,7 @@ std::optional<glm::ivec2> SectorSpawner::ToCellPosition( const glm::vec3 worldPo
     }
 }
 
-glm::vec3 SectorSpawner::ToWorldPosition( const glm::ivec2& cellPosition ) const
+glm::vec2 SectorSpawner::ToWorldPosition( const glm::ivec2& cellPosition ) const
 {
     glm::vec3 worldPosition(
         static_cast<float>( cellPosition.x ) * sCellWorldSize,

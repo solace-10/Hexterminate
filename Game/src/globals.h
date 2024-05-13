@@ -48,5 +48,4 @@ static const float ShipRewardThreshold = 0.20f; // Percentage of damage the play
 static const float cWaveThresholdThree = 20.0f; // Time, in minutes, before 3 waves can spawn at a sector.
 static const float cWaveThresholdFour = 45.0f; // Time, in minutes, before 4 waves can spawn at a sector.
 static const float cEasyDamageMitigation = 0.3f; // Percentage of damage reduction for Imperial ships in Easy difficulty.
-static const int cMaxContestingFleets = 8; // Maximum number of fleets simultaneously contesting a sector (not including temporary fleets)
 } // namespace Hexterminate

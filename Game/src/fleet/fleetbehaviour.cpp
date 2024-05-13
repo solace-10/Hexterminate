@@ -66,7 +66,7 @@ bool FleetBehaviour::ProcessTurn()
         {
             return false;
         }
-        else if ( pCurrentSector->HasHyperspaceInhibitor() == false && pCurrentSector->IsPersonal() == false && pCurrentSector->GetContestedFleets().size() < cMaxContestingFleets )
+        else if ( pCurrentSector->HasHyperspaceInhibitor() == false && pCurrentSector->IsPersonal() == false )
         {
             // Contest sector if it is not ours
             if ( Faction::sIsEnemyOf( pCurrentSector->GetFaction(), m_pFleet->GetFaction() ) )
@@ -186,11 +186,6 @@ SectorInfo* FleetBehaviour::GetSectorToAssist() const
             {
                 SectorInfo* pSectorToAssist = pOtherFleet->GetCurrentSector();
 
-                // Do not allow more than 8 fleets in the same sector.
-                if ( pSectorToAssist->GetContestedFleets().size() >= cMaxContestingFleets )
-                {
-                    continue;
-                }
                 // Limit the number of how many simultaneous fleets we can have assisting a sector to avoid having them bunch up.
                 if ( GetAssistingFleetsCount( pSectorToAssist ) >= 3 )
                 {
@@ -223,7 +218,7 @@ SectorInfo* FleetBehaviour::GetSectorToAssist() const
 
 bool FleetBehaviour::CanAttackSector( SectorInfo* pSectorInfo ) const
 {
-    if ( pSectorInfo->HasHyperspaceInhibitor() && pSectorInfo->GetFaction() != m_pFleet->GetFaction() && pSectorInfo->GetContestedFleets().size() < cMaxContestingFleets && pSectorInfo->IsPersonal() == false )
+    if ( pSectorInfo->HasHyperspaceInhibitor() && pSectorInfo->GetFaction() != m_pFleet->GetFaction() )
     {
         return false;
     }

@@ -139,7 +139,7 @@ void InvasionRequest::OnPlayerEnterSector()
         pInvasionFleet->AddShip( pShipInfo );
     }
 
-    g_pGame->GetCurrentSector()->Reinforce( pInvasionFleet );
+    g_pGame->GetCurrentSector()->Reinforce( pInvasionFleet, true );
 }
 
 int InvasionRequest::GetConquestReward( const SectorInfo* pSectorInfo ) const
