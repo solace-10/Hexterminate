@@ -31,7 +31,11 @@ IMPLEMENT_COMPONENT( ArbiterReinforcementComponent )
 
 bool ArbiterReinforcementComponent::Initialise()
 {
-    SpawnArbiters();
+    if ( g_pGame->GetCurrentSector()->GetSectorInfo()->GetFaction() == g_pGame->GetFaction( FactionId::Iriani ) && g_pGame->GetGameMode() == GameMode::Campaign )
+    {
+        SpawnArbiters();
+    }
+
     return true;
 }
 
