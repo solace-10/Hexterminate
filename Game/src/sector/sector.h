@@ -115,7 +115,7 @@ public:
 
     FleetWeakPtr GetRegionalFleet() const;
 
-    bool Reinforce( FleetSharedPtr pFleet, ShipVector* pSpawnedShips = nullptr );
+    void Reinforce( FleetSharedPtr pFleet, bool immediate = false, ShipVector* pSpawnedShips = nullptr );
     bool IsPlayerVictorious() const;
     void AddFleetCommand( FleetCommandUniquePtr pFleetCommand );
 
@@ -124,7 +124,7 @@ protected:
     void SpawnRegionalFleet();
     void SpawnStarfort();
     void DeleteRemovedShips();
-    bool GetFleetSpawnPosition( Faction* pFaction, float& x, float& y );
+    glm::vec2 GetFleetSpawnPosition( Faction* pFaction );
     void IntelStart();
     bool SelectFixedEvent();
     void SelectRandomEvent();
@@ -133,6 +133,8 @@ protected:
     void SelectPlaylist();
     void InitialiseComponents();
     void UpdateComponents( float delta );
+    void UpdateReinforcements( float delta );
+    void ReinforceImmediate( FleetSharedPtr pFleet, ShipVector* pSpawnedShips = nullptr );
 
     SectorInfo* m_pSectorInfo;
 
@@ -187,6 +189,10 @@ protected:
     ShipTweaksUniquePtr m_pShipTweaks;
 
     SectorSpawnerUniquePtr m_pSectorSpawner;
+
+    FleetList m_PendingImperialReinforcements;
+    FleetList m_PendingHostileReinforcements;
+    float m_TimeToNextReinforcements;
 };
 
 inline AmmoManager* Sector::GetAmmoManager() const

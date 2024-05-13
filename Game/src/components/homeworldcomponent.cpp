@@ -121,7 +121,7 @@ void HomeworldComponent::SpawnReinforcements( const StringVector& shipNames )
         pTemporaryFleet->AddShip( pShipInfo );
     }
 
-    pSector->Reinforce( pTemporaryFleet );
+    pSector->Reinforce( pTemporaryFleet, true );
 }
 
 } // namespace Hexterminate

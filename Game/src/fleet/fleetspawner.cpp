@@ -33,20 +33,20 @@
 namespace Hexterminate
 {
 
-bool FleetSpawner::Spawn( FleetSharedPtr pFleet, Sector* pSector, ShipVector* pSpawnedShips, float x, float y )
+bool FleetSpawner::Spawn( FleetSharedPtr pFleet, Sector* pSector, ShipVector* pSpawnedShips, const glm::vec2& position )
 {
     if ( pFleet->GetFaction() == g_pGame->GetPlayerFaction() )
     {
-        return SpawnFleetPlayer( pFleet, pSector, pSpawnedShips, x, y );
+        return SpawnFleetPlayer( pFleet, pSector, pSpawnedShips, position );
     }
     else
     {
         FleetFormation formation = FleetFormation::Cohesive; // TODO: Implement other formations
-        return SpawnFleetAI( pFleet, pSector, pSpawnedShips, x, y, formation );
+        return SpawnFleetAI( pFleet, pSector, pSpawnedShips, position, formation );
     }
 }
 
-bool FleetSpawner::SpawnFleetAI( FleetSharedPtr pFleet, Sector* pSector, ShipVector* pSpawnedShips, float spawnPointX, float spawnPointY, FleetFormation formation )
+bool FleetSpawner::SpawnFleetAI( FleetSharedPtr pFleet, Sector* pSector, ShipVector* pSpawnedShips, const glm::vec2& spawnPosition, FleetFormation formation )
 {
     CheckFirstEncounter( pFleet->GetFaction() );
 
@@ -65,7 +65,7 @@ bool FleetSpawner::SpawnFleetAI( FleetSharedPtr pFleet, Sector* pSector, ShipVec
     FleetCommandUniquePtr pFleetCommand( new FleetCommand );
 
     ShipSpawnDataVector fleetSpawnData;
-    GetSpawnData( shipsToSpawn, spawnPointX, spawnPointY, fleetSpawnData, formation );
+    GetSpawnData( shipsToSpawn, spawnPosition, fleetSpawnData, formation );
 
     for ( size_t i = 0, s = shipsToSpawn.size(); i < s; ++i )
     {
@@ -93,7 +93,7 @@ bool FleetSpawner::SpawnFleetAI( FleetSharedPtr pFleet, Sector* pSector, ShipVec
     return ( shipsToSpawn.size() > 0 );
 }
 
-bool FleetSpawner::SpawnFleetPlayer( FleetSharedPtr pFleet, Sector* pSector, ShipVector* pSpawnedShips, float spawnPointX, float spawnPointY )
+bool FleetSpawner::SpawnFleetPlayer( FleetSharedPtr pFleet, Sector* pSector, ShipVector* pSpawnedShips, const glm::vec2& position )
 {
     const std::string& companionShipTemplate = g_pGame->GetPlayer()->GetCompanionShipTemplate();
     const ShipInfo* pCompanionShipInfo = g_pGame->GetShipInfoManager()->Get( g_pGame->GetPlayerFaction(), companionShipTemplate );
@@ -109,12 +109,12 @@ bool FleetSpawner::SpawnFleetPlayer( FleetSharedPtr pFleet, Sector* pSector, Shi
     }
 
     ShipSpawnDataVector fleetSpawnData;
-    GetSpawnData( shipsToSpawn, spawnPointX, spawnPointY, fleetSpawnData, FleetFormation::Escort );
+    GetSpawnData( shipsToSpawn, position, fleetSpawnData, FleetFormation::Escort );
 
     FleetCommandUniquePtr pFleetCommand( new FleetCommand );
 
     // Manually spawn the player's ship, as it will use its own custom hexgrid
-    Ship* pPlayerShip = g_pGame->GetPlayer()->CreateShip( spawnPointX, spawnPointY );
+    Ship* pPlayerShip = g_pGame->GetPlayer()->CreateShip( position );
     pSector->AddShip( pPlayerShip );
     pFleetCommand->AssignLeader( pPlayerShip );
 
@@ -132,7 +132,7 @@ bool FleetSpawner::SpawnFleetPlayer( FleetSharedPtr pFleet, Sector* pSector, Shi
     return true;
 }
 
-void FleetSpawner::GetSpawnData( ShipInfoVector shipsToSpawn, float spawnPointX, float spawnPointY, ShipSpawnDataVector& fleetSpawnData, FleetFormation formation )
+void FleetSpawner::GetSpawnData( ShipInfoVector shipsToSpawn, const glm::vec2& position, ShipSpawnDataVector& fleetSpawnData, FleetFormation formation )
 {
     float spacing = 200.0f;
     if ( formation == FleetFormation::Cohesive )
@@ -142,8 +142,8 @@ void FleetSpawner::GetSpawnData( ShipInfoVector shipsToSpawn, float spawnPointX,
         ShipSpawnData spawnData;
         for ( size_t i = 0, s = shipsToSpawn.size(); i < s; ++i )
         {
-            spawnData.m_PositionX = spawnPointX + static_cast<float>( i % side ) * spacing - ( side * spacing ) / 2.0f;
-            spawnData.m_PositionY = spawnPointY + floor( static_cast<float>( i ) / side ) * spacing - ( side * spacing ) / 2.0f;
+            spawnData.m_PositionX = position.x + static_cast<float>( i % side ) * spacing - ( side * spacing ) / 2.0f;
+            spawnData.m_PositionY = position.y + floor( static_cast<float>( i ) / side ) * spacing - ( side * spacing ) / 2.0f;
             fleetSpawnData.push_back( spawnData );
         }
     }
@@ -153,12 +153,12 @@ void FleetSpawner::GetSpawnData( ShipInfoVector shipsToSpawn, float spawnPointX,
 
         // The first ship of the vector is assumed to be the centre of the formation
         ShipSpawnData spawnData;
-        spawnData.m_PositionX = spawnPointX;
-        spawnData.m_PositionY = spawnPointY;
+        spawnData.m_PositionX = position.x;
+        spawnData.m_PositionY = position.y;
         fleetSpawnData.push_back( spawnData );
 
-        float anchorX = spawnPointX;
-        float anchorY = spawnPointY;
+        float anchorX = position.x;
+        float anchorY = position.y;
 
         // The remaining ships are placed in delta formation around the point ship
         int spacingMultiplier = 1;

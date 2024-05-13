@@ -73,31 +73,24 @@ void ArbiterRequest::OnPlayerEnterSector()
     m_pTemporaryFleet->AddShip( pMaidenShipInfo );
 
     ShipVector spawnedShips;
-    if ( g_pGame->GetCurrentSector()->Reinforce( m_pTemporaryFleet, &spawnedShips ) )
+    g_pGame->GetCurrentSector()->Reinforce( m_pTemporaryFleet, true, &spawnedShips );
+    for ( Ship* pShip : spawnedShips )
     {
-        for ( Ship* pShip : spawnedShips )
+        if ( pShip->GetShipInfo() == pArbiterShipInfo )
         {
-            if ( pShip->GetShipInfo() == pArbiterShipInfo )
-            {
-                m_pArbiter = pShip;
-                break;
-            }
-        }
-
-        BlackboardSharedPtr pBlackboard = g_pGame->GetBlackboard();
-        if ( pBlackboard->Exists( sArbitersIntro ) == false )
-        {
-            g_pGame->AddIntel(
-                GameCharacter::AeliseGloriam,
-                "I see you have found one of our Arbiters. Let us see how you fare against one of the guardians of the Iriani." );
-
-            pBlackboard->Add( sArbitersIntro );
+            m_pArbiter = pShip;
+            break;
         }
     }
-    else
+
+    BlackboardSharedPtr pBlackboard = g_pGame->GetBlackboard();
+    if ( pBlackboard->Exists( sArbitersIntro ) == false )
     {
-        m_pTemporaryFleet = nullptr;
-        OnFailure();
+        g_pGame->AddIntel(
+            GameCharacter::AeliseGloriam,
+            "I see you have found one of our Arbiters. Let us see how you fare against one of the guardians of the Iriani." );
+
+        pBlackboard->Add( sArbitersIntro );
     }
 }
 

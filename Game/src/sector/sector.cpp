@@ -107,6 +107,7 @@ Sector::Sector( SectorInfo* pSectorInfo )
     , m_pLootWindow( nullptr )
     , m_AdditionalWaves( 0u )
     , m_AdditionalWavesSpawned( 0u )
+    , m_TimeToNextReinforcements( 0.0f )
 {
     SDL_assert( pSectorInfo != nullptr );
 
@@ -466,6 +467,7 @@ void Sector::Update( float delta )
     m_pDeathMenu->Update( delta );
 
     UpdateComponents( delta );
+    UpdateReinforcements( delta );
     UpdateSectorResolution();
 
     for ( auto& pFleetCommand : m_FleetCommands )
@@ -536,16 +538,14 @@ void Sector::UpdateSectorResolution()
             temporaryFleet->Initialise( m_pSectorInfo->GetFaction(), m_pSectorInfo );
             temporaryFleet->GenerateProceduralFleet( fleetPoints );
 
-            if ( Reinforce( temporaryFleet ) )
-            {
-                m_TemporaryFleets.push_back( temporaryFleet );
-                reinforced = true;
-                m_AdditionalWavesSpawned++;
-            }
+            Reinforce( temporaryFleet, true );
+            m_TemporaryFleets.push_back( temporaryFleet );
+            reinforced = true;
+            m_AdditionalWavesSpawned++;
         }
     }
 
-    if ( reinforced == false && hostilesPresent == false )
+    if ( reinforced == false && hostilesPresent == false && m_PendingHostileReinforcements.empty() )
     {
         m_IsPlayerVictorious = true;
 
@@ -615,23 +615,20 @@ void Sector::DeleteRemovedShips()
 
 void Sector::SpawnContestingFleets()
 {
-    float spawnPointX, spawnPointY;
     const FleetWeakPtrList& fleets = m_pSectorInfo->GetContestedFleets();
     for ( FleetWeakPtrList::const_iterator it = fleets.cbegin(); it != fleets.cend(); ++it )
     {
-        if ( !it->expired() )
+        FleetSharedPtr pFleet = it->lock();
+        if ( pFleet )
         {
-            FleetSharedPtr pFleet = it->lock();
-            bool validSpawn = GetFleetSpawnPosition( pFleet->GetFaction(), spawnPointX, spawnPointY );
-            SDL_assert( validSpawn );
-            FleetSpawner::Spawn( pFleet, this, nullptr, spawnPointX, spawnPointY );
+            Reinforce( pFleet );
         }
     }
+    UpdateReinforcements( 0.0f );
 }
 
 void Sector::SpawnRegionalFleet()
 {
-    float spawnPointX, spawnPointY;
     int numRegionalFleetPoints = (int)( (float)m_pSectorInfo->GetRegionalFleetPoints() * m_pSectorInfo->GetFaction()->GetRegionalFleetStrengthMultiplier() );
     if ( numRegionalFleetPoints > 0 )
     {
@@ -639,8 +636,8 @@ void Sector::SpawnRegionalFleet()
         m_pRegionalFleet->Initialise( m_pSectorInfo->GetFaction(), m_pSectorInfo );
         m_pRegionalFleet->GenerateProceduralFleet( numRegionalFleetPoints );
 
-        GetFleetSpawnPosition( m_pSectorInfo->GetFaction(), spawnPointX, spawnPointY );
-        FleetSpawner::Spawn( m_pRegionalFleet, this, nullptr, spawnPointX, spawnPointY );
+        const glm::vec2 spawnPosition = GetFleetSpawnPosition( m_pSectorInfo->GetFaction() );
+        FleetSpawner::Spawn( m_pRegionalFleet, this, nullptr, spawnPosition );
     }
 }
 
@@ -675,32 +672,126 @@ void Sector::SpawnStarfort()
     AddShip( pStarfort );
 }
 
-bool Sector::Reinforce( FleetSharedPtr pFleet, ShipVector* pSpawnedShips /* = nullptr */ )
+void Sector::Reinforce( FleetSharedPtr pFleet, bool immediate /* = false */, ShipVector* pSpawnedShips /* = nullptr */ )
 {
-    if ( pFleet == nullptr )
+    if ( immediate )
     {
-        return false;
-    }
-
-    float spawnPointX, spawnPointY;
-    if ( GetFleetSpawnPosition( pFleet->GetFaction(), spawnPointX, spawnPointY ) )
-    {
-        FleetSpawner::Spawn( pFleet, this, pSpawnedShips, spawnPointX, spawnPointY );
-
-        if ( Faction::sIsEnemyOf( pFleet->GetFaction(), g_pGame->GetPlayerFaction() ) )
-        {
-            g_pGame->AddFleetCommandIntel( "Detected waveform collapse, an enemy fleet is entering the sector." );
-        }
-        else
-        {
-            g_pGame->AddFleetCommandIntel( "Captain, reinforcements have arrived." );
-        }
-
-        return true;
+        ReinforceImmediate( pFleet, pSpawnedShips );
     }
     else
     {
-        return false;
+        SDL_assert( pSpawnedShips == nullptr ); // pSpawnedShips can only be used when immediately reinforcing.
+        if ( Faction::sIsEnemyOf( pFleet->GetFaction(), g_pGame->GetPlayerFaction() ) )
+        {
+            m_PendingHostileReinforcements.push_back( pFleet );
+        }
+        else
+        {
+            m_PendingImperialReinforcements.push_back( pFleet );
+        }
+    }
+}
+
+void Sector::UpdateReinforcements( float delta )
+{
+    if ( m_TimeToNextReinforcements > 0.0f )
+    {
+        m_TimeToNextReinforcements -= delta;
+        return;
+    }
+
+    int imperialFleetCommands = 0;
+    int hostileFleetCommands = 0;
+    int imperialShips = 0;
+    int hostileShips = 0;
+
+    for ( auto& pFleetCommand : m_FleetCommands )
+    {
+        bool fleetCommandAdded = false;
+        for ( Ship* pShip : pFleetCommand->GetShips() )
+        {
+            if ( pShip->IsDestroyed() == false )
+            {
+                if ( Faction::sIsEnemyOf( pShip->GetFaction(), g_pGame->GetPlayerFaction() ) )
+                {
+                    hostileShips++;
+                    if ( !fleetCommandAdded )
+                    {
+                        hostileFleetCommands++;
+                        fleetCommandAdded = true;
+                    }
+                }
+                else
+                {
+                    imperialShips++;
+                    if ( !fleetCommandAdded )
+                    {
+                        imperialFleetCommands++;
+                        fleetCommandAdded = true;
+                    }
+                }
+            }
+        }
+    }
+
+    static const int sMaxActiveFleetCommands = 10;
+    static const int sMaxActiveImperialFleetCommands = 8;
+    while ( 1 )
+    {
+        if ( imperialFleetCommands + hostileFleetCommands >= sMaxActiveFleetCommands )
+        {
+            break;
+        }
+
+        if ( imperialFleetCommands >= sMaxActiveImperialFleetCommands )
+        {
+            break;
+        }
+
+        FleetSharedPtr pFleetToSpawn;
+        if ( m_PendingImperialReinforcements.empty() == false )
+        {
+            pFleetToSpawn = m_PendingImperialReinforcements.front();
+            m_PendingImperialReinforcements.pop_front();
+            imperialFleetCommands++;
+        }
+        else if ( m_PendingHostileReinforcements.empty() == false )
+        {
+            pFleetToSpawn = m_PendingHostileReinforcements.front();
+            m_PendingHostileReinforcements.pop_front();
+            hostileFleetCommands++;
+        }
+
+        if ( pFleetToSpawn )
+        {
+            Genesis::Logger* pLogger = Genesis::FrameWork::GetLogger();
+            pLogger->LogInfo("Reinforcing sector, current state: " );
+            pLogger->LogInfo("- Imperial fleet commands: %d", imperialFleetCommands );
+            pLogger->LogInfo("- Hostile fleet commands: %d", hostileFleetCommands );
+            pLogger->LogInfo("- Imperial ships: %d", imperialShips );
+            pLogger->LogInfo("- Hostile ships: %d", hostileShips );
+            m_TimeToNextReinforcements = gRand( 10.0f, 15.0f );
+            ReinforceImmediate( pFleetToSpawn );
+        }
+        else
+        {
+            break;
+        }
+    }
+}
+
+void Sector::ReinforceImmediate( FleetSharedPtr pFleet, ShipVector* pSpawnedShips /* = nullptr */ )
+{
+    const glm::vec2 spawnPosition = GetFleetSpawnPosition( pFleet->GetFaction() );
+    FleetSpawner::Spawn( pFleet, this, pSpawnedShips, spawnPosition );
+
+    if ( Faction::sIsEnemyOf( pFleet->GetFaction(), g_pGame->GetPlayerFaction() ) )
+    {
+        g_pGame->AddFleetCommandIntel( "Detected waveform collapse, an enemy fleet is entering the sector." );
+    }
+    else
+    {
+        g_pGame->AddFleetCommandIntel( "Captain, reinforcements have arrived." );
     }
 }
 
@@ -755,13 +846,9 @@ void Sector::RemoveShip( Ship* pShip )
     m_ShipsToRemove.push_back( pShip );
 }
 
-bool Sector::GetFleetSpawnPosition( Faction* pFleetFaction, float& x, float& y )
+glm::vec2 Sector::GetFleetSpawnPosition( Faction* pFleetFaction )
 {
-
-    glm::vec3 position = m_pSectorSpawner->ClaimFleetSpawnPosition( pFleetFaction );
-    x = position.x;
-    y = position.y;
-    return true;
+    return m_pSectorSpawner->ClaimFleetSpawnPosition( pFleetFaction );
 }
 
 void Sector::IntelStart()

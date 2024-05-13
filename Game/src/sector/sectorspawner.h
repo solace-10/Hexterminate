@@ -38,7 +38,7 @@ public:
 
     void Update();
 
-    glm::vec3 ClaimFleetSpawnPosition( Faction* pFleetFaction );
+    glm::vec2 ClaimFleetSpawnPosition( Faction* pFleetFaction );
 
 private:
     static constexpr int sNumSpawnPointsSide = 10;
@@ -56,8 +56,8 @@ private:
 
     void Evaluate();
 
-    std::optional<glm::ivec2> ToCellPosition( const glm::vec3 worldPosition ) const;
-    glm::vec3 ToWorldPosition( const glm::ivec2& cellPosition ) const;
+    std::optional<glm::ivec2> ToCellPosition( const glm::vec2 worldPosition ) const;
+    glm::vec2 ToWorldPosition( const glm::ivec2& cellPosition ) const;
 
     using Reservation = std::bitset<sNumSpawnPointsSide * sNumSpawnPointsSide>;
     Reservation m_Reservation;
