@@ -17,6 +17,8 @@
 
 #pragma once
 
+#include <glm/vec2.hpp>
+
 #include "serialisable.h"
 #include "ship/ship.h"
 #include <list>
@@ -34,7 +36,7 @@ public:
     Player( const ShipCustomisationData& shipCustomisationData, const std::string& companionShipTemplate );
     ~Player();
 
-    Ship* CreateShip( float spawnPointX, float spawnPointY );
+    Ship* CreateShip( const glm::vec2& position );
 
     ShipCustomisationData& GetShipCustomisationData() { return m_ShipCustomisationData; }
     Ship* GetShip() const { return m_pShip; }

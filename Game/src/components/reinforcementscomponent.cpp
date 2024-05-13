@@ -144,10 +144,8 @@ void ReinforcementsComponent::SpawnReinforcements( const ShipInfoVector& shipInf
         pTemporaryFleet->AddShip( pShipInfo );
     }
 
-    if ( pSector->Reinforce( pTemporaryFleet ) )
-    {
-        m_TemporaryFleets.push_back( pTemporaryFleet );
-    }
+    pSector->Reinforce( pTemporaryFleet, true );
+    m_TemporaryFleets.push_back( pTemporaryFleet );
 }
 
 } // namespace Hexterminate

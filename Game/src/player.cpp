@@ -63,13 +63,13 @@ Player::~Player()
     delete m_pPerks;
 }
 
-Ship* Player::CreateShip( float spawnPointX, float spawnPointY )
+Ship* Player::CreateShip( const glm::vec2& position )
 {
     SDL_assert( m_pShip == nullptr );
 
     ShipSpawnData spawnData;
-    spawnData.m_PositionX = spawnPointX;
-    spawnData.m_PositionY = spawnPointY;
+    spawnData.m_PositionX = position.x;
+    spawnData.m_PositionY = position.y;
 
     m_pShip = new Ship();
     m_pShip->SetInitialisationParameters(
