@@ -192,11 +192,7 @@ void FileLogger::Log( const char* pText, LogMessageType type )
 
 void MessageBoxLogger::Log( const char* pText, LogMessageType type )
 {
-    if ( type == LOG_WARNING )
-    {
-        SDL_ShowSimpleMessageBox( SDL_MESSAGEBOX_WARNING, "Warning", pText, nullptr );
-    }
-    else if ( type == LOG_ERROR )
+    if ( type == LOG_ERROR )
     {
         SDL_ShowSimpleMessageBox( SDL_MESSAGEBOX_ERROR, "Error", pText, nullptr );
     }

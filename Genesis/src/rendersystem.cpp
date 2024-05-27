@@ -143,7 +143,7 @@ void RenderSystem::Initialize( GLuint screenWidth, GLuint screenHeight )
 	SDL_GL_GetAttribute( SDL_GL_CONTEXT_MINOR_VERSION, &minor );
 	pLogger->LogInfo( "Using OpenGL version %d.%d.", major, minor );
 
-    m_ProjectionMatrix = glm::perspective( 45.0f, static_cast<float>( m_ScreenWidth ) / static_cast<float>( m_ScreenHeight ), 1.0f, 1000.0f );
+    m_ProjectionMatrix = glm::perspective( 45.0f, static_cast<float>( m_ScreenWidth ) / static_cast<float>( m_ScreenHeight ), 1.0f, 2000.0f );
     m_ViewMatrix = glm::mat4( 1.0f );
 
     glClearColor( 0.0f, 0.0f, 0.0f, 1.0f );
@@ -607,7 +607,7 @@ void RenderSystem::ViewPerspective()
         glm::vec3( cTgt.x, cTgt.y, cTgt.z ),
         glm::vec3( 0.0f, 1.0f, 0.0f ) );
 
-    m_ProjectionMatrix = glm::perspective( 45.0f, static_cast<float>( m_ScreenWidth ) / static_cast<float>( m_ScreenHeight ), 1.0f, 1000.0f );
+    m_ProjectionMatrix = glm::perspective( 45.0f, static_cast<float>( m_ScreenWidth ) / static_cast<float>( m_ScreenHeight ), 1.0f, 2000.0f );
 }
 
 IntersectionResult RenderSystem::LinePlaneIntersection( const glm::vec3& position, const glm::vec3& direction, const glm::vec3& planePosition, const glm::vec3& planeNormal, glm::vec3& result )

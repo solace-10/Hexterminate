@@ -17,6 +17,8 @@
 
 #pragma once
 
+#include <glm/vec2.hpp>
+
 #include "fleet/fleet.fwd.h"
 #include "ship/ship.fwd.h"
 
@@ -52,12 +54,12 @@ enum class FleetFormation
 class FleetSpawner
 {
 public:
-    static bool Spawn( FleetSharedPtr pFleet, Sector* pSector, ShipVector* pSpawnedShips, float x, float y );
+    static bool Spawn( FleetSharedPtr pFleet, Sector* pSector, ShipVector* pSpawnedShips, const glm::vec2& position );
 
 private:
-    static bool SpawnFleetAI( FleetSharedPtr pFleet, Sector* pSector, ShipVector* pSpawnedShips, float x, float y, FleetFormation formation );
-    static bool SpawnFleetPlayer( FleetSharedPtr pFleet, Sector* pSector, ShipVector* pSpawnedShips, float x, float y );
-    static void GetSpawnData( ShipInfoVector shipsToSpawn, float spawnPointX, float spawnPointY, ShipSpawnDataVector& fleetSpawnData, FleetFormation formation );
+    static bool SpawnFleetAI( FleetSharedPtr pFleet, Sector* pSector, ShipVector* pSpawnedShips, const glm::vec2& position, FleetFormation formation );
+    static bool SpawnFleetPlayer( FleetSharedPtr pFleet, Sector* pSector, ShipVector* pSpawnedShips, const glm::vec2& position );
+    static void GetSpawnData( ShipInfoVector shipsToSpawn, const glm::vec2& position, ShipSpawnDataVector& fleetSpawnData, FleetFormation formation );
     static Ship* SpawnShip( Sector* pSector, FleetSharedPtr pFleet, const ShipInfo* pShipInfo, const ShipSpawnData& spawnData );
     static void CheckFirstEncounter( Faction* pFaction );
     static void CheckFlagshipEncounter( Faction* pFaction );

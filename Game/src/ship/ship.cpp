@@ -537,6 +537,13 @@ void Ship::CreateRigidBody()
     // The ship can only move in the XY plane and can only rotate around the Z axis.
     m_pRigidBody->SetLinearFactor( glm::vec3( 1.0f, 1.0f, 0.0f ) );
     m_pRigidBody->SetAngularFactor( glm::vec3( 0.0f, 0.0f, 1.0f ) );
+
+    TowerModule* pTowerModule = GetTowerModule();
+    if ( pTowerModule != nullptr )
+    {
+        glm::vec3 moduleLocalPos = pTowerModule->GetLocalPosition();
+        m_TowerPosition = glm::vec3( m_pRigidBody->GetWorldTransform() * glm::vec4( moduleLocalPos, 1.0f ) );
+    }
 }
 
 void Ship::DestroyRigidBody()

@@ -137,7 +137,7 @@ void SectorInfo::Contest()
     {
         for ( auto& pFleet : g_pGame->GetFaction( (FactionId)i )->GetFleets() )
         {
-            if ( pFleet->IsTerminating() == false && pFleet->GetCurrentSector() == this && pFleet->IsImmune() == false && m_ContestedFleets.size() < cMaxContestingFleets )
+            if ( pFleet->IsTerminating() == false && pFleet->GetCurrentSector() == this && pFleet->IsImmune() == false )
             {
                 m_ContestedFleets.push_back( pFleet );
                 pFleet->SetEngaged( true );

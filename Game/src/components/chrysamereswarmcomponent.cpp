@@ -75,10 +75,8 @@ void ChrysamereSwarmComponent::Update( float delta )
             temporaryFleet->AddShip( pShipInfo );
         }
 
-        if ( pCurrentSector->Reinforce( temporaryFleet ) )
-        {
-            m_TemporaryFleets.push_back( temporaryFleet );
-        }
+        pCurrentSector->Reinforce( temporaryFleet, true );
+        m_TemporaryFleets.push_back( temporaryFleet );
     }
 }
 

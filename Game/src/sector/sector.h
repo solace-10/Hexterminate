@@ -36,6 +36,8 @@ class Layer;
 namespace Hexterminate
 {
 
+GENESIS_DECLARE_SMART_PTR( SectorSpawner );
+
 class Background;
 class AmmoManager;
 class MuzzleflashManager;
@@ -113,7 +115,7 @@ public:
 
     FleetWeakPtr GetRegionalFleet() const;
 
-    bool Reinforce( FleetSharedPtr pFleet, ShipVector* pSpawnedShips = nullptr );
+    void Reinforce( FleetSharedPtr pFleet, bool immediate = false, ShipVector* pSpawnedShips = nullptr );
     bool IsPlayerVictorious() const;
     void AddFleetCommand( FleetCommandUniquePtr pFleetCommand );
 
@@ -122,9 +124,7 @@ protected:
     void SpawnRegionalFleet();
     void SpawnStarfort();
     void DeleteRemovedShips();
-    bool GetFleetSpawnPosition( Faction* pFaction, float& x, float& y );
-    void GetFleetSpawnPositionAtPoint( int idx, float& x, float& y );
-    void DebugDrawFleetSpawnPositions();
+    glm::vec2 GetFleetSpawnPosition( Faction* pFaction );
     void IntelStart();
     bool SelectFixedEvent();
     void SelectRandomEvent();
@@ -133,6 +133,8 @@ protected:
     void SelectPlaylist();
     void InitialiseComponents();
     void UpdateComponents( float delta );
+    void UpdateReinforcements( float delta );
+    void ReinforceImmediate( FleetSharedPtr pFleet, ShipVector* pSpawnedShips = nullptr, bool showNotification = true );
 
     SectorInfo* m_pSectorInfo;
 
@@ -162,7 +164,6 @@ protected:
     FleetStatusUniquePtr m_pFleetStatus;
 
     FleetSharedPtr m_pRegionalFleet;
-    IntVector m_AvailableSpawnPoints;
 
     ShipSpawnDataVector m_DebugShipSpawnData;
 
@@ -186,6 +187,12 @@ protected:
 
     Genesis::ComponentContainer m_Components;
     ShipTweaksUniquePtr m_pShipTweaks;
+
+    SectorSpawnerUniquePtr m_pSectorSpawner;
+
+    FleetList m_PendingImperialReinforcements;
+    FleetList m_PendingHostileReinforcements;
+    float m_TimeToNextReinforcements;
 };
 
 inline AmmoManager* Sector::GetAmmoManager() const
